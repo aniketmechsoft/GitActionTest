@@ -1,0 +1,611 @@
+{
+    "Titletext": {
+        "expected": "Order & Address Details",
+        "message": "Text Not Matched"
+    },
+    "warehousetext": {
+        "expected": "Warehouse is required.",
+        "message": "warehouseText Not Matched"
+    },
+    "customerText": {
+        "expected": "Customer is required.",
+        "message": "Customer text not matched"
+    },
+    "consigneeText": {
+        "expected": "Consignee is required.",
+        "message": "Consignee text not matched"
+    },
+    "customerordText": {
+        "expected": "Customer Order No is required.",
+        "message": "Customer Order No text not matched"
+    },
+    "localcarrText": {
+        "expected": "Delivering Local Carrier is required.",
+        "message": "Delivering Local Carrier text not matched"
+    },
+    "address1Text": {
+        "expected": "Address 1 is required.",
+        "message": "Address 1 text not matched"
+    },
+    "stateText": {
+        "expected": "State is required.",
+        "message": "State text not matched"
+    },
+    "cityText": {
+        "expected": "City is required.",
+        "message": "City text not matched"
+    },
+    "zipText": {
+        "expected": "Zipcode is required.",
+        "message": "Zipcode text not matched"
+    },
+    "orderTypeText": {
+        "expected": "Order Type is required.",
+        "message": "Order Type text not matched"
+    },
+    "pickupAddress": {
+        "expected": "Pfizer: 410 East Grant Line Road,AMT Newyork,9537",
+        "message": "Address not matched"
+    },
+    "pickupAddress2": {
+        "expected": "Global Supplies Inc.: 1200 Supply Chain Rd.,Roanoke Roslyn Heights,2139",
+        "message": "Address not matched"
+    },
+    "localCarrier": {
+        "expected": "01 - FedEx",
+        "message": "Carrier not matched"
+    },
+    "Address1": {
+        "expected": "104-bus stop",
+        "message": "Address not matched"
+    },
+    "Address2": {
+        "expected": "Belan",
+        "message": "Address not matched"
+    },
+    "Address3": {
+        "expected": "USA",
+        "message": "Address not matched"
+    },
+    "State": {
+        "expected": "New York",
+        "message": "Address not matched"
+    },
+    "City": {
+        "expected": "AMT",
+        "message": "Address not matched"
+    },
+    "Zipcode": {
+        "expected": "45678",
+        "message": "Address not matched"
+    },
+    "ordersaveToast": {
+        "expected": "Order details save successfully",
+        "message": "Toast Message for save order not displyed."
+    },
+    "Toastmsg": {
+        "expected": "Please ensure that either actual weight or literature weight is provided",
+        "message": "Toast Message for actual pieces and lit. weight not displayed. "
+    },
+    "Ratedweight": {
+        "expected": "20",
+        "message": "Address not matched"
+    },
+    "RatedLitweight": {
+        "expected": "30",
+        "message": "Address not matched"
+    },
+    "savemsg": {
+        "expected": "Carrier accessorial save successfully",
+        "message": "Accessorial save toast message not matched"
+    },
+    "cusaccessave": {
+        "expected": "Customer accessorial save successfully",
+        "message": "Accessorial save toast message not matched"
+    },
+    "savemsg2": {
+        "expected": "File save successfully",
+        "message": "Accessorial save toast message not matched"
+    },
+    "savemsg3": {
+        "expected": "Comment save successfully",
+        "message": "Accessorial save toast message not matched"
+    },
+    "custaccess": {
+        "expected": "Customer Accessorial is required. | Price is required.",
+        "message": "customer accessorial not matched"
+    },
+    "carraccess": {
+        "expected": "Carrier Accessorial is required. | Price is required.",
+        "message": "carrier accessorial not matched"
+    },
+    "typetext": {
+        "expected": "Type is required. | Subject is required.",
+        "message": " not matched"
+    },
+    "doctext": {
+        "expected": "Document Name is required. | File is required.",
+        "message": "Document field not matched"
+    },
+    "orderstatusdraft": {
+        "expected": "Draft",
+        "message": " not matched"
+    },
+    "qastatus": {
+        "expected": "QA Pending",
+        "message": "QA status not matched"
+    },
+    
+    "orderConfirmstatus": {
+        "expected": "Inbound Pallet Pending",
+        "message": " not matched"
+    },
+     "palletCreate": {
+        "expected": "Pallets are created successfully.",
+        "message": " pallet create message not found."
+    },
+   "TruckCreate": {
+        "expected": "Inbound Truck is created successfully.",
+        "message": "Inbound Truck create message not found."
+    },
+   "QAsucces": {
+        "expected": "QA Processed Successfully.",
+        "message": "QA Pass toast message not match"
+    },
+
+    "ILoadPending": {
+        "expected": "Inbound Truck Load Pending",
+        "message": " Truck load pending status not matched"
+    },
+   "IQAPending": {
+        "expected": "Inbound QA Pending",
+        "message": "Inbound QA pending status not Match after trucj arrived."
+    },
+
+  "OutboundPalletPending": {
+        "expected": "Outbound Pallet Pending",
+        "message": "After inbound QA done order status not match expected out .pallet pending."
+    },
+
+  "QApass": {
+        "expected": "QA Passed",
+        "message": "QA Pass status not with order."
+    },
+
+ "QAfailed": {
+        "expected": "QA Failed",
+        "message": "QA Pass status not with order."
+    },
+
+    "orderstatusifoutpalletdone": {
+        "expected": "Outbound Truck Load Pending",
+        "message": " not matched"
+    },
+    "price": {
+        "expected": "Price is required.",
+        "message": " not matched"
+    },
+    "duplicateortoast": {
+        "expected": "Duplicate customer order number.",
+        "message": " not matched"
+    },
+    "Text": {
+        "expected": "Actual weight or literature actual weight required.",
+        "message": " not matched"
+    },
+    "confirmmsg": {
+        "expected": "Selected order confirm successfully",
+        "message": " Select order confirm msg not matched"
+    },
+    "deleteorder": {
+        "expected": "Order deleted successfully",
+        "message": "order delete toast not matched"
+    },
+
+   "Actweightreq": {
+        "expected": "Actual weight or literature actual weight required.",
+        "message": " actual weight lit wt Text not match"
+    },
+
+    "saveorder": {
+        "expected": "Order details save successfully",
+        "message": " not matched"
+    },
+  "OrdernotDelete": {
+        "expected": "Order not in draft or inbound pallet pending stage",
+        "message": "Order not in delete state then msg not displyed."
+    },
+
+    "nodeleteorder": {
+        "expected": "Order is not in draft stage",
+        "message": " not matched"
+    },
+    "palletcreate": {
+        "expected": "Pallets are created successfully.",
+        "message": " not matched"
+    },
+    "palletCreateSuccess": {
+        "expected": "Pallets created successfully.",
+        "message": "pallet create message not matched"
+    },
+    "pickupdiff": {
+        "expected": "Can't merge orders, pickup locations are differents.",
+        "message": " not matched"
+    },
+    "dropdiff": {
+        "expected": "Can't merge orders, drop locations are differents.",
+        "message": " not matched"
+    },
+    "palletadd": {
+        "expected": "Pallet is updated successfully.",
+        "message": " not matched"
+    },
+    "palletdelete": {
+        "expected": "Pallet deleted successfully.",
+        "message": " not matched"
+    },
+    "outpalletadd": {
+        "expected": "Pallet update successfully",
+        "message": " not matched"
+    },
+    "outpalletdelete": {
+        "expected": "Pallet deleted successfully",
+        "message": " not matched"
+    },
+    "outpalletdeletelist": {
+        "expected": "Outbound pallet deleted successfully.",
+        "message": " not matched"
+    },
+    "LTLtext": {
+        "expected": "LTL is required.",
+        "message": "Text Not Matched"
+    },
+    "pickupText": {
+        "expected": "Pickup Location is required.",
+        "message": " text not matched"
+    },
+    "dropText": {
+        "expected": "Drop Location is required.",
+        "message": " text not matched"
+    },
+    "trcuksuccess": {
+        "expected": "Inbound Truck is created successfully.",
+        "message": " not matched"
+    },
+    "trcukstatus": {
+        "expected": "Truck loaded",
+        "message": " not matched"
+    },
+    "pallstatus": {
+        "expected": "Waiting for load",
+        "message": " not matched"
+    },
+    "pallstatus1": {
+        "expected": "Waiting for Load",
+        "message": " not matched"
+    },
+    "orderstatusfortruck": {
+        "expected": "Inbound Truck Loaded",
+        "message": " not matched"
+    },
+    "truckupdate": {
+        "expected": "Truck is updated successfully.",
+        "message": " not matched"
+    },
+    "truckdelete": {
+        "expected": "Inbound truck is deleted successfully.",
+        "message": " not matched"
+    },
+    "markarrived": {
+        "expected": "Trucks are marked as arrived successfully.",
+        "message": " not matched"
+    },
+    "truckstatusarrived": {
+        "expected": "Arrived",
+        "message": " not matched"
+    },
+    "QAsuccess": {
+        "expected": "QA Processed Successfully.",
+        "message": " not matched"
+    },
+    "truckstatusQA": {
+        "expected": "QA Done",
+        "message": " not matched"
+    },
+    "trucknotdelete": {
+        "expected": "Truck inbound QA is done.",
+        "message": " not matched"
+    },
+    "palletstatus": {
+        "expected": "QA Done",
+        "message": " not matched"
+    },
+    "palletnotdelete": {
+        "expected": "This pallet QA is already done.You can not delete it.",
+        "message": " not matched"
+    },
+    "orderstatus3": {
+        "expected": "Outbound Pallet Pending",
+        "message": " not matched"
+    },
+    "QAstatus": {
+        "expected": "QA Passed",
+        "message": " not matched"
+    },
+    "truckQAstatus": {
+        "expected": "QA Pending",
+        "message": " not matched"
+    },
+    "truckQAstatusinprocess": {
+        "expected": "QA Inprocess",
+        "message": " not matched"
+    },
+    "saveQA1": {
+        "expected": "Please enter received order /literature pieces for every customer order.",
+        "message": " not matched"
+    },
+    "saveQA2": {
+        "expected": "Received order quantity can not be greater than actual order quantity.",
+        "message": " not matched"
+    },
+    "saveQA3": {
+        "expected": "Received literature quantity can not be greater than actual order literature quantity.",
+        "message": " not matched"
+    },
+    "totalpiecesless": {
+        "expected": "Scanned number of pieces does not match the received pieces.",
+        "message": " not matched"
+    },
+    "QAstatusfailed": {
+        "expected": "QA Failed",
+        "message": " not matched"
+    },
+    "trcuksuccess1": {
+        "expected": "Truck created successfully.",
+        "message": " not matched"
+    },
+    "trcukstatusforoutbound": {
+        "expected": "Truck Loaded",
+        "message": " not matched"
+    },
+    "palletstatusforoutbound": {
+        "expected": "Truck Loaded",
+        "message": " not matched"
+    },
+    "orderstatusforoutbound": {
+        "expected": "Outbound Truck Loaded",
+        "message": " not matched"
+    },
+    "multipleLDAnotallowed": {
+        "expected": "Multiple LDA selections are not allowed for the selected LTL",
+        "message": " not matched"
+    },
+    "multipledropnotallowed": {
+        "expected": "Multiple drops are not allowed for this LTL.",
+        "message": " not matched"
+    },
+    "routeupdateinedit": {
+        "expected": "Route Order update successfully",
+        "message": " not matched"
+    },
+    "palletaddremove": {
+        "expected": "Truck update successfully",
+        "message": " not matched"
+    },
+    "outtruckdelete": {
+        "expected": "Outbound truck deleted successfully.",
+        "message": " not matched"
+    },
+    "truckdetails": {
+        "expected": "Truck delivery details Update Successfully",
+        "message": " not matched"
+    },
+    "trucknonedit": {
+        "expected": "The tracking number is updated. You cannot add/remove pallets.",
+        "message": " not matched"
+    },
+    "trucknondelete": {
+        "expected": "The tracking number is updated. You cannot delete the truck.",
+        "message": " not matched"
+    },
+    "palletnonedit": {
+        "expected": "The tracking number is updated. You cannot add/remove orders.",
+        "message": " not matched"
+    },
+    "palletnondelete": {
+        "expected": "The tracking number is updated. You cannot delete the pallet.",
+        "message": " not matched"
+    },
+    "orderstatusQA": {
+        "expected": "Outbound QA Pending",
+        "message": " not matched"
+    },
+    "LDAText": {
+        "expected": "LDA is required.",
+        "message": " matched"
+    },
+    "manifestText": {
+        "expected": "Manifest is required.",
+        "message": " not matched"
+    },
+    "Textfortrackingnum": {
+        "expected": "Tracking number is not updated for given orders",
+        "message": " not matched"
+    },
+    "piecesrequiredQA": {
+        "expected": "Please enter received pieces & received literature pieces.",
+        "message": " not matched"
+    },
+    "outQAsuccess": {
+        "expected": "QA details update successfully",
+        "message": " not matched"
+    },
+    "orderoutboundQastatus": {
+        "expected": "Consignee Delivery Schedule Pending",
+        "message": " not matched"
+    },
+    "Excelsuccess": {
+        "expected": "Excel file upload successfully.",
+        "message": " not matched"
+    },
+    "tracksuccess": {
+        "expected": "ETA & Tracking number is updated successfully.",
+        "message": " not matched"
+    },
+    "uptereqmsg": {
+        "expected": "Please select at least one truck.",
+        "message": " not matched"
+    },
+    "orderschedulestatus": {
+        "expected": "Consignee Delivery Schedule Pending",
+        "message": " not matched"
+    },
+    "scheduleText": {
+        "expected": "Sched. Delivery Date & Time is required.",
+        "message": " not matched"
+    },
+    "orderbeforeconQAtatus": {
+        "expected": "Consignee Delivery Pending",
+        "message": " not matched"
+    },
+    "orderStatusclosed": {
+        "expected": "Closed",
+        "message": " not matched"
+    },
+    "ConsigneeQAdone": {
+        "expected": "QA details update successfully",
+        "message": " not matched"
+    },
+    "saveinvoicesuccess": {
+        "expected": "Invoice Details save successfully",
+        "message": " not matched"
+    },
+    "Discountexceed": {
+        "expected": "Discount percentage exceeds max limit.",
+        "message": " not matched"
+    },
+    "fuelreq": {
+        "expected": "Fuel Surcharge is required.",
+        "message": " not matched"
+    },
+    "dimweightsuccess": {
+        "expected": "Dimensional Weight save successfully.",
+        "message": " not matched"
+    },
+    "validationmsg": {
+        "expected": "Please select at least one record.",
+        "message": " not matched"
+    },
+    "invoiceDatetext": {
+        "expected": "Invoice Date is required.",
+        "message": " Not Matched"
+    },
+    "dueDateText": {
+        "expected": "Due Date is required.",
+        "message": " not matched"
+    },
+    "FiscalPeriodText": {
+        "expected": "Fiscal Period is required.",
+        "message": " not matched"
+    },
+    "BatchSuccess": {
+        "expected": "Batch successfully created",
+        "message": " not matched"
+    },
+    "invoiceNoUse": {
+        "expected": "Invoice No already in use",
+        "message": " not matched"
+    },
+    "batchcreatedalredy": {
+        "expected": "A batch has already been created for the selected due date.",
+        "message": " not matched"
+    },
+    "RecordNotFound": {
+        "expected": "Record not found.",
+        "message": "Clear btn not working"
+    },
+    "cannotMergePallet": {
+        "expected": "Can't merge orders, pickup locations are differents.",
+        "message": "Not displayed error message, pickup locations are differents. "
+    },
+    "PalletDelete": {
+        "expected": "Pallet deleted successfully.",
+        "message": "Message not found for auto deleted Pallet"
+    },
+    "PalletQty": {
+        "expected": "Please enter pallet quantity first.",
+        "message": "Message not found for enter pallet quantity first."
+    },
+    "palletStatus": {
+        "expected": "Waiting for load",
+        "message": "Pallet status is wrong expect..waiting for load"
+    },
+    "palletStatusLoad": {
+        "expected": "Truck loaded",
+        "message": "Pallet status is wrong expect..Truck loaded"
+    },
+    "carraccessdelete":{
+        "expected": "Carrier accessorial deleted successfully",
+        "message": "not matched"
+    },
+    "custaccessdelete":{
+        "expected": "Customer accessorial deleted successfully",
+        "message": "not matched"
+    },
+    "commentdelete":{
+        "expected": "Comment deleted successfully",
+        "message": "not matched"
+    },
+    "filedelete":{
+        "expected": "File deleted successfully",
+        "message": "not matched"
+    },
+    "TuckQAdone": {
+        "expected": "Truck inbound QA is done.",
+        "message": "Truck QA done message not found."
+     },
+  "PalletQAdone": {
+        "expected": "This pallet QA is already done.You can not delete it.",
+        "message": "Pallet QA done. Toast not Displayed."
+    },
+    "TuckCreateSuccess": {
+        "expected": "Inbound Truck is created successfully.",
+        "message": "Truck create success msg not found."
+    },
+  "MandatePieces": {
+        "expected": "Please enter received order /literature pieces for every customer order.",
+        "message": "Enter Pieces validation message not show on save Btn."
+    },
+  "QAsucces": {
+        "expected": "QA Processed Successfully.",
+        "message": "QA process successfull message not found."
+    },
+  "scanedPiecesnotmatch": {
+        "expected": "Scanned number of pieces does not match the received pieces.",
+        "message": "Less enter scanned pieces message not found."
+    },
+  "outboundPalletDelete": {
+        "expected": "Outbound pallet deleted successfully.",
+        "message": "outbound pallet delete successfull message not found."
+    },
+  "palletArrived": {
+        "expected": "Pallet already Arrived",
+        "message": "Pallet already Arrived message not found."
+    },
+  "OLoadPending": {
+        "expected": "Outbound Truck Load Pending",
+        "message": "order status after Outbound palletcreate is not match."
+    },
+  "multiLDAcalidation": {
+        "expected": "Multiple LDA selections are not allowed for the selected LTL",
+        "message": "Toast message not displyed for multi LDA selection"
+    },
+  "CostestUpdate": {
+        "expected": "Cost Estimate Update Successfully",
+        "message": "cost estimated toast not found."
+    }
+	
+
+
+
+}

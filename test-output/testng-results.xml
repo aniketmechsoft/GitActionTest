@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-11-25T14:57:44 IST" name="Suite" finished-at="2025-11-25T14:58:36 IST" duration-ms="52563">
+    <groups>
+      <group name="Smoke">
+        <method signature="OrderTest.shouldDisplayOrderFormOnCreateButtonClick()[pri:1, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" name="shouldDisplayOrderFormOnCreateButtonClick" class="com.uiFramework.Genesis.regression.web.OrderTest"/>
+        <method signature="OrderTest.shouldKeepConsigneeDropdownEmptyUntilCustomerSelected()[pri:3, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" name="shouldKeepConsigneeDropdownEmptyUntilCustomerSelected" class="com.uiFramework.Genesis.regression.web.OrderTest"/>
+      </group> <!-- Smoke -->
+    </groups>
+    <test started-at="2025-11-25T14:57:44 IST" name="Test" finished-at="2025-11-25T14:58:36 IST" duration-ms="52563">
+      <class name="com.uiFramework.Genesis.regression.web.OrderTest">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:57:33 IST" name="beforeSuite" finished-at="2025-11-25T14:57:44 IST" duration-ms="10205" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+        <test-method is-config="true" signature="setupSuite(org.testng.ITestContext)[pri:0, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:57:44 IST" name="setupSuite" finished-at="2025-11-25T14:57:44 IST" duration-ms="6" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@5b44318]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupSuite -->
+        <test-method is-config="true" signature="beforeclass()[pri:0, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:57:44 IST" name="beforeclass" finished-at="2025-11-25T14:57:44 IST" duration-ms="14" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeclass -->
+        <test-method signature="shouldDisplayOrderFormOnCreateButtonClick()[pri:1, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:57:44 IST" name="shouldDisplayOrderFormOnCreateButtonClick" finished-at="2025-11-25T14:57:54 IST" duration-ms="10401" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldDisplayOrderFormOnCreateButtonClick -->
+        <test-method signature="shouldShowErrorMessagesForMandatoryFields()[pri:2, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:57:54 IST" name="shouldShowErrorMessagesForMandatoryFields" finished-at="2025-11-25T14:57:56 IST" duration-ms="1597" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldShowErrorMessagesForMandatoryFields -->
+        <test-method signature="shouldKeepConsigneeDropdownEmptyUntilCustomerSelected()[pri:3, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:57:56 IST" name="shouldKeepConsigneeDropdownEmptyUntilCustomerSelected" finished-at="2025-11-25T14:58:36 IST" duration-ms="40466" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- shouldKeepConsigneeDropdownEmptyUntilCustomerSelected -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:58:36 IST" name="tearDown" finished-at="2025-11-25T14:58:36 IST" duration-ms="320" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="flushReport()[pri:0, instance:com.uiFramework.Genesis.regression.web.OrderTest@31f9b85e]" started-at="2025-11-25T14:58:36 IST" name="flushReport" finished-at="2025-11-25T14:58:37 IST" depends-on-methods="com.uiFramework.Genesis.base.TestBase.tearDown" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- flushReport -->
+      </class> <!-- com.uiFramework.Genesis.regression.web.OrderTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

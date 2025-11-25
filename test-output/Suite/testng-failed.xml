@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Web_Test(failed)">
+    <classes>
+      <class name="org.contactManagement.regression.web.OrderTest">
+        <methods>
+          <include name="shouldKeepConsigneeDropdownEmptyUntilCustomerSelected"/>
+          <include name="shouldDisplayOrderFormOnCreateButtonClick"/>
+          <include name="beforeclass"/>
+          <include name="flushReport"/>
+          <include name="setupSuite"/>
+          <include name="shouldShowErrorMessagesForMandatoryFields"/>
+          <include name="tearDown"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- org.contactManagement.regression.web.OrderTest -->
+    </classes>
+  </test> <!-- Web_Test(failed) -->
+  <test thread-count="5" name="iOS_Test(failed)">
+    <classes>
+      <class name="org.contactManagement.regression.web.OrderTest">
+        <methods>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- org.contactManagement.regression.web.OrderTest -->
+      <class name="org.contactManagement.regression.ios.IOSBasics">
+        <methods>
+          <include name="IOSBasicsTest"/>
+          <include name="tearDown"/>
+          <include name="configureAppium"/>
+        </methods>
+      </class> <!-- org.contactManagement.regression.ios.IOSBasics -->
+    </classes>
+  </test> <!-- iOS_Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

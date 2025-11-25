@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="Test(failed)" verbose="0">
+    <classes>
+      <class name="com.uiFramework.Genesis.regression.web.OrderTest">
+        <methods>
+          <include name="shouldDeleteFileAndVerifyOrderStatusAsDraft"/>
+          <include name="beforeclass"/>
+          <include name="flushReport"/>
+          <include name="shouldDeleteOrderSuccessfullyWhenInDraftStatusInDraft"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldDisplayOrderFormOnCreateButtonClick"/>
+          <include name="shouldNotGenerateBarcodeWhenCheckboxIsUnchecked"/>
+          <include name="shouldAddCustomerAccessorialSuccessfully"/>
+          <include name="shouldSaveCommentAfterDeleteAndValidateFileUploadErrors"/>
+          <include name="shouldAllowOrderDeletionAfterConfirmation"/>
+          <include name="shouldUploadFileAndShowSuccessToast"/>
+          <include name="shouldAddEditAndDeleteCarrierAccessorialSuccessfully"/>
+          <include name="shouldCreateDistributorOrderWithRequiredDetails"/>
+          <include name="tearDown"/>
+          <include name="shouldDisplayBarcodeAfterDistributorOrderConfirmation"/>
+          <include name="shouldShowErrorOnConfirmFromListingWithMissingFields"/>
+          <include name="shouldConfirmMultipleOrdersAndDisplaySuccessToast"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OrderTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

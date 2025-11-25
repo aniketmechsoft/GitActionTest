@@ -1,0 +1,26 @@
+{
+  "inboundCustomerOrderNo": {
+    "iconXPath": "(//div[@title='Click to see orders present in pallet'])[1]",
+    "popupTextXPath": "//*[@id='simple-popover']//table/tbody/tr/td[5]",
+    "inputFieldXPath": "//input[@placeholder='Enter Customer Order No']"
+  },
+  
+  "inboundOrderNo": {
+    "iconXPath": "(//div[@title='Click to see orders present in pallet'])[1]",
+    "popupTextXPath": "//td[@role='cell' and contains(text(), 'GL-')]",
+    "inputFieldXPath": "//input[@placeholder='Enter Order No']"
+  },
+  
+  "inboundTruckPalletNo": {
+    "iconXPath": "(//div[@title='Click to see pallets present in truck'])[1]",
+    "popupTextXPath": "//*[@id='simple-popover']//table/tbody/tr/td[2]",
+    "inputFieldXPath": "//input[@placeholder='Enter Pallet No']"
+  },
+  
+  "inboundTruckOrderNo": {
+    "iconXPath": "(//div[@title='Click to see pallets present in truck'])[1]",
+    "iconXPath2": "(//div[@title='Click to see orders present in pallet'])[1]",
+    "popupTextXPath": "//td[@role='cell' and contains(text(), 'GL-')]",
+    "inputFieldXPath": "//input[@placeholder='Enter Order No']"
+  }
+}

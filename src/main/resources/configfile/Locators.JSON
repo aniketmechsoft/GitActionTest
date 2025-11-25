@@ -1,0 +1,885 @@
+{
+  "pages": {
+    "orderPage": {
+      "columns": [
+        {
+          "firstRowData": "(//td[contains(normalize-space(.),'GL-')])[1]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "(//th[@class='p-filter-column p-frozen-column']//input)[2]",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//*[@id='panel1bh-content']//div[2]/table/thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[6]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//*[@id='panel1bh-content']//div[2]/table/thead/tr[2]/th[6]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 6,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//*[@id='panel1bh-content']//div[2]/table/thead/tr[2]/th[7]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[8]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[9]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[9]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 9,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[12]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[12]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 12,
+          "validationType": "lda"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[13]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[8]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[13]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 13,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[16]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[11]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[16]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 16,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[17]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[12]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[17]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 17,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[18]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[13]",
+          "filterInput": "//*[@id=\"panel1bh-content\"]//div[2]/table/thead/tr[2]/th[18]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 18,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[19]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[14]",
+          "filterInput": "//*[@id='panel1bh-content']//div[2]/table/thead/tr[2]/th[19]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 19,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[20]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[15]",
+          "filterInput": "//*[@id='panel1bh-content']//div[2]/table/thead/tr[2]/th[20]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 20,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[21]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[16]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[21]/div/div/div/div/div/span/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 21,
+          "validationType": "date"
+        }
+      ]
+    },
+  
+ "ArPage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//*[@id='panel1bh-content']/div//div[2]/table/thead/tr[2]/th[2]/div/div/span/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "numeric"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div//div/div/div/div[2]/table/thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div[2]/table/thead/tr[2]/th[4]/div/div/div/div/span/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "date"
+        },
+        {
+          "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[5]/div/div/div/div/span/input",
+          "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "date"
+        }
+      ]
+    },
+"dimWeightPage": {
+  "columns": [
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[2]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div[2]/table/thead/tr[2]/th[2]/div/div/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 2,
+      "validationType": "column"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[3]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div//div/div/div/div[2]/table/thead/tr[2]/th[3]/div/div/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 3,
+      "validationType": "column"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[4]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div//div/div/div/div[2]/table/thead/tr[2]/th[4]/div/div/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 4,
+      "validationType": "column"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[5]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div//div/div/div/div[2]/table/thead/tr[2]/th[5]/div/div/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 5,
+      "validationType": "column"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[6]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div//div/div/div/div[2]/table/thead/tr[2]/th[6]/div/div/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 6,
+      "validationType": "column"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[7]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div/div[2]/table/thead/tr[2]/th[7]/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 7,
+      "validationType": "numeric"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[8]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div/div[2]/table/thead/tr[2]/th[8]/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 8,
+      "validationType": "numeric"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[9]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[8]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div/div[2]/table/thead/tr[2]/th[9]/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 9,
+      "validationType": "numeric"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[10]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[9]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div/div[2]/table/thead/tr[2]/th[10]/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 10,
+      "validationType": "numeric"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[11]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[10]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div/div[2]/table/thead/tr[2]/th[11]/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 11,
+      "validationType": "numeric"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[12]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[11]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div//div/div/div[2]/table/thead/tr[2]/th[12]/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 12,
+      "validationType": "numeric"
+    },
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[16]",
+      "filterIcon": "(//button[@aria-label='Show Filter Menu'])[15]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[16]/div/div/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 16,
+      "validationType": "date"
+    }
+
+      ]
+    },
+"APPage": {
+  "columns": [
+    {
+      "firstRowData": "//*[@id='panel1bh-content']//table/tbody/tr[1]/td[3]",
+      "filterIcon": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[3]/div/button[1]",
+      "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[3]/div/div/div/div/span/input",
+      "tableData": "//*[@id='panel1bh-content']//table/tbody/tr",
+      "columnIndex": 3,
+      "validationType": "date"
+    }
+  ]
+},
+"inboundPalletPage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[2]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[3]/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "numeric"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[4]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[6]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[6]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 6,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[7]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//thead/tr[2]/th[8]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[10]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[8]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[10]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 10,
+          "validationType": "date"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[11]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[9]",
+          "filterInput": "//thead/tr[2]/th[11]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 11,
+          "validationType": "column"
+        },
+        
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[12]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[10]",
+          "filterInput": "//thead/tr[2]/th[12]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 12,
+          "validationType": "column"
+        },
+         
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[15]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[11]",
+          "filterInput": "//thead/tr[2]/th[15]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 15,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[16]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[12]",
+          "filterInput": "//thead/tr[2]/th[16]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 16,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[17]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[13]",
+          "filterInput": "//thead/tr[2]/th[17]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 17,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[18]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[14]",
+          "filterInput": "//thead/tr[2]/th[18]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 18,
+          "validationType": "column"
+        }
+        
+      ]
+    },
+    
+    "inboundPalletCreatePage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[2]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[4]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[6]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[6]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 6,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[7]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[10]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[10]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 10,
+          "validationType": "date"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[11]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[8]",
+          "filterInput": "//thead/tr[2]/th[11]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 11,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[12]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[9]",
+          "filterInput": "//thead/tr[2]/th[12]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 12,
+          "validationType": "column"
+        }
+        ]
+        
+     },
+    
+    "inboundTruckPage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//thead/tr[2]/th[4]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[6]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[6]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 6,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[7]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "date"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[8]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[9]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[9]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 9,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[10]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//thead/tr[2]/th[10]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 10,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[11]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[8]",
+          "filterInput": "//thead/tr[2]/th[11]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 11,
+          "validationType": "column"
+        }
+    ]
+    },
+   "inboundTruckCreatePage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[2]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[3]/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "numeric"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[7]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "date"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[8]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[9]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[9]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 9,
+          "validationType": "column"
+        }
+      ]
+    },
+"inboundQAPage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[2]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[6]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[6]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 6,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[7]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[8]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "column"
+        }
+       ]
+    },
+
+"outboundPalletPage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[4]/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "numeric"
+        },
+	{
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[8]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "date"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[9]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[9]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 9,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[10]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[10]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 10,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[13]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[13]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 13,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[14]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//thead/tr[2]/th[14]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 14,
+          "validationType": "column"
+        }
+	
+        
+      ]
+    },
+
+  "outboundPalletCreatePage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[2]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[4]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[6]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[6]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 6,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[7]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[10]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th           [10]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 10,
+          "validationType": "date"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[11]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[8]",
+          "filterInput": "//thead/tr[2]/th[11]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 11,
+          "validationType": "column"
+        },      
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[12]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[9]",
+          "filterInput": "//thead/tr[2]/th[12]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 12,
+          "validationType": "column"
+        }
+        
+      ]
+    },
+
+"outboundTruckPage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[3]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[3]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 3,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//thead/tr[2]/th[4]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "column"
+        },
+
+	{
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+
+	{
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[9]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[9]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 9,
+          "validationType": "date"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[10]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//thead/tr[2]/th[10]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 10,
+          "validationType": "column"
+        },
+         {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[11]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[6]",
+          "filterInput": "//thead/tr[2]/th[11]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 11,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[12]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[7]",
+          "filterInput": "//thead/tr[2]/th[12]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 12,
+          "validationType": "column"
+        }
+        
+      ]
+    },
+
+"outboundTruckCreatePage": {
+      "columns": [
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[2]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[1]",
+          "filterInput": "//thead/tr[2]/th[2]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 2,
+          "validationType": "column"
+        },
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[4]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[2]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[4]/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 4,
+          "validationType": "numeric"
+        },
+         
+        {
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[5]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[3]",
+          "filterInput": "//thead/tr[2]/th[5]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 5,
+          "validationType": "column"
+        },
+	{
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[7]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[4]",
+          "filterInput": "//thead/tr[2]/th[7]/div/div/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 7,
+          "validationType": "column"
+        },
+	{
+          "firstRowData": "//*[@class='p-datatable-tbody']//tr[1]//td[8]",
+          "filterIcon": "(//button[@aria-label='Show Filter Menu'])[5]",
+          "filterInput": "//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[2]/table/thead/tr[2]/th[8]/div/div/div/div/div/span/input",
+          "tableData": "//table/tbody/tr",
+          "columnIndex": 8,
+          "validationType": "date"
+        }
+        
+      ]
+    }
+     
+  }
+}

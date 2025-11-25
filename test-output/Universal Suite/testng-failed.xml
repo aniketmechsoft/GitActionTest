@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite parallel="tests" name="Failed suite [Universal Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" parallel="tests" name="App Automation Tests(failed)">
+    <parameter name="platform" value="app"/>
+    <classes>
+      <class name="org.contactManagement.regression.ios.IOSBasics">
+        <methods>
+          <include name="IOSBasicsTest"/>
+          <include name="testDuplicateEmail"/>
+          <include name="testEmptyUsername"/>
+          <include name="testWeakPassword"/>
+          <include name="testValidSignUp"/>
+          <include name="testPasswordMismatch"/>
+          <include name="tearDown"/>
+          <include name="testEmptyPassword"/>
+          <include name="configureAppium"/>
+        </methods>
+      </class> <!-- org.contactManagement.regression.ios.IOSBasics -->
+    </classes>
+  </test> <!-- App Automation Tests(failed) -->
+</suite> <!-- Failed suite [Universal Suite] -->
