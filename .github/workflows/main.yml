@@ -1,0 +1,95 @@
+name: Selenium Automation
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: "Select Test Suite"
+        required: true
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - regression
+          - sanity
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@v1
+
+    - name: Decide Suite
+      run: |
+        if [ "${{ github.event_name }}" = "push" ]; then
+          echo "SUITE=regression" >> $GITHUB_ENV
+        else
+          echo "SUITE=${{ github.event.inputs.suite }}" >> $GITHUB_ENV
+        fi
+
+    - name: Run Selected Suite
+      run: |
+        mvn clean test \
+          -DsuiteFile=src/test/resources/${SUITE}.xml \
+          -Dmaven.test.failure.ignore=true
+
+    - name: Check pass percentage (exclude skipped)
+      run: |
+        REPORT=target/surefire-reports/testng-results.xml
+
+        TOTAL=$(grep -o 'total="[0-9]*"' $REPORT | grep -o '[0-9]*')
+        PASSED=$(grep -o 'passed="[0-9]*"' $REPORT | grep -o '[0-9]*')
+        SKIPPED=$(grep -o 'skipped="[0-9]*"' $REPORT | grep -o '[0-9]*')
+
+        EFFECTIVE_TOTAL=$(( TOTAL - SKIPPED ))
+
+        if [ "$EFFECTIVE_TOTAL" -le 0 ]; then
+          echo "❌ No executed tests. Failing pipeline."
+          exit 1
+        fi
+
+        PASS_PERCENT=$(( PASSED * 100 / EFFECTIVE_TOTAL ))
+
+        echo "========== TEST SUMMARY =========="
+        echo "Suite           : $SUITE"
+        echo "Total Tests     : $TOTAL"
+        echo "Skipped Tests   : $SKIPPED"
+        echo "Executed Tests  : $EFFECTIVE_TOTAL"
+        echo "Passed Tests    : $PASSED"
+        echo "Pass Percentage : $PASS_PERCENT%"
+        echo "================================="
+
+        if [ "$PASS_PERCENT" -lt 50 ]; then
+          echo "❌ Pass percentage below 50%. Failing pipeline."
+          exit 1
+        else
+          echo "✅ Pass percentage meets threshold."
+        fi
+
+    - name: Upload TestNG Reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: TestNG-Reports
+        path: target/surefire-reports
+
+    - name: Upload Extent Reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: Extent-Reports
+        path: test-output
