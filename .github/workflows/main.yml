@@ -10,11 +10,11 @@ on:
       suite:
         description: "Select Test Suite"
         required: true
-        default: smoke
+        default: smoke1
         type: choice
         options:
-          - smoke
-          - regression
+          - smoke1
+          - regression1
           - sanity
 
 jobs:
