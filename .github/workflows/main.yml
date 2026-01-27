@@ -36,7 +36,7 @@ jobs:
     - name: Decide Suite
       run: |
         if [ "${{ github.event_name }}" = "push" ]; then
-          echo "SUITE=regression" >> $GITHUB_ENV
+          echo "SUITE=regression1" >> $GITHUB_ENV
         else
           echo "SUITE=${{ github.event.inputs.suite }}" >> $GITHUB_ENV
         fi
