@@ -86,10 +86,27 @@ jobs:
       with:
         name: TestNG-Reports
         path: target/surefire-reports
+        
 
-    - name: Upload Extent Reports
+    - name: Zip Extent Reports
+      if: always()
+      run: |
+        echo "Waiting for extent report generation..."
+        sleep 5
+
+        if [ -d "target/extent-reports" ]; then
+        TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+        cd target
+        zip -r extent-reports-$TIMESTAMP.zip extent-reports
+        echo "Zipped report: extent-reports-$TIMESTAMP.zip"
+        else
+        echo "❌ extent-reports folder not found"
+        exit 1
+        fi
+
+    - name: Upload Extent Reports ZIP
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: Extent-Reports
-        path: test-output
+        path: target/extent-reports-*.zip
