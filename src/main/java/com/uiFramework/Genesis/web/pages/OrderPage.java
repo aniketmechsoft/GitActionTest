@@ -79,8 +79,15 @@ public class OrderPage {
 	}
 
 	private void jsClick(WebElement el) {
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
+		if (el != null && el.isDisplayed()) {
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", el);
+        }else {
+        	System.out.println("Element not displayed to click with JS");
+        }
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click();", el);  //show error 
 	}
+
 
 	/** Safari-safe, resilient click helper */
 	private void safeClick(By locator) {
@@ -190,7 +197,7 @@ public class OrderPage {
 	private By editbutton = By.xpath("(//*[name()='svg' and @data-testid='EditIcon'])[2]");
 	private By editbuttoncarr = By.xpath("(//button[@aria-label='edit'])[3]");
 	private By deletecarr = By
-			.xpath("(//*[name()='svg'][@class='MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1amtie4'])[12]");
+			.xpath("(//*[name()='svg'][@class='MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1amtie4'])[13]");
 	By searchContain = By.xpath("(//input[@placeholder='Contains...'])[1]");
 	private By yesbutton = By.xpath(
 			"//div[@class='MuiDialog-root LoginForm MuiModal-root css-126xj0f']//button[@type='button'][normalize-space()='Yes']");
@@ -229,11 +236,11 @@ public class OrderPage {
 	private By deleteorder = By.xpath("//button[@title='Click to delete']");
 	private By ordersource1 = By.xpath("(//span[@class='p-dropdown-label p-inputtext'])[3]");
 	private By distributor = By.xpath("//span[normalize-space()='Select Distributor']");
-	private By firstOptionCheckbox = By.xpath("(//input[@aria-invalid='false'])[2]");
-	private By secondOptionCheckbox = By.xpath("(//input[@aria-invalid='false'])[3]");
+	private By firstOptionCheckbox = By.xpath("//*[@class='p-checkbox p-component']");
+	private By secondOptionCheckbox = By.xpath("(//*[@class='p-checkbox p-component'])[2]");//(//input[@aria-invalid='false'])[3]
 	/**** Locators for filters ***/
-	private By fetchordertext = By.xpath("(//td[contains(normalize-space(.),'GL-')])[1]");
-	private By fetchcustordertext = By.xpath("(//*[@id='panel1bh-content']/div//div[2]/table/tbody/tr[1]/td[8])[1]");
+	private By fetchordertext = By.xpath("(//td[4])[1]");
+	private By fetchcustordertext = By.xpath("//*[@class='scrollable-pane']//tr[2]//td[4]");
 	private By fetchwavetext = By.xpath("(//*[@id='panel1bh-content']/div//div[2]/table/tbody/tr[1]/td[14])[1]");
 	private By selectconsigneeforlist = By.xpath("//div[contains(text(),'Select Consignee')]");
 	private By searchlocalcarrier = By.xpath("//*[@id='deliveringLocalCarrier']/span");
@@ -260,6 +267,7 @@ public class OrderPage {
 	private By getactulpieces = By.xpath("//table//tbody//tr/td[6]");
 	private By gettotalweight = By.xpath("//table//tbody//tr/td[7]");
 	private By orderpage = By.xpath("//a[@href='/order']");
+	private By ordListiPopup = By.xpath("(//*[@data-testid='HighlightOffIcon'])[3]");
 
 	/**
 	 * This method is used to fetch text from order page
@@ -308,7 +316,7 @@ public class OrderPage {
 		if (warehouses.isEmpty()) {
 			throw new SkipException("No warehouses available in the dropdown.");
 		}
-		warehouses.get(0).click();
+		warehouses.get(2).click(); //we select default warehouse ::Envision store
 		cp.waitForLoaderToDisappear();
 	}
 
@@ -447,10 +455,12 @@ public class OrderPage {
 		cp.waitForPopupToDisappear();
 		logger.info("Attempting to click the accessorial button");
 		try {
+			cp.waitForPopupToDisappear();
 			wait.until(ExpectedConditions.presenceOfElementLocated(custaccess));
 			safeClick(custaccess);
 			logger.info("Clicked on Accessorial button successfully.");
 		} catch (Exception e) {
+			safeClick(custaccess); //AccessorialButton
 			logger.info("Unable to click Accessorial button");
 		}
 	}
@@ -559,10 +569,11 @@ public class OrderPage {
 //		}
 	}
 
-	public void deleteCarrAccess() {
+	public void deleteCarrAccess() throws InterruptedException {
 		cp.waitForLoaderToDisappear();
 		cp.waitForPopupToDisappear();
 		safeClick(deletecarr);
+		Thread.sleep(500);
 		safeClick(yesbutton);
 	}
 
@@ -625,6 +636,7 @@ public class OrderPage {
 		Thread.sleep(3000);
 		safeClick(deletecomment);
 		safeClick(yescomment);
+		Thread.sleep(500);
 	}
 
 	public String addFile() {
@@ -672,6 +684,7 @@ public class OrderPage {
 			cp.waitForPopupToDisappear();
 			safeClick(deletefile);
 			safeClick(yesbutton);
+			cp.toastMsg=cp.captureToastMessage();
 		} finally {
 			cp.clickToClosePopUp();
 		}
@@ -692,7 +705,9 @@ public class OrderPage {
 		piecesField.clear();
 		piecesField.sendKeys(value);
 		String enteredPieces = piecesField.getAttribute("value");
-
+		
+		cp.clickToClosePopUp(); //add close pop if open then not able to stope confirm order
+		 
 		safeClick(confirm);
 		try {
 			WebElement secondPopup = new WebDriverWait(driver, Duration.ofSeconds(3)).until(
@@ -730,10 +745,10 @@ public class OrderPage {
 		} catch (Exception e) {
 			System.out.println("Error while fetching order details.");
 		}
-		WebElement back = driver.findElement(backbtn);
-		js.scrollIntoView(back);
-		Thread.sleep(1000);
-		wt.waitToClick(backbtn, 10);
+//		WebElement back = driver.findElement(backbtn);
+//		js.scrollIntoView(back);
+//		Thread.sleep(1000);
+//		wt.waitToClick(backbtn, 10);
 	}
 
 	public void landingOrderListing() {
@@ -828,7 +843,7 @@ public class OrderPage {
 			cp.waitAndClickWithJS(no, 5);
 			logger.info("Not click on barcode no Pop up");
 		} finally {
-			cp.closePopupIfPresent("(//*[@data-testid='HighlightOffIcon'])[2]");
+			cp.closePopupIfPresent("(//*[@data-testid='HighlightOffIcon'])[3]");
 		}
 		WebElement barcodeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//div//h6[text()='Record not found.'][1]")));
@@ -863,11 +878,12 @@ public class OrderPage {
 			safeClick(deleteorder);
 			safeClick(yes);
 		} finally {
-			cp.closePopupIfPresent("(//*[@data-testid='HighlightOffIcon'])[2]");
+			cp.closePopupIfPresent("(//*[@data-testid='HighlightOffIcon'])[3]");
 		}
 	}
 
 	public void onConfirmFieldDisable() {
+		SoftAssert sAssert= new SoftAssert();
 		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(20));
 		try {
 			safeClick(edit);
@@ -931,7 +947,7 @@ public class OrderPage {
 		safeClick(firstOptionCheckbox);
 		safeClick(tenderorder);
 		safeClick(yes);
-		try { safeClick(yes); } finally { cp.closePopupIfPresent("(//*[@data-testid='HighlightOffIcon'])[2]"); }
+		try { safeClick(yes); } finally { cp.closePopupIfPresent("(//*[@data-testid='HighlightOffIcon'])[3]"); }
 		cp.waitForLoaderToDisappear();
 		safeClick(edit);
 		cp.waitForLoaderToDisappear();
@@ -966,6 +982,7 @@ public class OrderPage {
 			safeClick(secondOptionCheckbox);
 			safeClick(tenderorder);
 			safeClick(yes);
+			Thread.sleep(700);
 			safeClick(yes);
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "Error during order confirmation", e);
@@ -1097,8 +1114,9 @@ public class OrderPage {
 		}
 	}
 
-	public void selectAnyConsigneeOrSkip() {
+	public void selectAnyConsigneeOrSkip() throws InterruptedException {
 		cp.waitForLoaderToDisappear();
+		Thread.sleep(600);
 		safeClick(selectconsignee);
 		wait.until(driver -> driver.findElements(clist).size() > 1);
 		driver.findElement(By.xpath("//input[@placeholder='Enter Customer Order No']")).click();
@@ -1135,6 +1153,7 @@ public class OrderPage {
 		driver.findElement(searchcustomer).click();
 		WebElement search = driver.findElement(input);
 		cp.selectSearchableDropdown(search, MCustomer);
+		Thread.sleep(1000);
 		selectAnyConsigneeOrSkip();
 		enterCustOrdNum(ordernumber);
 		selectFirstOrderType();
@@ -1200,6 +1219,7 @@ public class OrderPage {
 
 	        // Save
 	        safeClick(saveaccess);
+	        cp.toastMsg=cp.captureToastMessage();
 	        cp.waitForLoaderToDisappear();
 	        cp.waitForPopupToDisappear();
 

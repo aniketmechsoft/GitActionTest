@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -24,8 +25,8 @@ public class ScheduleDeliveryTest extends TestBase {
 	JavaScriptHelper js;
 	LdaQAPage lp;
 	LDAQATest lt;
-	//Set<String> handles;
-	//List<String> tabs;
+	// Set<String> handles;
+	// List<String> tabs;
 
 	@BeforeClass(alwaysRun = true)
 	public void befreclass() {
@@ -39,15 +40,15 @@ public class ScheduleDeliveryTest extends TestBase {
 		lt = new LDAQATest();
 
 	}
-
-	@Test(priority = 0,enabled=false)
+	
+	@Test(priority = 0, enabled = false)
 	public void createorderForLDA() throws Throwable {
 		SoftAssert sAssert = new SoftAssert();
 		np.endToEndOrder();
 
 	}
 
-	@Test(priority = 1, enabled=false)
+	@Test(priority = 1, enabled = true)
 	public void shouldManifestAvailableOnLDAPortal() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		js.executeScript("window.open()");
@@ -61,65 +62,106 @@ public class ScheduleDeliveryTest extends TestBase {
 //		cmObj.loginToApplication(driver, proObj.getPropertyValueFromFile("ldausername"),
 //				proObj.getPropertyValueFromFile("ldapassword"));
 
+//		driver.get("https://devagentportaldave.azurewebsites.net");
+//		cmObj.loginToApplication(driver, "aryaka-64", "gl1234");
+
 		System.out.println("agent portal open");
 		cp.waitForPopupToDisappear();
 	}
-	
-/**
- * Manual Schedule delivery
- * 
- */
+
+	/**
+	 * Manual Schedule delivery
+	 * 
+	 */
 
 	@Test(priority = 2)
 	public void shouldCheckMandatoryMessageOnManualSchedDate() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.clickManualScheDel();
 		sd.clickUpdateScheDel();
-		sAssert.assertEquals(cp.captureToastMessage(), "Please select at least one record.", "Not Match!.");
+		sAssert.assertEquals(cp.captureToastMessage(), "Please select at least one schedule date.", "Not Match!.");
 		sAssert.assertAll();
 	}
-
+	
 	@Test(priority = 3)
 	public void shouldCheckLBOLAvailableToShceduleDelivery() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		cp.searchSection();
 		System.out.println("lbol " + np.lbolArray[0]);
-		 sd.enterLbolNo(np.lbolArray[0]);
-		//sd.enterLbolNo("3863");
+		sd.enterLbolNo(np.lbolArray[0]);
+		//sd.enterLbolNo("4320");
 		cp.Search();
 		sAssert.assertFalse(cp.checkElementNorecord(), "LBOL Not available on LDA portal");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 4,dependsOnMethods="shouldCheckLBOLAvailableToShceduleDelivery")
+	@Test(priority = 4, dependsOnMethods = "shouldCheckLBOLAvailableToShceduleDelivery")
 	public void shouldScheduleManualDateForLBOL() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.selectManualScheDate();
+		sd.selectDeliveryDate();
+		sd.enterDelSignBy();
 		sd.clickUpdateScheDel();
-		sAssert.assertEquals(cp.captureToastMessage(), "Schedule delivery detaile update successfully.");
+		sAssert.assertEquals(cp.captureToastMessage(), "Schedule delivery details update successfully.");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 5,dependsOnMethods="shouldScheduleManualDateForLBOL")
-	public void shouldNotDisplayedLBOlAfterDeliverySchedule() throws Exception {
+	@Test(priority = 5, dependsOnMethods = "shouldScheduleManualDateForLBOL")
+	public void shouldNotShowLBOLAfterScheduledDelinPendingStatus() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
+		sd.selStatus("Pending");
 		cp.Search();
-		sAssert.assertTrue(cp.checkElementNorecord(), "LBOL available after schedule date");
+		sAssert.assertTrue(cp.checkElementNorecord(), "LBOL available in Pending status after schedule date on Manual Sched del");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 6, dependsOnMethods = "shouldScheduleManualDateForLBOL")
+	public void shouldShowLBOLForRescheduled() throws Exception {
+		SoftAssert sAssert = new SoftAssert();
+		cp.clickClearButton();
+		sd.selStatus("Scheduled");
+		sd.enterLbolNo(np.lbolArray[0]);
+		cp.Search();
+		sAssert.assertFalse(cp.checkElementNorecord(), "LBOL Not Available After Scheduled Delivery in Scheduled Status");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 7, dependsOnMethods = "shouldShowLBOLForRescheduled")
+	public void shouldShowScheuledDateCorrectly() throws Exception {
+		SoftAssert sAssert = new SoftAssert();
+//		System.out.println("Sched date "+sd.getScheduledDate());
+//		System.out.println("current date "+sd.getCurrentDate());
+		sAssert.assertEquals(sd.getScheduledDate(), sd.getCurrentDate(), "Scheduled Date not match!");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 8, dependsOnMethods = "shouldScheduleManualDateForLBOL")
+	public void shouldCheckUpdateDataOnAdminScreen() throws Exception {
+		SoftAssert sAssert = new SoftAssert();
+		driver.switchTo().window(lt.tabs.get(0));
+		cp.consigneeQAMenu();
+		sd.searchlbolOnQApage(np.lbolArray[0]);
+		cp.Search();
+		sAssert.assertTrue(sd.isDelSignByNotEmpty(),
+				"Delivery sign by is empty, detail not update from Mannual sched. del");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 9)
 	public void shouldScheduleDeliveryForMultiLBOL() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
+		driver.switchTo().window(lt.tabs.get(1));
 		cp.clickClearButton();
 		sd.selectManualScheDate();
 		sd.enterDateManually(lp.getCurrentDateTime());
+		sd.selectDeliveryDate();
+		sd.enterDelSignBy();	
 		sd.clickUpdateScheDel();
-		sAssert.assertEquals(cp.captureToastMessage(), "Schedule delivery detaile update successfully.");
+		sAssert.assertEquals(cp.captureToastMessage(), "Schedule delivery details update successfully.");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 10)
 	public void shouldExportPdfOnLDAQA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		cp.deleteExistingFiles();
@@ -128,7 +170,7 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 11)
 	public void shouldExportExcelOnLDAQA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		cp.deleteExistingFiles();
@@ -137,13 +179,14 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 9)
+	@Test(priority = 12)
 	public void shouldCheckOrderStatusAfterAcceptedManifest() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		driver.switchTo().window(lt.tabs.get(0));
+		cp.orderpageMenulanding();
 		lp.clearFilter();
-		sAssert.assertEquals(lp.getOrderStatus(lp.MGLOrderno), "Consignee Delivery Pending","Not match!" );
-	//	sAssert.assertEquals(lp.getOrderStatus("10024"), "Consignee Delivery Schedule Pending","Not match!" );
+		sAssert.assertEquals(cp.getOrderStatus(lp.MGLOrderno), "Consignee Delivery Pending","Not match!" );
+		//sAssert.assertEquals(cp.getOrderStatus("11712"), "Consignee Delivery Schedule Pending","Not match!" );
 		sAssert.assertAll();
 	}
 	
@@ -151,7 +194,7 @@ public class ScheduleDeliveryTest extends TestBase {
  * Schedule Delivery Page
  */
 
-	@Test(priority = 10)
+	@Test(priority = 13)
 	public void shouldCheckMandatoryMessageOnSchedDelDate() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		driver.switchTo().window(lt.tabs.get(1));
@@ -161,7 +204,7 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 11)
+	@Test(priority = 14)
 	public void shouldAcceptScheduleDeliveryByConsignee() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.clickOnAcceptedBtnIfPresent();
@@ -169,7 +212,7 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 12)
+	@Test(priority = 15)
 	public void shouldCheckMandatoryMsgForSchedDate() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.selectStatus();
@@ -179,7 +222,7 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 13)
+	@Test(priority = 16)
 	public void shouldLBOLAvailableOnScheduleStatus() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		//sd.searchlbol("3863");
@@ -193,7 +236,7 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 14, dependsOnMethods="shouldLBOLAvailableOnScheduleStatus")
+	@Test(priority = 17, dependsOnMethods="shouldLBOLAvailableOnScheduleStatus")
 	public void shouldScheduleDeliveryDateByLDA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.schedDeliveryDates();
@@ -202,14 +245,14 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 15, dependsOnMethods="shouldScheduleDeliveryDateByLDA")
+	@Test(priority = 18, dependsOnMethods="shouldScheduleDeliveryDateByLDA")
 	public void shouldDisplayedSchedDatebyLDA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertTrue(sd.isDateAvailable(), "Schedule date should not blank");
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 16)
+	@Test(priority = 19)
 	public void shouldShowErrorInSchedDateDuplicate() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.selectLbol();
@@ -220,7 +263,7 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 17)
+	@Test(priority = 20)
 	public void shouldAddNoteForLBOL() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		lp.editManifest();
@@ -230,31 +273,33 @@ public class ScheduleDeliveryTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 18,dependsOnMethods="shouldAddNoteForLBOL")
+	@Test(priority = 21,dependsOnMethods="shouldAddNoteForLBOL")
 	public void shouldDisplyedNoteOnGrid() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertTrue(sd.isNoteDisplayed(), "Added note should not be blank");
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 19)
+	@Test(priority = 22)
 	public void shouldOpenViewBtnForScheduleHistory() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		sd.clickOnViewBtn();
 		sAssert.assertTrue(sd.isSchedHistoryDisplayed(), "Schedule History Pop up not displayed");
 		sAssert.assertAll();
 	}
-	
-	@Test(priority = 20 ,enabled= false)
+
+	@Test(priority = 24, enabled = true)
 	public void shouldChekCloumnFilterOnSchedDelpage() throws Exception {
 		cp.clickClearButton();
-		lp.checkColoumFilter("ScheduleDeliveryPage");
+		//lp.checkColoumFilter("ScheduleDeliveryPage");
+		cp.verifyColumnFilterForFixGrid();
 	}
-	
-	@Test(priority = 21 ,enabled= false)
+
+	@Test(priority = 25, enabled = true)
 	public void shouldChekCloumnFilterOnManualSchedDelpage() throws Exception {
 		sd.clickManualScheDel();
-		lp.checkColoumFilter("ManualSchedDeliveryPage");
+		cp.verifyColumnFilterForFixGrid();
+		//lp.checkColoumFilter("ManualSchedDeliveryPage");
 	}
 
 }

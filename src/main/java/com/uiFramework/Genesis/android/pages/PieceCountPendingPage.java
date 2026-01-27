@@ -2,13 +2,22 @@ package com.uiFramework.Genesis.android.pages;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.collect.ImmutableMap;
+import com.uiFramework.Genesis.utils.AndroidActions;
+import com.uiFramework.Genesis.web.pages.CommonPage;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -31,7 +40,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 public class PieceCountPendingPage extends CommonClass {
 
 //	AppiumDriver driver;
-
+	AndroidActions Action;
 	/**
 	 * Constructor initializes the AppiumDriver instance and decorates all elements
 	 * using AppiumFieldDecorator.
@@ -41,6 +50,7 @@ public class PieceCountPendingPage extends CommonClass {
 	public PieceCountPendingPage(AndroidDriver driver) {
 		super(driver);
 		this.driver = driver;
+		Action=new AndroidActions(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 	}
 
@@ -303,5 +313,218 @@ public class PieceCountPendingPage extends CommonClass {
 	public void TrkingNoNotUpdatedValid() {
 		elementLoop(okBtnOnTrkingPopup);
 	}
+	
+	/*
+	 * Changes after Partial manifest
+	 */
+	
+	private By backBtn=By.xpath("//android.widget.Button");
+	private By confirmBtn1=By.xpath("//android.widget.Button[@text='CONFIRM']");
+	private By yesBtn=By.xpath("//android.widget.Button[@text='YES']");///android.widget.Button[@text="YES"]
+    private By noBtn=By.xpath("//android.widget.Button[translate(@text, 'no', 'NO')='NO']");
+    private By enterRecpieces = By.xpath("//android.view.View[contains(@resource-id, 'GL-')]/android.widget.EditText[1]");
+    private By openManifest = By.xpath("");
+    private By recOrdpc = By.xpath("(//android.widget.TextView[@text='Received Order'])[1]/following-sibling::android.widget.EditText[1]");
+	private By recLitOrd = By.xpath("(//android.widget.TextView[@text='Received Literature'])[1]/following-sibling::android.widget.EditText");
+	private By confirmbtn = By.xpath("//android.widget.Button[@text='CONFIRM']");
+	private By viewdetails = By.xpath("//android.widget.Button[@text='VIEW DETAILS']");
+	private By getstatus = By.xpath("//android.widget.TextView[@text='Manifest Details']/following-sibling::android.widget.TextView[1]");
+    
+	/**
+	 * Scrolls through the delivery list to find an LBOL entry with an enabled "Received Pieces" field.
+	 * Attempts up to 10 scroll iterations, performing incremental partial scrolls in each iteration.
+	 * Clicks the delivery confirmation button in each iteration and checks if the input field is enabled.
+	 * If enabled, stops scrolling; otherwise, navigates back and continues searching.
+	 *
+	 * @throws InterruptedException if the thread sleep is interrupted.
+	 */
+    public void checkManifestAvailableForDelivery() throws InterruptedException {
+    	Thread.sleep(2500);
+        List<WebElement> availableManifest =
+                driver.findElements(By.xpath("//android.widget.TextView[@text='Manifest']"));
+        
+         System.out.println("manifest grid "+availableManifest.size());
+         
+        for (int i = 1; i <= availableManifest.size(); i++) {
+
+            // Click Manifest
+            click(By.xpath("(//android.widget.TextView[@text='Manifest'])[" + i + "]"));
+            Thread.sleep(2500);
+            try {
+            	 WebElement TrackingNotUpdate =
+                         driver.findElement(By.xpath("//android.widget.Button[@text='OK']"));
+            	 if(TrackingNotUpdate.isDisplayed()) {
+            		 TrackingNotUpdate.click();
+            		 continue;
+                 }
+	
+            	} catch (Exception e) {
+	      // TODO: handle exception
+            	}
+              
+            List<WebElement> OBPLcount =
+                    driver.findElements(By.xpath("//android.view.View[@resource-id='childLayout']"));
+            
+            String status = driver.findElement(
+                    By.xpath("//android.view.View[@resource-id='root']/android.widget.TextView[3]")
+            ).getText();
+
+            // Get manifest number
+          
+            System.out.println("OBPL count: " + OBPLcount.size());
+            System.out.println("Status: " + status);
+            
+            System.out.println("iteration is "+i);
+            if (OBPLcount.size() >= 2 && status.equals("QA Pending")) {
+            	
+            	  WebElement manifestNumber = driver.findElement(
+                          By.xpath("//android.widget.TextView[@text='Manifest']/following-sibling::android.widget.TextView[1]"));
+            	  String manifest=manifestNumber.getText();
+            	  
+                System.out.println("Found Manifest for QA: " + manifest);
+                break;
+            } else {
+                System.out.println("Wrong manifest: " + manifest);
+                back() ;
+                Thread.sleep(2500);
+                if(i>=2) {
+                	partialScrollInsideElement(innerPage);
+                	System.out.println("Scroolling..");
+                }
+                continue;
+            }
+        }
+    //}
+
+	
+//		for (int i = 1; i <= 10; i++) {
+//		    System.out.println("Scroll attempt: " + i);
+//		    
+//		    for (int j = 1; j <= i; j++) {
+//		        Action.partialScroll();
+//		        System.out.println("→ partialScroll() called " + j + " time(s) in iteration " + i);
+//		        Thread.sleep(800);
+//		    }
+//
+//		   // click(delConfBtn_Android);
+//		    WebElement RecPieces = driver.findElement(enterRecpieces);
+//
+//		    if (RecPieces.isEnabled()) {
+//		    	System.out.println("EditText is enabled → breaking loop!");
+//			    break; 
+//			    
+//		    } else {
+//		    	back();
+//		        System.out.println("EditText is disabled → going back and continuing search...");
+//		    }
+//		}
+	}
+	
+	/**
+	 * This method used to click on back button
+	 */
+	public void back() {
+		click(backBtn);
+	}
+	
+	/**
+	 * This method used to click on confirm order 
+	 */
+	public void confirmOrder() {
+		click(confirmBtn1);
+		try {
+			click(yesBtn);
+			//driver.findElement(yesBtn).click();
+			Thread.sleep(2500);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	private static final Logger logger = Logger.getLogger(CommonPage.class.getName());
+	/**
+	 * This method used to Wait until loader is disable
+	 */
+	public void waitForLoaderToDisappear() throws TimeoutException {
+		try {
+			 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			 wait.until(driver -> {
+				try {
+					WebElement loader = driver
+							.findElement(By.xpath("//android.widget.TextView[@text='Loading...']"));
+					boolean isDisplayed = loader.isDisplayed();
+					return !isDisplayed;
+				} catch (NoSuchElementException e) {
+					return true;
+				}
+			});
+			logger.info("Loader has disappeared..");
+		} catch (TimeoutException e) {
+			logger.info("Timeout: Loader did not disappear within..seconds");
+			throw e;
+		}
+	}
+	
+	WebElement innerPage =////android.view.View[@resource-id="childLayout"]
+	        driver.findElement(By.xpath("(//android.widget.TextView[@text='Manifest'])[2]"));
+	
+	public void partialScrollInsideElement(WebElement element) {
+		try {
+	    Rectangle rect = element.getRect();
+
+	    ((JavascriptExecutor) driver).executeScript(
+	        "mobile: scrollGesture", ImmutableMap.of(
+	            "left", rect.getX(), "top", rect.getY(), "width", rect.getWidth(), 
+	            "height", rect.getHeight(), "direction", "down", "percent", 0.5
+	       )
+	    );
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	
+	/**
+	 * Clicks and enters the received order pieces count.
+	 * 
+	 * @param pieces Number of pieces to be entered.
+	 * @throws InterruptedException 
+	 */
+	public void enterRecOrderPieces(String pieces) throws InterruptedException {
+//		click(recOrdpc);
+//		enterValue(recOrdpc, pieces);
+		Action.enterTextWithPressKey(recOrdpc);
+	}
+
+	/**
+	 * Clicks and enters the received LIT (Line Item Tracking) count.
+	 * 
+	 * @param pieces Number of LIT pieces to be entered.
+	 * @throws InterruptedException 
+	 */
+	public void enterLitOrderPieces(String pieces) throws InterruptedException {
+//		click(recLitOrd);
+//		enterValue(recLitOrd, pieces);
+		Thread.sleep(1000);
+		Action.enterTextWithPressKey(recLitOrd);
+		
+	}
+	
+	/**
+	 * This method used to Click on view details
+	 */
+	public void viewDetails() {
+		
+		click(viewdetails);
+	}
+	
+	/**
+	 * This method used to get manifest status
+	 */
+	public String getmanifestStatus() {
+		return	getText(driver, getstatus);
+	}	
+	
+	
+
 
 }

@@ -36,7 +36,7 @@ public class ARInvoiceTest extends TestBase {
 
 	@Test(priority = 1, alwaysRun = true)
 	public void shouldAllowAllOrderTypesToBeUsedForInvoiceCreation() throws TimeoutException, InterruptedException {
-		ar.ARMenu();
+		//ar.ARMenu(); comment while run in suite
 		ar.ClickOnInvoiceMenu();
 		initialCount = ar.getTotalEntriesCount();
 		ar.clickOnCreateInvoicebtn();

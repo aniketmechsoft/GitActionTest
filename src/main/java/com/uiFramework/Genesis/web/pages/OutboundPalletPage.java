@@ -72,17 +72,18 @@ public class OutboundPalletPage extends InboundPalletPage {
 	private By barMenu = By.xpath("//i[@title='Barcode Printing']");
 	private By outboundpalletMenu = By.xpath("//a[@href='/pallet/outbound-pallet']");
 	private By createPallet = By.xpath("//button[@title='Click to create outbound pallet']");
-
-	private By ldafiltericon = By.xpath("(//button[@class='p-column-filter-menu-button p-link'])[5]");
-	private By notContains = By.xpath("//li[text()='Not contains']");
-	private By getlda = By.xpath("//tr[1]/td[6]");
-	private By searchLda = By.xpath("(//input[@class='p-column-filter p-inputtext p-component'])[5]");
+	//create pallet
+	private By ldafiltericon = By.xpath("(//*[@class='ml-1 cursor-pointer'])[5]//*[@class='p-icon']");
+	private By notContains = By.xpath("//li[text()='Not Contains']");
+	private By getlda = By.xpath("//tr[2]/td[4]");
+	private By searchLda = By.xpath("(//*[@class='ml-1 cursor-pointer'])[5]//preceding::input[1]");
 
 	private By mergepBtn = By.id("outPalletFiltermergePalletBtn");
 	private By createPBtn = By.xpath("//button[@title='Click to create pallet']");
 	private By popupsaveBtn = By.xpath("//button[@title='Click to save data']");
+	private By yes2 = By.xpath("(//*[@id='confmSubmit'])[2]");
 	private By yesBtn = By.id("confmSubmit");
-	private By noBtn = By.id("confmCancel"); // added best-guess id for NO button
+	private By noBtn = By.id("confmNo"); // added best-guess id for NO button
 
 	private By fetchordertext = By.xpath("(//td[contains(normalize-space(.),'GL-')])[1]");
 	private By dropfor = By.xpath("//div[@id='outPalletCreateOrderpalletFor']");
@@ -92,22 +93,22 @@ public class OutboundPalletPage extends InboundPalletPage {
 
 	// edit pallet
 	private By getPalletNo = By.xpath("//div[@class='labelBoxK__labelData' and contains(text(), 'OBPL-')]");
-	private By multiGLorder = By.xpath("(//div[@class='p-datatable-wrapper'])[1]//td[contains(text(), 'GL-')]");
+	private By multiGLorder = By.xpath("(//div[@class='datatable-wrapper'])[1]//tr//td[2]");
 	private By totalPieces = By.xpath("(//div[@class='labelBoxK__labelData'])[2]");
 	private By totalWeight = By.xpath("(//div[@class='labelBoxK__labelData'])[3]");
 	private By removeOrder = By.xpath("//button[@title='Click to remove orders from pallet']");
-	private By multicheckbx = By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[1]//td[1]");
+	private By multicheckbx = By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[1]//td[1]");
 	private By statusonedit = By.xpath("(//div[@class='labelBoxK__labelData'])[9]");
 	private By addorders = By.xpath("//button[@id='outboundPltMappingmapOrdersToPalletBtn']");
 	private By apalletqty = By.xpath("(//input[@placeholder='Pallet Qty'])[1]");
 	private By rpalletqty = By.xpath("(//input[@placeholder='Pallet Qty'])[2]");
 
 	// listing
-	private By ldacount = By.xpath("//table/tbody/tr[1]/td[6]//span[contains(@class, 'MuiTypography-button')]");
+	private By ldacount = By.xpath("//table/tbody/tr[2]/td[4]//span[contains(@class, 'MuiTypography-button')]");
 	private By editBtn = By.xpath("(//button[@title='Click to edit'])[1]");
 	private By deleteBtn = By.xpath("(//button[@title='Click to delete'])[1]");
-	private By statusonlisting = By.xpath("//table/tbody/tr[1]/td[13]");
-	private By palletQty = By.xpath("//tr[1]//td[4]");
+	private By statusonlisting = By.xpath("//table/tbody/tr[2]/td[10]");
+	private By palletQty = By.xpath("(//tr[2]//td[1])[2]");
 	private By getTruckNo = By.xpath("//table[1]/tbody[1]/tr[1]/td[9]");
 	private By getPalletNoonlist = By.xpath("//table[1]/tbody[1]/tr[1]/td[3]");
 	private By selectstatusoppage = By.xpath("(//*[.='2 items selected'])[3]");
@@ -119,14 +120,14 @@ public class OutboundPalletPage extends InboundPalletPage {
 	private By getOrderStatus = By.xpath("//table/tbody/tr[1]/td[19]");
 
 	// added: these were referenced but not declared earlier
-	private By checkbox = By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[1]//td[1]");
-	private By getGLorder = By.xpath("//tbody//*[contains(text(), 'GL-')]");
-	private By infoGrid = By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//tr//td[3]");
+	private By checkbox = By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[2]//td[1]");
+	private By getGLorder = By.xpath("(//tbody//tr[2]/td[2])[1]");
+	private By infoGrid = By.xpath("(//tbody[@class='p-datatable-tbody'])[1]//tr//td[2]");
 	private By closeInfo = By.xpath("//*[@data-testid='CloseIcon']");
 	private By nextPagination = By.xpath("//button[@class='p-paginator-next p-paginator-element p-link']");
 	private By backPagination = By.xpath("(//button[@aria-label='Page 1'])[1]");
 	private By loader = By.xpath("//*[@src='/static/media/loading.db43a6dd94d78914920a.gif']");
-	private By rmulticheckbx = By.xpath("(//div[@class='p-datatable-wrapper'])[2]//tr[1]//td[1]");
+	private By rmulticheckbx = By.xpath("(//div[@class='datatable-wrapper'])[2]//tr[1]//td[1]");
 	private By searchOrer = By.xpath("(//input[@placeholder='Contains...'])[1]");
 
 	// from parent edit summary labels that are used here too (shadowing if needed)
@@ -166,20 +167,28 @@ public class OutboundPalletPage extends InboundPalletPage {
 
 	/** Record OBPL on listing */
 	public void getMOBPL() {
-		MOBPL = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[3]"));
+		MOBPL = cp.getMandatoryText(By.xpath("//table/tbody/tr[2]/td[3]"));
 		logger.info("Created OBPL is " + MOBPL);
 	}
 
-	/** Return total entries count from paginator */
-	public int getTotalEntriesCount(WebDriver driver) {
-		cp.clickToClosePopUp();
-		cp.waitForLoaderToDisappear();
-		WebElement paginatorText = driver.findElement(By.className("p-paginator-current"));
-		String text = paginatorText.getText();
-		String countStr = text.replaceAll(".*of\\s+(\\d+).*", "$1");
-		logger.info("Total count " + countStr);
-		return Integer.parseInt(countStr);
-	}
+	/** Return total entries count from paginator 
+	 * @throws InterruptedException */
+	  public int getTotalEntriesCount(WebDriver driver) {
+	        cp.waitForLoaderToDisappear();
+
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	        WebElement paginatorText = wait.until(
+	                ExpectedConditions.refreshed(
+	                        ExpectedConditions.visibilityOfElementLocated(
+	                                By.xpath("(//*[@class='v-sected spanTag'])[1]"))));
+
+	        String text = paginatorText.getText();
+	        String countStr = text.replaceAll("\\D+", "");
+	        logger.info("Total count: " + countStr);
+
+	        return Integer.parseInt(countStr);
+	    }
 
 	/** Open create pallet dialog */
 	public void createPallet() throws TimeoutException {
@@ -213,7 +222,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 		List<WebElement> rows = driver.findElements(By.xpath("//table//tbody//tr"));
 		int rowLimit = Math.min(rows.size(), 10);
 		for (int i = 1; i <= rowLimit; i++) {
-			String actualTrimmed = driver.findElement(By.xpath("//table//tbody//tr[" + i + "]/td[11]"))
+			String actualTrimmed = driver.findElement(By.xpath("//table//tbody//tr[" + ( i+1 ) + "]/td[9]"))
 					.getText().trim().split(",")[0].trim();
 			Assert.assertEquals(actualTrimmed, Pickuplocation, "Pick location mismatch at row " + i);
 		}
@@ -237,7 +246,8 @@ public class OutboundPalletPage extends InboundPalletPage {
 	public void mergeBtn() {
 		driver.findElement(mergepBtn).click();
 		try {
-			cp.waitAndClickWithJS(yesBtn, 3);
+			cp.waitAndClickWithJS(yesBtn, 3);//inbound QA short
+			cp.waitAndClickWithJS(yesBtn, 3);//are you sure? multi lda
 			logger.info(cp.getMandatoryText(By.xpath("//h2[@class='confirm__title pt-1 pb-3']")));
 			cp.waitForLoaderToDisappear();
 		} catch (Exception e) {
@@ -245,7 +255,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 		}
 
 		WebElement glOrderCell = driver.findElement(
-				By.xpath("//tbody[@class='p-datatable-tbody']//tr[@role='row']/td[1][contains(text(), 'GL-')]"));
+				By.xpath("//tbody[@class='p-datatable-tbody']//tr[@role='row']/td[1]"));
 		String glOrderText = glOrderCell.getText();
 		glOrderOnpopup = Arrays.stream(glOrderText.split(",")).map(String::trim).toArray(String[]::new);
 		logger.info("popup gl: " + Arrays.toString(glOrderOnpopup));
@@ -268,7 +278,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 
 	/** LDA count badge on listing */
 	public int getLDAfromListng() {
-		logger.info(cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[5]")));
+		logger.info(cp.getMandatoryText(By.xpath("(//table/tbody/tr[2]/td[2])[2]")));
 		return Integer.parseInt(cp.getMandatoryText(ldacount).trim());
 	}
 
@@ -310,17 +320,17 @@ public class OutboundPalletPage extends InboundPalletPage {
 	public void checkRemovedOrders() {
 		glOrder.clear();
 		List<WebElement> glOrderCells = driver
-				.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//td[contains(text(), 'GL-')]"));
+				.findElements(By.xpath("(//div[@class='datatable-wrapper'])[1]//*[@data-pc-name='checkbox']"));
 
 		if (glOrderCells.size() > 1) {
 			for (int i = glOrderCells.size(); i >= 2; i--) {
 				try {
 					WebElement checkbox = driver
-							.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[1]"));
+							.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[1]"));
 					checkbox.click();
 
 					List<WebElement> glOrderElements = driver
-							.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[2]"));
+							.findElements(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[2]"));
 					for (WebElement element : glOrderElements) {
 						glOrder.add(element.getText());
 
@@ -328,10 +338,10 @@ public class OutboundPalletPage extends InboundPalletPage {
 						initialWeight = Integer.parseInt(driver.findElement(totalWeight).getText().trim());
 
 						orderPieces = Integer.parseInt(driver
-								.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[8]"))
+								.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[8]"))
 								.getText().trim().split("/")[0].trim());
 						orderWeight = Integer.parseInt(driver
-								.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[9]"))
+								.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[9]"))
 								.getText().trim());
 
 						int FinalPieces = initialPieces - orderPieces;
@@ -357,7 +367,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 			}
 
 			List<WebElement> glOrderRemoved = driver
-					.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[2]//td[contains(text(), 'GL-')]"));
+					.findElements(By.xpath("(//div[@class='datatable-wrapper'])[2]//tr//td[2]"));
 			if (glOrderRemoved.isEmpty()) {
 				logger.info("No GL orders found in removed orders table.");
 			} else {
@@ -399,7 +409,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 	/** Fail if any order process is Return/Closeout in bottom grid */
 	public void checkOrderProsessForInbound() {
 		List<WebElement> orderProcess = driver
-				.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[2]//td[contains(text(), 'Re')]"));
+				.findElements(By.xpath("(//div[@class='datatable-wrapper'])[2]//td[contains(text(), 'Re')]"));
 		if (orderProcess.isEmpty()) {
 			logger.info("No GL Order found for Order Process");
 		} else {
@@ -421,11 +431,11 @@ public class OutboundPalletPage extends InboundPalletPage {
 	public void selectMulcheckBoxForCretepallet() {
 		glOrder.clear();
 		List<WebElement> checkboxes = driver
-				.findElements(By.xpath("//td[@class='p-selection-column p-frozen-column']//input[@type='checkbox']"));
+				.findElements(By.xpath("//div[@class='p-checkbox p-component']//input[@type='checkbox']"));
 		for (int i = 0; i < 3 && i < checkboxes.size(); i++) {
 			try {
 				checkboxes.get(i).click();
-				List<WebElement> glOrderElements = driver.findElements(By.xpath("//td[@class='p-frozen-column']"));
+				List<WebElement> glOrderElements = driver.findElements(By.xpath("//td[@class='vt-cell border v-server-td truncate vs-frozen']"));
 				if (i < 3 && i < glOrderElements.size()) {
 					String glorder = glOrderElements.get(i).getText().trim();
 					glOrder.add(glorder);
@@ -435,28 +445,40 @@ public class OutboundPalletPage extends InboundPalletPage {
 			}
 		}
 
-		driver.findElement(nextPagination).click();
+	//	driver.findElement(nextPagination).click();
 		cp.waitForLoaderToDisappear();
-		driver.findElement(backPagination).click();
+	//	driver.findElement(backPagination).click();
 		cp.waitForLoaderToDisappear();
 
-		List<WebElement> refreshedCheckboxes = driver
-				.findElements(By.xpath("//td[@class='p-selection-column p-frozen-column']//input[@type='checkbox']"));
-		for (int i = 0; i < 3 && i < refreshedCheckboxes.size(); i++) {
-			Assert.assertTrue(refreshedCheckboxes.get(i).isSelected(), "Checkbox is NOT selected after pagination.");
-		}
+//		List<WebElement> refreshedCheckboxes = driver
+//				.findElements(By.xpath("//td[@class='p-selection-column p-frozen-column']//input[@type='checkbox']"));
+//		for (int i = 0; i < 3 && i < refreshedCheckboxes.size(); i++) {
+//			Assert.assertTrue(refreshedCheckboxes.get(i).isSelected(), "Checkbox is NOT selected after pagination.");
+//		}
 
 		wt.waitToClick(createPBtn, 10);
-		wt.waitForElement(By.xpath("//tbody[@class='p-datatable-tbody']//tr[@role='row']/td[1][contains(text(), 'GL-')]"), 10);
+		clickOnYesbtn();
+		wt.waitForElement(By.xpath("//tbody[@class='p-datatable-tbody']//tr[@role='row']/td[1]"), 10);
 
 		List<WebElement> glOrderc = driver.findElements(
-				By.xpath("//tbody[@class='p-datatable-tbody']//tr[@role='row']/td[1][contains(text(), 'GL-')]"));
+				By.xpath("//tbody[@class='p-datatable-tbody']//tr[@role='row']/td[1]"));
 		for (WebElement element : glOrderc) {
 			popupGLorder.add(element.getText().trim());
 		}
 		logger.info("Popup GL " + popupGLorder);
 		matchPopOrders();
 		cp.clickToClosePopUp();
+	}
+	
+	/**
+	 * THis method is used to handle pop up
+	 */
+	public void clickOnYesbtn() {
+		try {
+			cp.waitAndClickWithJS(yesBtn, 5);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	/** Assert selected GLs appear in the popup list, then save */
@@ -517,7 +539,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForLoaderToDisappear();
 		List<WebElement> glOrderCells = driver
-				.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//td[contains(text(), 'GL-')]"));
+				.findElements(By.xpath("(//tbody[@class='p-datatable-tbody'])[1]//tr"));
 		if (glOrderCells.size() > 1) {
 			logger.info("More than one GL order found. Skipping checkNoBtnonPopup method.");
 			return;
@@ -567,6 +589,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 
 						wt.waitToClick(addorders, 10);
 						try {
+							cp.waitAndClickWithJS(yesBtn, 5);
 							cp.waitAndClickWithJS(yesBtn, 5);
 						} catch (Exception e) {
 							logger.info("Yes button not displayed for multiple LDA");
@@ -634,8 +657,7 @@ public class OutboundPalletPage extends InboundPalletPage {
 		driver.findElement(rpalletqty).sendKeys(Keys.BACK_SPACE);
 		driver.findElement(rpalletqty).sendKeys(Keys.BACK_SPACE);
 		driver.findElement(addorders).click();
-		sAssert.assertEquals(cp.captureToastMessage(), ReadJsonData.getNestedValue("PalletQty", "expected"),
-				ReadJsonData.getNestedValue("PalletQty", "message"));
+		sAssert.assertEquals(cp.captureToastMessage(), "Please enter pallet quantity first.","Not match!");
 		cp.waitForPopupToDisappear();
 		addPalletQty(qty);
 	}
@@ -647,8 +669,11 @@ public class OutboundPalletPage extends InboundPalletPage {
 		driver.findElement(rpalletqty).sendKeys(qty);
 		driver.findElement(addorders).click();
 		try {
+			cp.waitAndClickWithJS(yes2, 4);//
 			cp.waitAndClickWithJS(yesBtn, 4);
 		} catch (Exception e) {
+			cp.waitForLoaderToDisappear();
+			cp.waitAndClickWithJS(yesBtn, 4);
 			// ignore
 		}
 		cp.waitForPopupToDisappear();

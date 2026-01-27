@@ -77,7 +77,7 @@ public class CloseOutPage {
 	private By enterSpecialInst = By.xpath("//*[@placeholder='Enter Special Instructions']");
 	private By originstatus = By.id("closeOutlineOrderDetailsorderStatus");
 	private By scheddate = By.xpath("(//*[@class='p-datepicker-trigger p-button p-component p-button-icon-only'])[1]");
-	private By pickupdate = By.xpath("(//*[@class='p-datepicker-trigger p-button p-component p-button-icon-only'])[2]");
+	private By pickupdate = By.xpath("(//*[@class='p-datepicker-trigger p-button p-component p-button-icon-only'])[3]");
 	private By dateSel = By.xpath("//td[@data-p-today='true']");
 	private By repname = By.xpath("//*[@placeholder='Enter Rep Name']");
 	private By signby = By.xpath("//*[@placeholder='Enter Pickup signed by']");
@@ -118,7 +118,7 @@ public class CloseOutPage {
 			.xpath("(//*[name()='svg'][@class='MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1amtie4'])[13]");
 	private By yesbutton = By.xpath(
 			"//div[@class='MuiDialog-root LoginForm MuiModal-root css-126xj0f']//button[@id='confmSubmit']");
-	private By edit = By.xpath("//button[@title='Click to edit']");
+	private By edit = By.xpath("(//button[@title='Click to edit'])[1]");
 	private By comment = By.xpath("//button[contains(@class, 'MuiButtonBase-root') and @title='Click to add comment']");
 	private By entercomment = By.xpath("//textarea[@placeholder='Enter Comment']");
 	private By editcomment = By.xpath("(//button[@title='Click to edit'])[1]");
@@ -134,7 +134,7 @@ public class CloseOutPage {
 	private By doctext = By.xpath("//span[text()='Document Name is required.']");
 	private By filetext = By.xpath("//span[text()='File is required.']");
 	private By addfile = By.xpath("//button[@title='Click to add file']");
-	private String downloadDir = System.getProperty("user.dir") + "\\downloadedFiles";
+	private String downloadDir = System.getProperty("user.dir") + "\\target\\downloads";
 	private By ormanifest = By.xpath("(//*[@title='Click to print'])[1]");
 	private By orlbol = By.xpath("(//*[@title='Click to print'])[2]");
 	private By addcloseoutline = By.xpath("//*[@title='Click to add Closeout Line']");
@@ -157,7 +157,7 @@ public class CloseOutPage {
 	private By enterLineLitDimwt =By.xpath("//input[@id='closeOutlineDetliteratureDimensionalWeight']");
 	private By ordernumber =By.xpath("//*[@id='closeOutlineDetglOrderNumber']");
 	private By lbolnumber =By.xpath("//*[@class='p-datatable-tbody']//td[7]");
-	private By closepopupBtn =By.xpath("(//*[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-3b9s7z'])[8]");
+	private By closepopupBtn =By.xpath("(//*[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-3b9s7z'])[9]");
 	private By deleteBtn =By.xpath("//*[contains(@id,'closeOutlineDeleteBtn')]");
 	private By getstatus =By.xpath("//*[@class='p-datatable-tbody']//td[8]");
 	private By auditorname=By.id("closeOutauditorDetauditorName");
@@ -183,7 +183,7 @@ public class CloseOutPage {
 	private By selectpickupLda =By.xpath("(//*[.='Select Pickup LDA'])[3]");
 	private By pickupLdaCode =By.xpath("//*[@placeholder='Enter Pickup LDA Code']");
 	private By pickupConsignee =By.xpath("//*[@placeholder='Select Pickup Consignee']");
-	private By fetchCloseoutOrderTextLocator =By.xpath("//td[contains(text(), 'GL-')]");
+	private By fetchCloseoutOrderTextLocator =By.xpath("//table/tbody/tr[1]/td[3]");
 	private By fetchcustordertext =By.xpath("//table/tbody/tr[1]/td[5]");
 	private By ordernum =By.xpath("//*[@placeholder='Enter Closeout Order Number']");
 	private By fetchpickupldacode =By.xpath("//table/tbody/tr[2]/td[10]");
@@ -1752,9 +1752,11 @@ public class CloseOutPage {
 	/**
 	 * Checks whether the "Ok" button is displayed on the page.
 	 * @return true if the Ok button is visible, false otherwise
+	 * @throws InterruptedException 
 	 */
-	public void clickOkBtn() {
+	public void clickOkBtn() throws InterruptedException {
 	    wt.waitToClick(okBtn, 10);
+	    Thread.sleep(500);
 	}
 	
 	/**
@@ -1773,14 +1775,16 @@ public class CloseOutPage {
 
 	/**
 	 * This method used to add matrics detail for origin order
+	 * @throws InterruptedException 
 	 */
-	public void addMetricsForOriginOrder() {
+	public void addMetricsForOriginOrder() throws InterruptedException {
 		enterActWeight(cm.getNumericString(2));
 		enterDimWeight(cm.getNumericString(2));
 		enterPieces(cm.getNumericString(2));
 		enterLitWeight(cm.getNumericString(2));
 		enterLitDimWeight(cm.getNumericString(2));
 		enterLitPieces(cm.getNumericString(2));
+		wt.waitToClick(By.xpath("//*[text()='Closeout Line']"), 5);
 
 	}
 	/**
@@ -1922,7 +1926,7 @@ public class CloseOutPage {
 	 */
 	public String getOriginOrderStatusOnListing() {
 		cp.waitForLoaderToDisappear();
-		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[11]"));
+		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[12]"));
 	}
 	
 	/**
@@ -2054,7 +2058,7 @@ public class CloseOutPage {
 	 * @return Order Number
 	 */
 	public String getOrderNo() {
-		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[3]"));
+		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[4]"));
 	}
 	
 	/**
@@ -2062,7 +2066,7 @@ public class CloseOutPage {
 	 * @return Customer Order Number
 	 */
 	public String getCustomerOrderNo() {
-		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[5]"));
+		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[6]"));
 	}
 	
 	/**
@@ -2070,7 +2074,7 @@ public class CloseOutPage {
 	 * @return Pickup Consignee
 	 */
 	public String getPickupCon() {
-		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[6]"));
+		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[7]"));
 	}
 	
 	/**
@@ -2078,7 +2082,7 @@ public class CloseOutPage {
 	 * @return carrier code
 	 */
 	public String getCarrierCode() {
-		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[10]"));
+		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[11]"));
 	}
 	
 	/**
@@ -2086,7 +2090,7 @@ public class CloseOutPage {
 	 * @return
 	 */
 	public String getActulwt() {
-		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[8]"));
+		return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[9]"));
 	}
 	
 	/**
@@ -2094,7 +2098,7 @@ public class CloseOutPage {
 	 * @return
 	 */
 	public String getActualpieces() {
-		String value = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[7]"));
+		String value = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[8]"));
 		return value.split("/")[1].trim();
 	}
 	
@@ -2104,7 +2108,7 @@ public class CloseOutPage {
 	 */
 	public void deleteCloseOrder() {
 		cp.waitForPopupToDisappear();
-	    String status = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[11]"));
+	    String status = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[12]"));
 	    if (status.equals("Closed")) {
 	        wt.waitToClick(By.xpath("//*[@title='Click to delete']"), 10);
 	        cp.waitAndClickWithJS(yesbutton, 10);
@@ -2149,7 +2153,7 @@ public class CloseOutPage {
 		selectFirstOrderType();
 	}
 	public String getCustomer() {
-		return cp.getMandatoryText(By.xpath("//tbody//tr//td[4]"));
+		return cp.getMandatoryText(By.xpath("//tbody//tr//td[5]"));
 	}
 	
 	/**

@@ -150,14 +150,17 @@ public class BrowserFactory extends SafariDriverFactory{
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver(getChromeOptions());
+                driver.manage().window().maximize();
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver(getFirefoxOptions());
+                driver.manage().window().maximize();
                 break;
             case "edge":
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver(getEdgeOptions());
+                driver.manage().window().maximize();
                 break;
             case "safari":
                // driver = getSafariDriver();

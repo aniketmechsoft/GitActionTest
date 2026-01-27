@@ -19,7 +19,7 @@ public class LoginPage {
 	AndroidDriver driver;
 
 	public LoginPage(AndroidDriver driver) {
-		// super(driver);
+		super();
 		this.driver = driver;
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this); //
 
@@ -97,7 +97,6 @@ public class LoginPage {
     
     private final By loginNowButton = MobileBy.xpath("//android.widget.Button[@text='Login Now']");
 
-    
     public void clickLoginNow() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         try {

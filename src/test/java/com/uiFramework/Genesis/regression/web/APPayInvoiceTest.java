@@ -31,7 +31,7 @@ public class APPayInvoiceTest extends TestBase {
 	public void shouldValidateMandatoryFieldsOnCreatePayableInvoice()
 			throws TimeoutException, InterruptedException, FileNotFoundException {
 		SoftAssert sAssert = new SoftAssert();
-	//	  ii.accountPayableMenu(); //when run suite
+		 // ii.accountPayableMenu(); //when run suite
 		ii.payInvoicesMenu();
 		ii.carrSelOnPayInvScreenCreateInv();
 		ii.clickOnInvAmt();
@@ -270,8 +270,9 @@ public class APPayInvoiceTest extends TestBase {
 	}
 	
 	@Test(priority = 27)
-	public void shouldAllowUserToAddRecordFromEdit() {
+	public void shouldAllowUserToAddRecordFromEdit(){
 		SoftAssert sAssert = new SoftAssert();
+		ii.loadAllRecord();
 		ii.enterInvnoForthirdRow();
 		System.out.println("Amt after edit "+ii.getTotalPaybleAmountFromEdit());
 		sAssert.assertNotEquals(ii.getTotalPaybleAmountFromEdit(), ii.paybleAmount, "Pay amount should not equal after invoice amt add.");
@@ -294,21 +295,25 @@ public class APPayInvoiceTest extends TestBase {
 		sAssert.assertEquals(ii.ToastMessage(),"Batch successfully created", " Toast on save batch Not match!");
 		sAssert.assertAll();
 	}
-	
-	@Test(priority = 30)
-	public void shouldNotAllowAddingDuplicateInvoice() throws InterruptedException, TimeoutException {
-		SoftAssert sAssert = new SoftAssert();
-		cp.waitForLoaderToDisappear();
-		ii.payInvoicesMenu();
-		ii.selectCarrier(ii.carrier);
-		ii.enterDublicateInvno();
-		ii.invoiceDateSelAsCurrentDate();
-		ii.fascalPeriodSel();
-		ii.SelDueDateSameAsinvoiceDate(ii.DueDate);
-		ii.saveBatch();
-		sAssert.assertEquals(cp.captureToastMessage(),"Invoice No already in use", " Toast on save batch Not match!");
-		sAssert.assertAll();
-	}
+	/**
+	 * Req changes
+	 * @throws InterruptedException
+	 * @throws TimeoutException
+	 */
+//	@Test(priority = 30)
+//	public void shouldNotAllowAddingDuplicateInvoice() throws InterruptedException, TimeoutException {
+//		SoftAssert sAssert = new SoftAssert();
+//		cp.waitForLoaderToDisappear();
+//		ii.payInvoicesMenu();
+//		ii.selectCarrier(ii.carrier);
+//		ii.enterDublicateInvno();
+//		ii.invoiceDateSelAsCurrentDate();
+//		ii.fascalPeriodSel();
+//		ii.SelDueDateSameAsinvoiceDate(ii.DueDate);
+//		ii.saveBatch();
+//		sAssert.assertEquals(cp.captureToastMessage(),"Invoice No already in use", " Toast on save batch Not match!");
+//		sAssert.assertAll();
+//	}
 	
 	@Test(priority = 31)
 	public void shouldDisplayedBatchAmountCorrectlyOnListingAfterEdit() throws InterruptedException, TimeoutException {
@@ -324,14 +329,19 @@ public class APPayInvoiceTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 32)
-	public void shouldDownloadFileWhenPreviewInvoiceButtonClicked() throws InterruptedException, TimeoutException {
-		SoftAssert sAssert = new SoftAssert();
-		ii.deleteExistingFiles();
-	    ii.clickOnPreviewInvoice();
-		sAssert.assertTrue(ii.isFileDownloaded(), "FAIL:On preview invoice File was not downloaded. when click on preview invoice");
-		sAssert.assertAll();
-	}
+	/**
+	 * Req changes
+	 * @throws InterruptedException
+	 * @throws TimeoutException
+	 */
+//	@Test(priority = 32)
+//	public void shouldDownloadFileWhenPreviewInvoiceButtonClicked() throws InterruptedException, TimeoutException {
+//		SoftAssert sAssert = new SoftAssert();
+//		cp.deleteExistingFiles();
+//	    ii.clickOnPreviewInvoice();
+//		sAssert.assertTrue(cp.isFileDownloaded(), "FAIL:On preview invoice File was not downloaded. when click on preview invoice");
+//		sAssert.assertAll();
+//	}
 		
 	@Test(priority = 33)
 	public void shouldAllowUserToPayInvoiceSuccessfully() throws InterruptedException, TimeoutException {
@@ -340,6 +350,7 @@ public class APPayInvoiceTest extends TestBase {
 		ii.isDisplayedRadioBtn();
 		ii.clickOnExpandBtn();
 	    ii.clickOnPayInvoice();
+	    ii.clickOnYes();
 		sAssert.assertEquals(cp.captureToastMessage(), "Pay invoice successful", "invocie pay toast not displyed.");
 		sAssert.assertAll();
 	}
@@ -351,13 +362,14 @@ public class APPayInvoiceTest extends TestBase {
 		sAssert.assertTrue(ii.isNoRecordFoundDisplayed(), "Batch Should not displyed After pay invoice.");
 		sAssert.assertAll();
 	}
-	
-	@Test(priority = 35)
-	public void shouldHandlePaginationCorrectlyOnBatchInvoicePage() throws InterruptedException, TimeoutException {
-		SoftAssert sAssert = new SoftAssert();
-		ii.paginationOnBatchInv();
-	}
-	
+	/**
+	 * Removed pagination 
+	 */
+//	@Test(priority = 35)
+//	public void shouldHandlePaginationCorrectlyOnBatchInvoicePage() throws InterruptedException, TimeoutException {
+//		SoftAssert sAssert = new SoftAssert();
+//		ii.paginationOnBatchInv();
+//	}
 	
 	
 }

@@ -53,37 +53,40 @@ public class InboundQATest extends TestBase {
 
 	}
 
-//	@Test(priority = 1, alwaysRun = true, groups = {"Smoke"})
-//	public void verifyPalletAvailable() throws TimeoutException, InterruptedException {
-//		SoftAssert sAssert = new SoftAssert();
-//		iqa.inboundQaMenu();
-//		iqa.searchOrder();
-//		sAssert.assertEquals(iqa.getMTruckNo(), iqa.MTruckNo, "Main Pallet not available to Create Truck.");
-//		sAssert.assertAll();
-//	}
-//
-//	@Test(priority = 2, alwaysRun = true, groups = {"Smoke"})
-//	public void verifyToasmsgOnQAPass() throws TimeoutException, InterruptedException {
-//		SoftAssert sAssert = new SoftAssert();
-//		iqa.viewButton();
-//		iqa.checkValidationQA();
-//		sAssert.assertEquals(cp.captureToastMessage(), "QA Processed Successfully.", "Not match.");
-//		sAssert.assertAll();
-//	}
+	@Test(priority = 1, alwaysRun = true, groups = {"smoke"})
+	public void verifyPalletAvailable() throws TimeoutException, InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		iqa.inboundQaMenu();
+		iqa.searchOrder();
+		sAssert.assertEquals(iqa.getMTruckNo(), iqa.MTruckNo, "Main Truck not available for inbound QA.");
+		sAssert.assertAll();
+	}
+
+	@Test(priority = 2, alwaysRun = true, groups = {"smoke"})
+	public void verifyToasmsgOnQAPass() throws TimeoutException, InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		iqa.viewButton();
+		iqa.positiveSave();
+		sAssert.assertEquals(cp.captureToastMessage(), "QA Processed Successfully.", "Not match.");
+		sAssert.assertAll();
+	}
 
 	@Test(priority = 3)
 	public void verifyTruckDataDisplayedCorrectlyOnView() throws TimeoutException, InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
 		iqa.inboundQaMenu();
 		iqa.searchPendingStatus(DataRepo.QA_PENDING);
 		iqa.getListTruckData();
 		iqa.viewButton();
 		iqa.getQAviewData();
 		iqa.validateTruckdata();
+		sAssert.assertAll();
 	}
 
-	@Test(priority = 4)
-	public void verifyMandatoryPiecesOnSaveBtn() {
+	@Test(priority = 4, dependsOnMethods="verifyTruckDataDisplayedCorrectlyOnView")
+	public void verifyMandatoryPiecesOnSaveBtn() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
+		iqa.clearpieces();
 		iqa.saveBtn();
 		sAssert.assertEquals(cp.captureToastMessage(),
 				"Please enter received order /literature pieces for every customer order.", "Not found.");
@@ -92,7 +95,7 @@ public class InboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 5, dependsOnMethods="verifyTruckDataDisplayedCorrectlyOnView")
 	public void checkDefaultZeroPopulate() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertEquals(iqa.checkThatlitQtyDefaultZero(2), DataRepo.ZERO,
@@ -100,8 +103,8 @@ public class InboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 6)
-	public void validateQAscreen() throws TimeoutException {
+	@Test(priority = 6, dependsOnMethods="verifyTruckDataDisplayedCorrectlyOnView")
+	public void validateInboundQAscreen() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		iqa.checkValidationQA();
 		sAssert.assertEquals(iqa.ToastfoQAsuccess, "QA Processed Successfully.","Not match.");
@@ -128,7 +131,7 @@ public class InboundQATest extends TestBase {
 		iqa.checkValidationQAScanning();
 	}
 
-	@Test(priority = 9, groups = "Smoke", enabled = false)
+	@Test(priority = 9, groups = {"smoke"}, enabled = true)
 	public void ValidateFilterOnQAListing() throws InterruptedException, TimeoutException {
 		iqa.inboundQaMenu();
 		cp.waitForLoaderToDisappear();
@@ -166,29 +169,23 @@ public class InboundQATest extends TestBase {
 
 	}
 
-	@Test(priority = 10, groups = "Smoke", enabled = false)
-	public void verifyColoumFilterOnQAScreen() throws TimeoutException, InterruptedException, IOException {
-		iqa.inboundQaMenu();
-		iqa.checkColoumfilter();
-	}
-
-	@Test(priority = 11, groups = "Smoke")
-	public void checkPagination() throws TimeoutException, InterruptedException {
-		iqa.inboundQaMenu();
-		iqa.paginationOnListing();
-		cp.waitForLoaderToDisappear();
-	}
-
-	@Test(priority = 12, groups = "Smoke")
-	public void checkQAStatusforInbound() {
+	@Test(priority = 10, alwaysRun = true, groups = {"smoke"})
+	public void shouldCheckColumnFilter() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
-		cp.orderpageMenulanding();
-		sAssert.assertEquals(iqa.getOrderQAStatus(it.MGLOrderno), "QA Passed","QA Pass status not with order.");
+		iqa.inboundQaMenu();
+		cp.verifyColumnFilterForFixGrid();
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 13)
-	public void checkQAStatusFailedforInbound() {
+//	@Test(priority = 11, groups = "smoke")
+//	public void checkPagination() throws TimeoutException, InterruptedException {
+//		iqa.inboundQaMenu();
+//		iqa.paginationOnListing();
+//		cp.waitForLoaderToDisappear();
+//	}
+
+	@Test(priority = 12)
+	public void checkQAStatusFailedforInbound() throws InterruptedException {
 		System.out.println("Scann GL is: " + iqa.scannGL);
 		if (iqa.yesBtncheck()) {
 			op.landingOrderListing();
@@ -202,12 +199,21 @@ public class InboundQATest extends TestBase {
 			logger.info("Skipping QA Status check as Yes button was not displayed.");
 		}
 	}
+	
+	@Test(priority = 13, groups = {"smoke"})
+	public void checkQAStatusforInbound() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		cp.orderpageMenulanding();
+		sAssert.assertEquals(iqa.getOrderQAStatus(it.MGLOrderno), "QA Passed", "QA Pass status not with order.");
+		sAssert.assertAll();
+	}
 
 	@AfterClass()
-	public void checkOrderStatusAfterInboundQAdone() {
+	public void checkOrderStatusAfterInboundQAdone() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		op.landingOrderListing();
-		sAssert.assertEquals(it.getOrderStatus(it.MGLOrderno),"Outbound Pallet Pending", "Not match.");
+		sAssert.assertEquals(cp.getOrderStatus(it.MGLOrderno),"Outbound Pallet Pending", "Not match.");
+		sAssert.assertAll();
 	}
 
 }

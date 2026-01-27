@@ -1,23 +1,32 @@
-package com.uiFramework.Genesis.regression.android;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-
-public class ScheduleDeliveryTest {
-	
-	@BeforeMethod
-	public void preSetup() {
-//		 Activity activity = new Activity("com.mechsoft.contact_mngmt",
-//		 "com.mechsoft.contact_mngmt.MainActivity");
-//		((JavascriptExecutor) driver).executeScript("mobile:startActivity",
-//				ImmutableMap.of("Intent", "com.mechsoft.contact_mngmt/com.mechsoft.contact_mngmt.MainActivity"));
-//		LoginPage formPage = new LoginPage(driver);
-
-	}
-
+//package com.uiFramework.Genesis.regression.android;
+//
+//import java.io.IOException;
+//import java.util.HashMap;
+//import java.util.List;
+//import org.testng.annotations.BeforeMethod;
+//import org.testng.annotations.DataProvider;
+//import org.testng.annotations.Test;
+//import org.testng.asserts.SoftAssert;
+//
+//import com.uiFramework.Genesis.android.pages.LDADashboard;
+//import com.uiFramework.Genesis.android.pages.LoginPage;
+////import com.uiFramework.Genesis.ios.pages.ScheduledPage;
+//import com.uiFramework.Genesis.android.pages.ScheduledPage;
+//
+//import io.appium.java_client.android.AndroidDriver;
+//
+//public class ScheduleDeliveryTest {
+//	
+//	@BeforeMethod
+//	public void preSetup() {
+////		 Activity activity = new Activity("com.mechsoft.contact_mngmt",
+////		 "com.mechsoft.contact_mngmt.MainActivity");
+////		((JavascriptExecutor) driver).executeScript("mobile:startActivity",
+////				ImmutableMap.of("Intent", "com.mechsoft.contact_mngmt/com.mechsoft.contact_mngmt.MainActivity"));
+////	LoginPage formPage = new LoginPage(driver);
+////
+//	}
+//
 //	@Test(priority = 1, groups = "Smoke")
 //	public void LoginIntoTheApplication() throws InterruptedException {
 //		System.out.println("Nice.....................");
@@ -25,8 +34,8 @@ public class ScheduleDeliveryTest {
 //		formPage.allow();
 //		formPage.clickNext();
 //		formPage.clickNext();
-//		loginPage.clickLoginNow();
-//		loginPage.performLogin(loginPage, "aryaka-64", "gl1234");
+//		formPage.clickLoginNow();
+//		formPage.performLogin(formPage, "aryaka-64", "gl1234");
 //		LDADashboard ldaDashboard = new LDADashboard(driver);
 //		Thread.sleep(5000);
 //		ldaDashboard.clickScheduled();
@@ -222,14 +231,14 @@ public class ScheduleDeliveryTest {
 ////		AssertJUnit.assertEquals(toastMessage, "Please your name");
 //
 //	}
-
-//	@DataProvider
-//	public Object[][] getData() throws IOException {
-//		List<HashMap<String, String>> data = getJsonData(
-//				System.getProperty("user.dir") + "\\resources\\loginCredential.json");
 //
-//		return new Object[][] { { data.get(1) } };
-//	}
-
-
-}
+////	@DataProvider
+////	public Object[][] getData() throws IOException {
+////		List<HashMap<String, String>> data = getJsonData(
+////				System.getProperty("user.dir") + "\\resources\\loginCredential.json");
+////
+////		return new Object[][] { { data.get(1) } };
+////	}
+//
+//
+//}

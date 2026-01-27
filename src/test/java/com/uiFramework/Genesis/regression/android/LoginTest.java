@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import com.uiFramework.Genesis.android.pages.AvailablePage;
 import com.uiFramework.Genesis.android.pages.LDADashboard;
 import com.uiFramework.Genesis.android.pages.LoginPage;
-import com.uiFramework.Genesis.android.pages.LoginPagee;
+import com.uiFramework.Genesis.android.pages.LoginPageOldBase;
 import com.uiFramework.Genesis.android.pages.PieceCountPendingPage;
 import com.uiFramework.Genesis.base.BaseTest;
 
@@ -36,7 +36,7 @@ public class LoginTest extends BaseTest {
 //		System.out.println("Nice.....................");
 ////		formPage.acceptPopup();
 //		Thread.sleep(19000);
-////		LoginPage formPage = new LoginPage(driver);
+//		LoginPage formPage = new LoginPage(driver);
 ////		System.out.println("Current page source: " + driver.getPageSource());
 //		formPage.clickNext();
 //		Thread.sleep(2000);

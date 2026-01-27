@@ -75,6 +75,7 @@ public class DimWtUpdateTest extends TestBase {
 	@Test(priority = 6)
 	public void validateDimWeightOnMultiOrderSave() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
+		cp.waitForLoaderToDisappear();
 		dwu.fillFirstThreeRows(cm.getNumericString(2));
 		sAssert.assertEquals(cp.captureToastMessage(), "Dimensional Weight save successfully.", "Not match.");
 		sAssert.assertAll();
@@ -85,7 +86,6 @@ public class DimWtUpdateTest extends TestBase {
 		cp.waitForLoaderToDisappear();
 		cp.waitForPopupToDisappear();
 		dwu.downloadFileFormat();
-
 	}
 
 	@Test(priority = 8)

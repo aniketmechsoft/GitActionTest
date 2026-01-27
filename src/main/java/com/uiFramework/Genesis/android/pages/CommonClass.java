@@ -12,6 +12,8 @@ import org.testng.Assert;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.HasOnScreenKeyboard;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 public class CommonClass {
@@ -71,6 +73,7 @@ public class CommonClass {
 	 *
 	 * @param ele   The locator of the input field element.
 	 * @param value The text value to be entered.
+	 * @throws InterruptedException 
 	 */
 //	public void enterValue(By ele, String value) {
 //		try {
@@ -90,7 +93,7 @@ public class CommonClass {
 	        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(ele));
 	        element.clear(); // Clear any pre-filled data
 	        element.sendKeys(value);
-
+	          driver.hideKeyboard();
 	        // --- Hide keyboard if visible ---
 	        try {
 	            if (driver instanceof HasOnScreenKeyboard) {
@@ -125,6 +128,17 @@ public class CommonClass {
 	    } catch (Exception e) {
 	        System.err.println("Failed to verify element presence: " + e.getMessage());
 	        Assert.fail("Element not found or not visible: " + e.getMessage());
+	    }
+	}
+	
+	/**
+	 * This method used to close keyboard
+	 */
+	public void closeKeyboard() {
+	    try {
+	        driver.hideKeyboard();
+	    } catch (Exception e) {
+	        driver.pressKey(new KeyEvent(AndroidKey.BACK));
 	    }
 	}
 

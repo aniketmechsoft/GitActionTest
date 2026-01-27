@@ -63,7 +63,7 @@ public class ConsigneeQA {
 	/** Attempts to collect dropdown options from PrimeNG-like overlays, with fallbacks. */
 	private List<WebElement> getOverlayOptions() {
 		List<By> candidates = List.of(
-			By.xpath("/html/body/div[4]/div/ul/li[position() >= 2]"),
+			By.xpath("/html/body/div[5]/div/ul/li[position() >= 2]"),
 			By.xpath("//div[contains(@class,'p-dropdown-panel')]//li[not(contains(@class,'p-disabled'))]"),
 			By.xpath("//div[@role='listbox']//li[not(contains(@class,'p-disabled'))]")
 		);
@@ -76,11 +76,11 @@ public class ConsigneeQA {
 	/* -------------------------------------------------------------------------- */
 
 	private By docMenu = By.xpath("//i[@title='Documents']");
-	private By QAMenu = By.xpath("//*[@id='root']/div[3]/div[1]/div/div/ul/li[8]/div");
-	private By consigneeQAMenu = By.xpath("//*[@id='root']/div[3]/div[1]/div/div/ul/div/div/div/ul[3]/a/li");
+	private By QAMenu = By.xpath("//i[@title='QA']");
+	private By consigneeQAMenu = By.xpath("//a[@href='/qa/consignee-qa']");
 	private By lbolDrpDwn = By.xpath("//*[@id='consigneeQaLBOL']");
 	private By status = By.xpath("//*[@id='consigneeQastatus']");
-	private By DrpDwnClose = By.xpath("//*[@id='genesis']/div[4]/div[1]/button");
+	private By DrpDwnClose = By.xpath("//*[@id='genesis']/div[5]/div[1]/button");
 	private By delSignByErrMsg = By.xpath("//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[4]/div/div/div/div");
 	private By delDateByErrMsg = By.xpath("//*[@id='panel1bh-content']/div/div/div/div/div/div/div/div[3]/div/div/div[2]/div");
 	private By edtIcon = By.xpath("//*[@id='consigneeQaEditBtn']");
@@ -112,7 +112,7 @@ public class ConsigneeQA {
 	/**
 	 * Tries LBOL options until delivery datetime field becomes enabled.
 	 */
-	public void LBOLSelOfTrkingUpdatedOrder() throws InterruptedException {
+	public void LBOLSelOfTrkingUpdatedOrder1() throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		WebElement dropdownButton = waitClickable(By.id("consigneeQaLBOL"), 10);
 		List<WebElement> options;
@@ -127,17 +127,19 @@ public class ConsigneeQA {
 				Thread.sleep(200);
 				continue;
 			}
-
+			System.out.println("optin "+options.size());
 			for (int i = 0; i < options.size(); i++) {
+				System.out.println("otions Size "+options.size() + "ANd i"+ i);
 				if (i > 0) {
+					System.out.println("In if i"+ i);
 					dropdownButton.click();
-					Thread.sleep(150);
+					Thread.sleep(200);
 					options = getOverlayOptions();
 					if (options.size() <= i) break;
 				}
 				WebElement option = options.get(i);
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", option);
-				Thread.sleep(150);
+				Thread.sleep(200);
 				jsClick(option);
 
 				WebElement searchBtn = waitClickable(By.id("consigneeQaSearchFilterBtn"), 5);
@@ -146,6 +148,60 @@ public class ConsigneeQA {
 
 				WebElement targetElement = driver.findElement(By.xpath("//*[@id='consigneeQadeliveryDateTime']/input"));
 				if (targetElement.isEnabled()) return; // success
+			}
+		}
+	}
+	
+	/**
+	 * Iterates through dropdown options to find the one that enables the delivery datetime field.
+	 * Scrolls, clicks, and checks if the input gets enabled — basically the Selenium version of speed dating.
+	 * 
+	 * @throws InterruptedException if thread sleep is interrupted during the UI interaction flow
+	 */
+	public void LBOLSelOfTrkingUpdatedOrder() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement dropdownButton = driver.findElement(By.xpath("//*[@id='consigneeQaLBOL']"));
+		dropdownButton.click();
+
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("/html/body/div[5]/div/ul/li[position() >= 2]")));
+		List<WebElement> options = driver.findElements(By.xpath("/html/body/div[5]/div/ul/li[position() >= 2]"));
+		System.out.println("Dropdown options found: " + options.size());
+
+		boolean foundEnabled = false;
+
+		for (int i = 0; i < options.size(); i++) {
+	//		System.out.println("Trying option " + (i + 1));
+
+			if (i > 0) {
+				dropdownButton.click();
+				Thread.sleep(1000);
+			}
+
+			wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("/html/body/div[5]/div/ul/li[position() >= 2]")));
+			options = driver.findElements(By.xpath("/html/body/div[5]/div/ul/li[position() >= 2]"));
+	//		System.out.println("Options after refresh: " + options.size());
+
+			if (options.size() <= i) {
+	//			System.out.println("Option index " + i + " not found after reloading.");
+				continue;
+			}
+
+			WebElement option = options.get(i);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", option);
+			Thread.sleep(300);
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", option);
+
+			WebElement searchBtn = driver.findElement(By.xpath("//*[@id='consigneeQaSearchFilterBtn']"));
+			searchBtn.click();
+			Thread.sleep(1000);
+
+			WebElement targetElement = driver.findElement(By.xpath("//*[@id='consigneeQadeliveryDateTime']/input"));
+			if (targetElement.isEnabled()) {
+	//			System.out.println("Enabled element found using option " + (i + 1));
+				foundEnabled = true;
+				break;
+			} else {
+	//			System.out.println("Still disabled with option " + (i + 1));
 			}
 		}
 	}
@@ -327,8 +383,8 @@ public class ConsigneeQA {
 		WebElement receivedPieces = driver.findElement(recPieces);
 		WebElement markReceivedBtn = driver.findElement(markQty);
 
-		boolean isReceivedPiecesDisabled = !receivedPieces.isEnabled();
-		boolean isMarkReceivedDisabled = !markReceivedBtn.isEnabled();
+		boolean isReceivedPiecesDisabled = receivedPieces.isEnabled();
+		boolean isMarkReceivedDisabled = markReceivedBtn.isEnabled();
 
 		return isReceivedPiecesDisabled && isMarkReceivedDisabled;
 	}
@@ -345,4 +401,5 @@ public class ConsigneeQA {
 			return false;
 		}
 	}
+	
 }

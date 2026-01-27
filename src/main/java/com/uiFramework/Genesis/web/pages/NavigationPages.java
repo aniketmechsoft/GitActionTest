@@ -1,5 +1,6 @@
 package com.uiFramework.Genesis.web.pages;
 
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
@@ -77,6 +78,11 @@ public class NavigationPages extends OutboundPalletPage {
     private By listpickup = By.xpath("//*[@id='outPalletpickupLocationId']");
     private By createtruckpickup = By.xpath("//*[@id='outboutTruckCreateHeaderpickupLocation']");
     private By docGenMenu = By.xpath("//a[@href='/documents/document-queue']");
+    private By warehousedrpdwn = By.xpath("//*[@aria-label='Select Warehouse']");
+    private By warehouseOption = By.xpath("//*[@class='p-dropdown-item-label']");
+    private By searchContainFirst = By.xpath("(//input[@placeholder='Contains...'])[1]");
+	private By changewarehouse = By.xpath("//*[@id='documentQueuewarehouse']");
+    
 
     // Return POD
     private By podmenu = By.xpath("//i[@title='Return POD']");
@@ -136,7 +142,7 @@ public class NavigationPages extends OutboundPalletPage {
 
     public String getIBPL() {        
         cp.waitForLoaderToDisappear();
-        return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[2]"));
+        return cp.getMandatoryText(By.xpath("(//table/tbody/tr[2]/td[2])[1]"));
     }
 
     public void inboundTruckProcess(String IBPL) throws TimeoutException, InterruptedException {
@@ -150,7 +156,7 @@ public class NavigationPages extends OutboundPalletPage {
     }
 
     public String getTruckNo() {
-        return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[3]"));
+        return cp.getMandatoryText(By.xpath("(//table/tbody/tr[2]/td[1])[2]"));
     }
 
     public void inboundQAProcess(String trukno) throws TimeoutException, InterruptedException {
@@ -169,7 +175,7 @@ public class NavigationPages extends OutboundPalletPage {
         createPallet();
         cp.searchSection();
         selectDropForDrpDwn("Origin");
-        selectPalletFormDrpDwn("Warehouse");
+        selectPalletFormDrpDwn("WAREHOUSE");
         selectPickup(createpickup, pickup);
         searchOrdNo(order);
         cp.Search();
@@ -253,7 +259,7 @@ public class NavigationPages extends OutboundPalletPage {
 
     /** Get OBPL number from list */
     public String getOBPL() {
-        return cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[3]"));
+        return cp.getMandatoryText(By.xpath("(//tbody/tr[2]//td[3])[1]"));
     }
 
     /**
@@ -272,7 +278,7 @@ public class NavigationPages extends OutboundPalletPage {
 
         if (dropFor != null && !dropFor.isEmpty()) selectDropForDrpDwn(dropFor);
         if (pickFor != null && !pickFor.isEmpty()) selectPalletFormDrpDwn(pickFor);
-
+       
         selectPickup(createpickup, pickup);
         searchOrdNo(order);
         cp.Search();
@@ -393,7 +399,7 @@ public class NavigationPages extends OutboundPalletPage {
         cp.Search();
 
         super.getOutboundPallet();
-        ordData = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[3]"));
+        ordData = cp.getMandatoryText(By.xpath("(//table/tbody/tr[2]/td[3])[1]"));
     }
 
     private void selectDropForDrpDwn(String val) {
@@ -402,7 +408,7 @@ public class NavigationPages extends OutboundPalletPage {
         cp.waitForLoaderToDisappear();
     }
 
-    private void selectPalletFormDrpDwn(String val) {
+    private void selectPalletFormDrpDwn(String val)  {
         wt.waitToClick(palletFormDrpDwn, 10);
         cp.DrpDwnValueSel(searchDrpDwn, val);
         cp.waitForLoaderToDisappear();
@@ -458,27 +464,80 @@ public class NavigationPages extends OutboundPalletPage {
         dq.docQueueMenu();
         dq.clickCloseoutBtn();
         dq.clickReconsinmntBtn();
+        searchOrderForCreateDoc(order);
         dq.checkAndSelectOrder();
-        dq.searchOrder1(order);
         dq.clickLDABtn();
         dq.clickGeneratedDoc();
         dq.searchOrderInGenScreen1(order);
         getDocumentNumber(index);
     }
 
-    public String[] manifestArray = new String[10];
-    public String[] lbolArray = new String[10];
-    public String[] ldaaArray = new String[10];
+    public static String[] manifestArray = new String[10];
+    public static String[] lbolArray = new String[10];
+    public static String[] ldaaArray = new String[10];
 
     public void getDocumentNumber(int index) {
         try {
-            manifestArray[index] = cp.getMandatoryText(By.xpath("//table/tbody/tr[1]/td[3]"));
-            lbolArray[index] = cp.getMandatoryText(By.xpath("//table/tbody/tr[2]/td[3]"));
-            ldaaArray[index] = cp.getMandatoryText(By.xpath("//table/tbody/tr[2]/td[7]"));
+            manifestArray[index] = cp.getMandatoryText(By.xpath("//table/tbody/tr[2]/td[2]"));
+            lbolArray[index] = cp.getMandatoryText(By.xpath("//table/tbody/tr[3]/td[2]"));
+            ldaaArray[index] = cp.getMandatoryText(By.xpath("//table/tbody/tr[3]/td[6]"));
+            
+//        	manifestArray[0]="2";  testing purpose
+//        	lbolArray[0]="4874";
+//        	ldaaArray[0]="2";
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * This method used to check which warehouse order available to create document
+     * 
+     * @param ordNo
+     * @throws InterruptedException
+     */
+    public void searchOrderForCreateDoc(String ordNo) throws InterruptedException {
+	    cp.waitForLoaderToDisappear();
+
+	    cp.searchSection();
+	    wt.waitToClick(changewarehouse, 10);
+
+	    List<WebElement> warehouses = driver.findElements(By.xpath("//li[@role='option']")); // adjust if needed
+	    boolean orderFound = false;
+
+	    for (int i = 0; i < warehouses.size(); i++) {
+	        WebElement wh = warehouses.get(i);
+	        
+	        if(i>0) {
+	        	wt.waitToClick(changewarehouse, 10);
+	        	 warehouses = driver.findElements(By.xpath("//li[@role='option']"));
+	        }
+	        cp.waitForLoaderToDisappear();
+	        WebElement option1 = warehouses.get(i);
+	        
+	        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", option1);
+			Thread.sleep(300);
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", option1);
+			
+	        cp.waitForLoaderToDisappear();
+	        cp.Search();
+	        cp.searchColoumFilter(searchContainFirst, ordNo);
+	        
+	        List<WebElement> noRecord = driver.findElements(By.xpath("//*[@class='noRcords']"));
+	        if (noRecord.isEmpty()) {
+	            orderFound = true;
+	            System.out.println("Order found in warehouse: ");
+	            break;
+	        } else {
+	            System.out.println("Order not found in warehouse: " + ". Trying next warehouse...");
+	        }
+	    }
+
+	    if (!orderFound) {
+	        System.out.println("Order " + ordNo + " not found in any warehouse.");
+	    }
+	}
 
     // ---------------- Tracking ----------------
 
@@ -585,16 +644,15 @@ public class NavigationPages extends OutboundPalletPage {
 		ordData= getTruckNo();
 		System.out.println("truck no "+ordData);
 		inboundQAProcess(ordData);
-		createOutboundPallet(MGLOrderno, MWarehouse,  "Warehouse", "LDA", 0);
-		//createOutboundPallet("9869", "envision",  "Warehouse", "LDA", 0);
-		obtTruckProcess(MWarehouse, dataArray[0] , "Warehouse", "LDA");
-		//obtTruckProcess("envision", dataArray[0] , "Warehouse", "LDA");
+		createOutboundPallet(MGLOrderno, MWarehouse,  "WAREHOUSE", "LDA", 0);
+		//createOutboundPallet("11181", "Envision Store",  "WAREHOUSE", "LDA", 0);
+		obtTruckProcess(MWarehouse, dataArray[0] , "WAREHOUSE", "LDA");
+		//obtTruckProcess("Envision Store", dataArray[0] , "WAREHOUSE", "LDA");
 		docGenerationProcess(MGLOrderno, 0);
-		//docGenerationProcess("GL-10024", 0);
-		//UpdateTrackingFromOrder();
-		//trkingDetailUpdateProcess();
-		
-			
+		//docGenerationProcess("11693", 0);
+		UpdateTrackingFromOrder();
+		trkingDetailUpdateProcess();
+				
 	}
     
     public void createOrder() throws Throwable {

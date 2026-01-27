@@ -43,41 +43,55 @@ public class OutboundQATest extends TestBase {
 
 	}
 	
-//	@Test(priority = 1,alwaysRun = true, groups = {"Smoke"})
-//	public void shouldAcceptManifestForMainOrder() throws InterruptedException, TimeoutException{
-//		SoftAssert sAssert = new SoftAssert();
-//		oqa.outboundQAMenu();
-//		System.out.println("lda is"+ op.MLDA);
-//        oqa.selectLDA(op.MLDA);
-//        oqa.selectLBOL(dq.ManifestNo);
-//		cp.Search();
-//		oqa.HandlePopup();
-//		oqa.markSameQty();
-//		oqa.clickOnUpdateRecPiece();
-//		sAssert.assertEquals(cp.captureToastMessage(), "QA details update successfully", "Toast not Displayed For outbound QA done.");
-//		sAssert.assertAll();
-//	}
+	@Test(priority = 1,alwaysRun = true, groups = {"smoke"})
+	public void shouldAcceptManifestForMainOrder() throws InterruptedException, TimeoutException{
+		SoftAssert sAssert = new SoftAssert();
+		oqa.outboundQAMenu();
+		System.out.println("lda is"+ op.MLDA);
+        oqa.selectLDA(op.MLDA);
+        oqa.selectLBOL(dq.ManifestNo);
+		cp.Search();
+		oqa.HandlePopup();
+		oqa.markSameQty();
+		oqa.clickOnUpdateRecPiece();
+		sAssert.assertEquals(cp.captureToastMessage(), "QA details update successfully", "Toast not Displayed For outbound QA done.");
+		sAssert.assertAll();
+	}
 	
 	@Test(priority = 2, alwaysRun = true)
 	public void shouldDisplayEditableFieldsForTrackingUpdatedRequest() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.outboundQAMenu();
 		cp.clickClearButton();
+		oqa.unSelInprocessStatus();
 		oqa.selectLDA();
 		Thread.sleep(2000);
 		oqa.selectManifest();
 		LDA =oqa.getLDA();
 		manifestNo = oqa.getManifestNo();
 		System.out.println("LDA is"+ LDA);
-		System.out.println("manifestNo is"+ manifestNo);
+		System.out.println("manifestNo is "+ manifestNo);
 //		boolean flag = cp.toastMsgReceivedSuccessfully();
 //		sAssert.assertTrue(flag, "Please select one record.");
 //		sAssert.assertAll();
 	}
 	
 	@Test(priority = 3)
+	public void shouldCheckMandateMsgIfOrderNotSelected() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		oqa.selectAllcheckbox();
+		oqa.clickOnUpdateRecPiece();
+		//boolean flag = cp.toastMsgReceivedSuccessfully();
+		System.out.println("msg "+ cp.captureToastMessage());
+		sAssert.assertEquals(cp.captureToastMessage(), "Please select at least one record.", "Not Found!");
+		sAssert.assertAll();
+
+	}
+	
+	@Test(priority = 4)
 	public void shouldNotAllowEnteringExtraReceivedOrderPieces() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
+		cp.waitForPopupToDisappear();
 		oqa.RecOrdExtraPiecesEnter(1);
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "Received order quantity can not be greater than actual order quantity while do Outbound QA.");
@@ -85,14 +99,14 @@ public class OutboundQATest extends TestBase {
 
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 5)
 	public void shouldPopulateDefaultValueAsZero() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
 		sAssert.assertEquals(oqa.checkThatLitQtyDefaultZero(), 0, "Lit pieces not popuplate zero.");
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 6)
 	public void shouldNotAllowEnteringExtraLiteratureOrderPieces() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
@@ -103,7 +117,7 @@ public class OutboundQATest extends TestBase {
 
 	}
 	
-	@Test(priority = 6, alwaysRun = true)
+	@Test(priority = 7, alwaysRun = true)
 	public void shouldValidateReceivedOrderPiecesWhenMarkSameQtyButtonClicked() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.markSameQty();
@@ -113,7 +127,7 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void shouldValidateLitOrderPiecesWhenMarkSameQtyButtonClicked() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		initialCount = oqa.GetLitRecVal();
@@ -122,14 +136,14 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 9)
 	public void shouldDisplaySelectedLDAInGrid() {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertEquals(oqa.getLDAfromGrid(), oqa.getLDAfromDropdown(), "LDA not match i mnifest Details Section");
 		sAssert.assertAll();
 		
 	}
-	@Test(priority = 9)
+	@Test(priority = 10)
 	public void shouldDisplaySelectedManifestInGrid() {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertEquals(oqa.getManifestfromGrid(), oqa.getManifestNofromDropdown(), "Manifest Number not match in Manifest Details");
@@ -137,23 +151,25 @@ public class OutboundQATest extends TestBase {
 		
 	}
 	
-	@Test(priority = 10)
+	@Test(priority = 11)
 	public void shouldDisplayCorrectTotalPiecesCount() {
 		SoftAssert sAssert = new SoftAssert();	
 		sAssert.assertEquals(oqa.getTotalPiecesfromGrid(), oqa.getSumofOrderPiecesNo(), "Total Pieces count not match with sum of the Order Pieces.");
 		sAssert.assertAll();
 		
 	}
-	@Test(priority = 11)
+	
+	@Test(priority = 12)
 	public void shouldMakeReceivedDateMandatory() {
 		SoftAssert sAssert = new SoftAssert();
+		oqa.selectFirstcheckbox();
 		CurrentRecDate= oqa.getndClearRecDate();
 		oqa.clickOnUpdateRecPiece();
 		sAssert.assertEquals(cp.captureToastMessage(),"Received Date is required.","Toast message not Displyed for when Received date blank.");
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 12)
+	@Test(priority = 13)
 	public void shouldMakeVoiceMailDateMandatory() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.ReceivedDateSelection();
@@ -163,7 +179,7 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();	
 	}
 	
-	@Test(priority = 13)
+	@Test(priority = 14)
 	public void shouldVerifyReceivedAndVoicemailDatesAreCurrentDate() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.voiceMailDateSelection();
@@ -172,34 +188,98 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 14, alwaysRun = true)
-	public void shouldAllowUserToCompleteOutboundQA() throws InterruptedException {
+	String order;
+	int ordercount;
+	@Test(priority = 15, alwaysRun = true)
+	public void shouldAllowUserToPartialOutboundQA() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.Search();
+		ordercount= oqa.selectAllcheckbox();
+		order=oqa.selectFirstcheckbox();
+		System.out.println("QA completed orer is "+ order);
 		oqa.markSameQty();
 		oqa.clickOnUpdateRecPiece();
 		sAssert.assertEquals(cp.captureToastMessage(), "QA details update successfully", "Toast not Displayed For outbound QA done.");
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 15,dependsOnMethods="shouldAllowUserToCompleteOutboundQA")
+    @Test(priority = 16)
+	public void shouldUpdateOrderStatusAfterPartialOutboundQADone() throws InterruptedException {
+    	SoftAssert sAssert = new SoftAssert();
+		oqa.orderpageMenulanding();
+		String status = cp.getOrderStatus(order);
+		boolean isValid = status.equals("Consignee Delivery Pending") || status.equals("Consignee Delivery Schedule Pending");
+		sAssert.assertTrue(isValid, "Consignee QA pending status not matched. Found: " + status);
+		sAssert.assertAll();
+	}
+    
+	@Test(priority = 17, dependsOnMethods="shouldAllowUserToPartialOutboundQA")
+	public void shouldCheckFisrtOrderShouldBeDisable() throws InterruptedException, TimeoutException {
+		SoftAssert sAssert = new SoftAssert();
+		oqa.outboundQAMenu();
+		oqa.checkMulOrderInManifest(ordercount);
+		oqa.selectLDA(LDA);
+        oqa.selectLBOL(manifestNo);
+		cp.Search();
+		sAssert.assertTrue(oqa.isReceivedPiecesDisabled(), "QA done Order is not Disable");
+		sAssert.assertAll();
+	}
+	
+//	@Test(priority = 18, alwaysRun = true)
+//	public void shouldAllowUserToCompleteOutboundQA() throws InterruptedException, TimeoutException {
+//		SoftAssert sAssert = new SoftAssert();
+//		//oqa.outboundQAMenu();
+//		cp.clickClearButton();
+//		oqa.checkMulOrderInManifest(ordercount);
+//		oqa.selectLDA(LDA);
+//        oqa.selectLBOL(manifestNo);
+//		cp.Search();
+//		oqa.markSameQty();
+//		oqa.clickOnUpdateRecPiece();
+//		sAssert.assertEquals(cp.captureToastMessage(), "QA details update successfully", "Toast not Displayed For outbound QA done.");
+//		sAssert.assertAll();
+//	}
+    
+	@Test(priority = 19)
 	public void shouldAllowUserToOpenCompletedQA() throws InterruptedException{
 		SoftAssert sAssert = new SoftAssert();
-        oqa.selStatus();
+        oqa.selCompeleteStatus();
         oqa.selectLDA(LDA);
         oqa.selectLBOL(manifestNo);
 		cp.Search();
-		sAssert.assertFalse(oqa.verifyUpdatePiecsBtnDisable().isEnabled(), "Update btn should bedisable in complete status.");
+		sAssert.assertTrue(oqa.isUpdatePiecesBtnNotVisible(), "Update btn Show after QA Done (complete status.)");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 20)
+	public void shouldUpdateOrderStatusAfterOutboundQADone() throws InterruptedException, TimeoutException {
+		SoftAssert sAssert = new SoftAssert();
+		oqa.orderpageMenulanding();
+		//String status = cp.getOrderStatus(op.MGLOrderno);
+		//boolean isValid = status.equals("Consignee Delivery Pending") || status.equals("Consignee Delivery Schedule Pending");
+		//sAssert.assertTrue(isValid, "Consignee QA pending status not matched. Found: " + status);
+		sAssert.assertEquals(cp.getOrderStatus(op.MGLOrderno), "Consignee Delivery Schedule Pending", "Not match!");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 21, dependsOnMethods="shouldUpdateOrderStatusAfterOutboundQADone")
+	public void shouldUpdateOrderStatusAfterSchedDellivery() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		oqa.editOrder();
+		cqa.scheduleDateSelection();
+		oqa.saveDetails();
+		sAssert.assertEquals(oqa.getOrderStatus(), "Consignee Delivery Pending", "Not match!");
 		sAssert.assertAll();
 	}
 	
 //	@AfterClass()
-//  @Test(priority = 16)
-//	public void shouldUpdateOrderStatusAfterOutboundQADone() throws InterruptedException {
-//		oqa.orderpageMenulanding();
-//		String status = oqa.getOrderStatus(op.MGLOrderno);
-//		boolean isValid = status.equals("Consignee Delivery Pending") || status.equals("Consignee Delivery Schedule Pending");
-//		Assert.assertTrue(isValid, "Consignee QA pending status not matched. Found: " + status);
+//	public void shouldUpdateOrderStatusAfterSchedDellivery() throws InterruptedException {
+//		SoftAssert sAssert = new SoftAssert();
+//		oqa.editOrder();
+//		cqa.scheduleDelieverySelection();
+//		oqa.saveDetails();
+//		sAssert.assertEquals(oqa.getOrderStatus(), "Consignee Delivery Pending", "Not match!");
+//		sAssert.assertAll();
 //	}
 
 }

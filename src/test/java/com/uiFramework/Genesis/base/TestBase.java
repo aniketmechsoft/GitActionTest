@@ -1,5 +1,6 @@
 package com.uiFramework.Genesis.base;
 
+import java.io.PrintStream;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;

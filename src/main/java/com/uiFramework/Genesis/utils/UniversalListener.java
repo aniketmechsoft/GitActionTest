@@ -1,57 +1,73 @@
-package com.uiFramework.Genesis.utils;
-
-import org.testng.*;
-import com.aventstack.extentreports.*;
-
-public class UniversalListener implements ITestListener, ISuiteListener {
-
-    private static ExtentReports extent;
-    private static ThreadLocal<ExtentTest> testThread = new ThreadLocal<>();
-
-    @Override
-    public void onStart(ISuite suite) {
-        // Grab platform from testng.xml parameter or system property
-        String platform = suite.getParameter("platform");
-        if (platform == null || platform.trim().isEmpty()) {
-            platform = System.getProperty("platform", "web"); // Default fallback
-        }
-        extent = ExtentManager.getInstance(platform);
-    }
-
-    @Override
-    public void onFinish(ISuite suite) {
-        ExtentManager.flushReport();
-    }
-
-    @Override
-    public void onTestStart(ITestResult result) {
-        ExtentTest test = extent.createTest(result.getMethod().getMethodName());
-        testThread.set(test);
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-        testThread.get().pass("Test passed ✅");
-    }
-
-    @Override
-    public void onTestFailure(ITestResult result) {
-        testThread.get().fail(result.getThrowable());
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result) {
-        testThread.get().skip(result.getThrowable());
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {}
-
-    @Override
-    public void onStart(ITestContext context) {}
-
-    @Override
-    public void onFinish(ITestContext context) {}
-}
-
-
+//package com.uiFramework.Genesis.testbase;
+//
+//import java.io.File;
+//
+//import org.testng.ITestContext;
+//import org.testng.ITestListener;
+//import org.testng.ITestResult;
+//
+//import com.aventstack.extentreports.ExtentTest;
+//import com.aventstack.extentreports.Status;
+//import com.uiFramework.Genesis.helper.getScreenShot.CaptureScreen;
+//
+//public class UniversalListener implements ITestListener {
+//
+//	private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+//	CaptureScreen screenObj = new CaptureScreen();
+//
+//	@Override
+//	public void onTestStart(ITestResult result) {
+//		ExtentTest test = extent.createTest(result.getMethod().getMethodName());
+//		extentTest.set(test);
+//		test.log(Status.INFO, result.getMethod().getMethodName() + " started");
+//	}
+//
+//	@Override
+//	public void onTestSuccess(ITestResult result) {
+//		extentTest.get().log(Status.PASS, result.getMethod().getMethodName() + " passed");
+//	}
+//
+//	
+//	@Override
+//	public void onTestFailure(ITestResult result) {
+//	    extentTest.get().log(Status.FAIL, result.getThrowable());
+//	    String imagePath = screenObj.getScreenShot(result.getName(), driver); // if this does NOT throw IOException
+//	    extentTest.get().addScreenCaptureFromPath(imagePath); // this throws IOException
+//	}
+//
+//
+//	@Override
+//	public void onTestSkipped(ITestResult result) {
+//	    ExtentTest test = extentTest.get();
+//	    if (test == null) {
+//	        test = extent.createTest(result.getMethod().getMethodName());
+//	        extentTest.set(test);
+//	    }
+//	    test.log(Status.SKIP, result.getMethod().getMethodName() + " skipped");
+//	    if (result.getThrowable() != null) {
+//	        test.log(Status.SKIP, result.getThrowable());
+//	    }
+//	}
+//
+//
+//	@Override
+//	public void onStart(ITestContext context) {
+//	    // Clean up existing screenshots before the run starts
+//	    File screenshotDir = new File(System.getProperty("user.dir") + "/src/main/resources/screenShots/");
+//	    if (screenshotDir.exists()) {
+//	        for (File file : screenshotDir.listFiles()) {
+//	            if (file.isFile()) {
+//	                file.delete(); // delete individual file
+//	            }
+//	        }
+//	    }
+//	    System.out.println("Old screenshots cleared before test execution!");
+//	}
+//
+//
+//	@Override
+//	public void onFinish(ITestContext context) {
+//		extent.flush();
+//	}
+//
+//}

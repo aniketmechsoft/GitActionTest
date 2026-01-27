@@ -41,7 +41,7 @@ public class ConsigneeQATest extends TestBase {
 
 	}
 
-	@Test(priority = 1,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 1,alwaysRun = true, groups = {"smoke"})
 	public void shouldDisplayEditableFieldsForTrackingUpdatedRequest() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cqa.consigneeQAMenu();
@@ -52,7 +52,7 @@ public class ConsigneeQATest extends TestBase {
 //		sAssert.assertAll();
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, dependsOnMethods="shouldDisplayEditableFieldsForTrackingUpdatedRequest")
 	public void shouldNotAllowEnteringExtraReceivedOrderPieces() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cqa.RecOrdExtraPiecesEnter(1);
@@ -62,7 +62,7 @@ public class ConsigneeQATest extends TestBase {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, dependsOnMethods="shouldDisplayEditableFieldsForTrackingUpdatedRequest")
 	public void shouldNotAllowEnteringExtraLiteratureOrderPieces() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
@@ -73,7 +73,7 @@ public class ConsigneeQATest extends TestBase {
 
 	}
 	
-	@Test(priority = 4,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 4,alwaysRun = true, groups = {"smoke"}, dependsOnMethods="shouldDisplayEditableFieldsForTrackingUpdatedRequest")
 	public void shouldValidateReceivedOrderPiecesWhenMarkSameQtyBtnClicked() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cqa.markSameQty();
@@ -83,7 +83,7 @@ public class ConsigneeQATest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 5, dependsOnMethods="shouldValidateReceivedOrderPiecesWhenMarkSameQtyBtnClicked")
 	public void shouldValidateLiteratureOrderPiecesWhenMarkSameQtyBtnClicked() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		initialCount = cqa.GetRecVal();
@@ -92,7 +92,7 @@ public class ConsigneeQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 6)
+	@Test(priority = 6, dependsOnMethods="shouldValidateLiteratureOrderPiecesWhenMarkSameQtyBtnClicked")
 	public void shouldAllowUserToSaveDetailsInDraft() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
         cqa.ClickSaveValBtn();
@@ -107,7 +107,7 @@ public class ConsigneeQATest extends TestBase {
 		cp.Search();
 	}
 	
-	@Test(priority = 8,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 8,alwaysRun = true, groups = {"smoke"}, dependsOnMethods="shouldAllowUserToOpenDraftRequest")
 	public void shouldAllowUserToUploadExcelFile() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cqa.upload_file();
@@ -126,14 +126,13 @@ public class ConsigneeQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-
-	@Test(priority = 10,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 10,alwaysRun = true, groups = {"smoke"})
 	public void shouldAllowUserToCompleteRequest() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
 		cqa.scheduleDelieverySelection();
 		cqa.scheduleDateSelection();
-		cqa.enterSignBy("David");
+		cqa.enterSignBy("David Convey");
 		Thread.sleep(1000);
 		cqa.MarkAsCompletedBtn();
 	 	boolean flag = cp.toastMsgReceivedSuccessfully();
@@ -149,12 +148,18 @@ public class ConsigneeQATest extends TestBase {
         cqa.selStatus();
         cqa.selectLBOL(lbolNo);
 		cp.Search();
-		sAssert.assertTrue(cqa.verifyMarkAsRecBtnAndRecPiecesField(), "MarkAsRec btn & received Pieces field should be read only.");
+		sAssert.assertTrue(cqa.verifyMarkAsRecBtnAndRecPiecesField(), "MarkAsRec btn & received Pieces field should be open");
 		sAssert.assertAll();
-
 	}
 	
-//	@Test(priority = 12, alwaysRun = true, dependsOnMethods = "ToCheckUserIsAbleToOpenCompletedReq")
+	@Test(priority = 12, dependsOnMethods="shouldAllowUserToOpenCompletedRequest")
+	public void shouldAllowUserToUpdatePiecesAfterConsingeeQADone() throws InterruptedException, TimeoutException {
+		SoftAssert sAssert = new SoftAssert();
+		sAssert.assertFalse(oqa.isReceivedPiecesDisabled(), "QA done Order is Disable, it should be open");
+		sAssert.assertAll();
+	}
+
+//	@Test(priority = 12)//, alwaysRun = true, dependsOnMethods = "ToCheckUserIsAbleToOpenCompletedReq"
 //	public void shouldCompleteConsigneeQAForMainOrder() throws InterruptedException {
 //		SoftAssert sAssert = new SoftAssert();
 //     //   cqa.selectLBOL(dq.MLBOL);
@@ -181,8 +186,6 @@ public class ConsigneeQATest extends TestBase {
 //		
 //	}
 	
-	
-
 //	@AfterClass()
 //	public void checkOrderStatusAfterorderLoad() {
 //		cp.orderpageMenulanding();

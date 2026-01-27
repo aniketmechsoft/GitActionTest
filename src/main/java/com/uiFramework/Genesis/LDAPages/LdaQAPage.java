@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.SkipException;
 
 import com.uiFramework.Genesis.common.CommonMethods;
 import com.uiFramework.Genesis.helper.WaitHelper;
@@ -51,6 +52,7 @@ public class LdaQAPage extends NavigationPages {
 	private By voicemailDatebtn = By.xpath("(//*[@aria-label='Choose Date'])[2]");
 	private By dateSel = By.xpath("//td[@data-p-today='true']");
 	private By clearfilter = By.xpath("//*[@data-pc-section='filterclearicon']");
+	private By LDAQAMenu = By.xpath("//i[@title='LDA QA']");
 	
 	/**
 	 * This method is used to select a status from the status dropdown based on the
@@ -189,7 +191,7 @@ public class LdaQAPage extends NavigationPages {
 	 * Returns the QA status text from the 8th column of the first row.
 	 */
 	public String getQAStatus() {
-		return cp.getMandatoryText(By.xpath("//tbody//tr/td[8]"));
+		return cp.getMandatoryText(By.xpath("//tbody//tr/td[7]"));
 	}
 
 	/**
@@ -221,29 +223,30 @@ public class LdaQAPage extends NavigationPages {
 		}
 	}
 
-	/**
-	 * Returns a string representing pieces adjusted by the given value. Example: if
-	 * current pieces = 5, passing 1 returns "6", passing -1 returns "4".
-	 */
-	public String getMoreOrLessPiece(int i) {
-		int pc = getOrdPieces();
-		return String.valueOf(pc + i);
-	}
-
-	/**
-	 * Returns a string representing liter pieces adjusted by the given value.
-	 * Example: if current liter pieces = 5, passing 1 returns "6", passing -1
-	 * returns "4".
-	 */
-	public String getMoreOrLessLitPiece(int i) {
-		int pc = getLitOrdPieces();
-		return String.valueOf(pc + i);
-	}
+//	/**
+//	 * Returns a string representing pieces adjusted by the given value. Example: if
+//	 * current pieces = 5, passing 1 returns "6", passing -1 returns "4".
+//	 */
+//	public String getMoreOrLessPiece(int i) {
+//		int pc = getOrdPieces();
+//		return String.valueOf(pc + i);
+//	}
+//
+//	/**
+//	 * Returns a string representing liter pieces adjusted by the given value.
+//	 * Example: if current liter pieces = 5, passing 1 returns "6", passing -1
+//	 * returns "4".
+//	 */
+//	public String getMoreOrLessLitPiece(int i) {
+//		int pc = getLitOrdPieces();
+//		return String.valueOf(pc + i);
+//	}
 
 	/**
 	 * Enters actual pieces value into the corresponding input field.
 	 */
 	public void enterActualPieces(String pieces) {
+		cp.waitForPopupToDisappear();
 		cp.clickAndSendKeys(enterRecpieces, pieces);
 	}
 
@@ -258,9 +261,11 @@ public class LdaQAPage extends NavigationPages {
 	 * Checks if the "Total pieces and received pieces do not match" message is displayed.
 	 *
 	 * @return true if the message is displayed, false otherwise
+	 * @throws InterruptedException 
 	 */
-	public boolean isPopDisplayed() {
+	public boolean isPopDisplayed() throws InterruptedException {
 	    try {
+	    	Thread.sleep(2000);
 	        WebElement message = driver.findElement(By.xpath("//h2[contains(text(),'Total pieces and received pieces do not match')]"));
 	        return message.isDisplayed();
 	    } catch (NoSuchElementException e) {
@@ -372,8 +377,103 @@ public class LdaQAPage extends NavigationPages {
 			// TODO: handle exception
 		}
 	}
+	
+	/**
+	 * This method is used to click on select all order outbound QA
+	 */
+	public void selectAllcheckbox() throws InterruptedException {
+		wt.waitToClick(By.xpath("//*[@aria-label='All items selected']"), 10);
+	}
+	
+	/**
+	 * This method is used to select first check box for outbound QA
+	 */
+	public void  selectFirstcheckbox() {
+		wt.waitToClick(By.xpath("//table/tbody/tr[1]/td[1]"), 10);
+	}
+	
+	/**
+	 * This method used to enter received pieces for all order present in manifest
+	 */
+	public void enterActualPiecesForAllOrders() {
+	    List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
+
+	    for (int i = 1; i <= rows.size(); i++) {
+
+	        WebElement cellLocator = driver.findElement(
+	                By.xpath("//table/tbody/tr[" + i + "]/td[8]//input"));
+	        
+	        // Skip if not enabled or not displayed
+	        if (!cellLocator.isDisplayed() || !cellLocator.isEnabled()) {
+	            continue;
+	        }
+	        
+	        cp.clickAndSendKeysEle(cellLocator, getRandomNumber());
+	    }
+	}
 
 	
+	/**
+	 * This method used to enter received pieces for all order present in manifest
+	 */
+	public void enterLitPiecesForAllOrders() {
+	    List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
 
+	    for (int i = 1; i <= rows.size(); i++) {
 
+	        WebElement cellLocator = driver.findElement(
+	                By.xpath("//table/tbody/tr[" + i + "]/td[9]//input"));
+	
+	        if (!cellLocator.isDisplayed() || !cellLocator.isEnabled()) {
+	            continue;
+	        }
+	        cp.clickAndSendKeysEle(cellLocator, getRandomNumber());
+	    }
+	}
+	
+	/**
+	 * This method used to generate random number to enter pieces
+	 * @return
+	 */
+	public String getRandomNumber() {
+	    return String.valueOf(new java.util.Random().nextInt(25));
+	}
+	
+	/**
+	 * This method is used to check manifest available to completed QA if not then skip method
+	 * @param Status
+	 */
+	public void checkOrderStatus() {
+		if (isUpdatePiecsBtnDisable().isEnabled()) {
+		    System.out.println("Manifest is opened");   
+		} else {
+		    throw new SkipException("Skipping test because manifest status is QA passed or already process");
+		}
+	}
+	
+	/**
+	 * This method used to check enter rec pieces filed should be disable or not
+	 * @return
+	 */
+	public boolean isReceivedPiecesDisabled() {
+	    WebElement ele = driver.findElement(By.xpath("(//*[@placeholder='Received Pieces'])[1]"));
+	    return !ele.isEnabled() || ele.getAttribute("disabled") != null;
+	}
+	
+	/**
+	 * This method is used to check received date should not empty
+	 * @return
+	 */
+	public boolean isReceivedDateNotEmpty() {
+	    return !driver.findElement(By.xpath("//tbody/tr[1]/td[10]")).getText().trim().isEmpty();
+	}
+	
+	/**
+	 * Clicks on "LDA QA Menu" button after waiting for loaders.
+	 */
+	public void clickOnLDAQAMenu() {
+	    cp.waitForLoaderToDisappear();
+	    wt.waitToClick(LDAQAMenu, 10);
+	    cp.waitForLoaderToDisappear();
+	}
 }

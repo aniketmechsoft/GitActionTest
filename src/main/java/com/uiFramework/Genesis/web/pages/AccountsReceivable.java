@@ -123,7 +123,7 @@ public class AccountsReceivable {
 	private By ARmenu = By.xpath("//i[@title='Accounts Receivable']");
 	private By ARinvoicemenu = By.xpath("//a[@href='/AR/invoice']");
 	private By EDIfilemenu = By.xpath("//a[@href='/AR/EDI-file-creation']");
-	private By createinvoice = By.id("arInvoiceDetailsFilterCreateInvoiceBtn"); // (minor) id updated if needed later
+	private By createinvoice = By.id("arInvoiceFilterCreateInvoiceBtn"); // (minor) id updated if needed later
 	private By createinvoiceCompat = By.id("arInvoiceFilterCreateInvoiceBtn");  // keep original id too
 	private By customerDropdown = By.xpath("//*[@id='arInvoiceDetailsFiltercustomer']");
 	private By firstcustomer = By.xpath("(//*[@class='p-dropdown-item'])[1]");
@@ -168,7 +168,8 @@ public class AccountsReceivable {
 	private By viewButton = By.xpath("(//*[@title='Click to view'])[1]");
 	private By editButton = By.xpath("(//*[@title='Click to edit'])[1]");
 	private By yesBtn = By.id("confmSubmit");
-	private String downloadDir = System.getProperty("user.dir") + "\\downloadedFiles";
+	private String downloadDir = System.getProperty("user.dir")+ File.separator + "target"
+																+ File.separator + "downloads";
 	public By downloadDetailXlS = By.xpath("(//*[@title='Click to export excel'])[2]");
 	public By downloadCoverXlS = By.xpath("(//*[@title='Click to export excel'])[1]");
 	public By downloadPDF = By.xpath("//*[@title='Click to export pdf']");
@@ -225,13 +226,14 @@ public class AccountsReceivable {
 	 * Alternative total record count reader
 	 */
 	public int getTotalRecordCount() {
-		WebElement recordElement = driver.findElement(By.xpath("//*[@class='p-paginator-current']"));
-		String text = recordElement.getText().trim();
-		String count = text.replaceAll(".*of\\s+(\\d+)\\s+entries.*", "$1");
-		logger.info("Total count " + count);
-		return Integer.parseInt(count);
+	    WebElement recordElement =
+	            driver.findElement(By.xpath("//*[@class='footerTable']/span"));
+	    String text = recordElement.getText().trim(); 
+	    int count = Integer.parseInt(text.replaceAll("\\D+", ""));
+	    logger.info("Total count: " + count);
+	    return count;
 	}
-
+	
 	/**
 	 * Click Create Invoice
 	 */
@@ -796,7 +798,7 @@ public class AccountsReceivable {
 		Set<String> highlightedOrders = new HashSet<>();
 		for (WebElement row : glOrderHighlight) {
 			try {
-				WebElement orderCell = row.findElement(By.xpath(".//td[starts-with(text(), 'GL-')]"));
+				WebElement orderCell = row.findElement(By.xpath(".//td[3]"));
 				highlightedOrders.add(orderCell.getText().trim());
 			} catch (Exception ignore) {}
 		}
@@ -850,7 +852,7 @@ public class AccountsReceivable {
 	}
 
 	public boolean checkOrderAvailability() {
-		List<WebElement> glOrderCells = driver.findElements(By.xpath("//td[starts-with(text(), 'GL-')]"));
+		List<WebElement> glOrderCells = driver.findElements(By.xpath("//td[3]"));
 		for (WebElement cell : glOrderCells) {
 			String orderText = cell.getText().trim();
 			if (orderText.equalsIgnoreCase(updatedOrder)) return true;
@@ -1020,7 +1022,7 @@ public class AccountsReceivable {
 		double sumOfTotal = 0.0;
 		try {
 			List<WebElement> priceCells = driver.findElements(
-					By.xpath("//table/tbody/tr[td[1][starts-with(text(), 'GL-')]]/td[9]"));
+					By.xpath("//table/tbody/tr[td[1]]/td[9]"));
 			for (WebElement cell : priceCells) {
 				sumOfTotal += parseMoney(cell.getText().trim());
 			}
@@ -1052,6 +1054,7 @@ public class AccountsReceivable {
 	 * FIX: return true if the Edit button IS present (previously returned inverse)
 	 */
 	public boolean isEditButtonDisplayed() {
+		cp.waitForLoaderToDisappear();
 		List<WebElement> elements = driver.findElements(By.xpath("(//*[@title='Click to edit'])[1]"));
 		return !elements.isEmpty();
 	}

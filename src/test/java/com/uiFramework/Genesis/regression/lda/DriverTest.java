@@ -160,7 +160,7 @@ public class DriverTest extends TestBase {
 		cp.waitForPopupToDisappear();
 		cp.searchSection();
 		cp.clickClearButton();
-		count = lp.getTotalEntriesCount(driver);
+		count = cp.getTotalEntriesCount(driver);
 		dp.LbolAssignmentMenu();
 		dp.selectDriverDrpDwn();
 		sAssert.assertEquals(count, dp.getDriver(), "Created Driver not show to Assigned");
@@ -229,7 +229,7 @@ public class DriverTest extends TestBase {
 	public void shouldUserInactiveDriver() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		dp.clickDriverMenu();
-		count = lp.getTotalEntriesCount(driver);
+		count = cp.getTotalEntriesCount(driver);
 		lp.editBtn();
 		dp.inactiveDriver();
 		cp.save();
@@ -241,14 +241,15 @@ public class DriverTest extends TestBase {
 	public void shouldNotMatchDriverCountAfterDriverInactive() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForLoaderToDisappear();
-		count = lp.getTotalEntriesCount(driver);
-		sAssert.assertNotEquals(count, lp.getTotalEntriesCount(driver) , "Count Should decrese after driver inactive");
+		count = cp.getTotalEntriesCount(driver);
+		sAssert.assertNotEquals(count, cp.getTotalEntriesCount(driver) , "Count Should decrese after driver inactive");
 		sAssert.assertAll();
 	}
 	
 	@Test(priority = 20, enabled= false)
 	public void shouldChekCloumnFilterOnCreateDriver() throws Exception {
-		lp.checkColoumFilter("CreateDriver");
+		//lp.checkColoumFilter("CreateDriver");
+		cp.verifyColumnFilterForFixGrid();
 	}
 	
 }

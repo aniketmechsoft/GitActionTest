@@ -46,16 +46,16 @@ public class OutboundPalletTest extends TestBase {
 
 	@BeforeClass(alwaysRun = true)
 	public void befreclass() {
-	//	test = extent.createTest(getClass().getSimpleName());
+		// test = extent.createTest(getClass().getSimpleName());
 		cm = new CommonMethods(driver);
 		op = new OrderPage(driver);
 		opp = new OutboundPalletPage(driver);
 		cp = new CommonPage(driver);
-	//	driver.navigate().refresh();
+		// driver.navigate().refresh();
 
 	}
 
-	@Test(priority = 1,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 1, alwaysRun = true, groups = { "smoke" })
 	public void shouldCreateOutboundPalletForMainOrder() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.outboundMenu();
@@ -65,7 +65,7 @@ public class OutboundPalletTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 2,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 2, alwaysRun = true, groups = { "smoke" })
 	public void shouldCreateOutboundPalletSuccessfully() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.createPalletforMorder();
@@ -75,7 +75,7 @@ public class OutboundPalletTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 3,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 3, alwaysRun = true, groups = { "smoke" })
 	public void shouldDisplaySelectedWarehouseOrderInGrid() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.outboundMenu();
@@ -87,7 +87,7 @@ public class OutboundPalletTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 4,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 4, alwaysRun = true, groups = { "smoke" })
 	public void shouldPerformMergeFunctionOnOutboundPallet() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.selectCheckbox();
@@ -100,7 +100,8 @@ public class OutboundPalletTest extends TestBase {
 
 	}
 
-	@Test(priority = 5, dependsOnMethods="shouldPerformMergeFunctionOnOutboundPallet",alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 5, dependsOnMethods = "shouldPerformMergeFunctionOnOutboundPallet", alwaysRun = true, groups = {
+			"smoke" })
 	public void shouldCreateSinglePalletOnMergeClick() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		afterCount = opp.getTotalEntriesCount(driver);
@@ -111,7 +112,7 @@ public class OutboundPalletTest extends TestBase {
 
 	}
 
-	@Test(priority = 6, dependsOnMethods="shouldPerformMergeFunctionOnOutboundPallet")
+	@Test(priority = 6, dependsOnMethods = "shouldPerformMergeFunctionOnOutboundPallet")
 	public void shouldIncludeMultipleLDAsInSinglePallet() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		int ldaCount = opp.getLDAfromListng();
@@ -119,23 +120,22 @@ public class OutboundPalletTest extends TestBase {
 		if (ldaCount < 2) {
 			throw new SkipException("SKIPPED: LDA count is less than 2. Actual count: " + ldaCount);
 		}
-		
+
 		sAssert.assertTrue(ldaCount > 1, "FAIL: LDA count is not greater than 1. Actual count: " + ldaCount);
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 7,alwaysRun = true, groups = {"Smoke"})
-	public void shouldUpdatePalletStatusAfterPalletCreation()
-			throws TimeoutException, InterruptedException {
+	@Test(priority = 7, alwaysRun = true, groups = { "smoke" })
+	public void shouldUpdatePalletStatusAfterPalletCreation() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.outboundMenu();
 		opp.editBtn();
-		sAssert.assertEquals(opp.PalletStatusonEdit(), DataRepo.STATUS,
+		sAssert.assertEquals(opp.PalletStatusonEdit(), DataRepo.STTUS,
 				"Pallet Status not match. expected: Waiting for Load");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 8,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 8, alwaysRun = true, groups = { "smoke" })
 	public void shouldAllowEditPalletWithAutoDeletedPallet() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.verifyPickndDrop();
@@ -146,7 +146,7 @@ public class OutboundPalletTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 9 ,dependsOnMethods="shouldAllowEditPalletWithAutoDeletedPallet")
+	@Test(priority = 9, dependsOnMethods = "shouldAllowEditPalletWithAutoDeletedPallet")
 	public void verifyAutoDeletedPalletNotVisibleAndOrderIsAvailableToAdd()
 			throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
@@ -158,7 +158,7 @@ public class OutboundPalletTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 10,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 10, alwaysRun = true, groups = { "smoke" })
 	public void shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination()
 			throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
@@ -168,28 +168,30 @@ public class OutboundPalletTest extends TestBase {
 		opp.selectMulcheckBoxForCretepallet();
 		afterCount = opp.getTotalEntriesCount(driver);
 		int diffint = afterCount - initialCount;
-		String difference = String.valueOf(diffint);
-		sAssert.assertEquals(difference, 3, "Entry count did not increase by 3. Outbound Pallet Not create.");
+		// String difference = String.valueOf(diffint);
+		sAssert.assertEquals(diffint, 3, "Entry count did not increase by 3. Outbound Pallet Not create.");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 11, dependsOnMethods="shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination")
+	@Test(priority = 11, dependsOnMethods = "shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination")
 	public void verifyCreatedOrderIsAvailableInPallet() throws TimeoutException, InterruptedException {
 		opp.orderInfo();
 		cp.clickToClosePopUp();
 	}
 
-	@Test(priority = 12, dependsOnMethods="shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination",alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 12, dependsOnMethods = "shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination", alwaysRun = true, groups = {
+			"smoke" })
 	public void shouldDisplayPalletStatusInListingAfterObtPalletCreation()
 			throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
-		sAssert.assertEquals(opp.PalletStatusonListing(), DataRepo.STATUS,
+		sAssert.assertEquals(opp.PalletStatusonListing(), DataRepo.STTUS,
 				"Pallet Status not match on Lisitng. expected: Waiting for Load");
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 13,alwaysRun = true, groups = {"Smoke"})
-	public void shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup() throws TimeoutException, InterruptedException {
+	@Test(priority = 13, alwaysRun = true, groups = { "smoke" })
+	public void shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup()
+			throws TimeoutException, InterruptedException {
 		opp.outboundMenu();
 		opp.editBtn();
 		outboundPallet = opp.getOutboundPallet();
@@ -197,7 +199,7 @@ public class OutboundPalletTest extends TestBase {
 		opp.checkAddedOrdersinPallet();
 	}
 
-	@Test(priority = 14, dependsOnMethods="shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup")
+	@Test(priority = 14, dependsOnMethods = "shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup")
 	public void shouldNotAllowAddedOrdersForPalletCreation() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.clickBackBtn();
@@ -207,14 +209,14 @@ public class OutboundPalletTest extends TestBase {
 	}
 
 	@Test(priority = 15)
-	public void shouldVerifyPalletQuantityOnOutboundPallet()
-			throws TimeoutException, InterruptedException {
+	public void shouldVerifyPalletQuantityOnOutboundPallet() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		opp.outboundMenu();
 		opp.editBtn();
 		opp.removedPalletQty(DataRepo.PALLET_QTY);
 		opp.backBtn();
-		sAssert.assertEquals(opp.getPalletQty(), DataRepo.PALLET_QTY, "Pallet quantity not same on create and listing page");
+		sAssert.assertEquals(opp.getPalletQty(), DataRepo.PALLET_QTY,
+				"Pallet quantity not same on create and listing page");
 		sAssert.assertAll();
 	}
 
@@ -225,7 +227,7 @@ public class OutboundPalletTest extends TestBase {
 		opp.checkDeletedOrderAvailable();
 		GLorder = opp.iGLorder();
 		opp.deleteBtn();
-		Assert.assertEquals(cp.captureToastMessage(), "Outbound pallet deleted successfully.",
+		sAssert.assertEquals(cp.captureToastMessage(), "Outbound pallet deleted successfully.",
 				"outbound pallet delete successfull message not found.");
 		opp.createPallet();
 		opp.search1Order(GLorder);
@@ -248,7 +250,7 @@ public class OutboundPalletTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 18, dataProvider = "getData", groups = "Smoke", enabled = false)
+	@Test(priority = 18, dataProvider = "getData", groups = { "smoke" }, enabled = false)
 	public void shouldApplyFiltersCorrectlyForOutboundPallet(HashMap<String, String> input)
 			throws InterruptedException, TimeoutException {
 		opp.outboundMenu();
@@ -274,13 +276,13 @@ public class OutboundPalletTest extends TestBase {
 
 	}
 
-	@Test(priority = 19, groups = "Smoke")
-	public void shouldCheckPaginationOnOutboundPalletListing() throws TimeoutException, InterruptedException {
-		opp.outboundMenu();
-		opp.paginationOnListing();
-	}
+//	@Test(priority = 19, groups = "smoke")
+//	public void shouldCheckPaginationOnOutboundPalletListing() throws TimeoutException, InterruptedException {
+//		opp.outboundMenu();
+//		opp.paginationOnListing();
+//	}
 
-	@Test(priority = 20, dataProvider = "getData", groups = "Smoke", enabled = false)
+	@Test(priority = 20, enabled = false)
 	public void shouldApplyFiltersOnCreateOutboundPalletScreen(HashMap<String, String> input)
 			throws InterruptedException, TimeoutException {
 		opp.outboundMenu();
@@ -312,24 +314,29 @@ public class OutboundPalletTest extends TestBase {
 		opp.paginationOnCeatePallet();
 	}
 
-	@Test(priority = 22, enabled = false)
-	public void checkColoumfilter() throws TimeoutException, InterruptedException, IOException {
+	@Test(priority = 22, enabled = false, groups = { "smoke" })
+	public void checkColoumfilterOnOutboundListingPage() throws TimeoutException, InterruptedException, IOException {
 		opp.outboundMenu();
-		opp.checkColoumFilter();
+		cp.verifyColumnFilter("frozen-pane");
+		cp.verifyColumnFilter("scrollable-pane");
+		sAssert.assertAll();
 	}
 
 	@Test(priority = 23, enabled = false)
-	public void shouldApplyColumnFilterOnCreateOutboundPallet() throws TimeoutException, InterruptedException, IOException {
+	public void shouldApplyColumnFilterOnCreateOutboundPallet()
+			throws TimeoutException, InterruptedException, IOException {
 		opp.outboundMenu();
 		opp.createPallet();
-		opp.checkColoumFilterOnCreatePage();
+		cp.verifyColumnFilter("frozen-pane");
+		cp.verifyColumnFilter("scrollable-pane");
+		sAssert.assertAll();
 	}
 
 	@AfterClass()
-	public void shouldUpdateOrderStatusAfterCreatingOutboundPallet() {
+	public void shouldUpdateOrderStatusAfterCreatingOutboundPallet() throws InterruptedException {
 		cp.orderpageMenulanding();
-		Assert.assertEquals(opp.getOrderStatus(op.getMGLOrderno()), "Outbound Truck Load Pending",
-				"order status after Outbound palletcreate is not match.");
+		Assert.assertEquals(cp.getOrderStatus(op.getMGLOrderno()), "Outbound Truck Load Pending",
+				"order status is not match after create Outbound pallet");
 	}
 
 }

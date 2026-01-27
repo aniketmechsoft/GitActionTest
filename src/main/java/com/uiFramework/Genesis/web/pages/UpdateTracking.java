@@ -72,7 +72,7 @@ public class UpdateTracking {
             new File(System.getProperty("user.dir") + File.separator + "target" + File.separator + "downloads"); // our factory default
     private final File homeDownloadsDir =
             new File(System.getProperty("user.home") + File.separator + "Downloads"); // Safari default
-    private String fullFilePath = new File(projectDownloadsDir, fileName).getAbsolutePath(); // preserved field name
+    private String fullFilePath = new File(targetDownloadsDir, fileName).getAbsolutePath(); // preserved field name
 
     // ---------- NAV / BASIC ACTIONS (unchanged logic) ----------
     public void updteTrackMenu() throws TimeoutException, InterruptedException {
@@ -91,6 +91,7 @@ public class UpdateTracking {
     }
 
     public void clickUpdateBtn() throws InterruptedException {
+        cp.clickElement(anonymsClick);
         cp.clickElement(anonymsClick);
         wt.waitToClickWithAction(createLDADoc, 10);
         cp.waitForLoaderToDisappear();
@@ -176,7 +177,7 @@ public class UpdateTracking {
             throw new FileNotFoundException("Downloaded file not found !");
         }
         fullFilePath = downloaded.getAbsolutePath(); // preserve your field usage
-        System.out.println("Downloaded: " + fullFilePath);
+        System.out.println("Downloaded1: " + fullFilePath);
     }
 
     public void updateFileFormat(boolean updateTracking, boolean updateETA) throws IOException {
@@ -289,7 +290,7 @@ public class UpdateTracking {
         Thread.sleep(3000);
         clickUpdateBtn();
         cp.waitForPopupToDisappear();
-        clickUpdateBtn();
+        clickUpdate();
     }
 
     private List<WebElement> getTableRows() {

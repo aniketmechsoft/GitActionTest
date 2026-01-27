@@ -164,21 +164,21 @@ public class CloseOutTest extends TestBase {
 		SoftAssert sAssert = new SoftAssert();
 		cp.save();
 		cp.waitForLoaderToDisappear();
-//		cop.clickAccessorialButton();
-//		sAssert.assertEquals(cop.addAccessorial(), "Customer Accessorial is required. | Price is required.",
-//				"customer accessorial not matched");
-//		sAssert.assertAll();
+		cop.clickAccessorialButton();
+		sAssert.assertEquals(cop.addAccessorial(), "Customer Accessorial is required. | Price is required.",
+				"customer accessorial not matched");
+		sAssert.assertAll();
 	}
 //
-//	@Test(priority = 14, dependsOnMethods="shouldSetOrderStatusToDraftAfterSave")
-//	public void shouldAddEditAndDeleteCustomerAccessorialSuccessfully() throws Throwable {
-//		SoftAssert sAssert = new SoftAssert();
-//		cop.saveCustAccess();
-//		cop.editCustAccess(cm.getNumericString(2));
-//		cop.deleteCustAccess();
-//		sAssert.assertEquals(cp.captureToastMessage(), "Customer accessorial deleted successfully", "Not Matched");
-//		sAssert.assertAll();
-//	}
+	@Test(priority = 14, dependsOnMethods="shouldSetOrderStatusToDraftAfterSave")
+	public void shouldAddEditAndDeleteCustomerAccessorialSuccessfully() throws Throwable {
+		SoftAssert sAssert = new SoftAssert();
+		cop.saveCustAccess();
+		cop.editCustAccess(cm.getNumericString(2));
+		cop.deleteCustAccess();
+		sAssert.assertEquals(cp.captureToastMessage(), "Customer accessorial deleted successfully", "Not Matched");
+		sAssert.assertAll();
+	}
 //
 	@Test(priority = 15 , dependsOnMethods="shouldSetOrderStatusToDraftAfterSave", alwaysRun = true)
 	public void shouldSaveCustomerAccessorialAfterDeleteAndValidateCarrierValidation() throws Throwable {
@@ -190,16 +190,16 @@ public class CloseOutTest extends TestBase {
 		sAssert.assertAll();
 
 	}
-//
-//	@Test(priority = 16, dependsOnMethods="shouldSetOrderStatusToDraftAfterSave")
-//	public void shouldAddedEditAndDeleteCarrierAccessorialSuccessfully() throws Throwable {
-//		SoftAssert sAssert = new SoftAssert();
-//		cop.saveCarrAccess(cm.getNumericString(2), cm.getAlphaNumericString(5));
-//		cop.editCarrAccess(cm.getNumericString(2));
-//		cop.deleteCarrAccess();
-//		sAssert.assertEquals(cp.captureToastMessage(), "Carrier accessorial deleted successfully", "Not matched.");
-//		sAssert.assertAll();
-//	}
+
+	@Test(priority = 16, dependsOnMethods="shouldSetOrderStatusToDraftAfterSave")
+	public void shouldAddedEditAndDeleteCarrierAccessorialSuccessfully() throws Throwable {
+		SoftAssert sAssert = new SoftAssert();
+		cop.saveCarrAccess(cm.getNumericString(2), cm.getAlphaNumericString(5));
+		cop.editCarrAccess(cm.getNumericString(2));
+		cop.deleteCarrAccess();
+		sAssert.assertEquals(cp.captureToastMessage(), "Carrier accessorial deleted successfully", "Not matched.");
+		sAssert.assertAll();
+	}
 
 	@Test(priority = 17, dependsOnMethods="shouldSetOrderStatusToDraftAfterSave", alwaysRun = true)
 	public void shouldSaveCarrierAccessorialAfterDeleteAndValidateCommentValidation() throws Throwable {
@@ -270,23 +270,23 @@ public class CloseOutTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-//	@Test(priority = 25, dependsOnMethods="shouldUpdateOrderStatusAfterConfirm")
-//	public void shouldAllowUserToPrintManifestDocument() throws InterruptedException {
-//		SoftAssert sAssert = new SoftAssert();
-//		cop.deleteExistingFiles();
-//		cop.printManifest();
-//		sAssert.assertTrue(cop.isFileDownloaded(), "FAIL: Manifest not downloaded!");
-//		sAssert.assertAll();
-//	}
-//	
-//	@Test(priority = 26, dependsOnMethods="shouldUpdateOrderStatusAfterConfirm")
-//	public void shouldAllowUserToPrintLbolDocument() throws InterruptedException {
-//		SoftAssert sAssert = new SoftAssert();
-//		cop.deleteExistingFiles();
-//		cop.printLBOL();
-//		sAssert.assertTrue(cop.isFileDownloaded(), "FAIL: LBOL document not downloaded!");
-//		sAssert.assertAll();
-//	}
+	@Test(priority = 25, dependsOnMethods="shouldUpdateOrderStatusAfterConfirm")
+	public void shouldAllowUserToPrintManifestDocument() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		cop.deleteExistingFiles();
+		cop.printManifest();
+		sAssert.assertTrue(cop.isFileDownloaded(), "FAIL: Manifest not downloaded!");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 26, dependsOnMethods="shouldUpdateOrderStatusAfterConfirm")
+	public void shouldAllowUserToPrintLbolDocument() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		cop.deleteExistingFiles();
+		cop.printLBOL();
+		sAssert.assertTrue(cop.isFileDownloaded(), "FAIL: LBOL document not downloaded!");
+		sAssert.assertAll();
+	}
 	
 	@Test(priority = 27, dependsOnMethods="shouldUpdateOrderStatusAfterConfirm")
 	public void shouldUpdateOutboundQAStatusAfterOrderConfirm() throws InterruptedException {
@@ -731,11 +731,11 @@ public class CloseOutTest extends TestBase {
 	public void shouldAllowUserToPrintTemplateForSingleOrder() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.clickBackBtn();
-//		cop.selectFirstOrder();
-//		cop.deleteExistingFiles();
-//		cop.clickOnPrintTem();
-//		sAssert.assertTrue(cop.isFileDownloaded(), "Close Out template not download.");
-//		sAssert.assertAll();
+		cop.selectFirstOrder();
+		cop.deleteExistingFiles();
+		cop.clickOnPrintTem();
+		sAssert.assertTrue(cop.isFileDownloaded(), "Close Out template not download.");
+		sAssert.assertAll();
 	}
 
 	@Test(priority = 69, dependsOnMethods = "shouldAllowUserToCreateOrderForTransferOfSample")
@@ -780,11 +780,11 @@ public class CloseOutTest extends TestBase {
 	}
 	
 	@Test(priority = 73)
-	public void shouldAllowUserToConfirmOrderFromListing() throws InterruptedException  {
+	public void shouldAllowUserToConfirmOrderFromListing() throws InterruptedException, TimeoutException  {
 		SoftAssert sAssert = new SoftAssert();
 		cop.addMetricsForOriginOrder();
 		cp.save();
-		cp.clickBackBtn();
+		cop.closeSubMenu();  //cp.clickBackBtn(); pop up stuck because used menu
 		cop.selectFirstOrder();
 		cop.confirmBtnOnListing();
 		sAssert.assertEquals(cop.getToastText(), "Selected order confirm successfully", "Not match!");
@@ -1010,7 +1010,7 @@ public class CloseOutTest extends TestBase {
 		cop.clickOnCloseOutType();
 		cop.selectTrasferSample();
 		cp.save();
-		sAssert.assertEquals(cp.captureToastMessage(), "Duplicate customer order number.", "Not match!");
+		sAssert.assertEquals(cp.captureToastMessage(), "Customer order number already exist.", "Not match!");
 		sAssert.assertAll();
 	}
 	
@@ -1071,7 +1071,7 @@ public class CloseOutTest extends TestBase {
 	System.out.println("cop.DiffLDAOrderNo "+cop.DiffLDAOrderNo );
 	System.out.println("cop.LDAPickuplocation "+cop.LDAPickuplocation );
 	
-	np.createOutboundPallet(cop.iOriginOrderNo, cop.pickupLocation,  "Warehouse", "Origin", 0);
+	np.createOutboundPallet(cop.iOriginOrderNo, cop.pickupLocation,  "WAREHOUSE", "Origin", 0);
 	np.createOutboundPallet(cop.OriginOrderNoObpl, cop.pickupLocationObpl,  "LDA", "Origin", 1);
 	np.createOutboundPallet(cop.DiffLDAOrderNo, cop.LDAPickuplocation,  "LDA", "LDA", 2);
 	
@@ -1083,7 +1083,7 @@ public class CloseOutTest extends TestBase {
 	System.out.println("cop.LDAPickuplocation"+cop.LDAPickuplocation );
 	System.out.println("np.dataArray[2]"+np.dataArray[2] );
 	
-	np.obtTruckProcess(cop.pickupLocation,     np.dataArray[0], "Warehouse", "Origin");
+	np.obtTruckProcess(cop.pickupLocation,     np.dataArray[0], "WAREHOUSE", "Origin");
 	//np.obtTruckProcess("Bensenville Facility","OBPL-3100", "Warehouse", "Origin");
 	np.obtTruckProcess(cop.pickupLocationObpl, np.dataArray[1], "LDA", "Origin");
 	//np.obtTruckProcess("JET TRANSPORTATION: 1085 Cranbury South River Rd (Unit 6)", "OBPL-3101", "LDA", "Origin");

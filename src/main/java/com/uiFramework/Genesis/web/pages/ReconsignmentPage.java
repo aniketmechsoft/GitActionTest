@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.SkipException;
 import org.testng.asserts.SoftAssert;
 
 import com.uiFramework.Genesis.helper.DropDownHelper;
@@ -44,7 +46,7 @@ public class ReconsignmentPage {
 
     // shared dropdown search box
     private By listOption2 = By.xpath("/html/body/div[4]/div/ul/li[2]");
-    private By DrpDwnVal1 = By.xpath("/html/body/div[4]/div/ul/li/div/input");
+    private By DrpDwnVal1 = By.xpath("//*[@placeholder='Search...']");
 
     private static final int DEFAULT_TIMEOUT = 30;
 
@@ -66,11 +68,11 @@ public class ReconsignmentPage {
         for (WebElement row : rows) {
             scrollIntoView(row);
             // td[10] within THIS row only
-            WebElement lbolCell = row.findElement(By.xpath(".//td[10]"));
+            WebElement lbolCell = row.findElement(By.xpath("//td[10]"));
             String lbolVal = lbolCell.getText().trim();
             if (!lbolVal.isEmpty()) {
                 // GL-* cell within THIS row only (often 4th col, but use starts-with)
-                String gl = row.findElement(By.xpath(".//td[starts-with(normalize-space(.), 'GL-')]"))
+                String gl = row.findElement(By.xpath("//td[4]"))
                                .getText().trim();
                 if (arrLen < firstUniqueText.size()) {
                     firstUniqueText.set(arrLen, gl);
@@ -127,7 +129,7 @@ public class ReconsignmentPage {
 
     public String getOriginalConsignee() {
         // Prefer reading from an input's value when available
-        return cp.getAttributeValue(By.xpath("(//input[@id='masterExternalUserDetreconsignedToConsignee'])[1]"), "value");
+        return cp.getMandatoryText(By.xpath("(//span[@class='p-dropdown-label p-inputtext'])[4]"));
     }
 
     public void selectLBOL(String consignee) throws InterruptedException {
@@ -142,14 +144,15 @@ public class ReconsignmentPage {
     }
 
     public int checkDrpDwnEleCount() {
-        return driver.findElements(By.xpath("/html/body/div[4]/div/ul/li")).size();
+        return driver.findElements(By.xpath("//ul[contains(@class,'p-autocomplete-items')]/li[position()>1]")).size();
     }
 
-    private void ordStatusFiltr(String val) {
+    private void ordStatusFiltr(String val) throws InterruptedException {
         cp.waitForLoaderToDisappear();
         WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(statusFiltr));
         input.clear();
         input.sendKeys(val);
+        Thread.sleep(2200);
         cp.waitForLoaderToDisappear();
     }
 
@@ -167,7 +170,7 @@ public class ReconsignmentPage {
 
         for (WebElement row : rows) {
             scrollIntoView(row);
-            String gl = row.findElement(By.xpath(".//td[starts-with(normalize-space(.), 'GL-')]"))
+            String gl = row.findElement(By.xpath("//td[4]"))
                            .getText().trim();
             if (!gl.isEmpty()) {
                 if (arrLen < validationOrdNo.size()) {
@@ -186,10 +189,10 @@ public class ReconsignmentPage {
         if (rows.isEmpty()) return;
 
         for (WebElement row : rows) {
-            String lbolVal = row.findElement(By.xpath(".//td[10]")).getText().trim();
+            String lbolVal = row.findElement(By.xpath("//td[10]")).getText().trim();
             if (lbolVal.isEmpty()) {
                 scrollIntoView(row);
-                String gl = row.findElement(By.xpath(".//td[starts-with(normalize-space(.), 'GL-')]"))
+                String gl = row.findElement(By.xpath("//td[4]"))
                                .getText().trim();
                 if (arrLen < trkingValidationOrdNo.size()) {
                     trkingValidationOrdNo.set(arrLen, gl);
@@ -270,4 +273,48 @@ public class ReconsignmentPage {
             firstUniqueText.add(val);
         }
     }
+    
+    private By selectconsingee = By.id("masterExternalUserDetreconsignedToConsignee");
+    private By list = By
+			.xpath("//div[contains(@class,'p-dropdown-items-wrapper')]//ul[contains(@class,'p-dropdown-items')]/li");	
+	private By clist = By.xpath("//div[contains(@class,'d-flex align-items-center mt-1 pitem ')]");
+    /**
+     * Selects the first available consignee from dropdown
+     */
+	public void selectAnyConsigneeOrSkip() throws InterruptedException {
+		cp.waitForLoaderToDisappear();
+		wait.until(ExpectedConditions.elementToBeClickable(selectconsingee)).click();
+
+		wait.until(driver -> {
+			List<WebElement> options = driver.findElements(clist);
+			return options.size() > 1;
+		});
+
+		driver.findElement(By.xpath("//*[@placeholder='Enter Address 2']")).click();
+		wait.until(ExpectedConditions.elementToBeClickable(selectconsingee)).click();
+		List<WebElement> consignee = driver.findElements(clist);
+		int consigneeCount = consignee.size();
+
+	//	logger.info("Total consignee found in list: " + consigneeCount);
+
+		if (consigneeCount == 1) {
+	//		logger.warning("No Consignee found in dropdown. Skipping test.");
+			throw new SkipException("No Consignee available in the dropdown.");
+		}
+
+		WebElement selectConsignee = consignee.get(0);
+	//	logger.info("Seleted consignee is " + selectConsignee);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(clist));
+		try {
+			driver.findElements(clist).get(0).click();
+		} catch (StaleElementReferenceException e) {
+		//	logger.warning("StaleElementReferenceException caught. Retrying click...");
+			wait.until(ExpectedConditions.elementToBeClickable(selectconsingee)).click();// try it work or not its add
+																							// for outbox index
+			driver.findElements(clist).get(0).click();
+		}
+		cp.waitForLoaderToDisappear();
+	}
+
+
 }

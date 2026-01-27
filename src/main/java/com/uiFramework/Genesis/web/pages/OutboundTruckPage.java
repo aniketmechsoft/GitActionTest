@@ -6,8 +6,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Logger;
 
@@ -63,7 +65,7 @@ public class OutboundTruckPage extends InbTruckPage {
 	private By licheckBox = By.xpath("//tbody[1]/tr[1]/td[1]");
 	private By ilibutton = By.xpath("(//div[@title='Click to see pallets present in truck'])[1]");
 	private By getliInboundpallet = By.xpath("(//tbody)[2]//tr//td[contains(., 'IBPL-')]");
-	private By getliLTL = By.xpath("//tbody[1]/tr[1]/td[5]");
+	private By getliLTL = By.xpath("//tbody[1]/tr[2]/td[3]");
 	private By getliTruckstatus = By.xpath("//table/tbody/tr[2]/td[7]");
 	private By editBtn = By.xpath("(//*[@title='Click to edit'])[1]");
 	private By searchfirstcontains = By.xpath("(//input[@placeholder='Contains...'])[2]");
@@ -74,8 +76,8 @@ public class OutboundTruckPage extends InbTruckPage {
 	// create xpath
 	private By getlda = By.xpath("//table/tbody/tr[2]/td[4]");
 	private By searchLdacode = By.xpath("//table/thead/tr[2]/th[4]/div/input");
-	private By ldacodefiltericon = By.xpath("//table/thead/tr[2]/th[4]/div/span");
-	private By notContains = By.xpath("//li[text()='Not contains']");
+	private By ldacodefiltericon = By.xpath("(//*[@class='ml-1 cursor-pointer'])[3]//*[@class='p-icon']");
+	private By notContains = By.xpath("//li[text()='Not Contains']");
 	private By LTLtext = By.xpath("//span[contains(text(),'Select LTL')]");
 	private By getTotalPieces = By.xpath("//input[@id='outboutTruckCreateHeadernumberOfPieces']");
 	private By getPalletQty = By.xpath("//input[@id='outboutTruckCreateHeadernoOfPallets']");
@@ -96,6 +98,7 @@ public class OutboundTruckPage extends InbTruckPage {
 	private By removePallet = By.xpath("//button[@title='Click to remove pallets from truck']");
 	private By addPallets = By.xpath("//button[@title='Click to add pallets into truck']");
 	private By updateroute = By.xpath("//button[@title='Click to update route order']");
+	private By dropcheckbox = By.xpath("//tbody[@class='p-datatable-tbody']//*[@class='p-checkbox-box']");
 
 	/**
 	 * Click Outbound Truck menu
@@ -104,7 +107,8 @@ public class OutboundTruckPage extends InbTruckPage {
 		cp.waitForLoaderToDisappear();
 		wt.waitToClick(barMenu, 10);
 		wt.waitToClick(truckMenu, 10);
-		driver.findElement(obtTruckMenu).click();
+		wt.waitToClick(obtTruckMenu, 10);
+		//driver.findElement(obtTruckMenu).click();
 		cp.waitForLoaderToDisappear();
 	}
 
@@ -126,16 +130,34 @@ public class OutboundTruckPage extends InbTruckPage {
 		logger.info("Truck create screen OBPL is " + opp.MOBPL);
 		cp.searchColoumFilter(searchibpl, opp.MOBPL);
 	}
-
+	
+	/**
+	 * Searches for a pallet in the outbound pallet list using the column filter.
+	 * Waits for the loader to disappear before typing the pallet number.
+	 *
+	 * @param outboundPalletNo pallet number to search
+	 */
 	public void searchPallet1(String outboundPalletNo) throws InterruptedException {
 		cp.waitForLoaderToDisappear();
 		cp.searchColoumFilter(searchibpl, outboundPalletNo);
 	}
-
+	
+	/**
+	 * Retrieves the mandatory text value representing the MOBPL-created truck
+	 * number from the inbound pallet section.
+	 *
+	 * @return truck number text
+	 */
 	public String getMOBPLCreatingTrcuk() {
 		return cp.getMandatoryText(inboundPallet);
 	}
-
+	
+	/**
+	 * Extracts the truck number displayed in the table row for MOBT.
+	 * Logs the extracted value and safely returns an empty string if not found.
+	 *
+	 * @return MOBT truck number, or empty string on failure
+	 */
 	public String getMobtTruckNo() {
 		MobtTruckNo = cp.getMandatoryText(By.xpath("(//table/tbody/tr[2]/td[2])[2]"));
 		logger.info("MobtTruckNo is " + MobtTruckNo);
@@ -145,31 +167,39 @@ public class OutboundTruckPage extends InbTruckPage {
 	/**
 	 * Verify order process types in info grid for outbound (no Return/Closeout)
 	 */
-	public void checkOrderProcessForOutbound(int j) throws InterruptedException {
+	public void checkOrderProcessForOutbound() throws InterruptedException {
 		List<WebElement> orderInfo = driver.findElements(iButton);
-
+		Thread.sleep(500);
 		for (int i = 0; i < orderInfo.size(); i++) {
 			List<WebElement> refreshedButtons = driver.findElements(iButton);
 			WebElement orderinfo = refreshedButtons.get(i);
+			//System.out.println("I is" +i);
 			orderinfo.click();
-
+			Thread.sleep(500);
 			List<WebElement> cells = driver
-					.findElements(By.xpath("(//tbody[@class='p-datatable-tbody'])[" + j + "]//tr//td[3]"));
+					.findElements(By.xpath("(//tbody[@class='p-datatable-tbody'])//td[3]"));
 
 			for (WebElement cell : cells) {
 				String orderProcess = cell.getText().trim();
 				logger.info("Process type: " + orderProcess);
-				js.scrollIntoView(orderinfo);
+				//js.scrollIntoView(orderinfo);
 
 				if (orderProcess.equalsIgnoreCase("Return") || orderProcess.equalsIgnoreCase("Closeout")) {
 					Assert.fail("FAIL: GL Order contains 'Return' or 'Closeout' on outbound truck.");
 				}
 			}
 			wt.waitToClick(closeInfo, 30);
+			Thread.sleep(500);
 		}
 		cp.waitForLoaderToDisappear();
 	}
-
+	
+	/**
+	 * Checks whether the Address field is editable.
+	 * The field is considered editable only if it is enabled and not marked as read-only.
+	 *
+	 * @return true if the Address field is editable; false otherwise
+	 */
 	public boolean checkAddressfield() {
 		WebElement addressField = driver.findElement(By.xpath("//*[@placeholder='Enter Address 1']"));
 		return addressField.isEnabled() && !"true".equals(addressField.getAttribute("readonly"));
@@ -190,7 +220,12 @@ public class OutboundTruckPage extends InbTruckPage {
 		}
 		cp.searchColoumFilter(searchLdacode, LDA);
 	}
-
+	
+	/**
+	 * Checks whether the dropdown has been cleared and reset to its default state.
+	 * 
+	 * @return true if the default LTL label is visible, false if not found
+	 */
 	public boolean isDropdownCleared() {
 		try {
 			WebElement dropdownLabel = driver.findElement(LTLtext);
@@ -199,7 +234,13 @@ public class OutboundTruckPage extends InbTruckPage {
 			return false;
 		}
 	}
-
+	
+	/**
+	 * Selects the LTL option for UPS workflow, chooses the first matching carrier,
+	 * and updates the cost estimate.
+	 *
+	 * @param cost value to be entered in the cost estimate field
+	 */
 	public void selectLTLforUPScase(String cost) {
 		cp.waitForLoaderToDisappear();
 		cp.moveToElementAndClick(LTLtext);
@@ -210,7 +251,14 @@ public class OutboundTruckPage extends InbTruckPage {
 		driver.findElement(costEstimate).clear();
 		driver.findElement(costEstimate).sendKeys(cost);
 	}
-
+	
+	/**
+	 * Fills optional (non-mandatory) fields such as third-party billing, truck ID,
+	 * description, emergency response number, and special instructions.
+	 * Skips silently if any element is not available.
+	 *
+	 * @param data text to populate optional input fields
+	 */
 	public void selectNonMandatefields(String data) {
 		try {
 			cp.waitForLoaderToDisappear();
@@ -233,18 +281,18 @@ public class OutboundTruckPage extends InbTruckPage {
 	public void creatTruckwithCheckTotalPiecesandpallet() {
 		glOrders.clear();
 		checkRemovePalletTotalPiecesndpalletQtyforFirstOrder();
-		List<WebElement> glOrderCells = driver.findElements(By.xpath("//*[@class='p-selection-column p-frozen-column']"));
+		List<WebElement> glOrderCells = driver.findElements(By.xpath("//*[@class='p-checkbox p-component']"));
 		TotalWeight = 0;
 		for (int i = 1; i <= 3 && i < glOrderCells.size(); i++) {
 			try {
 				iTotalPieces = Integer.parseInt(cp.getAttributeValue(getTotalPieces, "value"));
 				iPalletQty = Integer.parseInt(cp.getAttributeValue(getPalletQty, "value"));
 
-				WebElement checkbox = driver.findElement(By.xpath("//table/tbody/tr[" + (i) + "]/td[1]"));
+				WebElement checkbox = driver.findElement(By.xpath("//table/tbody/tr[" + (i+1) + "]/td[1]"));
 				checkbox.click();
-				js.scrollIntoView(checkbox);
+				//js.scrollIntoView(checkbox);
 
-				List<WebElement> glOrderElements = driver.findElements(By.xpath("//table/tbody/tr[" + i + "]/td[2]"));
+				List<WebElement> glOrderElements = driver.findElements(By.xpath("//*[@class='scrollable-pane']//tr["+( i+1 )+"]//td[1]"));
 				for (WebElement element : glOrderElements) {
 					String key = "OutboundPallet" + i;
 					String value = element.getText().trim();
@@ -257,9 +305,9 @@ public class OutboundTruckPage extends InbTruckPage {
 						By.xpath("(//div[@title='Click to see orders present in pallet'])[" + i + "]"));
 
 				orderInfo.click();
-				Thread.sleep(1000);
+			//	Thread.sleep(1000);
 				List<WebElement> orderElements = driver.findElements(
-						By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//*[contains(text(), 'GL-')]"));
+						By.xpath("(//div[@class='datatable-wrapper'])[2]//tr//td[2]"));
 
 				wt.waitForElementVisibleWithPollingTimeForList(orderElements, 9, 500);
 
@@ -269,11 +317,11 @@ public class OutboundTruckPage extends InbTruckPage {
 				wt.waitToClick(closeInfo, 30);
 				logger.info("GL Orders found at index " + i + ": " + glOrders);
 
-				Thread.sleep(1000);
-				WebElement lda = driver.findElement(By.xpath("//tbody[1]/tr[" + i + "]/td[5]"));
+			//	Thread.sleep(1000);
+				WebElement lda = driver.findElement(By.xpath("//tbody[1]/tr[" + (i+1) + "]/td[4]"));
 				wt.waitForElementVisibleWithPollingTime(lda, 9, 500);
-				String rawText = cp.getMandatoryText(By.xpath("//tbody[1]/tr[" + i + "]/td[5]"));
-				String[] LDAcode = rawText.split("\\s*,\\s*");
+				String LDAText = cp.getMandatoryText(By.xpath("//tbody[1]/tr[" + (i+1) + "]/td[4]"));
+				String[] LDAcode = LDAText.split("\\s*,\\s*");
 				for (String code : LDAcode) {
 					LDAcodes.add(code);
 				}
@@ -288,20 +336,29 @@ public class OutboundTruckPage extends InbTruckPage {
 		logger.info("Total Weight in array " + obttruckData.get("Totalweight"));
 		logger.info("GlOrders on creatTruckwithCheckToatlPiecesandpallet: " + glOrders);
 		getObtTruckDetails();
-		checkCheckBoxesSelectedAfterPagination();
+		//checkCheckBoxesSelectedAfterPagination();
+	}
+	
+	/**
+	 * This method use to click on save btn from route popup
+	 */
+	public void routeSaveBtn() {
+		wt.waitToClickWithAction(dropcheckbox, 10);
+		cp.waitAndClickWithJS(By.xpath("(//button[@title='Click to save data'])[2]"), 10);
+		cp.waitForLoaderToDisappear();
 	}
 
-	public void verifyRouteOrderShouldbeEditable() {
-		try {
-			WebElement addressField = driver.findElement(By.xpath("//*[@placeholder='Route Order']"));
-			boolean isEditable = addressField.isEnabled() && !"true".equals(addressField.getAttribute("readonly"));
-			sAssert.assertTrue(isEditable, "Route order should be editable but it is not.");
-			cp.waitAndClickWithJS(By.xpath("(//button[@title='Click to save data'])[2]"), 7);
-			cp.waitForLoaderToDisappear();
-		} catch (Exception e) {
-			logger.info("LDA is same; route-order popup not displayed");
-		}
-	}
+//	public boolean isRouteOrderShouldbeEditable() {
+//		try {
+//			WebElement addressField = driver.findElement(By.xpath("//*[@placeholder='Route Order']"));
+//			return isEditable = addressField.isEnabled() && !"true".equals(addressField.getAttribute("readonly"));
+////			sAssert.assertTrue(isEditable, "Route order should be editable but it is not.");
+////			cp.waitAndClickWithJS(By.xpath("(//button[@title='Click to save data'])[2]"), 7);
+////			cp.waitForLoaderToDisappear();
+//		} catch (Exception e) {
+//			logger.info("LDA is same; route-order popup not displayed");
+//		}
+//	}
 
 	public void getObtTruckDetails() {
 		String trimLtl = cp.getMandatoryText(getLTL);
@@ -333,10 +390,11 @@ public class OutboundTruckPage extends InbTruckPage {
 		iTotalPieces = Integer.parseInt(cp.getAttributeValue(getTotalPieces, "value"));
 		iPalletQty = Integer.parseInt(cp.getAttributeValue(getPalletQty, "value"));
 
-		WebElement checkbox = driver.findElement(By.xpath("//table/tbody/tr[1]/td[1]"));
+		WebElement checkbox = driver.findElement(By.xpath("(//table/tbody/tr[2]/td[1])[1]"));
 		checkbox.click();
 		int orderPieces = sumOrderPieces();
-		int orderPaletqty = Integer.parseInt(driver.findElement(By.xpath("//table/tbody/tr[1]/td[4]")).getText().trim());
+		System.out.println("order sum "+ orderPieces);
+		int orderPaletqty = Integer.parseInt(driver.findElement(By.xpath("//table/tbody/tr[2]/td[3]")).getText().trim());
 
 		int ExpectedPieces = orderPieces - iTotalPieces;
 		int ExpectedPalletQty = orderPaletqty - iPalletQty;
@@ -355,7 +413,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		driver.findElement(By.xpath("(//*[@title='Click to see orders present in pallet'])[1]")).click();
 		int totalOrderPieces = 0;
 
-		List<WebElement> cells = driver.findElements(By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//tr//td[6]"));
+		List<WebElement> cells = driver.findElements(By.xpath("//tbody[@class='p-datatable-tbody']//tr//td[6]"));
 
 		for (WebElement cell : cells) {
 			String orderPieces = cell.getText().trim();
@@ -382,7 +440,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		totalWeight = String.valueOf(TotalWeight);
 
 		int orderPieces = getPiecescount();
-		int orderPaletqty = Integer.parseInt(driver.findElement(By.xpath("//table/tbody/tr[" + i + "]/td[4]")).getText().trim());
+		int orderPaletqty = Integer.parseInt(driver.findElement(By.xpath("//table/tbody/tr[" + (i+1) + "]/td[3]")).getText().trim());
 
 		int ExpectedPieces = iTotalPieces + orderPieces;
 		int ExpectedPalletQty = iPalletQty + orderPaletqty;
@@ -397,7 +455,7 @@ public class OutboundTruckPage extends InbTruckPage {
 	}
 
 	public void getPiecesandWeight() {
-		List<WebElement> Pieces = driver.findElements(By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//tr//td[6]"));
+		List<WebElement> Pieces = driver.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr//td[6]"));
 		totalOrderPieces = 0;
 		totalOrderWeight = 0;
 
@@ -411,7 +469,7 @@ public class OutboundTruckPage extends InbTruckPage {
 			}
 		}
 
-		List<WebElement> weights = driver.findElements(By.xpath("(//tbody[@class='p-datatable-tbody'])[2]//tr//td[7]"));
+		List<WebElement> weights = driver.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr//td[7]"));
 		for (WebElement cell : weights) {
 			String orderWeight = cell.getText().trim();
 			try {
@@ -426,10 +484,12 @@ public class OutboundTruckPage extends InbTruckPage {
 	}
 
 	public int getPiecescount() {
+		System.out.println("pieces t is "+totalOrderPieces);
 		return totalOrderPieces;
 	}
 
 	public int getWeightCount() {
+		System.out.println("weight is "+totalOrderWeight);
 		return totalOrderWeight;
 	}
 
@@ -465,7 +525,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		litruckData.put("LTL", liLTL);
 		litruckData.put("pickupLocation", liPickup);
 
-		String rawText = cp.getMandatoryText(By.xpath("//tbody[1]/tr[1]/td[7]"));
+		String rawText = cp.getMandatoryText(By.xpath("//tbody[1]/tr[2]/td[5]"));
 		LDAcodesOnlist = rawText.split("\\s*,\\s*");
 
 		logger.info("TruckData On listing screen: " + litruckData);
@@ -506,7 +566,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		} catch (Exception ignored) {}
 
 		List<WebElement> pallets = driver
-				.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//td[contains(text(), 'OBPL-')]"));
+				.findElements(By.xpath("(//div[@class='datatable-wrapper'])[1]//td[contains(text(), 'OBPL-')]"));
 		int i = 1;
 		for (WebElement element : pallets) {
 			String key = "outboundPallet" + i;
@@ -550,8 +610,10 @@ public class OutboundTruckPage extends InbTruckPage {
 	public String checkLDAaddress() {
 		WebElement LDAaddress = driver.findElement(By.xpath("(//*[@class='labelBoxK__labelData'])[10]"));
 		String addressText = LDAaddress.getText().trim();
+		
+		boolean flag=isLdaCodeDifferent();
 
-		if (addressText == null || addressText.isEmpty()) {
+		if (addressText == null || addressText.isEmpty() && flag) {
 			driver.findElement(getEditLTL).click();
 			driver.findElement(selectFirst).click();
 			cp.waitForLoaderToDisappear();
@@ -561,17 +623,37 @@ public class OutboundTruckPage extends InbTruckPage {
 			throw new SkipException("LDA address is present. Skipping test. UPS case");
 		}
 	}
+	
+	/**
+	 * This method used to check if LDA code different then return true
+	 * @param driver
+	 * @return
+	 */
+	public boolean isLdaCodeDifferent() {
+	    Set<String> set = new HashSet<>();
+
+	    List<WebElement> cells = driver.findElements(
+	            By.xpath("(//*[@class='datatable-wrapper'])[1]//tr//td[5]"));
+
+	    for (WebElement e : cells) {
+	        set.add(e.getText().trim());
+	        if (set.size() > 1) {
+	            return true; // difference found
+	        }
+	    }
+	    return false; // all same
+	}
 
 	public void checkPiecesanWeightWhenPalletRemoved() throws InterruptedException {
 		addedPallets.clear();
 		removedPallets.clear();
 		List<WebElement> ObplOrderCells = driver
-				.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//td[contains(text(), 'OBPL-')]"));
+				.findElements(By.xpath("(//div[@class='datatable-wrapper'])[1]//td[contains(text(), 'OBPL-')]"));
 		if (ObplOrderCells.size() > 1) {
 			for (int i = ObplOrderCells.size(); i >= 2; i--) {
 				try {
 					WebElement checkbox = driver
-							.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[1]"));
+							.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[1]"));
 					checkbox.click();
 
 					RemovedPalletCalculationforPiecesWeightQTY(i);
@@ -583,7 +665,7 @@ public class OutboundTruckPage extends InbTruckPage {
 			}
 
 			List<WebElement> removedPalleteElement = driver
-					.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[2]//td[contains(text(), 'OBPL-')]"));
+					.findElements(By.xpath("(//div[@class='datatable-wrapper'])[2]//td[contains(text(), 'OBPL-')]"));
 			if (removedPalleteElement.isEmpty()) {
 				logger.info("No pallets found in removed grid");
 			} else {
@@ -609,9 +691,9 @@ public class OutboundTruckPage extends InbTruckPage {
 		int initialWeight = safeParseInt(driver.findElement(getEditTotalwt).getText());
 
 		int palletPieces = Integer.parseInt(
-				driver.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[1]//td[7]")).getText().trim());
+				driver.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[1]//td[7]")).getText().trim());
 		int palletWeight = Integer.parseInt(
-				driver.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[1]//td[8]")).getText().trim());
+				driver.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[1]//td[8]")).getText().trim());
 
 		int FinalPieces = initialPieces - palletPieces;
 		int FinalWeight = initialWeight - palletWeight;
@@ -645,17 +727,17 @@ public class OutboundTruckPage extends InbTruckPage {
 
 	public void RemovedPalletCalculationforPiecesWeightQTY(int i) {
 		WebElement element = driver
-				.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[2]"));
+				.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[2]"));
 		addedPallets.add(element.getText());
 
 		int initialPieces = Integer.parseInt(driver.findElement(getEditTotalpieces).getText().trim());
 		int initialWeight = Integer.parseInt(driver.findElement(getEditTotalwt).getText().trim());
 
 		int palletPieces = Integer.parseInt(
-				driver.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[7]"))
+				driver.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[7]"))
 						.getText().trim());
 		int palletWeight = Integer.parseInt(
-				driver.findElement(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr[" + i + "]//td[8]"))
+				driver.findElement(By.xpath("(//div[@class='datatable-wrapper'])[1]//tr[" + i + "]//td[8]"))
 						.getText().trim());
 
 		int FinalPieces = initialPieces - palletPieces;
@@ -681,7 +763,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		return cp.getMandatoryText(getEditStatus).trim().toLowerCase();
 	}
 
-	public void searchTruckno1(String number) {
+	public void searchTruckno1(String number) throws InterruptedException {
 		cp.searchColoumFilter(searchfirstcontains, number);
 	}
 
@@ -696,10 +778,10 @@ public class OutboundTruckPage extends InbTruckPage {
 		List<WebElement> obplOrderCells = driver
 				.findElements(By.xpath("(//div[@id='panel1bh-content'])[3]//td[contains(text(), 'OBPL-')]"));
 		if (obplOrderCells.size() > 1) {
-			for (int i = 3; i >= 1; i--) {
+			for (int i = 4; i >= 2; i--) {
 				try {
 					WebElement checkbox = driver
-							.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" + i + "]//td[1]"));
+							.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" +  i + "]//td[1]"));
 					checkbox.click();
 
 					AddedPalletCalculationforPiecesWeightQTY(i);
@@ -710,7 +792,7 @@ public class OutboundTruckPage extends InbTruckPage {
 				}
 			}
 			List<WebElement> addPalleteElement = driver
-					.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//td[contains(text(), 'OBPL-')]"));
+					.findElements(By.xpath("(//div[@class='datatable-wrapper'])[1]//td[contains(text(), 'OBPL-')]"));
 			if (addPalleteElement.isEmpty()) {
 				logger.info("No pallets found in added grid");
 			} else {
@@ -727,6 +809,9 @@ public class OutboundTruckPage extends InbTruckPage {
 		}
 	}
 
+	/**
+	 * This method used to add applet in truck and also check total pieces and weight add in truck
+	 */
 	public void AddedPalletCalculationforPiecesWeightQTY(int i) {
 		WebElement element = driver.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" + i + "]//td[2]"));
 		addedPallets.add(element.getText());
@@ -735,17 +820,18 @@ public class OutboundTruckPage extends InbTruckPage {
 		int initialWeight = safeParseInt(driver.findElement(getEditTotalwt).getText());
 
 		int palletPieces = Integer.parseInt(
-				driver.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" + i + "]//td[7]")).getText().trim());
+				driver.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" + i + "]//td[4]")).getText().trim());
 		int palletWeight = Integer.parseInt(
-				driver.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" + i + "]//td[8]")).getText().trim());
+				driver.findElement(By.xpath("(//div[@id='panel1bh-content'])[3]//tr[" + i + "]//td[5]")).getText().trim());
 
 		int FinalPieces = initialPieces + palletPieces;
 		int FinalWeight = initialWeight + palletWeight;
 
 		wt.waitToClick(addPallets, 10);
-
+		cp.waitForLoaderToDisappear();
 		try {
-			cp.moveToElementAndClick(saveTruck);
+			//cp.moveToElementAndClick(saveTruck);
+			wt.waitToClickWithAction(saveTruck, 5);
 		} catch (Exception ignored) {}
 		cp.waitForLoaderToDisappear();
 		cp.captureToastMessage();
@@ -782,7 +868,10 @@ public class OutboundTruckPage extends InbTruckPage {
 		driver.findElement(costEstimate).clear();
 		driver.findElement(costEstimate).sendKeys("10");
 		Thread.sleep(2000);
-		driver.findElement(updateBtn).click();
+		driver.findElement(specialinstruction).click();
+		wt.waitToClick(updateBtn, 5);
+		
+		//driver.findElement(updateBtn).click();
 	}
 
 	public String getEstimatedCost() {
@@ -814,7 +903,7 @@ public class OutboundTruckPage extends InbTruckPage {
 	}
 
 	public String emtyTruckStatsus() {
-		WebElement statusElement = driver.findElement(By.xpath("//tbody[1]/tr[1]/td[10]"));
+		WebElement statusElement = driver.findElement(By.xpath("//tbody[1]/tr[2]/td[7]"));
 		return Truckstatus = statusElement.getText();
 	}
 

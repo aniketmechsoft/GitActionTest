@@ -1,23 +1,24 @@
 package com.uiFramework.Genesis.regression.web;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeClass;
-import org.testng.AssertJUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.uiFramework.Genesis.base.TestBase;
 import com.uiFramework.Genesis.common.CommonMethods;
 import com.uiFramework.Genesis.web.pages.CommonPage;
 import com.uiFramework.Genesis.web.pages.DocQueue;
+import com.uiFramework.Genesis.web.pages.productionPage;
 
 public class DocQueueTest extends TestBase {
 	DocQueue dc = null;
 	CommonPage cp = null;
 	CommonMethods cm;
+	productionPage pr=null;
 	int initialCount;
 	int afterCount;
 
@@ -27,6 +28,7 @@ public class DocQueueTest extends TestBase {
 		cm = new CommonMethods(driver);
 		cp = new CommonPage(driver);
 		dc = new DocQueue(driver);
+		pr = new productionPage(driver);
 	//	driver.navigate().refresh();
 
 	}
@@ -60,10 +62,11 @@ public class DocQueueTest extends TestBase {
 	}
 
 	@Test(priority = 7, alwaysRun = true)
-	public void shouldCreateDifferentLBOLsForDifferentConsignees() throws InterruptedException {
+	public void shouldCreateDifferentLBOLsForDifferentConsignees() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
+		     //dc.docQueueMenu();
 		dc.clickGeneratedDoc();
-		initialCount = dc.ExtrNoCntFrmGenertrPge();
+		initialCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		dc.ClickDocGen();
 		dc.createLDAForDiffConsignee();
 		dc.clickLDABtn();
@@ -76,7 +79,7 @@ public class DocQueueTest extends TestBase {
 	public void shouldConfirmDifferentRequestsCreatedForDifferentConsignees() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.clickGeneratedDoc();
-		afterCount = dc.ExtrNoCntFrmGenertrPge();
+		afterCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		sAssert.assertEquals(initialCount + 3, afterCount, "");
 		sAssert.assertAll();
 	}
@@ -85,7 +88,7 @@ public class DocQueueTest extends TestBase {
 	public void shouldCreateDifferentManifestsForDifferentLDAs() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.clickGeneratedDoc();
-		initialCount = dc.ExtrNoCntFrmGenertrPge();
+		initialCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		dc.ClickDocGen();
 		dc.createManifestForDiffLDA();
 		dc.clickLDABtn();
@@ -98,15 +101,16 @@ public class DocQueueTest extends TestBase {
 	public void shouldConfirmDifferentRequestsCreatedForDifferentLDAs() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.clickGeneratedDoc();
-		afterCount = dc.ExtrNoCntFrmGenertrPge();
+		afterCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		sAssert.assertNotEquals(initialCount, afterCount, "");
 		sAssert.assertAll();
 	}
 
 	@Test(priority = 11, alwaysRun = true)
-	public void shouldCreateDifferentOrderProcessesForSameLDA() throws InterruptedException {
+	public void shouldCreateDifferentOrderProcessesForSameLDA() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
-		initialCount = dc.ExtrNoCntFrmGenertrPge();
+		   //dc.docQueueMenu();
+		initialCount =dc.ExtrNoCntFrmGenertrPge(driver);
 		dc.ClickDocGen();
 		dc.clickReconsinmntBtn();
 		dc.checkDiffTypeOrderMerge();
@@ -120,19 +124,20 @@ public class DocQueueTest extends TestBase {
 	public void shouldConfirmSameRequestCreatedForDifferentLDAs() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.clickGeneratedDoc();
-		afterCount = dc.ExtrNoCntFrmGenertrPge();
+		afterCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		sAssert.assertEquals(initialCount + 1, afterCount, "");
 		sAssert.assertAll();
 	}
 
 	@Test(priority = 13, alwaysRun = true)
-	public void shouldCreateDifferentOrderProcessesForDifferentLDAs() throws InterruptedException {
+	public void shouldCreateDifferentOrderProcessesForDifferentLDAs() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
-		initialCount = dc.ExtrNoCntFrmGenertrPge();
+			//dc.docQueueMenu();
+		initialCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		dc.ClickDocGen();
 		dc.clickReconsinmntBtn();
 		dc.clickCloseoutBtn();
-		dc.checkDiffTypeOrderMerge();
+		dc.checkDiffTypeOrderMergeDiffLDA();
 		dc.clickLDABtn();
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "Documents have been created for the selected record.");
@@ -143,7 +148,7 @@ public class DocQueueTest extends TestBase {
 	public void shouldConfirmDiffRequestsCreatedForDifferentLDAs() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.clickGeneratedDoc();
-		afterCount = dc.ExtrNoCntFrmGenertrPge();
+		afterCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		sAssert.assertEquals(initialCount + 2, afterCount, "");
 		sAssert.assertAll();
 	}
@@ -162,11 +167,32 @@ public class DocQueueTest extends TestBase {
 	
 	@Test(priority = 16,alwaysRun = true, groups = {"Smoke"})
 	public void shouldRetrieveDocumentsForMainOrder() throws TimeoutException, InterruptedException {
-		SoftAssert sAssert = new SoftAssert();
+		SoftAssert sAssert1 = new SoftAssert();
 		dc.clickGeneratedDoc();
 		dc.searchOrderInGenScreen();
 		dc.getDocumentNumber();
-		sAssert.assertFalse(dc.checkElementNorecord(), "'No record found' is displayed. Document not generated.");
+		Assert.assertFalse(dc.checkElementNorecord(), "'No record found' is displayed. Document not generated.");
+	}
+	
+	//Split POD
+	@Test(priority = 17, alwaysRun = true, groups = {"Smoke"})
+	public void shouldCheckColumnFilterOnSplitPOD() throws InterruptedException, TimeoutException {
+		SoftAssert sAssert = new SoftAssert();
+		//dc.docQueueMenu();
+		cp.ClickSplitPod();
+		pr.clickToRefresh();
+		dc.verifyColumnFilterForSplitePOD();
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 18, alwaysRun = true, dependsOnMethods="shouldCheckColumnFilterOnSplitPOD")
+	public void shouldPersistColumnFilterOnSplitPOD() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		dc.clickToViewPod();
+		cp.clickBackBtn();
+		initialCount = dc.ExtrNoCntFrmGenertrPge(driver);
+		sAssert.assertTrue(dc.getFilterData(),"Filter data is null or empty");
+		sAssert.assertAll();
 	}
 
 }

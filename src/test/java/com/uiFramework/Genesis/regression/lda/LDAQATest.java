@@ -40,8 +40,13 @@ public class LDAQATest extends TestBase {
 	public void createorderForLDA() throws Throwable {
 		SoftAssert sAssert = new SoftAssert();
 		np.endToEndOrder();
-		
+	
 	}
+	/**
+	 * Test
+	 *
+	 */
+
 
 	@Test(priority = 2)
 	public void shouldNotDisplayedManifestBeforeTrackingUpdate() throws Exception {
@@ -57,14 +62,17 @@ public class LDAQATest extends TestBase {
 //		cmObj.loginToApplication(driver, proObj.getPropertyValueFromFile("ldausername"),
 //				proObj.getPropertyValueFromFile("ldapassword"));
 
+		driver.get("https://devagentportaldave.azurewebsites.net");
+		cmObj.loginToApplication(driver,"aryaka-64","gl1234");
+		
 		System.out.println("agent portal open");
 		cp.waitForPopupToDisappear();
 		cp.searchSection();
 	    //lp.selectStatus("Pending");
 		System.out.println("manifest " + np.manifestArray[0]);
-		System.out.println("Lbol" +  np.lbolArray[0]);
+		System.out.println("Lbol " +  np.lbolArray[0]);
 		lp.searchManifest(np.manifestArray[0]);
-		//lp.searchManifest("3536");
+		//lp.searchManifest("3850");
 		cp.Search();
 		sAssert.assertTrue(cp.checkElementNorecord(), "Manifest should Not available on LDA portal, before tracking update");
 		sAssert.assertAll();
@@ -95,28 +103,32 @@ public class LDAQATest extends TestBase {
 		sAssert.assertEquals(lp.getTotalPieces(), lp.getTotalPiecesSum(), "Total Pieces sum not match on LDA QA.");
 		sAssert.assertAll();
 	}
-
+	
 	@Test(priority = 6)
+	public void shouldDisplayedToastForSelectOrders() throws Exception {
+		SoftAssert sAssert = new SoftAssert();
+		lp.clickOnUpdatePieces();
+		sAssert.assertEquals(cp.captureToastMessage(), "Please select at least one record.","Not Match!");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 7)
 	public void shouldDisplayedErrorIfNotEnterPieces() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
+		cp.waitForPopupToDisappear();
+		lp.selectFirstcheckbox();
 		lp.clickOnUpdatePieces();
 		sAssert.assertEquals(cp.captureToastMessage(), "Please enter received pieces & received literature pieces.",
 				"Not Match!");
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 7)
-	public void shouldWorkMarkRecQtySameAsOrdQtyBtn() throws Exception {
-		SoftAssert sAssert = new SoftAssert();
-		lp.clickMarkAsRecPiecesBtn();
-		sAssert.assertEquals(lp.getOrdPieces(),lp.getEnetrPieces() , "Received Order Pieces not match.");
-		sAssert.assertEquals(lp.getLitOrdPieces(),lp.getEnetrLitPieces() , "Received Order Pieces not match.");
-		sAssert.assertAll();
-	}
-	
 	@Test(priority = 8)
 	public void shouldAcceptManifestFrmLDA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
+		lp.enterActualPieces("10");
+		lp.enterLitPieces("0");
+		cp.waitForPopupToDisappear();
 		lp.clickOnUpdatePieces();
 		sAssert.assertEquals(cp.captureToastMessage(),"QA details update successfully", "Not match!");
 		sAssert.assertAll();
@@ -126,8 +138,7 @@ public class LDAQATest extends TestBase {
 	public void shouldCheckManifestStatusShouldQAPassed() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
-		//cp.searchSection();
-		//cp.clickClearButton();
+		cp.waitForLoaderToDisappear();
 		sAssert.assertEquals(lp.getQAStatus(),"QA Passed", "Manifest Status Not match!");
 		sAssert.assertAll();
 	}
@@ -137,8 +148,8 @@ public class LDAQATest extends TestBase {
 		SoftAssert sAssert = new SoftAssert();
 		driver.switchTo().window(tabs.get(0));
 		lp.navigateOrderMenu();
-		sAssert.assertEquals(lp.getOrderStatus(lp.MGLOrderno), "Consignee Delivery Schedule Pending","Not match!" );
-	//	sAssert.assertEquals(lp.getOrderStatus("10024"), "Consignee Delivery Schedule Pending","Not match!" );
+		sAssert.assertEquals(cp.getOrderStatus(lp.MGLOrderno), "Consignee Delivery Schedule Pending","Not match!" );
+	//	sAssert.assertEquals(cp.getOrderStatus("10024"), "Consignee Delivery Schedule Pending","Not match!" );
 		sAssert.assertAll();
 	}
 	
@@ -150,10 +161,10 @@ public class LDAQATest extends TestBase {
 		cp.clickClearButton();
 		lp.selectStatus("Pending");
 		cp.Search();
-		lp.editPendingManifest();
-		lp.clickMarkAsRecPiecesBtn();
-		lp.enterActualPieces(lp.getMoreOrLessPiece(1));
-		lp.enterLitPieces(lp.getMoreOrLessLitPiece(1));
+		lp.editManifest();
+		lp.selectFirstcheckbox();
+		lp.enterActualPiecesForAllOrders();
+		lp.enterLitPiecesForAllOrders();
 		lp.clickOnUpdatePieces();
 		sAssert.assertTrue(lp.isPopDisplayed(), "POP up not displayed for Mismatch Pieces." );
 		sAssert.assertAll();
@@ -183,10 +194,7 @@ public class LDAQATest extends TestBase {
 	public void shouldEnterLessPiecesThanAvailable() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		lp.voiceMailDateSelection(lp.getCurrentDateTime());
-		lp.clickMarkAsRecPiecesBtn();
 		Manifest=lp.getManifestFromQA();
-		lp.enterActualPieces(lp.getMoreOrLessPiece(-2));
-		lp.enterLitPieces(lp.getMoreOrLessLitPiece(-1));
 		lp.clickOnUpdatePieces();
 		lp.clickOnYes();
 		sAssert.assertEquals(cp.captureToastMessage(),"QA details update successfully", "Not match!");
@@ -204,31 +212,54 @@ public class LDAQATest extends TestBase {
 	}
 	
 	@Test(priority = 16)//shouldCheckManifestAvailableInGrid
-	public void shouldManifestStatusQAPending() throws Exception {
+	public void shouldNotManifestStatusQAPending() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
-		sAssert.assertEquals(lp.getQAStatus(), "QA Pending", "Manifets Status Should be QA pending.");
+		Manifest = lp.getQAStatus();
+		System.out.println("Manifest status "+ Manifest);
+		sAssert.assertEquals(lp.getQAStatus(), "QA Inprocess", "Not Match status");
 		sAssert.assertAll();
 	}
 	
 	@Test(priority = 17)//shouldManifestStatusQAPending
-	public void shouldNotEditabelManifestToLDA() throws Exception {
+	public void shouldCheckOrderisNotEditableInQAprocced() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		lp.editManifest();
-		sAssert.assertFalse(lp.isUpdatePiecsBtnDisable().isEnabled(), "Update btn should bedisable in complete status.");
+		sAssert.assertTrue(lp.isReceivedPiecesDisabled(), "QA done Order is not Disable");
 		sAssert.assertAll();
 	}
 	
 	@Test(priority = 18)//shouldManifestStatusQAPending
+	public void shouldCheckRecDateAndVoiceMailShowForOrder() throws Exception {
+		SoftAssert sAssert = new SoftAssert();
+		//lp.editManifest();
+		sAssert.assertTrue(lp.isReceivedDateNotEmpty(), "Received date is blank");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 19)//shouldManifestStatusQAPending
+	public void shouldAcceptPartialManifest() throws Exception {
+		SoftAssert sAssert = new SoftAssert();
+		lp.checkOrderStatus();
+		lp.enterActualPiecesForAllOrders();
+		lp.selectAllcheckbox();
+		lp.enterLitPiecesForAllOrders();
+		lp.clickOnUpdatePieces();
+		lp.clickOnYes();
+		sAssert.assertEquals(cp.captureToastMessage(),"QA details update successfully", "Not match!");
+		sAssert.assertAll();
+	}
+	
+	@Test(priority = 20)//shouldManifestStatusQAPending
 	public void shouldExportPdfOnLDAQA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
-		cp.clickBackBtn();
+		lp.clickOnLDAQAMenu();
 		cp.deleteExistingFiles();
 		cp.clickToExpPDF();
 		sAssert.assertTrue(cp.isFileDownloaded(), "PDF not download on LDA QA page.");
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 19)
+	@Test(priority = 21)
 	public void shouldExportExcelOnLDAQA() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		cp.deleteExistingFiles();
@@ -237,7 +268,7 @@ public class LDAQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 20, enabled=false)
+	@Test(priority = 22, enabled=false)
 	public void shouldChekCloumnFilterOnLDAQApage() throws Exception {
 		cp.clickClearButton();
 		lp.checkColoumFilter("LdaQaPage");

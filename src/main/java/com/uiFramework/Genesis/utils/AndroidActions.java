@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 
 public class AndroidActions extends AppiumUtils {
 
@@ -83,13 +85,15 @@ public class AndroidActions extends AppiumUtils {
 			element.click(); // Ensure focus
 			element.clear();
 			element.sendKeys(text);
+			driver.pressKey(new KeyEvent(AndroidKey.DIGIT_1));
 
 		} catch (InvalidElementStateException e1) {
 			System.out.println("Element not interactable, using Actions fallback.");
 			WebElement element = driver.findElement(locator);
 			element.click();
 			element.clear();
-			new Actions(driver).sendKeys(element, text).perform();
+			//new Actions(driver).sendKeys(element, text);
+			driver.pressKey(new KeyEvent(AndroidKey.DIGIT_0));
 		}
 	}
 
@@ -103,6 +107,25 @@ public class AndroidActions extends AppiumUtils {
 		WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10))
 				.until(ExpectedConditions.presenceOfElementLocated(locator));
 		return element.getText().trim();
+	}
+	
+	public void enterTextWithPressKey(By locator) {
+		try {
+			WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10))
+					.until(ExpectedConditions.elementToBeClickable(locator));
+			element.click(); // Ensure focus
+			element.clear();
+			element.sendKeys("2");
+			driver.pressKey(new KeyEvent(AndroidKey.DIGIT_1));
+
+		} catch (InvalidElementStateException e1) {
+			System.out.println("Element not interactable, using Actions fallback.");
+			WebElement element = driver.findElement(locator);
+			element.click();
+			element.clear();
+			//new Actions(driver).sendKeys(element, text);
+			driver.pressKey(new KeyEvent(AndroidKey.DIGIT_1));
+		}
 	}
 
 

@@ -84,6 +84,7 @@ public class DataRepo {
 
 	// Numeric / Count
 	public static final String ONE = "1";
+	public static final String TWO = "2";
 	public static final String THREE = "3";
 	public static final String PALLET_QTY = "9";
 	public static final String COST = "2";
@@ -91,12 +92,13 @@ public class DataRepo {
 
 	// Statuses
 	public static final String LOAD_STATUS = "truck loaded";
+	public static final String LOAD_STATUSs = "Truck Loaded";
 	public static final String PENDING = "Inbound Truck Load Pending";
 	public static final String ZERO = "0";
 	public static final String QA_DONE = "QA Done";
 	public static final String ARRIVED_STATUS = "Arrived";
 	public static final String STATUS = "waiting for load";
-	public static final String STTUS = "Waiting for load";
+	public static final String STTUS = "Waiting for Load";
 
 	public static final String QA_PENDING = "QA Pending";
 	

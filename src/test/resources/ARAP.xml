@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	
+			  <!-- Extent Report Listener -->
+  <listeners>
+    <listener class-name="com.uiFramework.Genesis.base.ExtentTestListener"/>
+  </listeners>
+				<!-- AR Invoice -->
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.uiFramework.Genesis.regression.web.DimWtUpdateTest"/>
+      <class name="com.uiFramework.Genesis.regression.web.ARInvoiceTest"/>
+      <class name="com.uiFramework.Genesis.regression.web.AREDIFileTest"/>
+      <class name="com.uiFramework.Genesis.regression.web.ARManualInputTest"/>
+    		   <!-- AP Invoice -->
+      <class name="com.uiFramework.Genesis.regression.web.ImportInvoicesTest"/>
+      <class name="com.uiFramework.Genesis.regression.web.APPayInvoiceTest"/>
+      <class name="com.uiFramework.Genesis.regression.web.APLookUpPage"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

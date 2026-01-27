@@ -23,6 +23,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.asserts.SoftAssert;
 
@@ -142,10 +143,11 @@ public class InboundQAPage extends InbTruckPage {
     private By markasreceivedqty = By.xpath("//button[@title='Click to mark received quantity same as order quantity']");
     private By save = By.xpath("//button[@id='inboundQAArrivedTruckDetailsSaveQtyBtn']");
     private By ibplCount = By.xpath("//tr//td[contains(text(), 'IBPL-')]");
-    private By glorderCounts = By.xpath("//tr//td[contains(text(), 'GL-')]");
+    private By glorderCounts = By.xpath("(//*[@class='p-datatable-tbody'])[2]//td[1]");
     private By scanninput = By.xpath("//input[@id='txtBarcodeScan']");
-    private By getQAStatus = By.xpath("//table/tbody/tr/td[15]");
+    private By getQAStatus = By.xpath("//table/tbody/tr/td[14]");
     private By yesbtn = By.xpath("//button[@id='confmSubmit']");
+    private By enterpc = By.xpath("//*[@placeholder='Enter pieces']");
 
     /**
      * Open QA menu
@@ -213,11 +215,13 @@ public class InboundQAPage extends InbTruckPage {
 
     /** Validate listing vs view data */
     public void validateTruckdata() {
+    	SoftAssert sAssert = new SoftAssert();
         for (Map.Entry<String, String> entry : litruckqData.entrySet()) {
             String expectedValue = entry.getValue();
-            org.testng.Assert.assertTrue(viewData.containsValue(expectedValue),
+            sAssert.assertTrue(viewData.containsValue(expectedValue),
                     "FAIL: Data mismatch between Listing and View. Missing: '" + expectedValue + "'");
         }
+        sAssert.assertAll();
     }
 
     /** Save with conditional YES popup handling */
@@ -242,14 +246,36 @@ public class InboundQAPage extends InbTruckPage {
     public boolean yesBtncheck() {
         return isYesButtonDisplayed;
     }
-
+ 
+    /**
+     * This method use to clear enter pieces in any scanned already
+     * @throws InterruptedException 
+     */
+    public void clearpieces() throws InterruptedException {
+    	wt.waitToClick(enterpc, 5);
+    	driver.findElement(enterpc).sendKeys(Keys.BACK_SPACE);
+    	//driver.findElement(enterpc).clear();
+    	//driver.findElement(enterpc).clear();
+    	driver.findElement(enterpc).sendKeys(Keys.BACK_SPACE);
+    	Thread.sleep(500);
+    }
+    
     /** Simple save click */
     public void saveBtn() {
         safeClick(save);
     }
+    
+    /**
+     * This method used to do QA for mail order
+     */
+    public void positiveSave() {
+    	safeClick(markasreceivedqty);
+    	saveBtn();
+    }
 
     /** Main QA validation flow */
     public void checkValidationQA() {
+    	SoftAssert sAssert = new SoftAssert();
         if ("QA Process".equals(qaStatus()) || "QA Done".equals(qaStatus())) {
             logger.info("QA already in process or done. Skipping.");
             return;
@@ -267,13 +293,13 @@ public class InboundQAPage extends InbTruckPage {
             validateTotalPieces();
 
             if (IBPLcountList.size() > 1 && j < IBPLcountList.size() - 1) {
-                softAssert.assertEquals(qaStatus(), "QA Inprocess", "QA status mismatch for intermediate pallets");
+            	sAssert.assertEquals(qaStatus(), "QA Inprocess", "QA status mismatch for intermediate pallets");
             } else if (j == IBPLcountList.size() - 1) {
                 logger.info("Last inbound pallet processed");
-                softAssert.assertEquals(qaStatus(), "QA Done", "QA status should be 'QA Done'.");
+                sAssert.assertEquals(qaStatus(), "QA Done", "QA status should be 'QA Done'.");
             }
         }
-        softAssert.assertAll();
+        sAssert.assertAll();
     }
 
     private void clickIBPLAtIndex(int index) {
@@ -283,9 +309,11 @@ public class InboundQAPage extends InbTruckPage {
 
     /** Enter pieces > max and assert toast */
     private void validateEnterPieces() {
+    	SoftAssert sAssert = new SoftAssert();
         List<WebElement> allAddons = driver.findElements(By.xpath("//span[@class='p-inputgroup-addon']"));
         cp.waitForPopupToDisappear();
         for (WebElement addon : allAddons) {
+        	cp.waitForPopupToDisappear();
             int maxValue = Integer.parseInt(addon.getText().replace("/", "").trim());
             WebElement parentGroup = addon.findElement(By.xpath("./ancestor::div[contains(@class, 'p-inputgroup')]"));
             WebElement inputField = parentGroup.findElement(By.xpath(".//input[@placeholder='Enter pieces']"));
@@ -294,15 +322,17 @@ public class InboundQAPage extends InbTruckPage {
             clearElement(inputField);
             inputField.sendKeys(exceedValue);
 
-            softAssert.assertTrue(cp.toastMsgReceivedSuccessfully(),
+            sAssert.assertTrue(cp.toastMsgReceivedSuccessfully(),
                     "Toast message not shown when exceeding piece limit");
             logger.info("Toast msg: " + cp.captureToastMessage());
             cp.waitForPopupToDisappear();
         }
+        sAssert.assertAll();
     }
 
     /** Validate total pieces calculation after mark-as-received */
     private void validateTotalPieces() {
+    	SoftAssert sAssert = new SoftAssert();
         totalPiecesSum = 0;
         List<WebElement> GLcount = driver.findElements(glorderCounts);
         logger.info("GL orders in IBPL: " + GLcount.size());
@@ -322,7 +352,7 @@ public class InboundQAPage extends InbTruckPage {
             int sum = recPCVal + reclitPCVal;
 
             int totalPiecesValue = Integer.parseInt(totalPiecesCell.getText().trim());
-            softAssert.assertEquals(sum, totalPiecesValue, "Sum of pieces != displayed total");
+            sAssert.assertEquals(sum, totalPiecesValue, "Sum of pieces != displayed total");
 
             totalPiecesSum += totalPiecesValue;
         }
@@ -331,7 +361,7 @@ public class InboundQAPage extends InbTruckPage {
         logger.info("Toast msg is " + ToastfoQAsuccess);
         cp.waitForLoaderToDisappear();
         logger.info("Total Pieces across GLs: " + totalPiecesSum);
-        softAssert.assertAll();
+        sAssert.assertAll();
     }
 
     public String getSumofOrderPieces() {
@@ -343,7 +373,7 @@ public class InboundQAPage extends InbTruckPage {
     }
 
     public String getGLorder() {
-        GLorder = cp.getMandatoryText(By.xpath("(//tr//td[contains(text(), 'GL-')])[1]"));
+        GLorder = cp.getMandatoryText(By.xpath("(//tr//td[1])[2]"));
         return GLorder;
     }
 
@@ -371,6 +401,7 @@ public class InboundQAPage extends InbTruckPage {
 
     /** Scanning validation */
     public void checkValidationQAScanning() {
+    	SoftAssert sAssert = new SoftAssert();
         if (isQAInProgressOrDone()) {
             logger.info("QA already in process or done. Skipping method...");
             return;
@@ -441,6 +472,7 @@ public class InboundQAPage extends InbTruckPage {
     }
 
     private void processValidScan(String barcode, int rowIndex) {
+    	SoftAssert sAssert = new SoftAssert();
         String scanned = driver.findElement(By.xpath("(//*[@class='p-datatable-tbody'])[3]//tr//td")).getText().trim();
 
         sAssert.assertEquals(barcode, scanned,
@@ -456,10 +488,8 @@ public class InboundQAPage extends InbTruckPage {
 
         saveBtn();
         sAssert.assertEquals(
-                cp.captureToastMessage(),
-                ReadJsonData.getNestedValue("scanedPiecesnotmatch", "expected"),
-                ReadJsonData.getNestedValue("scanedPiecesnotmatch", "message")
-        );
+                cp.captureToastMessage(),"Scanned number of pieces does not match the received pieces.",
+                "Less enter scanned pieces message not found.");
 
         verifyScannedInfoAndCount(rowIndex, barcode);
         saveBtnWithYesbtn();
@@ -471,6 +501,7 @@ public class InboundQAPage extends InbTruckPage {
         } else {
             logger.warning("Scan success assumed, but pieces = 0.");
         }
+        sAssert.assertAll();
     }
 
     public void verifyScannedInfoAndCount(int rowIndex, String barcode) {
@@ -551,10 +582,13 @@ public class InboundQAPage extends InbTruckPage {
         cp.paginationTest(By.xpath("//*[@id='panel1bh-content']//table/tbody/tr"), 2);
     }
 
-    /** Get QA status from listing for a given order */
-    public String getOrderQAStatus(String order) {
+    /** Get QA status from listing for a given order 
+     * @throws InterruptedException */
+    public String getOrderQAStatus(String order) throws InterruptedException {
         cp.waitForLoaderToDisappear();
-        searchTruckno(order);
+        searchTruckno(order); 
+        Thread.sleep(2100);
+        cp.waitForLoaderToDisappear();
         return cp.getMandatoryText(getQAStatus);
     }
 

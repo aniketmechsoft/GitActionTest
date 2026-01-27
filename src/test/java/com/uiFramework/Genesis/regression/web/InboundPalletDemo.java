@@ -78,7 +78,7 @@ public class InboundPalletDemo extends TestBase {
 	@Test(priority = 2)
 	public void shouldPerformMergeWhenButtonClicked() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
-		ip.clickonContains();
+	//	ip.clickonContains();
 		ip.selectmulcheckBox();
 		afterCount = ip.getTotalEntriesCount(driver);
 		int diffint = afterCount - initialCount;

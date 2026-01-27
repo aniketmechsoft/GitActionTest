@@ -1,36 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Web_Test(failed)">
+  <listeners>
+    <listener class-name="com.uiFramework.Genesis.base.ExtentTestListener"/>
+  </listeners>
+  <test thread-count="5" name="regression(failed)">
     <classes>
-      <class name="org.contactManagement.regression.web.OrderTest">
+      <class name="com.uiFramework.Genesis.regression.web.OutboundPalletTest">
         <methods>
-          <include name="shouldKeepConsigneeDropdownEmptyUntilCustomerSelected"/>
-          <include name="shouldDisplayOrderFormOnCreateButtonClick"/>
-          <include name="beforeclass"/>
+          <include name="shouldUpdateOrderStatusAfterCreatingOutboundPallet"/>
           <include name="flushReport"/>
-          <include name="setupSuite"/>
-          <include name="shouldShowErrorMessagesForMandatoryFields"/>
           <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="befreclass"/>
           <include name="beforeSuite"/>
+          <include name="shouldVerifyPalletQuantityOnOutboundPallet"/>
         </methods>
-      </class> <!-- org.contactManagement.regression.web.OrderTest -->
-    </classes>
-  </test> <!-- Web_Test(failed) -->
-  <test thread-count="5" name="iOS_Test(failed)">
-    <classes>
-      <class name="org.contactManagement.regression.web.OrderTest">
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundPalletTest -->
+      <class name="com.uiFramework.Genesis.regression.web.InboundPalletTest">
         <methods>
-          <include name="setupSuite"/>
-        </methods>
-      </class> <!-- org.contactManagement.regression.web.OrderTest -->
-      <class name="org.contactManagement.regression.ios.IOSBasics">
-        <methods>
-          <include name="IOSBasicsTest"/>
+          <include name="befreclass"/>
+          <include name="shouldApplyFiltersCorrectlyOnInboundPallet" invocation-numbers="0"/>
+          <include name="flushReport"/>
           <include name="tearDown"/>
-          <include name="configureAppium"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldCheckOrderStatusAfterInoundPalletCreate"/>
         </methods>
-      </class> <!-- org.contactManagement.regression.ios.IOSBasics -->
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundPalletTest -->
+      <class name="com.uiFramework.Genesis.regression.web.UpdateTrackingTest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="befreclass"/>
+          <include name="shouldAllowUpdateWithValidData"/>
+          <include name="shouldAllowUserToUpdateMultipleRequestsAtOnce"/>
+          <include name="shouldAllowUserToDownloadExcelOfGridData"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.UpdateTrackingTest -->
+      <class name="com.uiFramework.Genesis.regression.web.ConsigneeQATest">
+        <methods>
+          <include name="shouldDisplayEditableFieldsForTrackingUpdatedRequest"/>
+          <include name="flushReport"/>
+          <include name="befreclass"/>
+          <include name="shouldAllowUserToOpenCompletedRequest"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldAllowUserToUpdatePiecesAfterConsingeeQADone"/>
+          <include name="shouldNotAllowEnteringExtraLiteratureOrderPieces"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.ConsigneeQATest -->
+      <class name="com.uiFramework.Genesis.regression.web.OrderTest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="beforeclass"/>
+          <include name="shouldShowErrorWhenSavingEmptyCustomerAccessorial"/>
+          <include name="shouldFilterOrdersByVariousFieldsSuccessfully"/>
+          <include name="setupSuite"/>
+          <include name="shouldDeleteCustomerAccessorialSuccessfully"/>
+          <include name="shouldCheckExcelDownloadedOnOrderPage"/>
+          <include name="beforeSuite"/>
+          <include name="shouldCheckPDFDownloadedOnOrderPage"/>
+          <include name="shouldShowMandatoryFieldOnSaveFiles"/>
+          <include name="shouldUploadFileAndShowSuccessToast"/>
+          <include name="shouldAllowOrderDeletionAfterConfirmation"/>
+          <include name="shouldAddEditAndDeleteCarrierAccessorialSuccessfully"/>
+          <include name="shouldNotAllowDeletionWhenOrderInPalletStage"/>
+          <include name="shouldDeleteFileSuccessfully"/>
+          <include name="tearDown"/>
+          <include name="shouldConfirmMultipleOrdersAndDisplaySuccessToast"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OrderTest -->
+      <class name="com.uiFramework.Genesis.regression.web.InboundQATest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="befreclass"/>
+          <include name="checkDefaultZeroPopulate"/>
+          <include name="checkValidationOnScanningPieces"/>
+          <include name="beforeSuite"/>
+          <include name="shouldCheckColumnFilter"/>
+          <include name="checkOrderStatusAfterInboundQAdone"/>
+          <include name="checkQAStatusforInbound"/>
+          <include name="verifyTruckDataDisplayedCorrectlyOnView"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundQATest -->
+      <class name="com.uiFramework.Genesis.regression.web.InboundTruckTest">
+        <methods>
+          <include name="shouldUpdateOrderStatusWhenTruckLoaded"/>
+          <include name="shouldApplyFiltersCorrectlyOnInboundTruck" invocation-numbers="0"/>
+          <include name="shouldUpdateOrderStatusAfterPalletLoaded"/>
+          <include name="shouldMakeRemovedPalletAvailableToAddInInboundCreateTruck"/>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="befreclass"/>
+          <include name="shouldRemovePalletFromTruckAndUpdateWeightAndEmptyStatus"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundTruckTest -->
+      <class name="com.uiFramework.Genesis.regression.web.DocQueueTest">
+        <methods>
+          <include name="shouldCreateDifferentManifestsForDifferentLDAs"/>
+          <include name="befreclass"/>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="shouldConfirmSameRequestCreatedForDifferentLDAs"/>
+          <include name="shouldConfirmDiffRequestsCreatedForDifferentLDAs"/>
+          <include name="beforeSuite"/>
+          <include name="shouldCreateDifferentOrderProcessesForSameLDA"/>
+          <include name="shouldConfirmDifferentRequestsCreatedForDifferentLDAs"/>
+          <include name="shouldCreateDifferentOrderProcessesForDifferentLDAs"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.DocQueueTest -->
+      <class name="com.uiFramework.Genesis.regression.web.OutboundQATest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldPopulateDefaultValueAsZero"/>
+          <include name="shouldAllowUserToPartialOutboundQA"/>
+          <include name="shouldCheckFisrtOrderShouldBeDisable"/>
+          <include name="befreclass"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundQATest -->
+      <class name="com.uiFramework.Genesis.regression.web.OutboundTruckTest">
+        <methods>
+          <include name="shouldUpdateRoutesInEditOutboundTruck"/>
+          <include name="shouldVerifyCostEstimateOnEditingOutboundTruck"/>
+          <include name="shouldCreateSuccessfullyAndIncreseCountByOne"/>
+          <include name="shouldRouteOrderEditable"/>
+          <include name="flushReport"/>
+          <include name="shouldNotAllowAddedPalletToCreateOutboundTruck"/>
+          <include name="shouldApplyFiltersCorrectlyOnOutboundTruck" invocation-numbers="0"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldDisplayLDACodesCorrectlyOnListing"/>
+          <include name="shouldVerifyCreatedTruckDetailsAndPalletQtyMatch"/>
+          <include name="shouldDeleteTruckAndMakeOrdersAvailableToAdd"/>
+          <include name="shouldUpdateOrderStatusAfterOrderLoadInObtTruck"/>
+          <include name="tearDown"/>
+          <include name="shouldAddPalletInEditModeWithCalculationsAndShouldUpdateStatus"/>
+          <include name="shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck"/>
+          <include name="befreclass"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundTruckTest -->
     </classes>
-  </test> <!-- iOS_Test(failed) -->
+  </test> <!-- regression(failed) -->
 </suite> <!-- Failed suite [Suite] -->

@@ -55,14 +55,15 @@ public class ReconsignmentTest extends TestBase {
 	public void shouldAbleTopickOrderAsPerRequiredStatus() throws InterruptedException, java.util.concurrent.TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		rp.getOrdersData(0, "Outbound Pallet Pending", firstUniqueText);
+		System.out.println("👉 Final Captured Status List: " + firstUniqueText);
 		rp.getOrdersData(1, "Outbound QA Pending", firstUniqueText);
 		rp.getOrdersData(2, "Consignee Delivery Schedule Pending", firstUniqueText);
-	//	System.out.println("👉 Final Captured Status List: " + firstUniqueText);
+		System.out.println("👉 Final Captured Status List: " + firstUniqueText);
 		rp.getValidationData(0, "Draft", validationOrdNo);
 		rp.getValidationData(1, "Returned", validationOrdNo);
-	//	System.out.println("👉 Final Captured Status List: " + validationOrdNo);
+		System.out.println("👉 Final Captured Status List: " + validationOrdNo);
 		rp.getTrkingValidationData(0, "Outbound Pallet Pending", trkingValidationOrdNo);
-	//	System.out.println("👉 Final Captured Status List: " + trkingValidationOrdNo);
+		System.out.println("👉 Final Captured Status List: " + trkingValidationOrdNo);
 	}
     
 	@Test(priority = 2)
@@ -129,6 +130,18 @@ public class ReconsignmentTest extends TestBase {
 		rp.reconsignToConsigneeValidation(consignee);
 		sAssert.assertEquals(rp.checkDrpDwnEleCount(), 1);
 	}
+	
+	@Test(priority = 8)
+	public void shouldselectConsignee() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		//rp.reconsignMenuWithExpand();
+		
+		rp.selectAnyConsigneeOrSkip();
+	//	consignee = rp.getOriginalConsignee();
+		//rp.reconsignToConsigneeValidation(consignee);
+		//sAssert.assertEquals(rp.checkDrpDwnEleCount(), 1);
+	}
+	
 	
 	@Test(priority = 9,alwaysRun = true, groups = {"Smoke"})
 	public void shouldShowErrorWhenSavingEmptyCustomerAccessorial() throws Throwable {

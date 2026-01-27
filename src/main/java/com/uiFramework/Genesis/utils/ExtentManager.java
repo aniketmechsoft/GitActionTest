@@ -40,7 +40,7 @@ public class ExtentManager {
         er.setSystemInfo("Platform", platformName);
         er.setSystemInfo("OS", System.getProperty("os.name"));
         er.setSystemInfo("Java Version", System.getProperty("java.version"));
-        er.setSystemInfo("Tester", "Swapnil Shingare");
+        er.setSystemInfo("Tester", "Aniket Dhanadar");
         return er;
     }
 

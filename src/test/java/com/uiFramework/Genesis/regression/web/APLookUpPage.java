@@ -44,7 +44,7 @@ public class APLookUpPage extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 2,dependsOnMethods="shouldDisplayCorrectInvoiceNumberAndAmountWhenSearchedByInvoice")
 	public void shouldDisplayInvoiceDataByInvoice() {
 		SoftAssert sAssert = new SoftAssert();
 		 colIndex = ii.getInvoiceGeneratedFor();

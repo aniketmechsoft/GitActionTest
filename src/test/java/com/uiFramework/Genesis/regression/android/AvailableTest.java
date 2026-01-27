@@ -1,11 +1,19 @@
-package com.uiFramework.Genesis.regression.android;
-
-import com.uiFramework.Genesis.base.BaseTest;
-
-public class AvailableTest extends BaseTest{
-	
+//package com.uiFramework.Genesis.regression.android;
+//
+//import org.testng.annotations.Test;
+//import org.testng.asserts.SoftAssert;
+//
+//import com.uiFramework.Genesis.android.pages.AvailablePage;
+//import com.uiFramework.Genesis.android.pages.DelieveredPage;
+//import com.uiFramework.Genesis.android.pages.LDADashboard;
+//import com.uiFramework.Genesis.android.pages.LoginPage;
+//import com.uiFramework.Genesis.android.pages.PieceCountPendingPage;
+//import com.uiFramework.Genesis.base.BaseTest;
+//
+//public class AvailableTest extends BaseTest{
+//	
 //	String number = "";
-	
+//	
 //	@Test(priority = 1)
 //	public void UserIsableToSearchLbol() throws InterruptedException {
 //	//	System.out.println("Nice.....................");
@@ -105,5 +113,5 @@ public class AvailableTest extends BaseTest{
 //		ap.clickConfirmBtn();
 //
 //	}
-
-}
+//
+//}

@@ -3,7 +3,7 @@ package com.uiFramework.Genesis.regression.ios;
 import org.testng.annotations.Test;
 
 import com.uiFramework.Genesis.base.BaseTest;
-import com.uiFramework.Genesis.ios.pages.AlertViews;
+import com.uiFramework.Genesis.ios.pages.AlertViewsOldBase;
 import com.uiFramework.Genesis.ios.pages.LoginPage;
 
 public class SignInTest extends BaseTest{	

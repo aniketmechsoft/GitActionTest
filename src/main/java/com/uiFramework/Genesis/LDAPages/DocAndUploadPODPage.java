@@ -51,6 +51,7 @@ public class DocAndUploadPODPage extends LdaQAPage{
 	private By fetchcustordernotext = By.xpath("//table/tbody/tr/td[7]");
 	private By fetchdocumentnotext = By.xpath("//table/tbody/tr/td[3]");
 	private By fetchordertext = By.xpath("//table/tbody/tr/td[4]");
+	private By refreshBtn = By.xpath("//*[@title='Click to Refresh']");
 	
 	
 	/**
@@ -109,7 +110,8 @@ public class DocAndUploadPODPage extends LdaQAPage{
 		WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(fileInputLocator));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", fileInput);
 
-		String folderPath = System.getProperty("user.dir") + "\\downloadedFiles";
+		String folderPath = System.getProperty("user.dir") + File.separator + "target"
+							+ File.separator + "downloads";
 		File folder = new File(folderPath);
 		File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".pdf"));
 
@@ -161,6 +163,14 @@ public class DocAndUploadPODPage extends LdaQAPage{
 	public void deletePOD() {
 		wt.waitToClick(deletepodbtn, 10);
 		cp.waitAndClickWithJS(Yes, 10);
+	}
+	
+	/**
+	 * This method use to click on refresh button to clear all applied filter
+	 */
+	public void clickToRefresh() {
+		wt.waitToClick(refreshBtn, 10);
+		cp.waitForLoaderToDisappear();
 	}
 	/**
 	 * This method used to search document number

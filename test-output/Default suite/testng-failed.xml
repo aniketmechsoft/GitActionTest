@@ -3,16 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.uiFramework.Genesis.regression.web.OrderTest">
+      <class name="com.uiFramework.Genesis.regression.web.ConsigneeQATest">
         <methods>
-          <include name="beforeclass"/>
+          <include name="shouldDisplayEditableFieldsForTrackingUpdatedRequest"/>
           <include name="flushReport"/>
+          <include name="befreclass"/>
           <include name="tearDown"/>
           <include name="setupSuite"/>
           <include name="beforeSuite"/>
-          <include name="shouldDisplayOrderFormOnCreateButtonClick"/>
         </methods>
-      </class> <!-- com.uiFramework.Genesis.regression.web.OrderTest -->
+      </class> <!-- com.uiFramework.Genesis.regression.web.ConsigneeQATest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

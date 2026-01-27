@@ -51,21 +51,21 @@ public class ReturnTest extends TestBase {
 
 	}
 
-//	@Test(priority = 1)
-//	public void shouldAbleTopickOrderAsPerRequiredStatus() throws InterruptedException, java.util.concurrent.TimeoutException {
-//		SoftAssert sAssert = new SoftAssert();
-////		String[] array = { "GL-9351", "GL-9313", "GL-9272" };
-//		rp.getOrdersData(0, "Outbound Pallet Pending", firstUniqueText);
-//		rp.getOrdersData(1, "Outbound QA Pending", firstUniqueText);
-//		rp.getOrdersData(2, "Consignee Delivery Schedule Pending", firstUniqueText);
-//		System.out.println("👉 Final Captured Status List: " + firstUniqueText);
-////		rp.getValidationData(0, "Draft", validationOrdNo);
-////		rp.getValidationData(1, "Reconsignment", validationOrdNo);
-////		System.out.println("👉 Final Captured Status List: " + validationOrdNo);
-////		rp.getTrkingValidationData(0, "Outbound Pallet Pending", trkingValidationOrdNo);
-////		System.out.println("👉 Final Captured Status List: " + trkingValidationOrdNo);
-////		np.outboundPalletProcess_array(array);
-//	}
+	@Test(priority = 1)
+	public void shouldAbleTopickOrderAsPerRequiredStatus() throws InterruptedException, java.util.concurrent.TimeoutException {
+		SoftAssert sAssert = new SoftAssert();
+//		String[] array = { "GL-9351", "GL-9313", "GL-9272" };
+		rp.getOrdersData(0, "Outbound Pallet Pending", firstUniqueText);
+		rp.getOrdersData(1, "Outbound QA Pending", firstUniqueText);
+		rp.getOrdersData(2, "Consignee Delivery Schedule Pending", firstUniqueText);
+		System.out.println("👉 Final Captured Status List: " + firstUniqueText);
+		rp.getValidationData(0, "Draft", validationOrdNo);
+		rp.getValidationData(1, "Reconsignment", validationOrdNo);
+	System.out.println("👉 Final Captured Status List: " + validationOrdNo);
+		rp.getTrkingValidationData(0, "Outbound Pallet Pending", trkingValidationOrdNo);
+		System.out.println("👉 Final Captured Status List: " + trkingValidationOrdNo);
+	//	np.outboundPalletProcess_array(array);
+	}
     
 	@Test(priority = 2)
 	public void SouldAbleToNavigateOnReconsignmentPage() throws TimeoutException, InterruptedException {

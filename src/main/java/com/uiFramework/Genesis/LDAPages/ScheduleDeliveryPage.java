@@ -1,5 +1,8 @@
 package com.uiFramework.Genesis.LDAPages;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -34,7 +37,9 @@ public class ScheduleDeliveryPage {
 	private By manualscheduleDelivery = By.xpath("//i[@title='Manual Schedule Delivery']");
 	private By updateschedelBtn = By.xpath("//*[@title='Click to update schedule delivery']");
 	private By enterlbolno = By.xpath("//*[@placeholder='Enter LBOL No']");
-	private By datebtn = By.xpath("(//*[@aria-label='Choose Date'])[2]");
+	private By schdatebtn = By.xpath("(//*[@aria-label='Choose Date'])[2]");
+	private By deldatebtn = By.xpath("(//*[@aria-label='Choose Date'])[3]");
+	private By delsignby = By.xpath("//*[@placeholder='Enter Delivery Signed By']");
 	private By dateSel = By.xpath("//td[@data-p-today='true']");
 	private By scheddate = By.xpath("(//*[@placeholder='Sched. Delivery Date & Time'])[2]");
 	private By acceptbtn = By.xpath("//*[@aria-label='Accept']");
@@ -89,10 +94,37 @@ public class ScheduleDeliveryPage {
 	 */
 	public void selectManualScheDate() throws InterruptedException {
 	    cp.waitForPopupToDisappear();
-	    wt.waitToClick(datebtn, 10);
+	    wt.waitToClick(schdatebtn, 10);
 	    Thread.sleep(1000);
 	    wt.waitToClick(dateSel, 10);
-	    wt.waitToClick(enterlbolno, 10);
+	    wt.waitToClick(delsignby, 10);
+	}
+	
+	/**
+	 * Selects a Delivery date using the date picker popup
+	 */
+	public void selectDeliveryDate() throws InterruptedException {
+	    cp.waitForPopupToDisappear();
+	    wt.waitToClick(deldatebtn, 10);
+	    Thread.sleep(1000);
+	    wt.waitToClick(dateSel, 10);
+	    wt.waitToClick(delsignby, 10);
+	}
+	
+	/**
+	 * This method will get text from 2nd column 
+	 * @return
+	 */
+	public String getConsigneName() {
+		return cp.getMandatoryText(By.xpath("//tbody//tr[1]//td[2]"));
+	}
+	
+	/**
+	 * This method used to enter delivery sign by
+	 */
+	public void enterDelSignBy() throws InterruptedException {
+	    cp.waitForPopupToDisappear();
+	    cp.clickAndSendKeys(delsignby, getConsigneName());
 	}
 
 	/**
@@ -235,6 +267,7 @@ public class ScheduleDeliveryPage {
 	 * @param note The note text to add.
 	 */
 	public void addNote(String note) {
+		cp.waitForPopupToDisappear();
 	    try {
 	        cp.clickAndSendKeys(addnote, note);
 	    } catch (Exception e) {
@@ -273,6 +306,62 @@ public class ScheduleDeliveryPage {
 	        return false;
 	    }
 	    return false;
+	}
+	By clicklbol =By.id("consigneeQaLBOL");
+	By sendLbol =By.xpath("//*[@placeholder='Search...']");
+	By firstoption =By.xpath("(//span[contains(., 'LBOL')])[2]");
+	//By  =By.id("DelSignByNotEmpty");
+	
+	public void searchlbolOnQApage(String lbol) throws InterruptedException {
+		wt.waitToClick(clicklbol, 10);
+		cp.clickAndSendKeys(sendLbol, lbol);
+		Thread.sleep(2000);
+		cp.waitForLoaderToDisappear();
+		wt.waitToClick(firstoption, 10);
+		cp.waitForLoaderToDisappear();
+	}
+
+	/**
+	 * This method used to check deliveru sign by from consignee QA page shoul not empty
+	 * @return
+	 */
+	public boolean isDelSignByNotEmpty() {
+	    cp.waitForLoaderToDisappear();
+	    return cp.getAttributeValue(delsignby, "value") != null
+	            && !cp.getAttributeValue(delsignby, "value").trim().isEmpty();
+	}
+	
+	By closeFilter=By.xpath("//*[@data-pc-section='closeicon']");
+	By getschedDate=By.xpath("//table/tbody/tr/td[4]");
+	/**
+	 * This method used to select filter from given argument
+	 * @param status
+	 */
+	public void selStatus(String status) {
+		cp.waitForPopupToDisappear();
+		wt.waitToClick(selectstatus, 10);
+		wt.waitToClick(By.xpath("//*[contains(normalize-space(text()), '" + status + "')]"), 10);
+		//wt.waitToClick(selfirstelement, 10);
+		wt.waitToClick(closeFilter, 10);
+	}
+	
+	/**
+	 * THis methosd used to get only date from date and time // e.g. 01/22/2026 04:10 PM 
+	 * 
+	 * @return 01/22/2026
+	 */
+	public String getScheduledDate() {
+	    String fullDateTime = cp.getMandatoryText(getschedDate); 
+	    return fullDateTime.split("\\s+")[0];
+	}
+	
+	/**
+	 * This method used to get current date from system
+	 * @return
+	 */
+	public String getCurrentDate() {
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	    return LocalDate.now(ZoneId.systemDefault()).format(formatter);
 	}
 
 

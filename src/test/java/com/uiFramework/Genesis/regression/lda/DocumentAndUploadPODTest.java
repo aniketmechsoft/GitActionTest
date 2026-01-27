@@ -109,7 +109,7 @@ public class DocumentAndUploadPODTest extends TestBase {
 	public void shouldUploadHCPODSuccessfully() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
 		dcp.clickHcpodDocMenu();
-		initialcount = lp.getTotalEntriesCount(driver);
+		initialcount = cp.getTotalEntriesCount(driver);
 		dcp.addPDFFile();
 		dcp.clickUploadBtn();
 		sAssert.assertEquals(cp.captureToastMessage(), "POD uploaded successfully.", "Not match!");
@@ -119,7 +119,7 @@ public class DocumentAndUploadPODTest extends TestBase {
 	@Test(priority = 7, dependsOnMethods = "shouldUploadHCPODSuccessfully")
 	public void shouldIncreaseCountByOneAfterPODUpload() throws Exception {
 		SoftAssert sAssert = new SoftAssert();
-		sAssert.assertNotEquals(initialcount, lp.getTotalEntriesCount(driver), "Count not increase by one");
+		sAssert.assertNotEquals(initialcount, cp.getTotalEntriesCount(driver), "Count not increase by one");
 		sAssert.assertAll();
 	}
 
@@ -130,6 +130,7 @@ public class DocumentAndUploadPODTest extends TestBase {
 		podname = dcp.getPODName();
 		driver.switchTo().window(lt.tabs.get(0));
 		dcp.openSplitPODMenu();
+		dcp.clickToRefresh();
 		sAssert.assertEquals(podname, dcp.getPODName(), "POD name not match on admin screen.");
 		sAssert.assertAll();
 	}
@@ -164,7 +165,8 @@ public class DocumentAndUploadPODTest extends TestBase {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
 		driver.switchTo().window(lt.tabs.get(0));
-		dcp.searchDocName(podname);;
+		dcp.clickToRefresh();
+		dcp.searchDocName(podname);
 		sAssert.assertTrue(cp.checkElementNorecord(), "POD should not displayed after deleted.");
 		sAssert.assertAll();
 	}
@@ -201,13 +203,13 @@ public class DocumentAndUploadPODTest extends TestBase {
 	
 	@Test(priority = 14, enabled = false)
 	public void shouldChekCloumnFilterOnDocument() throws Exception {
-		lp.checkColoumFilter("DocumentScreen");
+		cp.verifyColumnFilterForFixGrid();
 	}
 	
 	@Test(priority = 15, enabled = false)
 	public void shouldChekCloumnFilterOnHCPODUpload() throws Exception {
 		dcp.clickHcpodDocMenu();
-		lp.checkColoumFilter("HCPODupload");
+		cp.verifyColumnFilterForFixGrid();
 	}
 	
 }

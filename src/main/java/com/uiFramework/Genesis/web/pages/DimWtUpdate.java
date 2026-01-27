@@ -93,9 +93,23 @@ public class DimWtUpdate {
 	private By uploadPopupDimWt = By.xpath("//table/tbody/tr[1]/td[5]");
 	private By uploadPopupLitDimWt = By.xpath("//table/tbody/tr[1]/td[7]");
 
-	private String downloadDir = System.getProperty("user.dir") + "\\downloadedFiles";
-	private String fileName = "Dimensional Weight Format Data.xlsx";
-	private String fullFilePath = downloadDir + "\\" + fileName;
+//	private String downloadDir = System.getProperty("user.dir") + "\\downloadedFiles";
+//	private String fileName = "Dimensional Weight Format Data.xlsx";
+//	private String fullFilePath = downloadDir + "\\" + fileName;
+	
+//	private String downloadDir = System.getProperty("user.dir") + "\\downloadedFiles";
+//	private String fileName = "Dimensional Weight Format Data.xlsx";
+//	private String fullFilePath = downloadDir + "\\" + fileName;
+	
+	 // ---------- DOWNLOADS (kept your file name; added OS/browser-safe resolution) ----------
+    private final String fileName = "Dimensional Weight Format Data.xlsx";
+    private final File projectDownloadsDir =
+            new File(System.getProperty("user.dir") + File.separator + "downloadedFiles"); // your original
+    private final File targetDownloadsDir =
+            new File(System.getProperty("user.dir") + File.separator + "target" + File.separator + "downloads"); // our factory default
+    private final File homeDownloadsDir =
+            new File(System.getProperty("user.home") + File.separator + "Downloads"); // Safari default
+    private String fullFilePath = new File(targetDownloadsDir, fileName).getAbsolutePath(); // preserved field name
 
 	/* ===================== NAV ===================== */
 
@@ -180,61 +194,114 @@ public class DimWtUpdate {
 		cp.waitForPopupToDisappear();
 	}
 
-	public void selectCheckbox(int rowNum) {
-		By cb = By.xpath("//table/tbody/tr[" + rowNum + "]/td[1]//input[@type='checkbox']");
-		WebElement checkbox = waitClickable(cb, 5);
+	public void selectCheckbox(int rowNum) throws InterruptedException {
+		Thread.sleep(5000);
+		By cb = By.xpath("//table/tbody/tr[" + rowNum + "]/td[1]//input[@class='p-checkbox-input']");
+		WebElement checkbox = waitClickable(cb, 10);
 		if (!checkbox.isSelected()) checkbox.click();
 	}
 
 	public void fillInputInColumn(int rowNum, int columnIndex, String value) {
 		By input = By.xpath("//table/tbody/tr[" + rowNum + "]/td[" + columnIndex + "]/div/span/input");
-		WebElement inputField = waitClickable(input, 5);
+		WebElement inputField = waitClickable(input, 10);
 		inputField.click();
 		inputField.clear();
 		inputField.sendKeys(value);
 	}
 
-	public void fillFirstThreeRows(String value) {
-		for (int i = 1; i <= 3; i++) {
-			selectCheckbox(i);
-			fillInputInColumn(i, 9, value);
-			fillInputInColumn(i, 12, value);
-		}
+	public void fillFirstThreeRows(String value) throws InterruptedException {
+		cp.waitForLoaderToDisappear();
+		//for (int i = 1; i <= 3; i++) {	
+			Thread.sleep(10000);
+			driver.findElement(By.xpath("//table/tbody/tr[1]/td[1]//input[@class='p-checkbox-input']")).click();
+			driver.findElement(By.xpath("//table/tbody/tr[2]/td[1]//input[@class='p-checkbox-input']")).click();
+			//selectCheckbox(i);
+			fillInputInColumn(1, 9, value);
+			fillInputInColumn(1, 12, value);
+		//}
 		this.clickSaveDimWeight();
 	}
 
 	/* ===================== EXPORT / IMPORT ===================== */
 
 	public void downloadFileFormat() throws InterruptedException, FileNotFoundException {
-		// clear old exact file if present
-		File exact = new File(fullFilePath);
-		if (exact.exists()) {
-			logger.info("Old file found. Deleting: " + exact.getName());
-			exact.delete();
-		}
-
-		wt.waitToClickWithAction(exportFileDataBtn, 10);
-
-		// wait for expected name first
-		int timeoutSec = 30, waited = 0;
-		while (!new File(fullFilePath).exists() && waited < timeoutSec) {
-			Thread.sleep(1000);
-			waited++;
-		}
+//		// clear old exact file if present
+//		 deleteIfExists(new File(projectDownloadsDir, fileName));
+//	     deleteIfExists(new File(targetDownloadsDir, fileName));
+//	     deleteIfExists(new File(homeDownloadsDir, fileName));
+//		
+//		File exact = new File(fullFilePath);
+//		if (exact.exists()) {
+//			logger.info("Old file found. Deleting: " + exact.getName());
+//			exact.delete();
+//		}
+//
+//		wt.waitToClickWithAction(exportFileDataBtn, 10);
+//
+//		// wait for expected name first
+//		int timeoutSec = 30, waited = 0;
+//		while (!new File(fullFilePath).exists() && waited < timeoutSec) {
+//			Thread.sleep(1000);
+//			waited++;
+//		}
 
 		// fallback: pick most recent matching if name got "(1)" appended
-		if (!new File(fullFilePath).exists()) {
-			File recent = mostRecentMatching(new File(downloadDir), "Dimensional Weight", ".xlsx");
-			if (recent != null) {
-				fullFilePath = recent.getAbsolutePath();
-			}
-		}
+//		if (!new File(fullFilePath).exists()) {
+//			File recent = mostRecentMatching(new File(downloadDir), "Dimensional Weight", ".xlsx");
+//			if (recent != null) {
+//				fullFilePath = recent.getAbsolutePath();
+//			}
+//		}
+//
+//		if (!new File(fullFilePath).exists()) {
+//			throw new FileNotFoundException("Downloaded file not found!");
+//		}
+//		System.out.println("Downloaded: " + fullFilePath);
+		
+		 deleteIfExists(new File(projectDownloadsDir, fileName));
+	        deleteIfExists(new File(targetDownloadsDir, fileName));
+	        deleteIfExists(new File(homeDownloadsDir, fileName));
 
-		if (!new File(fullFilePath).exists()) {
-			throw new FileNotFoundException("Downloaded file not found!");
-		}
-		logger.info("Downloaded: " + fullFilePath);
+	        wt.waitToClickWithAction(exportFileDataBtn, 30);
+
+	        // wait up to 60s for a finished .xlsx to appear in any known folder
+	        File downloaded = waitForDownload(fileName, 60);
+	        if (downloaded == null) {
+	            throw new FileNotFoundException("Downloaded file not found !");
+	        }
+	        fullFilePath = downloaded.getAbsolutePath(); // preserve your field usage
+	        System.out.println("Downloaded1: " + fullFilePath);
 	}
+	
+	  private void deleteIfExists(File f) {
+	        try { if (f.exists()) f.delete(); } catch (Exception ignored) {}
+	    }
+	  
+	  private File waitForDownload(String expectedName, int timeoutSec) throws InterruptedException {
+	        String base = stripExt(expectedName).toLowerCase();
+	        long end = System.currentTimeMillis() + timeoutSec * 1000L;
+
+	        while (System.currentTimeMillis() < end) {
+	            File f = resolveLatestDownloaded(expectedName);
+	            if (f != null && stripExt(f.getName()).toLowerCase().startsWith(base)) {
+	                return f;
+	            }
+	            Thread.sleep(1000);
+	        }
+	        return null;
+	    }
+	    private boolean inProgress(File dir, File file) {
+	        // if a temp marker exists next to the target, treat as in-progress
+	        String bare = stripExt(file.getName());
+	        return new File(dir, bare + ".crdownload").exists()
+	                || new File(dir, bare + ".part").exists()
+	                || new File(dir, file.getName() + ".download").exists(); // Safari bundle during download
+	    }
+
+	 private String stripExt(String name) {
+	        int i = name.lastIndexOf('.');
+	        return i > 0 ? name.substring(0, i) : name;
+	    }
 
 	public void updateFileFormat(boolean updateTracking, boolean updateETA) throws IOException {
 		try (FileInputStream fis = new FileInputStream(fullFilePath);
@@ -290,7 +357,30 @@ public class DimWtUpdate {
 		}
 		logger.info("File updated: " + fullFilePath + " — kept first 50 rows (trimmed extras).");
 	}
-
+	
+	   private File resolveLatestDownloaded(String expectedName) {
+	        String base = stripExt(expectedName).toLowerCase();
+	        File newest = null;
+	        long newestTs = -1;
+	        for (File dir : candidateDirs()) {
+	            File[] files = dir.listFiles((d, name) ->
+	                    name.toLowerCase().endsWith(".xlsx")
+	                            && stripExt(name).toLowerCase().startsWith(base));
+	            if (files == null) continue;
+	            for (File f : files) {
+	                if (inProgress(dir, f)) continue;
+	                long ts = f.lastModified();
+	                if (ts > newestTs) {
+	                    newest = f; newestTs = ts;
+	                }
+	            }
+	        }
+	        return newest;
+	    }
+	 private File[] candidateDirs() {
+	      return new File[]{ projectDownloadsDir, targetDownloadsDir, homeDownloadsDir };
+	  }
+	 
 	public void ClickImportBtn() {
 		cp.waitForLoaderToDisappear();
 		wt.waitToClickWithAction(importDimWtBtn, 10);

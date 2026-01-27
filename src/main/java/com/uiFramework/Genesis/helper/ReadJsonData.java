@@ -18,9 +18,12 @@ public class ReadJsonData {
             throw new RuntimeException("Failed to load JSON file: " + filePath);
         }
     }
-
+    
+    
+    
     // Retrieve nested values dynamically, for handling cases where parent/child keys exist
     public static String getNestedValue(String parentKey, String childKey) {
+    	
         if (jsonData != null && jsonData.has(parentKey)) {
             JsonNode parentNode = jsonData.get(parentKey);
             if (parentNode.has(childKey)) {
@@ -31,5 +34,7 @@ public class ReadJsonData {
         } else {
             throw new RuntimeException("Parent key not found: " + parentKey);
         }
+
     }
+
 }

@@ -80,6 +80,7 @@ public class UpdateTrackingTest extends TestBase {
 	@Test(priority = 5)
 	public void shouldAllowUserToUpdateMultipleRequestsAtOnce() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
+		
 		ut.enterTrackingDetailsInLoop();
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "ETA & Tracking number is updated successfully.");
@@ -87,8 +88,9 @@ public class UpdateTrackingTest extends TestBase {
 	}
 
 	@Test(priority = 6,alwaysRun = true, groups = {"Smoke"})
-	public void shouldAllowUserToDownloadExcelOfGridData() throws FileNotFoundException, InterruptedException {
+	public void shouldAllowUserToDownloadExcelOfGridData() throws FileNotFoundException, InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
+				//ut.updteTrackMenu();
 		ut.downloadFileFormat();
 		Thread.sleep(5000);
 	}
