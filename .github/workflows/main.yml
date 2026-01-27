@@ -95,10 +95,9 @@ jobs:
         sleep 5
 
         if [ -d "target/extent-reports" ]; then
-        TIMESTAMP=$(date +%Y%m%d_%H%M%S)
         cd target
-        zip -r extent-reports-$TIMESTAMP.zip extent-reports
-        echo "Zipped report: extent-reports-$TIMESTAMP.zip"
+        zip -r extent-reports.zip extent-reports
+        echo "Zipped report: extent-reports.zip"
         else
         echo "❌ extent-reports folder not found"
         exit 1
@@ -109,4 +108,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Extent-Reports
-        path: target/extent-reports-*.zip
+        path: target/extent-reports.zip
