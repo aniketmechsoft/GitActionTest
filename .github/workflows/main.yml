@@ -70,12 +70,12 @@ jobs:
 
         {
           echo "========== TEST SUMMARY =========="
-          echo "Suite           : $SUITE"
-          echo "Total Tests     : $TOTAL"
-          echo "Skipped Tests   : $SKIPPED"
-          echo "Executed Tests  : $EFFECTIVE_TOTAL"
-          echo "Passed Tests    : $PASSED"
-          echo "Pass Percentage : $PASS_PERCENT%"
+          echo "Suite           : $SUITE" >> $GITHUB_ENV 
+          echo "Total Tests     : $TOTAL" >> $GITHUB_ENV 
+          echo "Skipped Tests   : $SKIPPED" >> $GITHUB_ENV 
+          echo "Executed Tests  : $EFFECTIVE_TOTAL" >> $GITHUB_ENV 
+          echo "Passed Tests    : $PASSED" >> $GITHUB_ENV 
+          echo "Pass Percentage : $PASS_PERCENT%" >> $GITHUB_ENV 
           echo "Threshold       : $THRESHOLD%"
           echo "================================="
         } | tee "$SUMMARY_FILE"
@@ -142,7 +142,14 @@ jobs:
 
         Status: ${{ job.status }}
 
-        $(cat target/test-summary.txt)
+         Status          : ${{ job.status }}
+         Suite           : ${{ env.SUITE }}
+
+        Total Tests     : ${{ env.TOTAL }}
+        Skipped Tests   : ${{ env.SKIPPED }}
+        Executed Tests  : ${{ env.EXECUTED }}
+        Passed Tests    : ${{ env.PASSED }}
+        Pass Percentage : ${{ env.PASS_PERCENT }}%
 
         -----------------------------
         📊 How to view detailed report
@@ -154,7 +161,7 @@ jobs:
         5. Open Web folder
         6. Open index.html
 
-        Report Link:
+        🔗Report Link:
           ${{ env.ARTIFACT_LINK }}
 
        to: aniketdhandar111@gmail.com
