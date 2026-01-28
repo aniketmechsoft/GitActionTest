@@ -120,24 +120,24 @@ jobs:
       if: always()
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        username: ${{ secrets.EMAIL_USER }}
-        password: ${{ secrets.EMAIL_PASS }}
+       server_address: smtp.gmail.com
+       server_port: 587
+       secure: false
 
-        subject: "Automation Suite – ${{ job.status }}"
+       username: ${{ secrets.EMAIL_USER }}
+       password: ${{ secrets.EMAIL_PASS }}
 
-        body: |
-          Automation Execution Summary
+       subject: "Automation Suite – ${{ job.status }}"
+
+       body: |
+        Automation Execution Summary
 
         Status: ${{ job.status }}
 
-          $(cat target/test-summary.txt)
+        $(cat target/test-summary.txt)
 
         Report Link:
           ${{ env.ARTIFACT_LINK }}
 
-        to: aniketdhandar111@gmail.com
-        from: Automation CI
-
-
+       to: aniketdhandar111@gmail.com
+       from: Automation CI
