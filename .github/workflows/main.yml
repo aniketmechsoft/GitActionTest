@@ -48,45 +48,40 @@ jobs:
           -Dmaven.test.failure.ignore=true
 
 
-    - name: Check pass percentage (exclude skipped)
+    - name: Calculate test stats (exclude skipped)
       if: always()
       run: |
-        REPORT=target/surefire-reports/testng-results.xml
-        SUMMARY_FILE=target/test-summary.txt
-        THRESHOLD=50
+       REPORT=target/surefire-reports/testng-results.xml
+       THRESHOLD=50
 
-        TOTAL=$(grep -o 'total="[0-9]*"' $REPORT | grep -o '[0-9]*')
-        PASSED=$(grep -o 'passed="[0-9]*"' $REPORT | grep -o '[0-9]*')
-        SKIPPED=$(grep -o 'skipped="[0-9]*"' $REPORT | grep -o '[0-9]*')
+       TOTAL=$(grep -o 'total="[0-9]*"' $REPORT | grep -o '[0-9]*')
+       PASSED=$(grep -o 'passed="[0-9]*"' $REPORT | grep -o '[0-9]*')
+       SKIPPED=$(grep -o 'skipped="[0-9]*"' $REPORT | grep -o '[0-9]*')
 
-        EFFECTIVE_TOTAL=$(( TOTAL - SKIPPED ))
+       EFFECTIVE_TOTAL=$(( TOTAL - SKIPPED ))
 
-        if [ "$EFFECTIVE_TOTAL" -le 0 ]; then
-          echo "❌ No executed tests. Failing pipeline."
-          exit 1
-        fi
+       if [ "$EFFECTIVE_TOTAL" -le 0 ]; then
+        echo "❌ No executed tests."
+        exit 1
+       fi
 
-        PASS_PERCENT=$(( PASSED * 100 / EFFECTIVE_TOTAL ))
+       PASS_PERCENT=$(( PASSED * 100 / EFFECTIVE_TOTAL ))
 
-        {
-          echo "========== TEST SUMMARY =========="
-          echo "Suite           : $SUITE" >> $GITHUB_ENV 
-          echo "Total Tests     : $TOTAL" >> $GITHUB_ENV 
-          echo "Skipped Tests   : $SKIPPED" >> $GITHUB_ENV 
-          echo "Executed Tests  : $EFFECTIVE_TOTAL" >> $GITHUB_ENV 
-          echo "Passed Tests    : $PASSED" >> $GITHUB_ENV 
-          echo "Pass Percentage : $PASS_PERCENT%" >> $GITHUB_ENV 
-          echo "Threshold       : $THRESHOLD%"
-          echo "================================="
-        } | tee "$SUMMARY_FILE"
+       # 👉 Export variables for next steps
+       echo "TOTAL=$TOTAL" >> $GITHUB_ENV
+       echo "PASSED=$PASSED" >> $GITHUB_ENV
+       echo "SKIPPED=$SKIPPED" >> $GITHUB_ENV
+       echo "EXECUTED=$EFFECTIVE_TOTAL" >> $GITHUB_ENV
+       echo "PASS_PERCENT=$PASS_PERCENT" >> $GITHUB_ENV
 
-        if [ "$PASS_PERCENT" -lt "$THRESHOLD" ]; then
-          echo "❌ Pass percentage below threshold. Failing pipeline."
-          exit 1
-        else
-          echo "✅ Pass percentage meets threshold."
-        fi
-     
+       echo "Pass % = $PASS_PERCENT"
+
+       if [ "$PASS_PERCENT" -lt "$THRESHOLD" ]; then
+       echo "❌ Pass percentage below threshold"
+       exit 1
+       else
+       echo "✅ Pass percentage OK"
+       fi   
 
     - name: Upload TestNG Reports
       if: always()
@@ -117,12 +112,12 @@ jobs:
       with:
         name: Extent-Reports
         path: target/extent-reports.zip
-        
-  # Artifact link
+
+     #Artifact Link 
     - name: Set Artifact Link
       if: always()
       run: |
-        echo "ARTIFACT_LINK=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+       echo "ARTIFACT_LINK=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
 
     - name: Send Automation Report Email
       if: always()
