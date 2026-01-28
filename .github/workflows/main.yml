@@ -48,8 +48,11 @@ jobs:
           -Dmaven.test.failure.ignore=true
 
     - name: Check pass percentage (exclude skipped)
+      if: always()
       run: |
         REPORT=target/surefire-reports/testng-results.xml
+        SUMMARY_FILE=target/test-summary.txt
+        THRESHOLD=50
 
         TOTAL=$(grep -o 'total="[0-9]*"' $REPORT | grep -o '[0-9]*')
         PASSED=$(grep -o 'passed="[0-9]*"' $REPORT | grep -o '[0-9]*')
@@ -73,7 +76,7 @@ jobs:
         echo "Pass Percentage : $PASS_PERCENT%"
         echo "================================="
 
-        if [ "$PASS_PERCENT" -lt 50 ]; then
+        if [ "$PASS_PERCENT" -lt "$THRESHOLD" ]; then
           echo "❌ Pass percentage below 50%. Failing pipeline."
           exit 1
         else
@@ -135,6 +138,16 @@ jobs:
         Status: ${{ job.status }}
 
         $(cat target/test-summary.txt)
+
+        -----------------------------
+        📊 How to view detailed report
+        -----------------------------
+        1. Open the link below
+        2. Go to "Artifacts"
+        3. Download the Extent Report ZIP
+        4. Extract zip
+        5. Open Web folder
+        6. Open index.html
 
         Report Link:
           ${{ env.ARTIFACT_LINK }}
