@@ -47,6 +47,7 @@ jobs:
           -DsuiteFile=src/test/resources/${SUITE}.xml \
           -Dmaven.test.failure.ignore=true
 
+
     - name: Check pass percentage (exclude skipped)
       if: always()
       run: |
@@ -67,21 +68,25 @@ jobs:
 
         PASS_PERCENT=$(( PASSED * 100 / EFFECTIVE_TOTAL ))
 
-        echo "========== TEST SUMMARY =========="
-        echo "Suite           : $SUITE"
-        echo "Total Tests     : $TOTAL"
-        echo "Skipped Tests   : $SKIPPED"
-        echo "Executed Tests  : $EFFECTIVE_TOTAL"
-        echo "Passed Tests    : $PASSED"
-        echo "Pass Percentage : $PASS_PERCENT%"
-        echo "================================="
+        {
+          echo "========== TEST SUMMARY =========="
+          echo "Suite           : $SUITE"
+          echo "Total Tests     : $TOTAL"
+          echo "Skipped Tests   : $SKIPPED"
+          echo "Executed Tests  : $EFFECTIVE_TOTAL"
+          echo "Passed Tests    : $PASSED"
+          echo "Pass Percentage : $PASS_PERCENT%"
+          echo "Threshold       : $THRESHOLD%"
+          echo "================================="
+        } | tee "$SUMMARY_FILE"
 
         if [ "$PASS_PERCENT" -lt "$THRESHOLD" ]; then
-          echo "❌ Pass percentage below 50%. Failing pipeline."
+          echo "❌ Pass percentage below threshold. Failing pipeline."
           exit 1
         else
           echo "✅ Pass percentage meets threshold."
         fi
+     
 
     - name: Upload TestNG Reports
       if: always()
