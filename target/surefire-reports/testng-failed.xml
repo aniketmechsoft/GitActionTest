@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <listeners>
+    <listener class-name="com.uiFramework.Genesis.base.ExtentTestListener"/>
+  </listeners>
+  <test thread-count="5" name="regression(failed)" verbose="0">
+    <classes>
+      <class name="com.uiFramework.Genesis.regression.web.InboundPalletTest">
+        <methods>
+          <include name="shouldApplyFiltersCorrectlyOnInboundPallet" invocation-numbers="0"/>
+          <include name="befreclass"/>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldCheckOrderStatusAfterInoundPalletCreate"/>
+          <include name="shouldVerifyPalletQuantityAndStatusForInboundPallet"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundPalletTest -->
+      <class name="com.uiFramework.Genesis.regression.web.OrderTest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="beforeclass"/>
+          <include name="tearDown"/>
+          <include name="shouldFilterOrdersByVariousFieldsSuccessfully"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldNotGenerateBarcodeWhenCheckboxIsUnchecked"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OrderTest -->
+      <class name="com.uiFramework.Genesis.regression.web.ConsigneeQATest">
+        <methods>
+          <include name="shouldDisplayEditableFieldsForTrackingUpdatedRequest"/>
+          <include name="flushReport"/>
+          <include name="befreclass"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldNotAllowEnteringExtraLiteratureOrderPieces"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.ConsigneeQATest -->
+      <class name="com.uiFramework.Genesis.regression.web.OutboundQATest">
+        <methods>
+          <include name="shouldNotAllowEnteringExtraReceivedOrderPieces"/>
+          <include name="flushReport"/>
+          <include name="shouldDisplaySelectedLDAInGrid"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldAllowUserToPartialOutboundQA"/>
+          <include name="shouldCheckFisrtOrderShouldBeDisable"/>
+          <include name="befreclass"/>
+          <include name="shouldValidateReceivedOrderPiecesWhenMarkSameQtyButtonClicked"/>
+          <include name="shouldMakeVoiceMailDateMandatory"/>
+          <include name="shouldVerifyReceivedAndVoicemailDatesAreCurrentDate"/>
+          <include name="shouldAllowUserToOpenCompletedQA"/>
+          <include name="shouldUpdateOrderStatusAfterSchedDellivery"/>
+          <include name="tearDown"/>
+          <include name="shouldDisplaySelectedManifestInGrid"/>
+          <include name="shouldUpdateOrderStatusAfterOutboundQADone"/>
+          <include name="shouldValidateLitOrderPiecesWhenMarkSameQtyButtonClicked"/>
+          <include name="shouldCheckMandateMsgIfOrderNotSelected"/>
+          <include name="shouldUpdateOrderStatusAfterPartialOutboundQADone"/>
+          <include name="shouldPopulateDefaultValueAsZero"/>
+          <include name="shouldMakeReceivedDateMandatory"/>
+          <include name="shouldNotAllowEnteringExtraLiteratureOrderPieces"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundQATest -->
+      <class name="com.uiFramework.Genesis.regression.web.InboundTruckTest">
+        <methods>
+          <include name="shouldUpdateOrderStatusWhenTruckLoaded"/>
+          <include name="shouldApplyFiltersCorrectlyOnInboundTruck" invocation-numbers="0"/>
+          <include name="shouldUpdateOrderStatusAfterPalletLoaded"/>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="befreclass"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundTruckTest -->
+      <class name="com.uiFramework.Genesis.regression.web.OutboundTruckTest">
+        <methods>
+          <include name="shouldUpdateOrderStatusAfterOrderLoadInObtTruck"/>
+          <include name="flushReport"/>
+          <include name="shouldApplyFiltersCorrectlyOnOutboundTruck" invocation-numbers="0"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="shouldDisplayTruckDetailsInEditOutboundTruckMode"/>
+          <include name="befreclass"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundTruckTest -->
+      <class name="com.uiFramework.Genesis.regression.web.UpdateTrackingTest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="beforeSuite"/>
+          <include name="befreclass"/>
+          <include name="shouldAllowUserToUpdateMultipleRequestsAtOnce"/>
+          <include name="shouldAllowUpdateWithValidData"/>
+          <include name="shouldAllowUserToDownloadExcelOfGridData"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.UpdateTrackingTest -->
+      <class name="com.uiFramework.Genesis.regression.web.InboundQATest">
+        <methods>
+          <include name="flushReport"/>
+          <include name="validateTotalPiecesinTruck"/>
+          <include name="tearDown"/>
+          <include name="befreclass"/>
+          <include name="setupSuite"/>
+          <include name="validateInboundQAscreen"/>
+          <include name="checkDefaultZeroPopulate"/>
+          <include name="beforeSuite"/>
+          <include name="checkValidationOnScanningPieces"/>
+          <include name="verifyMandatoryPiecesOnSaveBtn"/>
+          <include name="shouldCheckColumnFilter"/>
+          <include name="checkOrderStatusAfterInboundQAdone"/>
+          <include name="verifyTruckDataDisplayedCorrectlyOnView"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundQATest -->
+      <class name="com.uiFramework.Genesis.regression.web.OutboundPalletTest">
+        <methods>
+          <include name="shouldUpdateOrderStatusAfterCreatingOutboundPallet"/>
+          <include name="shouldIncludeMultipleLDAsInSinglePallet"/>
+          <include name="flushReport"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="befreclass"/>
+          <include name="beforeSuite"/>
+          <include name="shouldVerifyPalletQuantityOnOutboundPallet"/>
+          <include name="shouldPerformMergeFunctionOnOutboundPallet"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundPalletTest -->
+      <class name="com.uiFramework.Genesis.regression.web.DocQueueTest">
+        <methods>
+          <include name="shouldConfirmDifferentRequestsCreatedForDifferentConsignees"/>
+          <include name="shouldCreateDifferentManifestsForDifferentLDAs"/>
+          <include name="befreclass"/>
+          <include name="flushReport"/>
+          <include name="shouldCreateDifferentLBOLsForDifferentConsignees"/>
+          <include name="tearDown"/>
+          <include name="setupSuite"/>
+          <include name="shouldConfirmSameRequestCreatedForDifferentLDAs"/>
+          <include name="beforeSuite"/>
+          <include name="shouldConfirmDiffRequestsCreatedForDifferentLDAs"/>
+          <include name="shouldCreateDifferentOrderProcessesForSameLDA"/>
+          <include name="shouldCreateDifferentOrderProcessesForDifferentLDAs"/>
+          <include name="shouldConfirmDifferentRequestsCreatedForDifferentLDAs"/>
+        </methods>
+      </class> <!-- com.uiFramework.Genesis.regression.web.DocQueueTest -->
+    </classes>
+  </test> <!-- regression(failed) -->
+</suite> <!-- Failed suite [Suite] -->

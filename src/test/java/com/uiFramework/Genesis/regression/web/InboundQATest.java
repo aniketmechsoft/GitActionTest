@@ -130,14 +130,23 @@ public class InboundQATest extends TestBase {
 		iqa.viewButton();
 		iqa.checkValidationQAScanning();
 	}
+	
+	@Test(priority = 9, alwaysRun = true, groups = {"smoke"})
+	public void shouldCheckColumnFilter() throws InterruptedException, TimeoutException {
+		SoftAssert sAssert = new SoftAssert();
+		iqa.inboundQaMenu();
+		cp.verifyColumnFilterForFixGrid();
+		sAssert.assertAll();
+	}
 
-	@Test(priority = 9, groups = {"smoke"}, enabled = true)
+	@Test(priority = 10, groups = {"smoke"}, enabled = true)
 	public void ValidateFilterOnQAListing() throws InterruptedException, TimeoutException {
 		iqa.inboundQaMenu();
 		cp.waitForLoaderToDisappear();
 		cp.searchSection();
 		String jsonPath = System.getProperty("user.dir") + "\\src\\main\\resources\\configfile\\xpath.JSON";
-
+		
+		cp.clickClearButton(); 
 		List<Integer> indicesToSelect = Arrays.asList(55, 2, 3);
 		cp.selectMultiplePickuprByIndex(indicesToSelect);
 		cp.validateDataInGrid(7);
@@ -169,14 +178,6 @@ public class InboundQATest extends TestBase {
 
 	}
 
-	@Test(priority = 10, alwaysRun = true, groups = {"smoke"})
-	public void shouldCheckColumnFilter() throws InterruptedException, TimeoutException {
-		SoftAssert sAssert = new SoftAssert();
-		iqa.inboundQaMenu();
-		cp.verifyColumnFilterForFixGrid();
-		sAssert.assertAll();
-	}
-
 //	@Test(priority = 11, groups = "smoke")
 //	public void checkPagination() throws TimeoutException, InterruptedException {
 //		iqa.inboundQaMenu();
@@ -205,7 +206,7 @@ public class InboundQATest extends TestBase {
 		SoftAssert sAssert = new SoftAssert();
 		cp.orderpageMenulanding();
 		sAssert.assertEquals(iqa.getOrderQAStatus(it.MGLOrderno), "QA Passed", "QA Pass status not with order.");
-		sAssert.assertAll();
+		sAssert.assertAll();	
 	}
 
 	@AfterClass()

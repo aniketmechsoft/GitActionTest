@@ -3,16 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.uiFramework.Genesis.regression.web.ConsigneeQATest">
+      <class name="com.uiFramework.Genesis.regression.web.InboundPalletTest">
         <methods>
-          <include name="shouldDisplayEditableFieldsForTrackingUpdatedRequest"/>
-          <include name="flushReport"/>
           <include name="befreclass"/>
+          <include name="flushReport"/>
           <include name="tearDown"/>
           <include name="setupSuite"/>
           <include name="beforeSuite"/>
+          <include name="shouldCheckOrderStatusAfterInoundPalletCreate"/>
+          <include name="shouldVerifyPalletQuantityAndStatusForInboundPallet"/>
         </methods>
-      </class> <!-- com.uiFramework.Genesis.regression.web.ConsigneeQATest -->
+      </class> <!-- com.uiFramework.Genesis.regression.web.InboundPalletTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

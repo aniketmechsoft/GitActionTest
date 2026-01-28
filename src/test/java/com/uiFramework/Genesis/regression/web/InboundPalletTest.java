@@ -22,6 +22,7 @@ import com.uiFramework.Genesis.web.pages.DataRepo;
 import com.uiFramework.Genesis.web.pages.InbTruckPage;
 import com.uiFramework.Genesis.web.pages.InboundPalletPage;
 import com.uiFramework.Genesis.web.pages.OrderPage;
+import com.uiFramework.Genesis.web.pages.productionPage;
 
 public class InboundPalletTest extends TestBase {
 	InbTruckPage it = null;
@@ -34,6 +35,7 @@ public class InboundPalletTest extends TestBase {
 	String inboundPallet;
 	String GLorder;
 	SoftAssert sAssert = new SoftAssert();
+	productionPage pr=null;
 	private static final Logger logger = Logger.getLogger(InboundPalletTest.class.getName());
 
 	@DataProvider
@@ -51,6 +53,7 @@ public class InboundPalletTest extends TestBase {
 		ip = new InboundPalletPage(driver);
 		cp = new CommonPage(driver);
 		it = new InbTruckPage(driver);
+		pr = new productionPage(driver);
 	//	driver.navigate().refresh();
 
 	}
@@ -233,49 +236,31 @@ public class InboundPalletTest extends TestBase {
 		cp.searchSection();
 		cp.clickClearButton();
 		String jsonPath = System.getProperty("user.dir") + "\\src\\main\\resources\\configfile\\xpath.JSON";
-
-		List<Integer> indicesToSelect = Arrays.asList(55, 2, 3);
+		
+		List<Integer> indicesToSelect = Arrays.asList(2, 21, 23);
 		cp.selectMultiplePickuprByIndex(indicesToSelect);
-		cp.validateDataInGrid(17);
+		cp.validateDataInGridForScroll(15);
 
-		List<Integer> indicesToSelect1 = Arrays.asList(2, 1, 3);
+		List<Integer> indicesToSelect1 = Arrays.asList(1, 3, 5);
 		cp.selectMultipleDropByIndex(indicesToSelect1);
-		cp.validateDataInGrid(18);
+		cp.validateDataInGridForScrollForDropLoc(16);
+		
+		cp.pickFrom();
 		List<Integer> indicesToSelect2 = Arrays.asList(4, 3);
-		ip.selectMultiplestatusByIndex(indicesToSelect2);
-		cp.validateDataInGrid(15);
+		pr.selectMultiplestatusByIndex(indicesToSelect2);
+		cp.validateDataInGridForScroll(13);
+		
 		ip.searchAndValidateTruckNo();
 		ip.searchAndValidatePalletNo();
 		Map<String, String> customerOrderMap = CommonMethods.getXPathSet("inboundCustomerOrderNo", jsonPath);
 		cp.extractInputFromIconSearchVerify(customerOrderMap);
 		Map<String, String> inboundOrderNomap = CommonMethods.getXPathSet("inboundOrderNo", jsonPath);
 		cp.extractInputFromIconSearchVerify(inboundOrderNomap);
-		cp.searchAndValidateDateByColumn(10);
-		cp.searchAndValidateToDateByColumn(10);
+		cp.searchAndValidateDateByColumn(8);
+		cp.searchAndValidateToDateByColumn(8);
 		cp.pickFrom();
 
 	}
-
-//	@Test(priority = 16, groups = "smoke")
-//	public void shouldCheckPaginationOnInboundPallet() throws TimeoutException, InterruptedException {
-//		ip.inboundMenu();
-//		ip.paginationOnListing();
-//
-//	}
-
-//	@Test(priority = 17)
-//	public void shouldCheckPaginationOnCreateInboundPallet() throws TimeoutException, InterruptedException {
-//		ip.inboundMenu();
-//		ip.createPallet();
-//		ip.paginationOnCeatePallet();
-//	}
-//
-//	@Test(priority = 18, groups = "smoke", enabled = false)
-//	public void shouldApplyColumnFiltersOnInboundPallet() throws InterruptedException, IOException, TimeoutException {
-//		ip.inboundMenu();
-//		ip.checkColoumFilter();
-//
-//	}
 	
 	@Test(priority = 13, alwaysRun = true, groups = {"smoke"})
 	public void shouldCheckColumnFilter() throws InterruptedException, TimeoutException {

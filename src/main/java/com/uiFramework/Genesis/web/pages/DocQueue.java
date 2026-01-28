@@ -269,6 +269,7 @@ public class DocQueue {
 	 */
 	   public int ExtrNoCntFrmGenertrPge(WebDriver driver) {
 	        cp.waitForLoaderToDisappear();
+	        cp.waitForPopupToDisappear();
 
 	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 

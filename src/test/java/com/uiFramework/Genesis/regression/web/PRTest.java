@@ -31,7 +31,7 @@ public class PRTest extends TestBase {
 		opp = new OutboundPalletPage(driver);
 	}
 	
-	@Test(priority = 1, alwaysRun = true, groups = {"smoke"})
+	@Test(priority = 1, alwaysRun = true, groups = {"smoke1"})
 	public void shouldNotDisplayedToastafterLogIn() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		driver.manage().window().maximize();
@@ -40,7 +40,7 @@ public class PRTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 2, alwaysRun = true, groups = {"smoke"})
+	@Test(priority = 2, alwaysRun = true, groups = {"smoke1"})
 	public void shouldNotDisplayedToastOnCreateOrderBtn() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		System.out.println("smoke 2");
@@ -49,7 +49,7 @@ public class PRTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 3, alwaysRun = true, groups = {"smoke"})
+	@Test(priority = 3, alwaysRun = true, groups = {"smoke1"})
 	public void shouldDisplayErrorForMandatoryFields() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		System.out.println("smoke 3");
@@ -285,15 +285,15 @@ public class PRTest extends TestBase {
 //		sAssert.assertAll();
 //	}
 //	
-//	@Test(priority = 24, alwaysRun = true, groups = {"smoke"})
-//	public void shouldCheckPickFromAndStatusFromInboundPallet() throws InterruptedException {
-//		SoftAssert sAssert = new SoftAssert();
-//		cp.pickFrom();
-//		List<Integer> indicesToSelect2 = Arrays.asList(4, 3);
-//		pr.selectMultiplestatusByIndex(indicesToSelect2);
-//		cp.validateDataInGridForScroll(13);
-//		sAssert.assertAll();
-//	}
+	@Test(priority = 24, alwaysRun = true, groups = {"smoke"})
+	public void shouldCheckPickFromAndStatusFromInboundPallet() throws InterruptedException {
+		SoftAssert sAssert = new SoftAssert();
+		cp.pickFrom();
+		List<Integer> indicesToSelect2 = Arrays.asList(4, 3);
+		pr.selectMultiplestatusByIndex(indicesToSelect2);
+		cp.validateDataInGridForScroll(13);
+		sAssert.assertAll();
+	}
 //	
 //	@Test(priority = 25, alwaysRun = true, groups = {"smoke"})
 //	public void shouldCheckColumnFilterOnInboundPalletListing() throws InterruptedException {

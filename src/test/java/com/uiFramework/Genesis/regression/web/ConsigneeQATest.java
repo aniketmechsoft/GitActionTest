@@ -59,7 +59,6 @@ public class ConsigneeQATest extends TestBase {
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "Received order quantity can not be greater than actual order quantity.");
 		sAssert.assertAll();
-
 	}
 
 	@Test(priority = 3, dependsOnMethods="shouldDisplayEditableFieldsForTrackingUpdatedRequest")
@@ -70,7 +69,6 @@ public class ConsigneeQATest extends TestBase {
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "Received Literature quantity can not be greater than actual order quantity.");
 		sAssert.assertAll();
-
 	}
 	
 	@Test(priority = 4,alwaysRun = true, groups = {"smoke"}, dependsOnMethods="shouldDisplayEditableFieldsForTrackingUpdatedRequest")

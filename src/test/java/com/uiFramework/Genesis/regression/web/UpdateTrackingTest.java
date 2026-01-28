@@ -131,7 +131,7 @@ public class UpdateTrackingTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 10, alwaysRun = true, groups = {"Smoke"}, dependsOnMethods = "shouldAllowUserToDownloadExcelOfGridData")
+	@Test(priority = 10, groups = {"Smoke"}, dependsOnMethods = "shouldAllowUserToDownloadExcelOfGridData")
 	public void shouldAllowUpdateWithValidData() throws InterruptedException, IOException {
 		SoftAssert sAssert = new SoftAssert();
 		ut.updateFileFormat(true, true);

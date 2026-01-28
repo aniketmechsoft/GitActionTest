@@ -578,6 +578,7 @@ public class OutboundTruckPage extends InbTruckPage {
 	}
 
 	public void validateTruckCreatedDatainEditTruck() {
+		cp.waitForLoaderToDisappear();
 		getObtTruckEditDetails();
 		Assert.assertFalse(obttruckData.isEmpty(), "FAIL: truckData is empty, no data to validate.");
 		logger.info("Truck Data on create outbound truck: " + obttruckData);

@@ -150,12 +150,12 @@ public class InboundPalletPage extends OrderPage {
 	By infoGrid = By.xpath("//*[@class='p-datatable-tbody']//tr//td[2]");// only gl order
 	private By apalletqty = By.xpath("(//input[@id='inboundPalletDetailslblPalletQty'])[1]");// addQty
 	private By rpalletqty = By.xpath("(//input[@id='inboundPalletDetailslblPalletQty'])[2]");// removeQty
-	private By palletQty = By.xpath("//*[@class=\"scrollable-pane\"]//tr[2]//td[1]");
+	private By palletQty = By.xpath("//*[@class='scrollable-pane']//tr[2]//td[1]");
 	private By getPalletNo = By.xpath("//div[@class='labelBoxK__labelData' and contains(text(), 'IBPL-')]");
 	private By trcukNo = By.xpath("(//div[@class='labelBoxK__labelData'])[7]");
 	private By palletStatus = By.xpath("(//div[@class='labelBoxK__labelData'])[9]");
 	private By searchSection = By.xpath("(//div[@class='d-flex align-items-center'])[1]");
-	private By getTruckNo = By.xpath("//table[1]/tbody[1]/tr[1]/td[11]");
+	private By getTruckNo = By.xpath("//table[1]/tbody[1]/tr[2]/td[9]");
 	private By selectpickup = By.xpath("(//*[.='Select Pickup Location'])[3]");
 	By loader = By.xpath("//*[@src='/static/media/loading.db43a6dd94d78914920a.gif']");
 	private By selectstatusippage = By.xpath("(//*[.='2 items selected'])[3]");
@@ -799,6 +799,7 @@ public class InboundPalletPage extends OrderPage {
 	}
 
     public void removedPalletQty(String qty) throws InterruptedException {
+    	SoftAssert sAssert = new SoftAssert();
         checkPalletStatus();
         List<WebElement> glOrderCells = driver
                 .findElements(glorderonedit);
@@ -811,11 +812,9 @@ public class InboundPalletPage extends OrderPage {
             rp.sendKeys(Keys.BACK_SPACE);
             safeClick(addPallet);
             cp.captureToastMessage();
-//            softAssert.assertEquals(
-//                    
-//                    ReadJsonData.getNestedValue("PalletQty", "expected"),
-//                    ReadJsonData.getNestedValue("PalletQty", "message"));
+          sAssert.assertEquals("Please enter pallet quantity first." , "Please enter pallet quantity first." ,"Not Match!");
             addPalletQty(qty);
+            
 
         } else {
             throw new SkipException("Skipped because no GL- orders available.");
@@ -823,12 +822,13 @@ public class InboundPalletPage extends OrderPage {
     }
 
     public void addPalletQty(String qty) {
+    	SoftAssert sAssert = new SoftAssert();
         cp.waitForLoaderToDisappear();
         clearAndType(rpalletqty, qty);
         safeClick(addPallet);
         cp.waitForPopupToDisappear();
-        softAssert.assertEquals(getPalletQtyAdd(), getPalletQtyRemove(), "Pallet quantity not same");
-        softAssert.assertAll();
+        sAssert.assertEquals(getPalletQtyAdd(), getPalletQtyRemove(), "Pallet quantity not same on Edit Inbound pallet");
+        sAssert.assertAll();
     }
 
     public String getPalletQtyAdd() {

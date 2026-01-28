@@ -228,8 +228,11 @@ public class ConsigneeQA {
 
 	/**
 	 * Updates extra literature pieces on first row (adds num).
+	 * @throws InterruptedException 
 	 */
-	public void RecOrdExtraLitrEntr(int num) {
+	public void RecOrdExtraLitrEntr(int num) throws InterruptedException {
+		Thread.sleep(1000);
+		cp.waitForPopupToDisappear();
 		try {
 			List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr"));
 			if (rows.isEmpty()) return;

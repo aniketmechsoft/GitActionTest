@@ -56,8 +56,14 @@ public class BrowserFactory extends SafariDriverFactory{
 
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
-        options.addArguments("--window-size=1366,768");
+//        options.addArguments("--window-size=1366,768");
+//        options.addArguments("--disable-popup-blocking");
+//        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--headless=new");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-popup-blocking");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
 
         if (isLinux() || headless()) {

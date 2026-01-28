@@ -15,6 +15,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.SkipException;
 
 import com.uiFramework.Genesis.common.CommonMethods;
 import com.uiFramework.Genesis.helper.WaitHelper;
@@ -274,9 +275,14 @@ public class UpdateTracking {
     public void enterTrackingDetailsInLoop() throws InterruptedException {
         cp.waitForLoaderToDisappear();
         List<WebElement> items = getTableRows();
-
+        
         for (int i = 0; i < 5 && i < items.size(); i++) {
-            WebElement row = items.get(i);
+        	
+        	if (items.isEmpty()) {
+                throw new SkipException("No rows found in table. Skipping test.");
+            }
+        	
+            WebElement row = items.get(i);  
             row.click();
 
             String value = generateValue(i);

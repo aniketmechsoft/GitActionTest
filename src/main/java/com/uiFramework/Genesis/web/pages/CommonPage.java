@@ -1105,7 +1105,7 @@ public class CommonPage {
 	 */
 	public void searchAndValidateDateByColumn(int columnIndex) throws InterruptedException {
 		clickClearButton();
-		searchAndValidate(By.xpath(String.format("//*[@id='panel1bh-content']//table/tbody/tr[1]/td[%d]", columnIndex)),
+		searchAndValidate(By.xpath(String.format("//*[@id='panel1bh-content']//table/tbody/tr[2]/td[%d]", columnIndex)),
 				fromdate, "From Date");
 	}
 	

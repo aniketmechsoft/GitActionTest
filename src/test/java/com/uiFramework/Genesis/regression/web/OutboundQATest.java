@@ -88,7 +88,7 @@ public class OutboundQATest extends TestBase {
 
 	}
 	
-	@Test(priority = 4)
+	@Test(priority = 4, dependsOnMethods="shouldCheckMandateMsgIfOrderNotSelected")
 	public void shouldNotAllowEnteringExtraReceivedOrderPieces() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
@@ -96,17 +96,17 @@ public class OutboundQATest extends TestBase {
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "Received order quantity can not be greater than actual order quantity while do Outbound QA.");
 		sAssert.assertAll();
-
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 5,dependsOnMethods="shouldCheckMandateMsgIfOrderNotSelected")
 	public void shouldPopulateDefaultValueAsZero() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
 		sAssert.assertEquals(oqa.checkThatLitQtyDefaultZero(), 0, "Lit pieces not popuplate zero.");
+		sAssert.assertAll();
 	}
 	
-	@Test(priority = 6)
+	@Test(priority = 6,dependsOnMethods="shouldNotAllowEnteringExtraReceivedOrderPieces")
 	public void shouldNotAllowEnteringExtraLiteratureOrderPieces() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.waitForPopupToDisappear();
@@ -114,10 +114,9 @@ public class OutboundQATest extends TestBase {
 		boolean flag = cp.toastMsgReceivedSuccessfully();
 		sAssert.assertTrue(flag, "Received Literature quantity can not be greater than actual order quantity while do Outbound QA.");
 		sAssert.assertAll();
-
 	}
 	
-	@Test(priority = 7, alwaysRun = true)
+	@Test(priority = 7,alwaysRun = true,dependsOnMethods="shouldNotAllowEnteringExtraLiteratureOrderPieces")
 	public void shouldValidateReceivedOrderPiecesWhenMarkSameQtyButtonClicked() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.markSameQty();
@@ -127,7 +126,7 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 8)
+	@Test(priority = 8, dependsOnMethods="shouldValidateReceivedOrderPiecesWhenMarkSameQtyButtonClicked")
 	public void shouldValidateLitOrderPiecesWhenMarkSameQtyButtonClicked() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		initialCount = oqa.GetLitRecVal();
@@ -136,30 +135,28 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 9)
+	@Test(priority = 9, dependsOnMethods="shouldValidateLitOrderPiecesWhenMarkSameQtyButtonClicked")
 	public void shouldDisplaySelectedLDAInGrid() {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertEquals(oqa.getLDAfromGrid(), oqa.getLDAfromDropdown(), "LDA not match i mnifest Details Section");
 		sAssert.assertAll();
-		
 	}
-	@Test(priority = 10)
+	
+	@Test(priority = 10, dependsOnMethods="shouldDisplaySelectedLDAInGrid")
 	public void shouldDisplaySelectedManifestInGrid() {
 		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertEquals(oqa.getManifestfromGrid(), oqa.getManifestNofromDropdown(), "Manifest Number not match in Manifest Details");
 		sAssert.assertAll();
-		
 	}
 	
-	@Test(priority = 11)
+	@Test(priority = 11, dependsOnMethods="shouldDisplaySelectedManifestInGrid")
 	public void shouldDisplayCorrectTotalPiecesCount() {
-		SoftAssert sAssert = new SoftAssert();	
+		SoftAssert sAssert = new SoftAssert();
 		sAssert.assertEquals(oqa.getTotalPiecesfromGrid(), oqa.getSumofOrderPiecesNo(), "Total Pieces count not match with sum of the Order Pieces.");
-		sAssert.assertAll();
-		
+		sAssert.assertAll();	
 	}
 	
-	@Test(priority = 12)
+	@Test(priority = 12, dependsOnMethods="shouldDisplayCorrectTotalPiecesCount")
 	public void shouldMakeReceivedDateMandatory() {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.selectFirstcheckbox();
@@ -169,7 +166,7 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 13)
+	@Test(priority = 13, dependsOnMethods="shouldMakeReceivedDateMandatory")
 	public void shouldMakeVoiceMailDateMandatory() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.ReceivedDateSelection();
@@ -179,7 +176,7 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();	
 	}
 	
-	@Test(priority = 14)
+	@Test(priority = 14, dependsOnMethods="shouldMakeVoiceMailDateMandatory")
 	public void shouldVerifyReceivedAndVoicemailDatesAreCurrentDate() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.voiceMailDateSelection();
@@ -203,7 +200,7 @@ public class OutboundQATest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-    @Test(priority = 16)
+    @Test(priority = 16, dependsOnMethods="shouldAllowUserToPartialOutboundQA")
 	public void shouldUpdateOrderStatusAfterPartialOutboundQADone() throws InterruptedException {
     	SoftAssert sAssert = new SoftAssert();
 		oqa.orderpageMenulanding();

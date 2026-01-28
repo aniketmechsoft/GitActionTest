@@ -1026,6 +1026,7 @@ public class InbTruckPage extends InboundPalletPage {
 			logger.info("Adding pallet in empty truck :: " + cp.getMandatoryText(getIbplfromedit));
 			safeClick(addPallets);
 			cp.captureToastMessage();
+			cp.waitForLoaderToDisappear();
 		} else {
 			logger.info("Pallets not available to Add in Truck");
 		}
@@ -1034,7 +1035,7 @@ public class InbTruckPage extends InboundPalletPage {
 	/** Get GL order number from info popups 
 	 * @throws InterruptedException */
 	public String getOrderno() throws InterruptedException {
-		cp.waitForLoaderToDisappear();	
+		cp.waitForLoaderToDisappear();
 		try {
 			WebElement orderinfo = driver
 					.findElement(By.xpath("(//div[@title='Click to see pallets present in truck'])[1]"));

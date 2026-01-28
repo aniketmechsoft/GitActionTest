@@ -271,19 +271,36 @@ public class InboundTruckTest extends TestBase {
 
 		List<Integer> indicesToSelect = Arrays.asList(55, 2, 3);
 		cp.selectMultiplePickuprByIndex(indicesToSelect);
-		cp.validateDataInGrid(10);
-
-		List<Integer> indicesToSelect1 = Arrays.asList(1, 2, 3);
+		cp.validateDataInGridForScroll(8);
+		
+//		List<Integer> indicesToSelect = Arrays.asList(55, 2, 3);
+//		cp.selectMultiplePickuprByIndex(indicesToSelect);
+//		cp.validateDataInGrid(10);
+		
+		List<Integer> indicesToSelect1 = Arrays.asList(2,3,5);
 		cp.selectMultipleDropByIndex(indicesToSelect1);
-		cp.validateDataInGrid(11);
+		cp.validateDataInGridForScroll(9);
+
+//		List<Integer> indicesToSelect1 = Arrays.asList(1, 2, 3);
+//		cp.selectMultipleDropByIndex(indicesToSelect1);
+//		cp.validateDataInGrid(11);
 
 		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
 		cp.selectMultipleLTLByIndex(indicesToSelect2);
-		cp.validateDataInGrid(6);
-
+		cp.validateDataInGridForScroll(4);
+		
+//		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
+//		cp.selectMultipleLTLByIndex(indicesToSelect2);
+//		cp.validateDataInGrid(6);
+		
+		cp.clickClearButton();
 		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
 		cp.selectMultiplestatusByIndex(indicesToSelect3);
-		cp.validateDataInGrid(8);
+		cp.validateDataInGridForScroll(6);
+
+//		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
+//		cp.selectMultiplestatusByIndex(indicesToSelect3);
+//		cp.validateDataInGrid(8);
 
 		it.searchAndValidateTruckNo();
 		it.searchAndValidateTruckName();
@@ -294,8 +311,8 @@ public class InboundTruckTest extends TestBase {
 		Map<String, String> inboundOrderNomap = CommonMethods.getXPathSet("inboundTruckOrderNo", jsonPath);
 		cp.extractInputFromIconSearchVerifyTwoIcons(inboundOrderNomap);
 
-		cp.searchAndValidateDateByColumn(7);
-		cp.searchAndValidateToDateByColumn(7);
+		cp.searchAndValidateDateByColumn(5);
+		cp.searchAndValidateToDateByColumn(5);
 		cp.pickFrom();
 	}
 
@@ -318,19 +335,6 @@ public class InboundTruckTest extends TestBase {
 		cp.verifyColumnFilter("scrollable-pane");
 		sAssert.assertAll();
 	}
-
-//	@Test(priority = 22, groups = "smoke")
-//	public void shouldCheckPaginationOnInboundTruckListing() throws TimeoutException, InterruptedException {
-//		it.truckMenu();
-//		it.paginationOnListing();
-//	}
-
-//	@Test(priority = 23, groups = "smoke")
-//	public void shouldCheckPaginationOnInboundCreateTruck() throws TimeoutException, InterruptedException {
-//		it.truckMenu();
-//		it.createTruck();
-//		it.paginationOnCreateTruck();
-//	}
 	
 	@Test(priority = 24, groups = {"smoke"})
 	public void shouldCheckMandateFiledForImportTruck() throws TimeoutException, InterruptedException {

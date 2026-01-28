@@ -341,21 +341,14 @@ public class OutboundTruckTest extends TestBase {
 		cp.clickClearButton();
 		String jsonPath = System.getProperty("user.dir") + "\\src\\main\\resources\\configfile\\xpath.JSON";
 
-//		List<Integer> indicesToSelect = Arrays.asList(1);
-//		cp.selectMultiplePickuprByIndex(indicesToSelect);
-//		cp.validateDataInGrid(12);
-//
-//		List<Integer> indicesToSelect1 = Arrays.asList(1, 2, 3);
-//		cp.selectMultipleDropByIndex(indicesToSelect1);
-//		cp.validateDataInGrid(11);//same for outbound Pallet
+		
+		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
+		cp.selectMultiplestatusByIndex(indicesToSelect3);
+		cp.validateDataInGridForScroll(7);
 
 		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
 		cp.selectMultipleLTLByIndex(indicesToSelect2);
-		cp.validateDataInGrid(5);
-
-		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
-		cp.selectMultiplestatusByIndex(indicesToSelect3);
-		cp.validateDataInGrid(10);
+		cp.validateDataInGridForScroll(5);
 
 		obt.searchAndValidateTruckNo();
 		obt.searchAndValidateTruckName();
@@ -366,8 +359,8 @@ public class OutboundTruckTest extends TestBase {
 		Map<String, String> inboundOrderNomap = CommonMethods.getXPathSet("inboundTruckOrderNo", jsonPath);
 		cp.extractInputFromIconSearchVerifyTwoIcons(inboundOrderNomap);
 
-		cp.searchAndValidateDateByColumn(9);
-		cp.searchAndValidateToDateByColumn(9);
+		cp.searchAndValidateDateByColumn(6);
+		cp.searchAndValidateToDateByColumn(6);
 		cp.pickFrom();
 	}
 

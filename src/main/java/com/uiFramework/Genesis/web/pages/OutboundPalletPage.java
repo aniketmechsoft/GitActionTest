@@ -668,16 +668,21 @@ public class OutboundPalletPage extends InboundPalletPage {
 		cp.waitForLoaderToDisappear();
 		driver.findElement(rpalletqty).sendKeys(qty);
 		driver.findElement(addorders).click();
+		
 		try {
-			cp.waitAndClickWithJS(yes2, 4);//
+			cp.waitAndClickWithJS(yes2, 4);
 			cp.waitAndClickWithJS(yesBtn, 4);
 		} catch (Exception e) {
-			cp.waitForLoaderToDisappear();
-			cp.waitAndClickWithJS(yesBtn, 4);
-			// ignore
+			cp.waitForLoaderToDisappear();	
+			//cp.waitAndClickWithJS(yesBtn, 4);	// ignore
+		}	
+		try {
+			cp.waitAndClickWithJS(yesBtn, 4); //click of pop up presend 
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		cp.waitForPopupToDisappear();
-		sAssert.assertEquals(getPalletQtyAdd(), getPalletQtyRemove(), "Pallet quantity not same");
+		sAssert.assertEquals(getPalletQtyAdd(), getPalletQtyRemove(), "Pallet quantity not same on outbound pallet");
 	}
 
 	public String getPalletQtyAdd() {

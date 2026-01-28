@@ -132,7 +132,6 @@ public class DocQueueTest extends TestBase {
 	@Test(priority = 13, alwaysRun = true)
 	public void shouldCreateDifferentOrderProcessesForDifferentLDAs() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
-			//dc.docQueueMenu();
 		initialCount = dc.ExtrNoCntFrmGenertrPge(driver);
 		dc.ClickDocGen();
 		dc.clickReconsinmntBtn();

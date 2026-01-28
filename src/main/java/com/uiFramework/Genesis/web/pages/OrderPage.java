@@ -953,8 +953,10 @@ public class OrderPage {
 		cp.waitForLoaderToDisappear();
 	}
 
+	By barcode=By.xpath("(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[1]");
 	public void untickBarcodeGenertion() {
-		driver.findElement(By.xpath("(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[1]")).click();
+		safeClick(barcode);
+		//driver.findElement(By.xpath("(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[1]")).click();
 		logger.info("barcode untick for order no." + cp.getMandatoryText(By.xpath("//table/tbody/tr/td[4]")));
 	}
 
