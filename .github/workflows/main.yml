@@ -10,11 +10,11 @@ on:
       suite:
         description: "Select Test Suite"
         required: true
-        default: smoke
+        default: smoke1
         type: choice
         options:
-          - smoke
-          - regression
+          - smoke1
+          - regression1
           - sanity
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
     - name: Decide Suite
       run: |
         if [ "${{ github.event_name }}" = "push" ]; then
-          echo "SUITE=regression" >> $GITHUB_ENV
+          echo "SUITE=regression1" >> $GITHUB_ENV
         else
           echo "SUITE=${{ github.event.inputs.suite }}" >> $GITHUB_ENV
         fi
@@ -47,38 +47,41 @@ jobs:
           -DsuiteFile=src/test/resources/${SUITE}.xml \
           -Dmaven.test.failure.ignore=true
 
-    - name: Check pass percentage (exclude skipped)
+
+    - name: Calculate test stats (exclude skipped)
+      if: always()
       run: |
-        REPORT=target/surefire-reports/testng-results.xml
+       REPORT=target/surefire-reports/testng-results.xml
+       THRESHOLD=50
 
-        TOTAL=$(grep -o 'total="[0-9]*"' $REPORT | grep -o '[0-9]*')
-        PASSED=$(grep -o 'passed="[0-9]*"' $REPORT | grep -o '[0-9]*')
-        SKIPPED=$(grep -o 'skipped="[0-9]*"' $REPORT | grep -o '[0-9]*')
+       TOTAL=$(grep -o 'total="[0-9]*"' $REPORT | grep -o '[0-9]*')
+       PASSED=$(grep -o 'passed="[0-9]*"' $REPORT | grep -o '[0-9]*')
+       SKIPPED=$(grep -o 'skipped="[0-9]*"' $REPORT | grep -o '[0-9]*')
 
-        EFFECTIVE_TOTAL=$(( TOTAL - SKIPPED ))
+       EFFECTIVE_TOTAL=$(( TOTAL - SKIPPED ))
 
-        if [ "$EFFECTIVE_TOTAL" -le 0 ]; then
-          echo "❌ No executed tests. Failing pipeline."
-          exit 1
-        fi
+       if [ "$EFFECTIVE_TOTAL" -le 0 ]; then
+        echo "❌ No executed tests."
+        exit 1
+       fi
 
-        PASS_PERCENT=$(( PASSED * 100 / EFFECTIVE_TOTAL ))
+       PASS_PERCENT=$(( PASSED * 100 / EFFECTIVE_TOTAL ))
 
-        echo "========== TEST SUMMARY =========="
-        echo "Suite           : $SUITE"
-        echo "Total Tests     : $TOTAL"
-        echo "Skipped Tests   : $SKIPPED"
-        echo "Executed Tests  : $EFFECTIVE_TOTAL"
-        echo "Passed Tests    : $PASSED"
-        echo "Pass Percentage : $PASS_PERCENT%"
-        echo "================================="
+       # 👉 Export variables for next steps
+       echo "TOTAL=$TOTAL" >> $GITHUB_ENV
+       echo "PASSED=$PASSED" >> $GITHUB_ENV
+       echo "SKIPPED=$SKIPPED" >> $GITHUB_ENV
+       echo "EXECUTED=$EFFECTIVE_TOTAL" >> $GITHUB_ENV
+       echo "PASS_PERCENT=$PASS_PERCENT" >> $GITHUB_ENV
 
-        if [ "$PASS_PERCENT" -lt 50 ]; then
-          echo "❌ Pass percentage below 50%. Failing pipeline."
-          exit 1
-        else
-          echo "✅ Pass percentage meets threshold."
-        fi
+       echo "Pass % = $PASS_PERCENT"
+
+       if [ "$PASS_PERCENT" -lt "$THRESHOLD" ]; then
+       echo "❌ Pass percentage below threshold"
+       exit 1
+       else
+       echo "✅ Pass percentage OK"
+       fi   
 
     - name: Upload TestNG Reports
       if: always()
@@ -86,10 +89,75 @@ jobs:
       with:
         name: TestNG-Reports
         path: target/surefire-reports
+        
 
-    - name: Upload Extent Reports
+    - name: Zip Extent Reports
+      if: always()
+      run: |
+        echo "Waiting for extent report generation..."
+        sleep 5
+
+        if [ -d "target/extent-reports" ]; then
+        cd target
+        zip -r extent-reports.zip extent-reports
+        echo "Zipped report: extent-reports.zip"
+        else
+        echo "❌ extent-reports folder not found"
+        exit 1
+        fi
+
+    - name: Upload Extent Reports ZIP
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: Extent-Reports
-        path: test-output
+        path: target/extent-reports.zip
+
+     #Artifact Link 
+    - name: Set Artifact Link
+      if: always()
+      run: |
+       echo "ARTIFACT_LINK=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+
+    - name: Send Automation Report Email
+      if: always()
+      uses: dawidd6/action-send-mail@v3
+      with:
+       server_address: smtp.gmail.com
+       server_port: 587
+       secure: false
+
+       username: ${{ secrets.EMAIL_USER }}
+       password: ${{ secrets.EMAIL_PASS }}
+
+       subject: "Automation Suite – ${{ job.status }}"
+
+       body: |
+        Automation Execution Summary
+
+        Status: ${{ job.status }}
+
+         Status          : ${{ job.status }}
+         Suite           : ${{ env.SUITE }}
+
+        Total Tests     : ${{ env.TOTAL }}
+        Skipped Tests   : ${{ env.SKIPPED }}
+        Executed Tests  : ${{ env.EXECUTED }}
+        Passed Tests    : ${{ env.PASSED }}
+        Pass Percentage : ${{ env.PASS_PERCENT }}%
+
+        -----------------------------
+        📊 How to view detailed report
+        -----------------------------
+        1. Open the link below
+        2. Go to "Artifacts"
+        3. Download the Extent Report ZIP
+        4. Extract zip
+        5. Open Web folder
+        6. Open index.html
+
+        🔗Report Link:
+          ${{ env.ARTIFACT_LINK }}
+
+       to: aniketdhandar111@gmail.com
+       from: Automation CI

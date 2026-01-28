@@ -186,6 +186,7 @@
                 <suiteXmlFiles>
                     <suiteXmlFile>${suiteFile}</suiteXmlFile>
                 </suiteXmlFiles>
+<<<<<<< HEAD
 
 				<!-- Allure results output -->
                 <systemPropertyVariables>
@@ -200,3 +201,19 @@
 	
 
 </project>
+=======
+
+				<!-- Allure results output -->
+                <systemPropertyVariables>
+                    <allure.results.directory>
+                        target/allure-results
+                    </allure.results.directory>
+				</systemPropertyVariables>
+            </configuration>
+        </plugin>
+    </plugins>
+	</build>
+	
+
+</project>
+>>>>>>> beccc414627794fed6d3e7fde0392bb5dbb17df1
