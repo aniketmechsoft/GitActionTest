@@ -109,3 +109,35 @@ jobs:
       with:
         name: Extent-Reports
         path: target/extent-reports.zip
+        
+  # Artifact link
+    - name: Set Artifact Link
+      if: always()
+      run: |
+        echo "ARTIFACT_LINK=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+
+    - name: Send Automation Report Email
+      if: always()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.EMAIL_USER }}
+        password: ${{ secrets.EMAIL_PASS }}
+
+        subject: "Automation Suite – ${{ job.status }}"
+
+        body: |
+          Automation Execution Summary
+
+        Status: ${{ job.status }}
+
+          $(cat target/test-summary.txt)
+
+        Report Link:
+          ${{ env.ARTIFACT_LINK }}
+
+        to: aniketdhandar111@gmail.com
+        from: Automation CI
+
+
