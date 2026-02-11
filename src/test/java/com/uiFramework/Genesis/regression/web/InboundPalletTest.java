@@ -61,12 +61,9 @@ public class InboundPalletTest extends TestBase {
 	@Test(priority = 1,alwaysRun = true, groups = {"smoke"})
 	public void CreateInboundPalletforMainOrder() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
-		ip.inboundMenu();
-		//Thread.sleep(5000);		
-		ip.createPallet();
-		//Thread.sleep(1000);		
-		ip.searchOrder();
-		//Thread.sleep(1000);		
+		ip.inboundMenu();		
+		ip.createPallet();		
+		ip.searchOrder();		
 		sAssert.assertEquals(ip.getMGLorder(), ip.MGLOrderno, "Main Order not available to Create pallet");
 		sAssert.assertAll();
 	}
@@ -75,7 +72,7 @@ public class InboundPalletTest extends TestBase {
 	public void verifyInboundpalletCreateSuccefully() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		ip.createPalletforMorder();
-		Thread.sleep(1000);		
+		Thread.sleep(500);	
 		sAssert.assertEquals(cp.captureToastMessage(), "Pallets are created successfully.",
 				"pallet create message not found.");
 		ip.getMIBPL();
@@ -87,7 +84,7 @@ public class InboundPalletTest extends TestBase {
 	public void shouldNotMergeInboundPalletWithDifferentPickup() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		ip.inboundMenu();
-		//Thread.sleep(1000);		
+		//Thread.sleep(1000);	
 		initialCount = ip.getTotalEntriesCount(driver);
 		ip.createPallet();
 		//Thread.sleep(1000);	
@@ -112,7 +109,6 @@ public class InboundPalletTest extends TestBase {
 		String difference = String.valueOf(diffint);
 		sAssert.assertEquals(difference, DataRepo.ONE, "Entry count did not increase by 1.");
 		sAssert.assertAll();
-
 	}
 
 	@Test(priority = 5)
@@ -126,7 +122,6 @@ public class InboundPalletTest extends TestBase {
 		ip.checkRemovedOrders();
 		sAssert.assertEquals(cp.getToastMessage(), "Pallet deleted successfully.", "not matched");
 		sAssert.assertAll();
-
 	}
 
 	@Test(priority = 6, dependsOnMethods = "shouldRemoveOrdersInEditPalletAndPalletAutoDelete")
@@ -152,7 +147,6 @@ public class InboundPalletTest extends TestBase {
 		String difference = String.valueOf(diffint);
 		sAssert.assertEquals(difference, DataRepo.THREE, "Entry count did not increase by 3.");
 		sAssert.assertAll();
-
 	}
 
 	@Test(priority = 8, dependsOnMethods = "shouldCreateMultiplePallet")

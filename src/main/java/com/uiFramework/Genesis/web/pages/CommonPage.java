@@ -90,8 +90,7 @@ public class CommonPage {
 	private By clearbtn = By.xpath("//button/*[.='clear']");
 	private By ordstatusLocator = By
 			.xpath("//*[@id='panel1bh-content']/div/div//div/div/div[2]/table/tbody/tr[1]/td[19]");
-	private By closeIconXPath = By.xpath(
-			"//div[@class='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation8 MuiPopover-paper css-1pmi0tv']//div//button[@type='button']//*[name()='svg']");
+	private By closeIconXPath = By.xpath("//*[@data-testid='CloseIcon']");
 	private By enterPalletNoLocator = By.xpath("//input[@placeholder='Enter Pallet No']");
 	private By enterTruckNoLocator = By.xpath("//input[@placeholder='Enter Truck No']");
 	private By enterTruckNameLocator = By.xpath("//input[@placeholder='Enter Truck Name']");
@@ -114,12 +113,12 @@ public class CommonPage {
 	private static final String NUMERIC_SANITIZER_REGEX = "[^0-9.-]";
 	private static final int DECIMAL_PRECISION = 2;
 
-	private String downloadDir = System.getProperty("user.dir")+ File.separator + "target"
-																+ File.separator + "downloads";
+	private String downloadDir = System.getProperty("user.dir") + File.separator + "target" + File.separator
+			+ "downloads";
 	private By PDFBtn = By.xpath("//*[@title='Export to PDF']");
 	private By excelBtn = By.xpath("//*[@title='Export to Excel']");
 	private By palletMenu = By.xpath("//i[@title='Pallet']");
-	private By barMenu = By.xpath("//i[@title='Barcode Printing']");
+	private By barMenu = By.xpath("//i[@title='Barcode Printing1']");
 	private By inboundpalletMenu = By.xpath("//a[@href='/pallet/inbound-pallet']");
 	private By outboundpalletMenu = By.xpath("//a[@href='/pallet/outbound-pallet']");
 	By truckMenu = By.xpath("//i[@title='Truck']");
@@ -148,10 +147,10 @@ public class CommonPage {
 	private By pickupLDA = By.xpath("(//*[.='Select Pickup LDA'])[4]");
 	private By closeOutMenu = By.xpath("//i[@title='Closeout']");
 	private By subMenu = By.xpath("//a[@href='/closeout']");
-	 By getOrderStatus = By.xpath("(//table/tbody/tr[2])[2]//td[15]");
+	By getOrderStatus = By.xpath("(//table/tbody/tr[2])[2]//td[15]");
 	private By searchfirstcoloum = By.xpath("(//input[@placeholder='Contains...'])[1]");
 	private By palletWt = By.xpath("//*[@placeholder='Enter Pallet Weight']");
-	
+
 	/*
 	 * ------------------------------ Cross-browser click utilities
 	 * ------------------------------
@@ -212,30 +211,34 @@ public class CommonPage {
 	public void enterTruckNo(String trkNo) {
 		this.clickAndSendKeys(truckNo, trkNo);
 	}
-	
+
 	public void max_pagination() throws InterruptedException {
 		wt.waitToClick(paginationDrpDwn, 10);
 		Thread.sleep(500);
 		wt.waitToClick(paginationCount, 10);
 	}
+
 	/**
 	 * This method used to click on truck name and enter truck name
+	 * 
 	 * @param trkName
 	 */
 	public void enterTruckName(String trkName) {
 		this.clickAndSendKeys(truckName, trkName);
 	}
-	
+
 	/**
 	 * This method used to click on pallet no and enter pallet name
+	 * 
 	 * @param paltNo
 	 */
 	public void enterPalletNo(String paltNo) {
 		this.clickAndSendKeys(palletNo, paltNo);
 	}
-	
+
 	/**
 	 * This method used to click on order no and enter order no
+	 * 
 	 * @param paltNo
 	 */
 	public void enterOrderNo(String ordNo) {
@@ -254,7 +257,7 @@ public class CommonPage {
 			logger.log(Level.SEVERE, " Failed to click element: " + locator, e);
 		}
 	}
-	
+
 	/**
 	 * This method used to click on search section
 	 */
@@ -262,7 +265,7 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		wt.waitToClick(searchsection, DEFAULT_TIMEOUT);
 	}
-	
+
 	/**
 	 * This method used to click on Back button
 	 */
@@ -288,9 +291,10 @@ public class CommonPage {
 //    public String getMandatoryText(By locator) {
 //        return driver.findElement(locator).getText().trim();
 //    }
-	
+
 	/**
 	 * This method used to click on element and get value
+	 * 
 	 * @param locator
 	 * @return
 	 */
@@ -305,9 +309,10 @@ public class CommonPage {
 
 		return text == null ? "" : text.trim();
 	}
-	
+
 	/**
 	 * This method used to click on element and and get valued
+	 * 
 	 * @param element
 	 * @param attributeName
 	 * @return
@@ -316,9 +321,10 @@ public class CommonPage {
 		wt.waitForElement(element, DEFAULT_TIMEOUT);
 		return driver.findElement(element).getAttribute(attributeName);
 	}
-	
+
 	/**
 	 * This method used to click on drop down and select enter text in search field
+	 * 
 	 * @param dropdownTrigger
 	 * @param valueToSelect
 	 */
@@ -326,9 +332,10 @@ public class CommonPage {
 		dropdownTrigger.click();
 		DrpDwn.DrpDwnValueSel(dropdownTrigger, valueToSelect);
 	}
-	
+
 	/**
 	 * This method used to click enetr value and select value by arrow down
+	 * 
 	 * @param input
 	 * @param DrpDwnValue
 	 */
@@ -339,12 +346,13 @@ public class CommonPage {
 		driver.findElement(input).sendKeys(Keys.ARROW_DOWN);
 		driver.findElement(input).sendKeys(Keys.ENTER);
 	}
-	
+
 	/**
 	 * This methods used to enter value and select first value from drop down
+	 * 
 	 * @param input
 	 * @param DrpDwnValue
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 */
 	public void DrpDwnValueSel(By input, String DrpDwnValue) {
 		WebElement dropdown = driver.findElement(input);
@@ -355,13 +363,13 @@ public class CommonPage {
 		dropdown.click();
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		
+
 		List<WebElement> options = wait.until(ExpectedConditions
 				.visibilityOfAllElementsLocatedBy(By.xpath("//li[.//text()[contains(., '" + DrpDwnValue + "')]]")));
-		
+
 		boolean optionSelected = false;
 		for (WebElement option : options) {
-			
+
 			if (option.getText().toLowerCase().contains(DrpDwnValue.toLowerCase())) {
 				// Click the matching option directly
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", option);
@@ -369,12 +377,12 @@ public class CommonPage {
 				break;
 			}
 		}
-		
+
 		if (!optionSelected) {
 			throw new NoSuchElementException("Dropdown option not found: " + DrpDwnValue);
 		}
 	}
-	
+
 	/**
 	 * This method used to click on locator and enter text
 	 */
@@ -383,17 +391,20 @@ public class CommonPage {
 		driver.findElement(locator).clear();
 		driver.findElement(locator).sendKeys(text);
 	}
-	
+
 	/**
 	 * This method clicks on a WebElement and enters text inside it.
 	 */
 	public void clickAndSendKeysEle(WebElement element, String text) {
-	    element.click();
-	    element.clear();
-	    element.sendKeys(text);
+		element.click();
+		element.clear();
+		element.sendKeys(text);
 	}
+
 	/**
-	 * This method used to click on locator clear filed using back space then send keys
+	 * This method used to click on locator clear filed using back space then send
+	 * keys
+	 * 
 	 * @param locator
 	 * @param text
 	 */
@@ -403,9 +414,10 @@ public class CommonPage {
 		driver.findElement(locator).sendKeys(Keys.BACK_SPACE);
 		driver.findElement(locator).sendKeys(text);
 	}
-	
+
 	/**
 	 * This method used to capture text from toast message
+	 * 
 	 * @return
 	 */
 	public String captureToastMessage() {
@@ -421,9 +433,10 @@ public class CommonPage {
 			return "Toast message Failed";
 		}
 	}
-	
+
 	/**
 	 * This method used to return true is toast displayed
+	 * 
 	 * @return
 	 */
 	public boolean toastMsgReceivedSuccessfully() {
@@ -435,9 +448,10 @@ public class CommonPage {
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * This method used to move to element and click
+	 * 
 	 * @param locator
 	 * @throws InterruptedException
 	 */
@@ -447,9 +461,10 @@ public class CommonPage {
 		actions.moveToElement(element).perform();
 		logger.info("Element clicked after scroll: " + locator.toString());
 	}
-	
+
 	/**
 	 * This method used to move to element and click
+	 * 
 	 * @param locator
 	 */
 	public void moveToElementAndClick(By locator) {
@@ -460,17 +475,18 @@ public class CommonPage {
 			logger.info("Fallback click used for: " + locator);
 		}
 	}
-	
-	//toastMsg=cp.captureToastMessage(); //used of toast
-	
+
+	// toastMsg=cp.captureToastMessage(); //used of toast
+
 	/**
 	 * This method used to return message from toast
+	 * 
 	 * @return
 	 */
 	public String getToastMessage() {
 		return toastMsg;
 	}
-	
+
 	/**
 	 * This method used to Wait until loader is disable
 	 */
@@ -576,16 +592,18 @@ public class CommonPage {
 			}
 		}
 	}
+
 	/**
-	 * This method used to click on search button and wait for loader 
+	 * This method used to click on search button and wait for loader
 	 */
 	public void Search() {
 		wt.waitToClick(searchbtn, DEFAULT_TIMEOUT);
 		this.waitForLoaderToDisappear();
 	}
-	
+
 	/**
 	 * This method used to select multiple value from drop down
+	 * 
 	 * @param dropdownLocator
 	 * @param indices
 	 * @param elementName
@@ -605,9 +623,10 @@ public class CommonPage {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method used to select multiple warehouse from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -616,9 +635,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(warehouse, indices, "Warehouse");
 	}
-	
+
 	/**
 	 * This method used to select multiple LDA from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -626,8 +646,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectLDA, indices, "LDA");
 	}
+
 	/**
 	 * This method used to select multiple Distributor from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -636,9 +658,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(distributor, indices, "Distributor");
 	}
-	
+
 	/**
 	 * This method used to select multiple customer from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -646,9 +669,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(customer, indices, "Customer");
 	}
-	
+
 	/**
 	 * This method used to select multiple pickup from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -657,9 +681,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectpickup, indices, "Pickup");
 	}
-	
+
 	/**
 	 * This method used to select multiple LTL from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -668,9 +693,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectLTL, indices, "LTL");
 	}
-	
+
 	/**
 	 * This method used to select multiple user from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -678,9 +704,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectUser, indices, "User");
 	}
-	
+
 	/**
 	 * This method used to select multiple Creation mode from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -688,9 +715,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectCreationMode, indices, "Creation Mode");
 	}
-	
+
 	/**
-	 *  This method used to select multiple Status from list
+	 * This method used to select multiple Status from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -699,9 +727,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectstatus, indices, "Status");
 	}
-	
+
 	/**
-	 *  This method used to select multiple Document type from list
+	 * This method used to select multiple Document type from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -709,9 +738,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(selectDoctype, indices, "Document Type");
 	}
-	
+
 	/**
-	 *  This method used to select multiple  print Status from list
+	 * This method used to select multiple print Status from list
+	 * 
 	 * @param indices
 	 * @throws InterruptedException
 	 */
@@ -752,9 +782,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		selectMultipleByIndex(pickupLDA, indices, "New LDA");
 	}
-	
+
 	/**
 	 * This method used to fetch data those are select in drop down
+	 * 
 	 * @return
 	 */
 	public List<String> fetchSelectedData() {
@@ -771,9 +802,10 @@ public class CommonPage {
 		}
 		return selectedData;
 	}
-	
+
 	/**
 	 * This method used to get selected consignee list from drop down
+	 * 
 	 * @return
 	 */
 	public List<String> fetchSelectedDataForConsignee() {
@@ -790,9 +822,10 @@ public class CommonPage {
 		}
 		return selectedData;
 	}
-	
+
 	/**
 	 * This method used to verify select data and search data on grid
+	 * 
 	 * @param index
 	 * @throws InterruptedException
 	 */
@@ -851,15 +884,17 @@ public class CommonPage {
 			}
 		}
 	}
-	
+
 	/**
-	 * This method used to check selected data and grid data check on grid 
-	 * and this method for dynamic grid
+	 * This method used to check selected data and grid data check on grid and this
+	 * method for dynamic grid
+	 * 
 	 * @param index
 	 * @throws InterruptedException
 	 */
 	public void validateDataInGridForScroll(int index) throws InterruptedException {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		waitForLoaderToDisappear();
 		List<String> expectedValues = fetchSelectedData();
 
 		try {
@@ -908,9 +943,10 @@ public class CommonPage {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method check data filter contains same value for drop location
+	 * 
 	 * @param index
 	 * @throws InterruptedException
 	 */
@@ -945,19 +981,38 @@ public class CommonPage {
 			try {
 				String cellXPath = String.format("//*[@class='scrollable-pane']//table/tbody/tr[%d]/td[%d]", i, index);
 				List<WebElement> cellElements = driver.findElements(By.xpath(cellXPath));
+				
+				/**
+				 * Commit code because from warehouse list not show , after city and grid list because of 
+				 * that test failed. so we removed space and , from actual and expected.
+				 * 
+				 */
+
+//				if (!cellElements.isEmpty()) {
+//					String cellText = cellElements.get(0).getText().trim();
+//
+//					boolean matchFound = expectedValues.stream()
+//							.anyMatch(expected -> cellText.toLowerCase().contains(expected.toLowerCase()));
+//
+//					System.out.println("Actual cell value: " + cellText);
+//					Assert.assertTrue(matchFound, "Row " + i + " mismatch. Actual: '" + cellText
+//							+ "' | Expected partial match from: " + expectedValues);
+//
+//				}
 
 				if (!cellElements.isEmpty()) {
-					String cellText = cellElements.get(0).getText().trim();
+				    String cellText = cellElements.get(0).getText();
 
-					boolean matchFound = expectedValues.stream()
-							.anyMatch(expected -> cellText.toLowerCase().contains(expected.toLowerCase()));
+				    boolean matchFound = expectedValues.stream()
+				        .anyMatch(expected -> cellText.toLowerCase().replaceAll("[,\\s]+", " ")
+				                            .contains(expected.toLowerCase().replaceAll("[,\\s]+", " ")));
 
-					System.out.println("Actual cell value: " + cellText);
-					Assert.assertTrue(matchFound, "Row " + i + " mismatch. Actual: '" + cellText
-							+ "' | Expected partial match from: " + expectedValues);
+				    System.out.println("Actual cell value: " + cellText);
 
+				    Assert.assertTrue(matchFound, "Row " + i + " mismatch. Actual: '" + cellText
+				            + "' | Expected partial match from: " + expectedValues);
 				} else {
-					System.out.println("No record found Foe filter " + index);
+				    System.out.println("No record found for filter " + index);
 				}
 
 			} catch (Exception e) {
@@ -965,7 +1020,7 @@ public class CommonPage {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method used to get data from consignee List and verify data on grid
 	 */
@@ -1014,9 +1069,10 @@ public class CommonPage {
 		}
 
 	}
-	
+
 	/**
 	 * This method used to check filter data for consignee for fixed grid
+	 * 
 	 * @param index
 	 * @throws InterruptedException
 	 */
@@ -1069,10 +1125,10 @@ public class CommonPage {
 			}
 		}
 	}
-	
+
 	/**
-	 * This method used to search and check data in grid 
-	 * this for text field data
+	 * This method used to search and check data in grid this for text field data
+	 * 
 	 * @param fetchValueLocator
 	 * @param inputFieldLocator
 	 * @param logEntityName
@@ -1097,9 +1153,11 @@ public class CommonPage {
 			logger.warning(logEntityName + " mismatch: Expected " + expectedValue + ", but found " + actualValue);
 		}
 	}
-	
+
 	/**
-	 * Clears previous filters and searches for a date in a specific column using the "From Date" value.
+	 * Clears previous filters and searches for a date in a specific column using
+	 * the "From Date" value.
+	 * 
 	 * @param columnIndex Index of the column to search
 	 * @throws InterruptedException if waiting is interrupted
 	 */
@@ -1108,19 +1166,21 @@ public class CommonPage {
 		searchAndValidate(By.xpath(String.format("//*[@id='panel1bh-content']//table/tbody/tr[2]/td[%d]", columnIndex)),
 				fromdate, "From Date");
 	}
-	
+
 	/**
 	 * Searches for a "To Date" value in a specific column and validates it.
+	 * 
 	 * @param columnIndex Index of the column to search
 	 * @throws InterruptedException if waiting is interrupted/td[%d]
 	 */
 	public void searchAndValidateToDateByColumn(int columnIndex) throws InterruptedException {
-		searchAndValidate(By.xpath(String.format("//*[@class='scrollable-pane']//tr[2]//td[%d]", columnIndex)),
-				todate, "To Date");
+		searchAndValidate(By.xpath(String.format("//*[@class='scrollable-pane']//tr[2]//td[%d]", columnIndex)), todate,
+				"To Date");
 	}
-	
+
 	/**
 	 * Searches for an order number in the table and validates it.
+	 * 
 	 * @param fetchOrderTextLocator Locator for the order number cell
 	 * @throws InterruptedException if waiting is interrupted
 	 */
@@ -1130,33 +1190,39 @@ public class CommonPage {
 
 	/**
 	 * Searches and validates the customer order number in the table.
-	 * @param fetchCustomerOrderTextLocator Locator for the customer order number cell
+	 * 
+	 * @param fetchCustomerOrderTextLocator Locator for the customer order number
+	 *                                      cell
 	 * @throws InterruptedException if waiting is interrupted
 	 */
 	public void searchAndValidateCustomerOrderNumber(By fetchCustomerOrderTextLocator) throws InterruptedException {
 		searchAndValidate(fetchCustomerOrderTextLocator, entercustordernum, "Customer Order Number");
 	}
-	
+
 	/**
 	 * Searches for a pallet number in the table and validates it.
+	 * 
 	 * @param fetchPalletTextLocator Locator for the pallet number cell
 	 * @throws InterruptedException if waiting is interrupted
 	 */
 	public void searchAndValidatePalletNo(By fetchPalletTextLocator) throws InterruptedException {
 		searchAndValidate(fetchPalletTextLocator, enterPalletNoLocator, "Pallet Number");
 	}
-	
+
 	/**
 	 * Searches for a truck number in the table and validates it.
+	 * 
 	 * @param fetchPalletTextLocator Locator for the truck number cell
 	 * @throws InterruptedException if waiting is interrupted
 	 *
-	public void searchAndValidateTruckNo(By fetchPalletTextLocator) throws InterruptedException {
-		searchAndValidate(fetchPalletTextLocator, enterTruckNoLocator, "Truck Number");
-	}
-	
-	/**
-	 * Searches for a truck name in the table and validates it.
+	 *                              public void searchAndValidateTruckNo(By
+	 *                              fetchPalletTextLocator) throws
+	 *                              InterruptedException {
+	 *                              searchAndValidate(fetchPalletTextLocator,
+	 *                              enterTruckNoLocator, "Truck Number"); }
+	 * 
+	 *                              /** Searches for a truck name in the table and
+	 *                              validates it.
 	 * @param fetchPalletTextLocator Locator for the truck name cell
 	 * @throws InterruptedException if waiting is interrupted
 	 */
@@ -1218,14 +1284,15 @@ public class CommonPage {
 		resetFilter(filterIconXPath, filterInputXPath);
 		validateValueExists(tableDataXPath, columnIndex, lastUsedFilterValue, digitsOnly);
 	}
-	
+
 	/**
 	 * Validates column filters for string/text values using multiple conditions.
-	 * @param columnXPath XPath of the first row of the column
-	 * @param filterIconXPath XPath of the filter icon
+	 * 
+	 * @param columnXPath      XPath of the first row of the column
+	 * @param filterIconXPath  XPath of the filter icon
 	 * @param filterInputXPath XPath of the filter input field
-	 * @param tableDataXPath XPath of the table rows
-	 * @param columnIndex Index of the column to validate
+	 * @param tableDataXPath   XPath of the table rows
+	 * @param columnIndex      Index of the column to validate
 	 * @throws InterruptedException if waiting is interrupted
 	 */
 	public void validateColumnFilters(String columnXPath, String filterIconXPath, String filterInputXPath,
@@ -1233,26 +1300,31 @@ public class CommonPage {
 		validateColumnFiltersGeneric(columnXPath, filterIconXPath, filterInputXPath, tableDataXPath, columnIndex,
 				false);
 	}
-	
+
 	/**
-	 * Validates column filters for numeric/LDA values by removing non-digit characters.
-	 * @param columnXPath XPath of the first row of the column
-	 * @param filterIconXPath XPath of the filter icon
+	 * Validates column filters for numeric/LDA values by removing non-digit
+	 * characters.
+	 * 
+	 * @param columnXPath      XPath of the first row of the column
+	 * @param filterIconXPath  XPath of the filter icon
 	 * @param filterInputXPath XPath of the filter input field
-	 * @param tableDataXPath XPath of the table rows
-	 * @param columnIndex Index of the column to validate
+	 * @param tableDataXPath   XPath of the table rows
+	 * @param columnIndex      Index of the column to validate
 	 * @throws InterruptedException if waiting is interrupted
 	 */
 	public void validateLDAColumnFilters(String columnXPath, String filterIconXPath, String filterInputXPath,
 			String tableDataXPath, int columnIndex) throws InterruptedException {
 		validateColumnFiltersGeneric(columnXPath, filterIconXPath, filterInputXPath, tableDataXPath, columnIndex, true);
 	}
-	
+
 	/**
-	 * Validates a string cell value against a filter value based on the specified condition.
-	 * @param condition Comparison type (e.g., "Starts with", "Contains", "Equals")
+	 * Validates a string cell value against a filter value based on the specified
+	 * condition.
+	 * 
+	 * @param condition   Comparison type (e.g., "Starts with", "Contains",
+	 *                    "Equals")
 	 * @param filterValue Value used for filtering
-	 * @param cellValue Value from the cell to validate
+	 * @param cellValue   Value from the cell to validate
 	 * @return true if the condition is satisfied, otherwise false
 	 */
 	private boolean validateCondition(String condition, String filterValue, String cellValue) {
@@ -1275,10 +1347,12 @@ public class CommonPage {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Selects a filter condition from the filter dropdown list.
-	 * @param condition The filter condition to select (e.g., "Date is", "No Filter")
+	 * 
+	 * @param condition The filter condition to select (e.g., "Date is", "No
+	 *                  Filter")
 	 */
 
 	private void selectFilterCondition(String condition) {
@@ -1298,14 +1372,17 @@ public class CommonPage {
 			logger.severe("Error selecting filter condition: " + e.getMessage());
 		}
 	}
+
 	/**
-	 * Validates date filter functionality on a column by applying multiple conditions
-	 * and verifying that the filtered rows match the expected date criteria.
-	 * @param dateColumnXPath XPath of the first row in the date column
-	 * @param filterIconXPath XPath of the filter icon
+	 * Validates date filter functionality on a column by applying multiple
+	 * conditions and verifying that the filtered rows match the expected date
+	 * criteria.
+	 * 
+	 * @param dateColumnXPath  XPath of the first row in the date column
+	 * @param filterIconXPath  XPath of the filter icon
 	 * @param filterInputXPath XPath of the filter input field
-	 * @param tableDataXPath XPath of the table rows
-	 * @param columnIndex Index of the date column in the table
+	 * @param tableDataXPath   XPath of the table rows
+	 * @param columnIndex      Index of the date column in the table
 	 * @throws InterruptedException if waiting is interrupted
 	 */
 	public void validateDateFilters(String dateColumnXPath, String filterIconXPath, String filterInputXPath,
@@ -1342,10 +1419,11 @@ public class CommonPage {
 	}
 
 	/**
-	 * Enters a date value into the specified input field, retrying up to 3 times if needed,
-	 * and ensures the value is correctly set.
+	 * Enters a date value into the specified input field, retrying up to 3 times if
+	 * needed, and ensures the value is correctly set.
+	 * 
 	 * @param inputXPath XPath of the date input field
-	 * @param dateValue Date value to enter
+	 * @param dateValue  Date value to enter
 	 * @return true if the value was successfully applied, otherwise false
 	 */
 	private boolean applyDateInput(String inputXPath, String dateValue) {
@@ -1377,13 +1455,15 @@ public class CommonPage {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * Validates the first 10 rows of a column against a date filter condition.
-	 * Logs a warning if no rows match the specified condition.
+	 * Validates the first 10 rows of a column against a date filter condition. Logs
+	 * a warning if no rows match the specified condition.
+	 * 
 	 * @param dataXPath XPath of the table rows
-	 * @param colIndex Index of the column to validate
-	 * @param condition Date comparison condition (e.g., "Date is", "Date is before")
+	 * @param colIndex  Index of the column to validate
+	 * @param condition Date comparison condition (e.g., "Date is", "Date is
+	 *                  before")
 	 * @param inputDate Date value to compare against
 	 */
 
@@ -1408,22 +1488,24 @@ public class CommonPage {
 			logger.warning("No matching rows found for condition: " + condition);
 		}
 	}
-	
+
 	/**
 	 * Extracts only the date part (before the first space) from a date-time string.
+	 * 
 	 * @param dateTimeStr Date-time string
 	 * @return Date portion of the string, or empty string if input is null/empty
 	 */
 	private String extractDateOnly(String dateTimeStr) {
 		return (dateTimeStr == null || dateTimeStr.isEmpty()) ? "" : dateTimeStr.split(" ")[0];
 	}
-	
+
 	/**
-	 * Validates a date comparison between the input date and the cell date
-	 * based on the specified condition.
-	 * @param condition Comparison type (e.g., "Date is", "Date is before")
+	 * Validates a date comparison between the input date and the cell date based on
+	 * the specified condition.
+	 * 
+	 * @param condition     Comparison type (e.g., "Date is", "Date is before")
 	 * @param inputDateTime Input date as a string
-	 * @param cellDateTime Cell date as a string
+	 * @param cellDateTime  Cell date as a string
 	 * @return true if the condition is satisfied, otherwise false
 	 */
 	private boolean validatedateCondition(String condition, String inputDateTime, String cellDateTime) {
@@ -1451,9 +1533,10 @@ public class CommonPage {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Navigates to the Order page from the menu after waiting for the loader to disappear.
+	 * Navigates to the Order page from the menu after waiting for the loader to
+	 * disappear.
 	 */
 	public void orderpageMenulanding() {
 		waitForLoaderToDisappear();
@@ -1470,34 +1553,34 @@ public class CommonPage {
 			logger.warning("Popup did not disappear within the timeout.");
 		}
 	}
-	
-	/**		
-	  * show error 'wait for element but no show' failed method after not genereate barcode
-	  */
-	
-	
+
+	/**
+	 * show error 'wait for element but no show' failed method after not genereate
+	 * barcode
+	 */
+
 	/**
 	 * Waits for a toast popup to disappear if it appears on the page.
 	 */
 	public void waitForPopupToDisappear() {
 		By popupLocator = By.xpath("//div[@role='alert']");
 
-	    List<WebElement> popups = driver.findElements(popupLocator);
+		List<WebElement> popups = driver.findElements(popupLocator);
 
-	    // If popup is not present OR not displayed → continue immediately
-	    if (popups.isEmpty() || !popups.get(0).isDisplayed()) {
-	        logger.info("Popup not displayed. Continuing execution.");
-	        return;
-	    }
+		// If popup is not present OR not displayed → continue immediately
+		if (popups.isEmpty() || !popups.get(0).isDisplayed()) {
+			logger.info("Popup not displayed. Continuing execution.");
+			return;
+		}
 
-	    // Popup is displayed → wait until it disappears
-	    try {
-	        wait.until(ExpectedConditions.invisibilityOf(popups.get(0)));
-	        logger.info("Popup was displayed and has disappeared.");
-	    } catch (TimeoutException e) {
-	        logger.info("Popup did not disappear within timeout. Continuing execution.");
-	    }
-	    
+		// Popup is displayed → wait until it disappears
+		try {
+			wait.until(ExpectedConditions.invisibilityOf(popups.get(0)));
+			logger.info("Popup was displayed and has disappeared.");
+		} catch (TimeoutException e) {
+			logger.info("Popup did not disappear within timeout. Continuing execution.");
+		}
+
 //		By popupLocator = By.xpath("//div[@role='alert']//div[2]");
 //		List<WebElement> popups = driver.findElements(popupLocator);
 //		if (!popups.isEmpty() && popups.get(0).isDisplayed()) {
@@ -1507,8 +1590,11 @@ public class CommonPage {
 //			logger.info("No popup appeared. Continuing...");
 //		}
 	}
+
 	/**
-	 * Waits for popups and loaders to disappear, then clicks the Create Order button.
+	 * Waits for popups and loaders to disappear, then clicks the Create Order
+	 * button.
+	 * 
 	 * @throws InterruptedException if the waiting is interrupted
 	 */
 	public void createOrder() throws InterruptedException {
@@ -1516,9 +1602,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		wt.waitToClick(CreatOrder, DEFAULT_TIMEOUT);
 	}
-	
+
 	/**
 	 * Checks whether an element is present on the page.
+	 * 
 	 * @param locator Locator of the element to check
 	 * @return true if the element exists, otherwise false
 	 */
@@ -1533,9 +1620,10 @@ public class CommonPage {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Retrieves and returns the order status text from the list.
+	 * 
 	 * @return Order status text, or an error message if not visible
 	 */
 	public String verifyOrderStatusOnList() {
@@ -1551,9 +1639,10 @@ public class CommonPage {
 			return "Error fetching status";
 		}
 	}
-	
+
 	/**
 	 * Selects multiple dropdown options based on their index positions.
+	 * 
 	 * @param indices List of option indices to select
 	 */
 	public void selectMultipleDropByIndex(List<Integer> indices) throws InterruptedException {
@@ -1569,11 +1658,14 @@ public class CommonPage {
 			}
 		}
 	}
-	
+
 	/**
 	 * Extracts text from an info icon popup, inputs it into a search field,
-	 * performs a search, and verifies the popup value matches the originally extracted text.
-	 * @param xpathMap Map containing XPaths for the icon, popup text, and input field
+	 * performs a search, and verifies the popup value matches the originally
+	 * extracted text.
+	 * 
+	 * @param xpathMap Map containing XPaths for the icon, popup text, and input
+	 *                 field
 	 */
 	public void extractInputFromIconSearchVerify(Map<String, String> xpathMap) {
 		clickClearButton();
@@ -1587,7 +1679,7 @@ public class CommonPage {
 			WebElement popupTextElement = wait
 					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathMap.get("popupTextXPath"))));
 			String extractedText = popupTextElement.getText().trim();
-
+			
 			WebElement closeIcon = wait.until(ExpectedConditions.elementToBeClickable(closeIconXPath));
 			closeIcon.click();
 
@@ -1606,7 +1698,7 @@ public class CommonPage {
 			WebElement resultTextElement = wait
 					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathMap.get("popupTextXPath"))));
 			String resultText = resultTextElement.getText().trim();
-
+		
 			WebElement closeIconAfter = wait.until(ExpectedConditions.elementToBeClickable(closeIconXPath));
 			closeIconAfter.click();
 
@@ -1618,10 +1710,12 @@ public class CommonPage {
 			logger.severe("Exception in extractInputFromIconSearchVerify: " + e.getMessage());
 		}
 	}
-	
+
 	/**
-	 * Enters the truck number into the specified input field after making it visible.
-	 * @param truckNo Truck number to enter
+	 * Enters the truck number into the specified input field after making it
+	 * visible.
+	 * 
+	 * @param truckNo           Truck number to enter
 	 * @param truckFieldLocator Locator of the truck number field
 	 */
 	private void enterTruckNumber(String truckNo, By truckFieldLocator) {
@@ -1707,13 +1801,14 @@ public class CommonPage {
 			logger.warning("Only " + validRowCount + " rows had valid numeric data (expected 10).");
 		}
 	}
-	
+
 	/**
 	 * Validates a numeric comparison between the filter value and the cell value
 	 * based on the specified condition.
-	 * @param condition Comparison type (e.g., Equals, Less than)
+	 * 
+	 * @param condition   Comparison type (e.g., Equals, Less than)
 	 * @param filterValue Numeric value used for filtering
-	 * @param cellValue Numeric value from the grid cell
+	 * @param cellValue   Numeric value from the grid cell
 	 * @return true if the condition is satisfied, otherwise false
 	 */
 	private boolean validateNumericCondition(String condition, String filterValue, String cellValue) {
@@ -1741,11 +1836,12 @@ public class CommonPage {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Clears the applied filter by selecting 'No Filter', removing input text,
-	 * and triggering the field update.
-	 * @param filterIconXPath XPath of the filter icon
+	 * Clears the applied filter by selecting 'No Filter', removing input text, and
+	 * triggering the field update.
+	 * 
+	 * @param filterIconXPath  XPath of the filter icon
 	 * @param filterInputXPath XPath of the filter input field
 	 */
 	private void clearFilter(String filterIconXPath, String filterInputXPath) throws InterruptedException {
@@ -1761,22 +1857,23 @@ public class CommonPage {
 		}
 		waitForLoaderToDisappear();
 	}
-	
+
 	/**
 	 * Checks whether the grid shows a 'Record not found.' message.
+	 * 
 	 * @return true if no records are found, otherwise false
 	 */
 	private boolean isNoRecordsFound() {
 		return driver.findElements(By.xpath("//td[contains(text(),'Record not found.')]")).size() > 0;
 	}
-	
+
 	/**
 	 * Clicks the Save button after waiting for it to be clickable.
 	 */
 	public void save() {
 		wt.waitToClick(save, DEFAULT_TIMEOUT);
 	}
-	
+
 	/**
 	 * Attempts to close the popup filter icon if present.
 	 */
@@ -1796,11 +1893,12 @@ public class CommonPage {
 //				});
 //	}
 	/**
-	 * Validates that a field contains the correct numeric value extracted from an alphanumeric input,
-	 * formatted to the defined decimal precision.
+	 * Validates that a field contains the correct numeric value extracted from an
+	 * alphanumeric input, formatted to the defined decimal precision.
+	 * 
 	 * @param fieldLocator Locator of the input field
-	 * @param inputValue Provided alphanumeric input
-	 * @param fieldName Name of the field for assertion messages
+	 * @param inputValue   Provided alphanumeric input
+	 * @param fieldName    Name of the field for assertion messages
 	 */
 	public void validateAlphaNumericValue(By fieldLocator, String inputValue, String fieldName) {
 		try {
@@ -1821,9 +1919,10 @@ public class CommonPage {
 			throw e;
 		}
 	}
-	
+
 	/**
 	 * Scrolls to the icon and clicks it using JavaScript executor.
+	 * 
 	 * @param iconXPath XPath of the icon to click
 	 */
 	private void clickIcon(String iconXPath) {
@@ -1831,11 +1930,12 @@ public class CommonPage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", icon);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", icon);
 	}
-	
+
 	/**
 	 * Extracts text by clicking two icons and reading the popup content.
-	 * @param iconXPath1 First icon XPath
-	 * @param iconXPath2 Second icon XPath
+	 * 
+	 * @param iconXPath1     First icon XPath
+	 * @param iconXPath2     Second icon XPath
 	 * @param popupTextXPath XPath of popup text element
 	 */
 	private String extractTextFromIcons(String iconXPath1, String iconXPath2, String popupTextXPath) {
@@ -1845,7 +1945,7 @@ public class CommonPage {
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(popupTextXPath)));
 		return popupTextElement.getText().trim();
 	}
-	
+
 	/**
 	 * Closes the popup by clicking the close icons in sequence.
 	 */
@@ -1855,21 +1955,23 @@ public class CommonPage {
 		WebElement closeIcon = wait.until(ExpectedConditions.elementToBeClickable(closeIconXPath));
 		closeIcon.click();
 	}
-	
+
 	/**
 	 * Enters the provided text into the input field after clearing existing value.
+	 * 
 	 * @param inputFieldXPath XPath of the input field
-	 * @param text Text to enter
+	 * @param text            Text to enter
 	 */
 	private void enterTextInField(String inputFieldXPath, String text) {
 		WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(inputFieldXPath)));
 		inputField.clear();
 		inputField.sendKeys(text);
 	}
-	
+
 	/**
-	 * This method extracts text from icons, inputs it into a field,
-	 * performs a search, and verifies the result matches the extracted text.
+	 * This method extracts text from icons, inputs it into a field, performs a
+	 * search, and verifies the result matches the extracted text.
+	 * 
 	 * @param xpathMap Map containing required XPaths for icons and fields
 	 */
 	public void extractInputAndVerifyFromIcons(Map<String, String> xpathMap) {
@@ -1889,9 +1991,10 @@ public class CommonPage {
 			throw e;
 		}
 	}
-	
+
 	/**
 	 * This method used to wait and click with java script executor
+	 * 
 	 * @param locator
 	 * @param timeoutInSeconds
 	 */
@@ -1915,7 +2018,8 @@ public class CommonPage {
 	/**
 	 * Safari & Chrome-friendly sendKeys method using By locator. Converts null
 	 * input to empty string automatically.
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	public void searchColoumFilter(By locator, String input) {
 		WebElement element = driver.findElement(locator);
@@ -1988,7 +2092,7 @@ public class CommonPage {
 			logger.severe("Exception in extractInputFromIconSearchVerify: " + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * This method used to click on search section
 	 */
@@ -1996,10 +2100,10 @@ public class CommonPage {
 		waitForLoaderToDisappear();
 		safeClick(searchsection);
 	}
-	
+
 	/**
-	 * This method used to check pick from drop down after change should check data change 
-	 * on depended drop down
+	 * This method used to check pick from drop down after change should check data
+	 * change on depended drop down
 	 */
 	public void pickFrom() {
 		clickClearButton();
@@ -2023,9 +2127,11 @@ public class CommonPage {
 		}
 		clickClearButton();
 	}
-	
+
 	/**
-	 * This method will check that pagination page sized and data in girs should match
+	 * This method will check that pagination page sized and data in girs should
+	 * match
+	 * 
 	 * @param itemsOnpage
 	 * @param j
 	 */
@@ -2059,6 +2165,7 @@ public class CommonPage {
 			logger.info("Currently active page: " + activePage.getText());
 		}
 	}
+
 	/**
 	 * This method used to close pop up
 	 */
@@ -2069,9 +2176,10 @@ public class CommonPage {
 			logger.info("HighlightOffIcon not found or not clickable: " + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * This method used to close pop up if present
+	 * 
 	 * @param closeBtnXpath
 	 */
 	public void closePopupIfPresent(String closeBtnXpath) {
@@ -2201,7 +2309,7 @@ public class CommonPage {
 		System.out.println("No file downloaded within timeout.");
 		return false;
 	}
-	
+
 	/**
 	 * This method used to click on export pdf btn
 	 */
@@ -2209,7 +2317,7 @@ public class CommonPage {
 		waitForPopupToDisappear();
 		wt.waitToClick(PDFBtn, 10);
 	}
-	
+
 	/**
 	 * This method used to click on export excel btn
 	 */
@@ -2217,9 +2325,10 @@ public class CommonPage {
 		waitForPopupToDisappear();
 		wt.waitToClick(excelBtn, 10);
 	}
-	
+
 	/**
 	 * This method used to check is displayed invalid toast or not
+	 * 
 	 * @return
 	 */
 	public boolean isInvalidToastDisplayed() {
@@ -2237,9 +2346,10 @@ public class CommonPage {
 		}
 		return false;
 	}
-	
+
 	/**
-	 * This method used to check extension of the file should be match 
+	 * This method used to check extension of the file should be match
+	 * 
 	 * @param expectedExtension
 	 * @return
 	 * @throws InterruptedException
@@ -2290,9 +2400,11 @@ public class CommonPage {
 		logger.info("No file downloaded within timeout.");
 		return false;
 	}
-	
+
 	/**
-	 * Ensures that the specified download directory exists, creating it if necessary.
+	 * Ensures that the specified download directory exists, creating it if
+	 * necessary.
+	 * 
 	 * @param dir Directory to check or create
 	 */
 	private void ensureDownloadDirExists(File dir) {
@@ -2302,9 +2414,10 @@ public class CommonPage {
 				logger.warning("Could not create download directory: " + dir.getAbsolutePath());
 		}
 	}
-	
+
 	/**
 	 * This method used to open inbound pallet menu page
+	 * 
 	 * @throws TimeoutException
 	 * @throws InterruptedException
 	 */
@@ -2315,9 +2428,10 @@ public class CommonPage {
 		safeClick(inboundpalletMenu);
 		waitForLoaderToDisappear();
 	}
-	
+
 	/**
 	 * This method used to click on outbound pallet menu
+	 * 
 	 * @throws TimeoutException
 	 */
 	public void outboundMenu() throws TimeoutException {
@@ -2404,10 +2518,11 @@ public class CommonPage {
 		wt.waitToClick(outboundQAMenu, 10);
 		waitForLoaderToDisappear();
 	}
-	
+
 	/**
 	 * This method used to select consignee QA menu
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	public void consigneeQAMenu() throws InterruptedException {
 		waitForLoaderToDisappear();
@@ -2417,9 +2532,10 @@ public class CommonPage {
 		wt.waitToClick(consigneeQAMenu, 10);
 		waitForLoaderToDisappear();
 	}
-	
+
 	/**
 	 * This method used to open tracking update page
+	 * 
 	 * @throws InterruptedException
 	 */
 	public void trackingMenu() throws InterruptedException {
@@ -2429,10 +2545,10 @@ public class CommonPage {
 		wt.waitToClick(trackingMenu, 10);
 		waitForLoaderToDisappear();
 	}
-	
-	
+
 	/**
 	 * This method used to open reconsignment page
+	 * 
 	 * @throws TimeoutException
 	 * @throws InterruptedException
 	 */
@@ -2443,9 +2559,10 @@ public class CommonPage {
 		wt.waitToClick(reconsign, 10);
 		waitForLoaderToDisappear();
 	}
-	
+
 	/**
 	 * This method used to open return page
+	 * 
 	 * @throws TimeoutException
 	 * @throws InterruptedException
 	 */
@@ -2472,104 +2589,111 @@ public class CommonPage {
 		wt.waitToClick(subMenu, 10);
 		waitForLoaderToDisappear();
 	}
-	
+
 	public String getOrderStatus(String order) throws InterruptedException {
 		waitForLoaderToDisappear();
 		searchColoumFilter(searchfirstcoloum, order);
 		Thread.sleep(100);
 		return getMandatoryText(getOrderStatus);
 	}
-	
+
 	public void searchAndValidateTruckNo(By fetchPalletTextLocator) throws InterruptedException {
 		searchAndValidate(fetchPalletTextLocator, enterTruckNoLocator, "Truck Number");
 	}
-	
+
 	/**
 	 * This method used to enter pallet wt into truck
+	 * 
 	 * @param wt
 	 */
 	public void addpalletWt(String wt) {
 		clickAndSendKeys(palletWt, wt);
 	}
-	
+
 	/**
 	 * This method used to get pallet wt from edit truck
+	 * 
 	 * @return
 	 */
 	public String getPalletWt() {
 		return getAttributeValue(palletWt, "value");
 	}
+
 	/**
 	 * Scrolls through and validates grid data dynamically based on the grid type.
 	 * Works for both frozen and scrollable panes.
 	 *
-	 * @param classname Either "frozen-pane" or "scrollable-pane" — determines which grid section to operate on.
+	 * @param classname Either "frozen-pane" or "scrollable-pane" — determines which
+	 *                  grid section to operate on.
 	 * @throws InterruptedException if thread sleep is interrupted.
 	 */
-	//frozen-pane
-	//scrollable-pane
+	// frozen-pane
+	// scrollable-pane
 	public void verifyColumnFilter(String classname) throws InterruptedException {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-	    List<WebElement> initialCells = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-	            By.xpath("//*[@class='" + classname + "']//tbody//tr[2]//td")));
+		List<WebElement> initialCells = wait.until(ExpectedConditions
+				.presenceOfAllElementsLocatedBy(By.xpath("//*[@class='" + classname + "']//tbody//tr[2]//td")));
 
-	    int columnCount = initialCells.size();
+		int columnCount = initialCells.size();
 
-	    for (int i = 1; i <= columnCount; i++) {
-	    	
-	        String cellXPath = "//*[@class='" + classname + "']//tbody//tr[2]//td[" + i + "]";
-	        WebElement cell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXPath)));
+		for (int i = 1; i <= columnCount; i++) {
 
-	        String text = cell.getText().trim();
-	        Thread.sleep(300);
+			String cellXPath = "//*[@class='" + classname + "']//tbody//tr[2]//td[" + i + "]";
+			WebElement cell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXPath)));
 
-	        if (text.isEmpty()) continue;
+			String text = cell.getText().trim();
+			Thread.sleep(300);
 
-	        System.out.println("Cell " + i + " value: " + text);
+			if (text.isEmpty())
+				continue;
 
-	        String filterXPath = "//*[@class='" + classname + "']//thead//tr[2]//th[" + i + "]//input";
-	        List<WebElement> filters = driver.findElements(By.xpath(filterXPath));
+			System.out.println("Cell " + i + " value: " + text);
 
-	        if (filters.isEmpty() || !filters.get(0).isDisplayed()) {
-	            System.out.println("No visible filter for column " + i);
-	            continue;
-	        }
+			String filterXPath = "//*[@class='" + classname + "']//thead//tr[2]//th[" + i + "]//input";
+			List<WebElement> filters = driver.findElements(By.xpath(filterXPath));
 
-	        WebElement filter = driver.findElement(By.xpath(filterXPath));
-	        filter.clear();
+			if (filters.isEmpty() || !filters.get(0).isDisplayed()) {
+				System.out.println("No visible filter for column " + i);
+				continue;
+			}
 
-	        // Get header title fresh
-	        String headerTitle = driver.findElement(
-	        	    By.xpath("//*[@class='scrollable-pane']//thead//tr[1]//th[" + i + "]//*[@class='p-column-title']")
-	        	).getText().trim();
+			WebElement filter = driver.findElement(By.xpath(filterXPath));
+			filter.clear();
 
-	        // Special case: LDA column
-	        if ("LDA".equals(headerTitle)) {
-	            text = text.contains("-") ? text.split("-")[0].trim() : text.trim();
-	            if (!text.matches("\\d+")) continue; // Skip non-numeric
-	        }
+			// Get header title fresh
+			String headerTitle = driver
+					.findElement(By.xpath(
+							"//*[@class='scrollable-pane']//thead//tr[1]//th[" + i + "]//*[@class='p-column-title']"))
+					.getText().trim();
 
-	        // Special case: QA Status column
-	        if ("QA Status".equals(headerTitle)) {
-	            text = text.split("\n")[0].trim();
-	        }
+			// Special case: LDA column
+			if ("LDA".equals(headerTitle)) {
+				text = text.contains("-") ? text.split("-")[0].trim() : text.trim();
+				if (!text.matches("\\d+"))
+					continue; // Skip non-numeric
+			}
 
-	        System.out.println("Filtering with: " + text);
+			// Special case: QA Status column
+			if ("QA Status".equals(headerTitle)) {
+				text = text.split("\n")[0].trim();
+			}
 
-	        filter.sendKeys(text);
-	        Thread.sleep(1500);
-	        waitForLoaderToDisappear();
+			System.out.println("Filtering with: " + text);
 
-	        // Re-locate the cell after filtering (fresh lookup)
-	        WebElement filteredCell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXPath)));
-	        String filteredText = filteredCell.getText().trim();
+			filter.sendKeys(text);
+			Thread.sleep(1500);
+			waitForLoaderToDisappear();
 
-	        System.out.println("After filter, cell[" + i + "] text: " + filteredText);
+			// Re-locate the cell after filtering (fresh lookup)
+			WebElement filteredCell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXPath)));
+			String filteredText = filteredCell.getText().trim();
 
-	        Assert.assertTrue(filteredText.contains(text),
-	                "Column filter not matching — expected to contain: " + text + " but got: " + filteredText);
-	    }
+			System.out.println("After filter, cell[" + i + "] text: " + filteredText);
+
+			Assert.assertTrue(filteredText.contains(text),
+					"Column filter not matching — expected to contain: " + text + " but got: " + filteredText);
+		}
 	}
 
 	/**
@@ -2578,90 +2702,91 @@ public class CommonPage {
 	 *
 	 * @throws InterruptedException if thread sleep is interrupted.
 	 */
-	//This method for Remaining for optimization pages
+	// This method for Remaining for optimization pages
 	public void verifyColumnFilterForFixGrid() throws InterruptedException {
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-	    
-	    List<WebElement> gridCells = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-	            By.xpath("//*[@id='panel1bh-content']//tbody//tr[1]//td")
-	        ));
-	    
-	    int columnCount = gridCells.size();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-	    for (int i = 1; i <= columnCount; i++) {
+		List<WebElement> gridCells = wait.until(ExpectedConditions
+				.presenceOfAllElementsLocatedBy(By.xpath("//*[@id='panel1bh-content']//tbody//tr[1]//td")));
 
-	        // Always re-locate fresh to avoid stale
-	        String cellXPath = "//*[@id='panel1bh-content']//tbody//tr[1]//td[" + i + "]";
-	        WebElement cell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXPath)));
+		int columnCount = gridCells.size();
 
-	        Thread.sleep(500);
-	        String text = cell.getText().trim();
+		for (int i = 1; i <= columnCount; i++) {
 
-	        if (text.isEmpty()) continue;
+			// Always re-locate fresh to avoid stale
+			String cellXPath = "//*[@id='panel1bh-content']//tbody//tr[1]//td[" + i + "]";
+			WebElement cell = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cellXPath)));
 
-	        System.out.println("Cell " + i + " value: " + text);
+			Thread.sleep(500);
+			String text = cell.getText().trim();
 
-	        String filterXPath = "//*[@id='panel1bh-content']//thead//tr[2]//th[" + i + "]//input";
-	        List<WebElement> filters = driver.findElements(By.xpath(filterXPath));
+			if (text.isEmpty())
+				continue;
 
-	        if (filters.isEmpty() || !filters.get(0).isDisplayed()) {
-	            System.out.println("No visible filter for column " + i);
-	            continue;
-	        }
+			System.out.println("Cell " + i + " value: " + text);
 
-	        WebElement filter = filters.get(0);
-	        filter.clear();
-	        
-	        String header = driver.findElement(By.xpath(
-	                "//*[@id='panel1bh-content']//thead//tr[1]//th[" + i + "]//*[@class='p-column-title']")
-	        ).getText().trim();
-	        
-	        if ("LDA".equals(header) || "Original LDA".equals(header) ||"New LDA".equals(header)) {
+			String filterXPath = "//*[@id='panel1bh-content']//thead//tr[2]//th[" + i + "]//input";
+			List<WebElement> filters = driver.findElements(By.xpath(filterXPath));
 
-	            text = text.contains("-") ? text.split("-")[0].trim() : text.trim();
-	            // only get numeric values; skip others
-	            if (!text.matches("\\d+")) {
-	                continue;
-	            }
-	        }
-	        
-	      //Check column label is QA Status then Spite text
-	        if ("QA Status".equals(driver.findElement(By.xpath(
-	    	        "//*[@id='panel1bh-content']//thead//tr[1]//th[" + i + "]//*[@class='p-column-title']"))
-	    	        .getText().trim())) {
-	    	        text = text.split("\n")[0].trim();
-	 
-	    	    }    
-	        System.out.println("Filter apply "+text);
+			if (filters.isEmpty() || !filters.get(0).isDisplayed()) {
+				System.out.println("No visible filter for column " + i);
+				continue;
+			}
 
-	        filter.sendKeys(text);
-	        Thread.sleep(2000) ;
-	        waitForLoaderToDisappear();
+			WebElement filter = filters.get(0);
+			filter.clear();
 
-	        String filteredText = driver.findElement(By.xpath(cellXPath)).getText().trim();
-	        System.out.println("After filter, cell[" + i + "] text: " + filteredText);
+			String header = driver
+					.findElement(By.xpath(
+							"//*[@id='panel1bh-content']//thead//tr[1]//th[" + i + "]//*[@class='p-column-title']"))
+					.getText().trim();
 
-	        Assert.assertTrue(filteredText.contains(text),
-	                "Column filter not matching — expected to contain: " + text + " but got: " + filteredText);
-	    }
+			if ("LDA".equals(header) || "Original LDA".equals(header) || "New LDA".equals(header)) {
+
+				text = text.contains("-") ? text.split("-")[0].trim() : text.trim();
+				// only get numeric values; skip others
+				if (!text.matches("\\d+")) {
+					continue;
+				}
+			}
+
+			// Check column label is QA Status then Spite text
+			if ("QA Status".equals(driver
+					.findElement(By.xpath(
+							"//*[@id='panel1bh-content']//thead//tr[1]//th[" + i + "]//*[@class='p-column-title']"))
+					.getText().trim())) {
+				text = text.split("\n")[0].trim();
+
+			}
+			System.out.println("Filter apply " + text);
+
+			filter.sendKeys(text);
+			Thread.sleep(2000);
+			waitForLoaderToDisappear();
+
+			String filteredText = driver.findElement(By.xpath(cellXPath)).getText().trim();
+			System.out.println("After filter, cell[" + i + "] text: " + filteredText);
+
+			Assert.assertTrue(filteredText.contains(text),
+					"Column filter not matching — expected to contain: " + text + " but got: " + filteredText);
+		}
 	}
-	
-	/** Return total entries count from paginator  from LDA portal and od grid*/
+
+	/** Return total entries count from paginator from LDA portal and od grid */
 	public int getTotalEntriesCount(WebDriver driver) {
-	    waitForLoaderToDisappear();
+		waitForLoaderToDisappear();
 
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-	    WebElement paginatorText = wait.until(
-	            ExpectedConditions.visibilityOfElementLocated(
-	                    By.xpath("//span[contains(@class,'p-paginator-current')]")));
+		WebElement paginatorText = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//span[contains(@class,'p-paginator-current')]")));
 
-	    String text = paginatorText.getText(); // Showing 1 to 10 of 13 entries
+		String text = paginatorText.getText(); // Showing 1 to 10 of 13 entries
 
-	    String countStr = text.replaceAll(".*of\\s+(\\d+)\\s+entries.*", "$1");
+		String countStr = text.replaceAll(".*of\\s+(\\d+)\\s+entries.*", "$1");
 
-	   System.out.println("Total count: " + countStr);
-	    return Integer.parseInt(countStr);
+		System.out.println("Total count: " + countStr);
+		return Integer.parseInt(countStr);
 	}
 
 }

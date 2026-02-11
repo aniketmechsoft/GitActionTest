@@ -44,16 +44,16 @@ public class UpdateTracking {
             .xpath("//*[@id='root']/div[3]/div[1]/div/div/ul/div/div/div/ul[2]/a");
     private By createLDADoc = By.xpath("//*[@title='Click to update the details']");
     private By updateBtn = By
-            .xpath("//*[@id=\"root\"]/div[5]/div[3]/div[2]/div/div/div/div/div/div[3]/div/button");
+            .xpath("//*[@title='Click to update the details']");
     private By ltl = By.id("outBoundTruckETALTLCarriers");
-    private By anonymsClick = By.xpath("//table/tbody/tr[1]/td[8]");
-    private By firstCheckbox = By.xpath("//table/tbody/tr[1]/td[1]/div");
+    private By anonymsClick = By.xpath("//table/tbody/tr[2]/td[7]");
+    private By firstCheckbox = By.xpath("//table/tbody/tr[2]/td[1]/div");
     private By statusDrpDwn = By.xpath("//*[@id='outBoundTruckETAstatus']");
     private By inputPath = By.xpath("//*[@id='genesis']/div[4]/div[1]/div[2]/input");
     private By dateSel = By
-            .xpath("//table/tbody/tr[1]/td[6]/div/div/div/div/span/button");
+            .xpath("//table/tbody/tr[2]/td[5]/div/div/div/div/span/button");
     private By enterGrdTrkNo = By
-            .xpath("//table/tbody/tr[1]/td[5]/div/div/div/input");
+            .xpath("//table/tbody/tr[2]/td[4]/div/div/div/input");
     private By selDrpDwnVal = By.xpath("//*[@id='genesis']/div[4]/div[2]/ul/li");
     private By downloadFileFormatBtn = By.id("etaBulkImportDownloadBtn");
     private By uploadFile = By
@@ -276,13 +276,13 @@ public class UpdateTracking {
         cp.waitForLoaderToDisappear();
         List<WebElement> items = getTableRows();
         
-        for (int i = 0; i < 5 && i < items.size(); i++) {
+        for (int i = 1; i < 5 && i < items.size(); i++) {
         	
         	if (items.isEmpty()) {
                 throw new SkipException("No rows found in table. Skipping test.");
             }
         	
-            WebElement row = items.get(i);  
+            WebElement row = items.get(i);
             row.click();
 
             String value = generateValue(i);
@@ -290,7 +290,8 @@ public class UpdateTracking {
 
             String dateVal = fillInputAndDate(rowIndex, value);
             enteredPairs.put(value, dateVal);
-            System.err.println(enteredPairs);
+            //System.error.println(enteredPairs);
+            System.out.println(enteredPairs);
         }
 
         Thread.sleep(3000);
@@ -300,7 +301,7 @@ public class UpdateTracking {
     }
 
     private List<WebElement> getTableRows() {
-        return driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
+        return driver.findElements(By.xpath("//tr//*[@placeholder='Enter Tracking No.']"));
     }
 
     private String generateValue(int index) {
@@ -310,13 +311,13 @@ public class UpdateTracking {
     // *** kept EXACTLY your original behaviour here ***
     private String fillInputAndDate(int rowIndex, String value) throws InterruptedException {
         WebElement input = driver.findElement(
-                By.xpath("//table/tbody/tr[" + rowIndex + "]/td[5]/div/div/div/input"));
+                By.xpath("//table/tbody/tr[" + rowIndex + "]/td[4]/div/div/div/input"));
         input.click();
         input.clear();
         input.sendKeys(value);
 
         WebElement dateField = driver.findElement(
-                By.xpath("//table/tbody/tr[" + rowIndex + "]/td[6]/div/div/div/div/span/button"));
+                By.xpath("//table/tbody/tr[" + rowIndex + "]/td[5]/div/div/div/div/span/button"));
         dateField.click();
         Thread.sleep(1000);
         clickTodayDate();

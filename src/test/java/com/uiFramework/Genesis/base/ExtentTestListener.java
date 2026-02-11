@@ -20,12 +20,12 @@ public class ExtentTestListener extends TestBase implements ITestListener {
 	public void onTestStart(ITestResult result) {
 		ExtentTest test = extent.createTest(result.getMethod().getMethodName());
 		extentTest.set(test);
-		test.log(Status.INFO, result.getMethod().getMethodName() + " started");
+	//	test.log(Status.INFO, result.getMethod().getMethodName() + " started");
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		extentTest.get().log(Status.PASS, result.getMethod().getMethodName() + " passed");
+	//	extentTest.get().log(Status.PASS, result.getMethod().getMethodName() + " passed");
 	}
 
 	@Override
@@ -48,12 +48,11 @@ public class ExtentTestListener extends TestBase implements ITestListener {
 	        test = extent.createTest(result.getMethod().getMethodName());
 	        extentTest.set(test);
 	    }
-	    test.log(Status.SKIP, result.getMethod().getMethodName() + " skipped");
+	//    test.log(Status.SKIP, result.getMethod().getMethodName() + " skipped");
 	    if (result.getThrowable() != null) {
 	        test.log(Status.SKIP, result.getThrowable());
 	    }
 	}
-
 
 	@Override
 	public void onStart(ITestContext context) {
@@ -66,7 +65,7 @@ public class ExtentTestListener extends TestBase implements ITestListener {
 	            }
 	        }
 	    }
-	    System.out.println("Old screenshots cleared before test execution!");
+//	    System.out.println("Old screenshots cleared before test execution!");
 	}
 
 

@@ -123,16 +123,16 @@ public class InboundQAPage extends InbTruckPage {
     private By qaMenu = By.xpath("//i[@title='QA']");
     private By inboundqaMenu = By.xpath("//a[@href='/qa/inbound-qa']");
     private By searchtruckno = By.xpath("(//input[@placeholder='Contains...'])[1]");
-    private By viewbtn = By.xpath("//table/tbody/tr[1]/td[1]//button");
-    private By truckliNo = By.xpath("//table/tbody/tr[1]/td[2]");
+    private By viewbtn = By.xpath("//table/tbody/tr[2]/td[1]//button");
+    private By truckliNo = By.xpath("//table/tbody/tr[2]/td[2]");
     private By getliPalletqty = By.xpath("(//span[@class='MuiTypography-root MuiTypography-button css-rscwwo'])[1]");
-    private By truckliStatus = By.xpath("//table/tbody/tr[1]/td[6]");
-    private By truckliPickup = By.xpath("//table/tbody/tr[1]/td[7]");
-    private By truckliDrop = By.xpath("//table/tbody/tr[1]/td[8]");
+    private By truckliStatus = By.xpath("//table/tbody/tr[2]/td[4]");
+    private By truckliPickup = By.xpath("//table/tbody/tr[2]/td[5]");
+    private By truckliDrop = By.xpath("//table/tbody/tr[2]/td[6]");
     private By iBtn = By.xpath("//div[@title='Click to see pallets present in truck']");
     private By closeiBtn = By.xpath("//*[@data-testid='CloseIcon']");
-    private By getliTruckno = By.xpath("//tbody[1]/tr[1]/td[2]");
-    private By getliTruckname = By.xpath("//tbody[1]/tr[1]/td[3]");
+    private By getliTruckno = By.xpath("//tbody[1]/tr[2]/td[2]");
+    private By getliTruckname = By.xpath("//*[@class='scrollable-pane']//tr[2]//td[1]");
     // view xpath
     private By truckNo = By.xpath("(//div[@class='labelBoxK__labelData'])[1]");
     private By truckPickup = By.xpath("(//div[@class='labelBoxK__labelData'])[5]");

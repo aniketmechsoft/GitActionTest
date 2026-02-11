@@ -1,6 +1,8 @@
 package com.uiFramework.Genesis.browserConfiguration;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -56,18 +58,17 @@ public class BrowserFactory extends SafariDriverFactory{
 
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
-//        options.addArguments("--window-size=1366,768");
-//        options.addArguments("--disable-popup-blocking");
-//        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--headless=new");
-        options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
 
         if (isLinux() || headless()) {
-            options.addArguments("--headless=new", "--no-sandbox", "--disable-dev-shm-usage");
+            options.addArguments(
+                    "--headless=new",
+                    "--window-size=1920,1080",
+                    "--no-sandbox",
+                    "--disable-dev-shm-usage"
+            );
+            System.out.println("Window size: IF()"); 
         }
         return options;
     }
@@ -156,12 +157,17 @@ public class BrowserFactory extends SafariDriverFactory{
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver(getChromeOptions());
-                driver.manage().window().maximize();
+                if (isLinux() || headless()) {
+                    driver.manage().window().setSize(new Dimension(1920, 1080));
+                    System.out.println("Window size:1920, 1080");
+                } else {
+                    driver.manage().window().maximize();
+                }
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver(getFirefoxOptions());
-                driver.manage().window().maximize();
+               // driver.manage().window().maximize();
                 break;
             case "edge":
                 WebDriverManager.edgedriver().setup();

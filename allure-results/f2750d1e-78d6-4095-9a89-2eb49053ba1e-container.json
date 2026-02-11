@@ -1,0 +1,1 @@
+{"uuid":"f2750d1e-78d6-4095-9a89-2eb49053ba1e","name":"smoke","children":["17a02f21-9274-4587-b1c9-ce0295b5f3d1"],"befores":[{"name":"setupSuite","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1769749561667,"stop":1769749561668}],"afters":[],"start":1769749561320,"stop":1769749598703}

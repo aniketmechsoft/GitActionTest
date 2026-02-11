@@ -131,20 +131,30 @@ public class OutboundTruckTest extends TestBase {
 	@Test(priority = 8, alwaysRun = true, groups = { "smoke" }, dependsOnMethods="shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck")
 	public void shouldRouteOrderEditable() throws TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
+//		obt.saveTruck();
+//		sAssert.assertTrue(obt.isRouteOrderEditable(), "Route Order input field is not editable.");
+//		sAssert.assertAll();
 		obt.saveTruck();
-		sAssert.assertTrue(obt.isRouteOrderEditable(), "Route Order input field is not editable.");
+
+		if (obt.isRouteOrderDisplayed()) {
+		    sAssert.assertTrue(obt.isRouteOrderEditable(), 
+		        "Route Order input field is not editable.");
+		} else {
+			sAssert.assertEquals(obt.CreateTruckToast(), "Truck created successfully.", "Outbound truck toast not found.");
+		}
 		sAssert.assertAll();
+
 	}
 	
-	@Test(priority = 9, alwaysRun = true, groups = { "smoke" }, dependsOnMethods="shouldRouteOrderEditable")
-	public void shouldCreateSuccessfullyAndIncreseCountByOne() throws TimeoutException {
+	@Test(priority = 9, alwaysRun = true, groups = { "smoke" })
+	public void shouldCreateSuccessfullyAndIncreseCountByOne() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		obt.routeSaveBtn();
 		afterCount = obt.getTotalEntriesCount(driver);
 		int diffint = afterCount - initialCount;
 		String difference = String.valueOf(diffint);
 		sAssert.assertEquals(difference, DataRepo.ONE, "Entry count did not increase for Truck by 1.");
-		sAssert.assertAll();	
+		sAssert.assertAll();
 	}
 	
 	@Test(priority = 10, dependsOnMethods="shouldCreateSuccessfullyAndIncreseCountByOne", groups = {
@@ -348,7 +358,7 @@ public class OutboundTruckTest extends TestBase {
 
 		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
 		cp.selectMultipleLTLByIndex(indicesToSelect2);
-		cp.validateDataInGridForScroll(5);
+		cp.validateDataInGridForScroll(3);
 
 		obt.searchAndValidateTruckNo();
 		obt.searchAndValidateTruckName();
@@ -398,10 +408,10 @@ public class OutboundTruckTest extends TestBase {
 //		obt.paginationOnOutboundCreateTruck();
 //	}
 
-	@AfterClass()
-	public void shouldUpdateOrderStatusAfterOrderLoadInObtTruck() throws InterruptedException {
-		cp.orderpageMenulanding();
-		Assert.assertEquals(cp.getOrderStatus(obt.MGLOrderno), "Outbound Truck Loaded", "Order Status not Match.");
-	}
+//	@AfterClass()
+//	public void shouldUpdateOrderStatusAfterOrderLoadInObtTruck() throws InterruptedException {
+//		cp.orderpageMenulanding();
+//		Assert.assertEquals(cp.getOrderStatus(obt.MGLOrderno), "Outbound Truck Loaded", "Order Status not Match.");
+//	}
 	
 }

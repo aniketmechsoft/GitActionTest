@@ -26,6 +26,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.SkipException;
 import org.testng.asserts.SoftAssert;
 
 import com.uiFramework.Genesis.common.CommonMethods;
@@ -413,15 +414,18 @@ public class InbTruckPage extends InboundPalletPage {
 	/** Create truck + check totals */
 	public void creatTruckwithCheckTotalPiecesandpallet() {
 		checkRemovePalletTotalPiecesndpalletQtyforFirstOrder();
+		
 		List<WebElement> glOrderCells = driver.findElements(By.xpath(
 				"//table/tbody/tr//td[1]//*[@type='checkbox']"));
 		TotalWeight = 0;
-		for (int i = 1; i <= 3 && i < glOrderCells.size(); i++) {
+
+		for (int i = 1; i <= Math.min(3, glOrderCells.size()); i++) {
 			try {
 				iTotalPieces = Integer.parseInt(cp.getAttributeValue(getTotalPieces, "value"));
 				iPalletQty = Integer.parseInt(cp.getAttributeValue(getPalletQty, "value"));
 				
 				WebElement checkbox = driver.findElement(By.xpath("//table/tbody/tr[" + (i+1) + "]/td[1]"));
+			
 				checkbox.click();
 				js.scrollIntoView(checkbox);
 
@@ -872,6 +876,11 @@ public class InbTruckPage extends InboundPalletPage {
 		List<WebElement> ibplOrderCells = driver
 				.findElements(By.xpath("(//div[@id='panel1bh-content'])[3]//td[contains(text(), 'IBPL-')]"));
 		if (ibplOrderCells.size() > 1) {
+			
+			if (ibplOrderCells == null || ibplOrderCells.isEmpty()) {
+			    throw new SkipException("Skipping test: No IBPL order cells found in truck");
+			}
+			
 			for (int i = 3; i >= 1; i--) {
 				try {
 					WebElement checkbox = driver
@@ -975,9 +984,10 @@ public class InbTruckPage extends InboundPalletPage {
 		return cp.getMandatoryText(getliTruckno);
 	}
 
-	public void searchTruckno(String number) {
+	public void searchTruckno(String number) throws InterruptedException {
 		try {
 			clearAndType(searchfirstcoloum, number);
+			Thread.sleep(2200);
 			cp.waitForLoaderToDisappear();
 		} catch (StaleElementReferenceException e) {
 			clearAndType(searchfirstcoloum, number);
@@ -1056,8 +1066,9 @@ public class InbTruckPage extends InboundPalletPage {
 		
 	}
 
-	/** Get order status from listing */
-	public String getOrderStatus(String order) {
+	/** Get order status from listing 
+	 * @throws InterruptedException */
+	public String getOrderStatus(String order) throws InterruptedException {
 		cp.waitForLoaderToDisappear();
 		searchTruckno(order);
 		return cp.getMandatoryText(getOrderStatus);

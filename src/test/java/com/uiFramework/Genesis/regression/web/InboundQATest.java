@@ -132,10 +132,11 @@ public class InboundQATest extends TestBase {
 	}
 	
 	@Test(priority = 9, alwaysRun = true, groups = {"smoke"})
-	public void shouldCheckColumnFilter() throws InterruptedException, TimeoutException {
+	public void shouldCheckColumnFilterOnInboundQA() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		iqa.inboundQaMenu();
-		cp.verifyColumnFilterForFixGrid();
+		cp.verifyColumnFilter("frozen-pane");
+		cp.verifyColumnFilter("scrollable-pane");
 		sAssert.assertAll();
 	}
 
@@ -149,19 +150,19 @@ public class InboundQATest extends TestBase {
 		cp.clickClearButton(); 
 		List<Integer> indicesToSelect = Arrays.asList(55, 2, 3);
 		cp.selectMultiplePickuprByIndex(indicesToSelect);
-		cp.validateDataInGrid(7);
+		cp.validateDataInGridForScroll(5);
 
 		List<Integer> indicesToSelect1 = Arrays.asList(1, 2, 3);
 		cp.selectMultipleDropByIndex(indicesToSelect1);
-		cp.validateDataInGrid(8);
+		cp.validateDataInGridForScroll(6);
 
 		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
 		cp.selectMultipleLTLByIndex(indicesToSelect2);
-		cp.validateDataInGrid(5);
+		cp.validateDataInGridForScroll(3);
 
 		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
 		cp.selectMultiplestatusByIndex(indicesToSelect3);
-		cp.validateDataInGrid(6);
+		cp.validateDataInGridForScroll(4);
 
 		iqa.searchAndValidateTruckNo();
 		cp.clickClearButton();

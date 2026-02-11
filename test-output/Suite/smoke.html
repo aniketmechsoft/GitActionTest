@@ -1,0 +1,1185 @@
+<html>
+<head>
+<title>TestNG:  smoke</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>smoke</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>67/12/1</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Feb 03 11:21:46 IST 2026</td>
+</tr>
+<tr><td>Total time:</td><td>1702 seconds (1702894 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td>smoke </td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundQATest.ValidateFilterOnQAListing()'><b>ValidateFilterOnQAListing</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundQATest</td>
+<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id=&apos;panel1bh-content&apos;]//thead//tr[1]//th[7]//*[@class=&apos;p-column-title&apos;]&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//*[@id=&apos;panel1bh-content&apos;]//thead//tr[1]//th[7]//*[@class=&apos;p-column-title&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.CommonPage.validateDataInGrid(CommonPage.java:855)
+	at com.uiFramework.Genesis.regression.web.InboundQATest.ValidateFilterOnQAListing(InboundQATest.java:153)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 31 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1169508565", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1169508565'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id=&apos;panel1bh-content&apos;]//thead//tr[1]//th[7]//*[@class=&apos;p-column-title&apos;]&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//*[@id=&apos;panel1bh-content&apos;]//thead//tr[1]//th[7]//*[@class=&apos;p-column-title&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at jdk.internal.reflect.GeneratedConstructorAccessor19.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.CommonPage.validateDataInGrid(CommonPage.java:855)
+	at com.uiFramework.Genesis.regression.web.InboundQATest.ValidateFilterOnQAListing(InboundQATest.java:153)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>15</td>
+<td>com.uiFramework.Genesis.regression.web.InboundQATest@18920cc</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck()'><b>shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td><div><pre>java.lang.AssertionError: Mismatch in Total and final pieces when pallet removed expected [3] but found [10]
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.checkRemovePalletTotalPiecesndpalletQtyforFirstOrder(OutboundTruckPage.java:409)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.creatTruckwithCheckTotalPiecesandpallet(OutboundTruckPage.java:283)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck(OutboundTruckTest.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1057516458", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1057516458'><pre>java.lang.AssertionError: Mismatch in Total and final pieces when pallet removed expected [3] but found [10]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.checkRemovePalletTotalPiecesndpalletQtyforFirstOrder(OutboundTruckPage.java:409)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.creatTruckwithCheckTotalPiecesandpallet(OutboundTruckPage.java:283)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck(OutboundTruckTest.java:128)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>28</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldAllowEditPalletWithAutoDeletedPallet()'><b>shouldAllowEditPalletWithAutoDeletedPallet</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td><div><pre>java.lang.AssertionError: Mismatch in Total and final Pieces! expected [17] but found [10]
+	at com.uiFramework.Genesis.web.pages.OutboundPalletPage.checkRemovedOrders(OutboundPalletPage.java:361)
+	at com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldAllowEditPalletWithAutoDeletedPallet(OutboundPalletTest.java:144)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1095106540", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1095106540'><pre>java.lang.AssertionError: Mismatch in Total and final Pieces! expected [17] but found [10]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.uiFramework.Genesis.web.pages.OutboundPalletPage.checkRemovedOrders(OutboundPalletPage.java:361)
+	at com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldAllowEditPalletWithAutoDeletedPallet(OutboundPalletTest.java:144)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>6</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldDeleteCustomerAccessorialSuccessfully()'><b>shouldDeleteCustomerAccessorialSuccessfully</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td><div><pre>java.lang.AssertionError: The following asserts failed:
+	Not Matched expected [Customer accessorial deleted successfully] but found [Toast message Failed]
+	at com.uiFramework.Genesis.regression.web.OrderTest.shouldDeleteCustomerAccessorialSuccessfully(OrderTest.java:159)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1155023635", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1155023635'><pre>java.lang.AssertionError: The following asserts failed:
+	Not Matched expected [Customer accessorial deleted successfully] but found [Toast message Failed]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:46)
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:30)
+	at com.uiFramework.Genesis.regression.web.OrderTest.shouldDeleteCustomerAccessorialSuccessfully(OrderTest.java:159)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>36</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldRouteOrderEditable()'><b>shouldRouteOrderEditable</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@placeholder=&apos;Route Order&apos;]&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//*[@placeholder=&apos;Route Order&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.isRouteOrderEditable(OutboundTruckPage.java:894)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldRouteOrderEditable(OutboundTruckTest.java:135)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 31 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1482088250", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1482088250'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@placeholder=&apos;Route Order&apos;]&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//*[@placeholder=&apos;Route Order&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at jdk.internal.reflect.GeneratedConstructorAccessor19.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.isRouteOrderEditable(OutboundTruckPage.java:894)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldRouteOrderEditable(OutboundTruckTest.java:135)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>9</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldAllowUserToUpdateMultipleRequestsAtOnce()'><b>shouldAllowUserToUpdateMultipleRequestsAtOnce</b><br>Test class: com.uiFramework.Genesis.regression.web.UpdateTrackingTest</td>
+<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//table/tbody/tr[1]/td[5]/div/div/div/input&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//table/tbody/tr[1]/td[5]/div/div/div/input}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.UpdateTracking.fillInputAndDate(UpdateTracking.java:312)
+	at com.uiFramework.Genesis.web.pages.UpdateTracking.enterTrackingDetailsInLoop(UpdateTracking.java:291)
+	at com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldAllowUserToUpdateMultipleRequestsAtOnce(UpdateTrackingTest.java:84)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 31 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2125981061", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2125981061'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//table/tbody/tr[1]/td[5]/div/div/div/input&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//table/tbody/tr[1]/td[5]/div/div/div/input}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at jdk.internal.reflect.GeneratedConstructorAccessor19.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.UpdateTracking.fillInputAndDate(UpdateTracking.java:312)
+	at com.uiFramework.Genesis.web.pages.UpdateTracking.enterTrackingDetailsInLoop(UpdateTracking.java:291)
+	at com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldAllowUserToUpdateMultipleRequestsAtOnce(UpdateTrackingTest.java:84)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.UpdateTrackingTest@6492fab5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldRemovePalletFromTruckAndUpdateWeightAndEmptyTruckStatus()'><b>shouldRemovePalletFromTruckAndUpdateWeightAndEmptyTruckStatus</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td><div><pre>java.lang.AssertionError: Mismatch in Total and final pieces! expected [0] but found [3]
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.RemovelastPalletFromTruck(OutboundTruckPage.java:716)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.checkPiecesanWeightWhenPalletRemoved(OutboundTruckPage.java:688)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldRemovePalletFromTruckAndUpdateWeightAndEmptyTruckStatus(OutboundTruckTest.java:205)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 33 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace192328079", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace192328079'><pre>java.lang.AssertionError: Mismatch in Total and final pieces! expected [0] but found [3]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:1419)
+	at org.testng.Assert.assertEquals(Assert.java:1383)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.RemovelastPalletFromTruck(OutboundTruckPage.java:716)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.checkPiecesanWeightWhenPalletRemoved(OutboundTruckPage.java:688)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldRemovePalletFromTruckAndUpdateWeightAndEmptyTruckStatus(OutboundTruckTest.java:205)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>20</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldShowErrorMessageIfReqFieldNotSelected()'><b>shouldShowErrorMessageIfReqFieldNotSelected</b><br>Test class: com.uiFramework.Genesis.regression.web.UpdateTrackingTest</td>
+<td><div><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//table/tbody/tr[1]/td[5]/div/div/div/input&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//table/tbody/tr[1]/td[5]/div/div/div/input}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.CommonPage.clickAndSendKeys(CommonPage.java:390)
+	at com.uiFramework.Genesis.web.pages.UpdateTracking.EnterTrkNo(UpdateTracking.java:116)
+	at com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldShowErrorMessageIfReqFieldNotSelected(UpdateTrackingTest.java:41)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 31 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1333457601", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1333457601'><pre>org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//table/tbody/tr[1]/td[5]/div/div/div/input&quot;}
+  (Session info: chrome=144.0.7559.110)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [60de00873b3b871b9a810ed6471cb5e7, findElement {using=xpath, value=//table/tbody/tr[1]/td[5]/div/div/div/input}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at jdk.internal.reflect.GeneratedConstructorAccessor19.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:52)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:602)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:359)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:353)
+	at com.uiFramework.Genesis.web.pages.CommonPage.clickAndSendKeys(CommonPage.java:390)
+	at com.uiFramework.Genesis.web.pages.UpdateTracking.EnterTrkNo(UpdateTracking.java:116)
+	at com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldShowErrorMessageIfReqFieldNotSelected(UpdateTrackingTest.java:41)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>17</td>
+<td>com.uiFramework.Genesis.regression.web.UpdateTrackingTest@6492fab5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldCreateSuccessfullyAndIncreseCountByOne()'><b>shouldCreateSuccessfullyAndIncreseCountByOne</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //tbody[@class=&apos;p-datatable-tbody&apos;]//*[@class=&apos;p-checkbox-box&apos;] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)
+	at com.uiFramework.Genesis.helper.WaitHelper.waitToClickWithAction(WaitHelper.java:256)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.routeSaveBtn(OutboundTruckPage.java:347)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldCreateSuccessfullyAndIncreseCountByOne(OutboundTruckTest.java:142)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace409790193", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace409790193'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //tbody[@class=&apos;p-datatable-tbody&apos;]//*[@class=&apos;p-checkbox-box&apos;] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)
+	at com.uiFramework.Genesis.helper.WaitHelper.waitToClickWithAction(WaitHelper.java:256)
+	at com.uiFramework.Genesis.web.pages.OutboundTruckPage.routeSaveBtn(OutboundTruckPage.java:347)
+	at com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldCreateSuccessfullyAndIncreseCountByOne(OutboundTruckTest.java:142)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>10</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldAddEditAndDeleteCarrierAccessorialSuccessfully()'><b>shouldAddEditAndDeleteCarrierAccessorialSuccessfully</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td><div><pre>java.lang.AssertionError: The following asserts failed:
+	Not matched. expected [Carrier accessorial deleted successfully] but found [Carrier accessorial save successfully]
+	at com.uiFramework.Genesis.regression.web.OrderTest.shouldAddEditAndDeleteCarrierAccessorialSuccessfully(OrderTest.java:180)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace814071547", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace814071547'><pre>java.lang.AssertionError: The following asserts failed:
+	Not matched. expected [Carrier accessorial deleted successfully] but found [Carrier accessorial save successfully]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:46)
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:30)
+	at com.uiFramework.Genesis.regression.web.OrderTest.shouldAddEditAndDeleteCarrierAccessorialSuccessfully(OrderTest.java:180)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>69</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldCheckColumnFilter()'><b>shouldCheckColumnFilter</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //*[@class=&apos;scrollable-pane&apos;]//tbody//tr[2]//td[6] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)
+	at com.uiFramework.Genesis.web.pages.CommonPage.verifyColumnFilter(CommonPage.java:2689)
+	at com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldCheckColumnFilter(InboundPalletTest.java:264)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 27 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1226630338", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1226630338'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //*[@class=&apos;scrollable-pane&apos;]//tbody//tr[2]//td[6] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.12.0&apos;, revision: &apos;249f2a7d1b*&apos;
+System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.10&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 144.0.7559.110, chrome: {chromedriverVersion: 144.0.7559.109 (6a8d5e49388..., userDataDir: C:\Users\EMP256\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52657}, goog:processID: 13300, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52657/devtoo..., se:cdpVersion: 144.0.7559.110, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 60de00873b3b871b9a810ed6471cb5e7
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)
+	at com.uiFramework.Genesis.web.pages.CommonPage.verifyColumnFilter(CommonPage.java:2689)
+	at com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldCheckColumnFilter(InboundPalletTest.java:264)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>31</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundQATest.shouldAcceptManifestForMainOrder()'><b>shouldAcceptManifestForMainOrder</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundQATest</td>
+<td><div><pre>java.lang.AssertionError: The following asserts failed:
+	Toast not Displayed For outbound QA done. expected [QA details update successfully] but found [Toast message Failed]
+	at com.uiFramework.Genesis.regression.web.OutboundQATest.shouldAcceptManifestForMainOrder(OutboundQATest.java:59)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 29 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace116300945", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace116300945'><pre>java.lang.AssertionError: The following asserts failed:
+	Toast not Displayed For outbound QA done. expected [QA details update successfully] but found [Toast message Failed]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:46)
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:30)
+	at com.uiFramework.Genesis.regression.web.OutboundQATest.shouldAcceptManifestForMainOrder(OutboundQATest.java:59)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>77</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundQATest@39a8312f</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.UpdateTrackingTest.shouldAllowUserToDownloadExcelOfGridData()'><b>shouldAllowUserToDownloadExcelOfGridData</b><br>Test class: com.uiFramework.Genesis.regression.web.UpdateTrackingTest</td>
+<td></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.UpdateTrackingTest@6492fab5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldDisplaySelectedWarehouseOrderInGrid()'><b>shouldDisplaySelectedWarehouseOrderInGrid</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>10</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundQATest.verifyToasmsgOnQAPass()'><b>verifyToasmsgOnQAPass</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundQATest</td>
+<td></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.InboundQATest@18920cc</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldApplyFiltersCorrectlyOnOutboundTruck()'><b>shouldApplyFiltersCorrectlyOnOutboundTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest<br>Parameters: {orderType=order1-50, palletQty=9, consigneename=Ashley Nguyen - 833, WaveNumber=WAVE-7890, data=Resopnse number-102912 and Instructions, litDimWeight=30, subject=data, three=3, zero=0, litDimWeightBlankError=Lit. Dim. Weight should not be blank., dimWeightError=Dim. Weight XYZ should have only numeric value., price=56, Importexceltwoorder=Importexceltwoorder.xlsx, customerpurdue=Purdue, text=New price added, dimWeightNegativeError=Dim. Weight -9 should be greater than 0., state=CA, price2=66, alphanumeric=AB-12test, zip=110021, actWeight=10, Importexcelreconsignment=Importexcelreconsignment.xlsx, EmptyTruck=waiting for load, dimWeightBlankError=Dim. Weight should not be blank., distvalue=Global Supplies Inc., decanconsignee=Andrew mark, Daytonwarehouse=Dayton Distribution Hub, Filename=Dimensional Weight Format Data, ordertypedecan=Delivery Base, litWeight=25, thirdparty=Blue Dart, litDimWeightError=Lit. Dim. Weight XYZ should have only numeric value., filename=update price, custaccess=2-Day Move (48hrs), litPieces=5, Warehouse=Bensenville Facility, defaultCost=0.00, litDimWeightNegativeError=Lit. Dim. Weight -9 should be greater than 0., ArrivedStatus=Arrived, LTL=13234 - Schneider National, city=Phoenix, Importexceloneorder=Importexceloneorder.xlsx, description=Default, carraccess=170 - 24 HOUR EXPRESS, greenconsignee=Green Valley Imports, pickupaddress=Pfizer: 410 East Grant Line Road,AMT Newyork,9537, Palletstatus=Waiting for Load, pieces=10, palletQtyzero=0, qapending=QA Pending, pickuplocation=Pfizer: 410 East Grant Line Road,AMT Newyork,9537, Numbers=19627224408691320110341568514152487869715549168578683247586979136874137817675654734697895683666244041, OrderNote=Special instructions for delivery, value=10, distaddress=Global Supplies Inc.: 1200 Supply Chain Rd., Roanoke Roslyn Heights, 2139, newcomment=Test, purdueadd=Purdue: 500 Distribution Blvd, cost=2, address=1020 street rd, duplicateordnum=Duplicate customer order number, one=1, commenttype=Complaints, QAdone=QA Done, purdueconsignee=Benjamin Garcia, emergencynum=7867897678, ordersource=Distributor, Loadstatus=truck loaded, purdueordertype=Order1-100, truckLoadstatus=Truck Loaded, ParentOrderNumber=PARENT-54321, dimWeight=20, SapOrderNumber=SAP-12345, instruction=Data should be proper, duedate=12-27-2025, Notdeleted=Inbound Truck Load Pending, comment=qwerty, custname=Deccan, customer=Pfizer}</td>
+<td></td>
+<td>52</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.CreateInboundPalletforMainOrder()'><b>CreateInboundPalletforMainOrder</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest</td>
+<td></td>
+<td>11</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundQATest.checkQAStatusforInbound()'><b>checkQAStatusforInbound</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundQATest</td>
+<td></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.InboundQATest@18920cc</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup()'><b>shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>13</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldValidateTotalPiecesAndWeightOnListingPage()'><b>shouldValidateTotalPiecesAndWeightOnListingPage</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>0</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldCheckColumnFilter()'><b>shouldCheckColumnFilter</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>94</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldShowMandatoryFieldOnSaveFiles()'><b>shouldShowMandatoryFieldOnSaveFiles</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.DocQueueTest.shouldCreateDocumentsForMainOrder()'><b>shouldCreateDocumentsForMainOrder</b><br>Test class: com.uiFramework.Genesis.regression.web.DocQueueTest</td>
+<td></td>
+<td>11</td>
+<td>com.uiFramework.Genesis.regression.web.DocQueueTest@2c5529ab</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldCalculateRatedWeightAndLitWeightCorrectly()'><b>shouldCalculateRatedWeightAndLitWeightCorrectly</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>4</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup()'><b>shouldAddPalletInEditModeWithPiecesAndWeightWithNoPopup</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest</td>
+<td></td>
+<td>19</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldSaveTypeAndsubjectReqOnComment()'><b>shouldSaveTypeAndsubjectReqOnComment</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>2</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination()'><b>shouldCreatePalletAndMaintainCheckboxSelectionAcrossPagination</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>20</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldCheckDefaultCostEstimate()'><b>shouldCheckDefaultCostEstimate</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>12</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldVerifyTruckStatusAfterTruckCreation()'><b>shouldVerifyTruckStatusAfterTruckCreation</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>0</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.verifyInboundpalletCreateSuccefully()'><b>verifyInboundpalletCreateSuccefully</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest</td>
+<td></td>
+<td>11</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldGenerateBarcodeAfterOrderConfirmation()'><b>shouldGenerateBarcodeAfterOrderConfirmation</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>17</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.DocQueueTest.shouldShowErrorMessageIfRequiredFieldNotSelected()'><b>shouldShowErrorMessageIfRequiredFieldNotSelected</b><br>Test class: com.uiFramework.Genesis.regression.web.DocQueueTest</td>
+<td></td>
+<td>3</td>
+<td>com.uiFramework.Genesis.regression.web.DocQueueTest@2c5529ab</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldVerifyPalletAvailableToAddInTruck()'><b>shouldVerifyPalletAvailableToAddInTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>12</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldFilterOrdersByVariousFieldsSuccessfully()'><b>shouldFilterOrdersByVariousFieldsSuccessfully</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>186</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldCheckMandateFiledForImportTruck()'><b>shouldCheckMandateFiledForImportTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>8</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldPerformMergeFunctionOnOutboundPallet()'><b>shouldPerformMergeFunctionOnOutboundPallet</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>9</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldCheckExcelDownloadedOnOrderPage()'><b>shouldCheckExcelDownloadedOnOrderPage</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>6</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldCreateBulkInboundTruck()'><b>shouldCreateBulkInboundTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>6</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldShowToastWhenConfirmingWithoutWeightOrPieces()'><b>shouldShowToastWhenConfirmingWithoutWeightOrPieces</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>7</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldSaveCustomerAccessorialAfterDeleteAndValidateCarrierValidation()'><b>shouldSaveCustomerAccessorialAfterDeleteAndValidateCarrierValidation</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>12</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldCreateTruckSuccessfullyAndVerifyTotalPiecesAndPalletQty()'><b>shouldCreateTruckSuccessfullyAndVerifyTotalPiecesAndPalletQty</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>24</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldUploadFileAndShowSuccessToast()'><b>shouldUploadFileAndShowSuccessToast</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>3</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldCreateOutboundPalletSuccessfully()'><b>shouldCreateOutboundPalletSuccessfully</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>9</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldApplyColumnFilterOnOutboundTruckCreatePage()'><b>shouldApplyColumnFilterOnOutboundTruckCreatePage</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td></td>
+<td>35</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldDisplayToastMessageOnCreateObtTruck()'><b>shouldDisplayToastMessageOnCreateObtTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td></td>
+<td>18</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldAddPalletInEditModeWithCalculationsAndShouldUpdateStatus()'><b>shouldAddPalletInEditModeWithCalculationsAndShouldUpdateStatus</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td></td>
+<td>66</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldAddPalletInEditModeWithCalculations()'><b>shouldAddPalletInEditModeWithCalculations</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>29</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldCheckPDFDownloadedOnOrderPage()'><b>shouldCheckPDFDownloadedOnOrderPage</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>7</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldUpdatePalletStatusAfterPalletCreation()'><b>shouldUpdatePalletStatusAfterPalletCreation</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>3</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldApplyColumnFilterForOutboundTruck()'><b>shouldApplyColumnFilterForOutboundTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td></td>
+<td>33</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldCreateMultiplePallet()'><b>shouldCreateMultiplePallet</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest</td>
+<td></td>
+<td>28</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.ConsigneeQATest.shouldValidateReceivedOrderPiecesWhenMarkSameQtyBtnClicked()'><b>shouldValidateReceivedOrderPiecesWhenMarkSameQtyBtnClicked</b><br>Test class: com.uiFramework.Genesis.regression.web.ConsigneeQATest</td>
+<td></td>
+<td>0</td>
+<td>com.uiFramework.Genesis.regression.web.ConsigneeQATest@5f6722d3</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldShowErrorWhenSavingEmptyCustomerAccessorial()'><b>shouldShowErrorWhenSavingEmptyCustomerAccessorial</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>10</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldApplyFiltersCorrectlyOnInboundTruck()'><b>shouldApplyFiltersCorrectlyOnInboundTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest<br>Parameters: {orderType=order1-50, palletQty=9, consigneename=Ashley Nguyen - 833, WaveNumber=WAVE-7890, data=Resopnse number-102912 and Instructions, litDimWeight=30, subject=data, three=3, zero=0, litDimWeightBlankError=Lit. Dim. Weight should not be blank., dimWeightError=Dim. Weight XYZ should have only numeric value., price=56, Importexceltwoorder=Importexceltwoorder.xlsx, customerpurdue=Purdue, text=New price added, dimWeightNegativeError=Dim. Weight -9 should be greater than 0., state=CA, price2=66, alphanumeric=AB-12test, zip=110021, actWeight=10, Importexcelreconsignment=Importexcelreconsignment.xlsx, EmptyTruck=waiting for load, dimWeightBlankError=Dim. Weight should not be blank., distvalue=Global Supplies Inc., decanconsignee=Andrew mark, Daytonwarehouse=Dayton Distribution Hub, Filename=Dimensional Weight Format Data, ordertypedecan=Delivery Base, litWeight=25, thirdparty=Blue Dart, litDimWeightError=Lit. Dim. Weight XYZ should have only numeric value., filename=update price, custaccess=2-Day Move (48hrs), litPieces=5, Warehouse=Bensenville Facility, defaultCost=0.00, litDimWeightNegativeError=Lit. Dim. Weight -9 should be greater than 0., ArrivedStatus=Arrived, LTL=13234 - Schneider National, city=Phoenix, Importexceloneorder=Importexceloneorder.xlsx, description=Default, carraccess=170 - 24 HOUR EXPRESS, greenconsignee=Green Valley Imports, pickupaddress=Pfizer: 410 East Grant Line Road,AMT Newyork,9537, Palletstatus=Waiting for Load, pieces=10, palletQtyzero=0, qapending=QA Pending, pickuplocation=Pfizer: 410 East Grant Line Road,AMT Newyork,9537, Numbers=19627224408691320110341568514152487869715549168578683247586979136874137817675654734697895683666244041, OrderNote=Special instructions for delivery, value=10, distaddress=Global Supplies Inc.: 1200 Supply Chain Rd., Roanoke Roslyn Heights, 2139, newcomment=Test, purdueadd=Purdue: 500 Distribution Blvd, cost=2, address=1020 street rd, duplicateordnum=Duplicate customer order number, one=1, commenttype=Complaints, QAdone=QA Done, purdueconsignee=Benjamin Garcia, emergencynum=7867897678, ordersource=Distributor, Loadstatus=truck loaded, purdueordertype=Order1-100, truckLoadstatus=Truck Loaded, ParentOrderNumber=PARENT-54321, dimWeight=20, SapOrderNumber=SAP-12345, instruction=Data should be proper, duedate=12-27-2025, Notdeleted=Inbound Truck Load Pending, comment=qwerty, custname=Deccan, customer=Pfizer}</td>
+<td></td>
+<td>56</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.ConsigneeQATest.shouldDisplayEditableFieldsForTrackingUpdatedRequest()'><b>shouldDisplayEditableFieldsForTrackingUpdatedRequest</b><br>Test class: com.uiFramework.Genesis.regression.web.ConsigneeQATest</td>
+<td></td>
+<td>28</td>
+<td>com.uiFramework.Genesis.regression.web.ConsigneeQATest@5f6722d3</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldDisplayPalletStatusInListingAfterObtPalletCreation()'><b>shouldDisplayPalletStatusInListingAfterObtPalletCreation</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>0</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldRemovePalletFromTruckAndUpdateWeightAndEmptyStatus()'><b>shouldRemovePalletFromTruckAndUpdateWeightAndEmptyStatus</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>12</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldApplyColumnFilterCorrectlyOnInboundTruck()'><b>shouldApplyColumnFilterCorrectlyOnInboundTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>32</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldKeepConsigneeDropdownEmptyUntilCustomerSelected()'><b>shouldKeepConsigneeDropdownEmptyUntilCustomerSelected</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>74</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldCreateOutboundPalletForMainOrder()'><b>shouldCreateOutboundPalletForMainOrder</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>13</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.DocQueueTest.shouldRetrieveDocumentsForMainOrder()'><b>shouldRetrieveDocumentsForMainOrder</b><br>Test class: com.uiFramework.Genesis.regression.web.DocQueueTest</td>
+<td></td>
+<td>13</td>
+<td>com.uiFramework.Genesis.regression.web.DocQueueTest@2c5529ab</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldVerifyDraftOrderStatusAfterSave()'><b>shouldVerifyDraftOrderStatusAfterSave</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>10</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldUpdateTruckStatusOnMarkAsArrived()'><b>shouldUpdateTruckStatusOnMarkAsArrived</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>12</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldApplyFiltersCorrectlyOnInboundPallet()'><b>shouldApplyFiltersCorrectlyOnInboundPallet</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest<br>Parameters: {orderType=order1-50, palletQty=9, consigneename=Ashley Nguyen - 833, WaveNumber=WAVE-7890, data=Resopnse number-102912 and Instructions, litDimWeight=30, subject=data, three=3, zero=0, litDimWeightBlankError=Lit. Dim. Weight should not be blank., dimWeightError=Dim. Weight XYZ should have only numeric value., price=56, Importexceltwoorder=Importexceltwoorder.xlsx, customerpurdue=Purdue, text=New price added, dimWeightNegativeError=Dim. Weight -9 should be greater than 0., state=CA, price2=66, alphanumeric=AB-12test, zip=110021, actWeight=10, Importexcelreconsignment=Importexcelreconsignment.xlsx, EmptyTruck=waiting for load, dimWeightBlankError=Dim. Weight should not be blank., distvalue=Global Supplies Inc., decanconsignee=Andrew mark, Daytonwarehouse=Dayton Distribution Hub, Filename=Dimensional Weight Format Data, ordertypedecan=Delivery Base, litWeight=25, thirdparty=Blue Dart, litDimWeightError=Lit. Dim. Weight XYZ should have only numeric value., filename=update price, custaccess=2-Day Move (48hrs), litPieces=5, Warehouse=Bensenville Facility, defaultCost=0.00, litDimWeightNegativeError=Lit. Dim. Weight -9 should be greater than 0., ArrivedStatus=Arrived, LTL=13234 - Schneider National, city=Phoenix, Importexceloneorder=Importexceloneorder.xlsx, description=Default, carraccess=170 - 24 HOUR EXPRESS, greenconsignee=Green Valley Imports, pickupaddress=Pfizer: 410 East Grant Line Road,AMT Newyork,9537, Palletstatus=Waiting for Load, pieces=10, palletQtyzero=0, qapending=QA Pending, pickuplocation=Pfizer: 410 East Grant Line Road,AMT Newyork,9537, Numbers=19627224408691320110341568514152487869715549168578683247586979136874137817675654734697895683666244041, OrderNote=Special instructions for delivery, value=10, distaddress=Global Supplies Inc.: 1200 Supply Chain Rd., Roanoke Roslyn Heights, 2139, newcomment=Test, purdueadd=Purdue: 500 Distribution Blvd, cost=2, address=1020 street rd, duplicateordnum=Duplicate customer order number, one=1, commenttype=Complaints, QAdone=QA Done, purdueconsignee=Benjamin Garcia, emergencynum=7867897678, ordersource=Distributor, Loadstatus=truck loaded, purdueordertype=Order1-100, truckLoadstatus=Truck Loaded, ParentOrderNumber=PARENT-54321, dimWeight=20, SapOrderNumber=SAP-12345, instruction=Data should be proper, duedate=12-27-2025, Notdeleted=Inbound Truck Load Pending, comment=qwerty, custname=Deccan, customer=Pfizer}</td>
+<td></td>
+<td>43</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldSaveCarrierAccessorialAfterDeleteAndValidateCommentValidation()'><b>shouldSaveCarrierAccessorialAfterDeleteAndValidateCommentValidation</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>7</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundQATest.verifyPalletAvailable()'><b>verifyPalletAvailable</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundQATest</td>
+<td></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.InboundQATest@18920cc</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldValidateFullAddressDetails()'><b>shouldValidateFullAddressDetails</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>0</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldMatchOrderDetailsOnListingPage()'><b>shouldMatchOrderDetailsOnListingPage</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>12</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldSaveCommentAfterDelete()'><b>shouldSaveCommentAfterDelete</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>16</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.ConsigneeQATest.shouldAllowUserToCompleteRequest()'><b>shouldAllowUserToCompleteRequest</b><br>Test class: com.uiFramework.Genesis.regression.web.ConsigneeQATest</td>
+<td></td>
+<td>14</td>
+<td>com.uiFramework.Genesis.regression.web.ConsigneeQATest@5f6722d3</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldDisplayToastMessageOnCreateTruck()'><b>shouldDisplayToastMessageOnCreateTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>23</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldPalletAvailableToCreateOutboundTruck()'><b>shouldPalletAvailableToCreateOutboundTruck</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td></td>
+<td>15</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldApplyColumnFilterCorrectlyOnInboundTruckCreate()'><b>shouldApplyColumnFilterCorrectlyOnInboundTruckCreate</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>40</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OrderTest.shouldDisplayOrderFormOnCreateButtonClick()'><b>shouldDisplayOrderFormOnCreateButtonClick</b><br>Test class: com.uiFramework.Genesis.regression.web.OrderTest</td>
+<td></td>
+<td>5</td>
+<td>com.uiFramework.Genesis.regression.web.OrderTest@6ad59d92</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundTruckTest.shouldDisplayTruckDetailsInEditMode()'><b>shouldDisplayTruckDetailsInEditMode</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundTruckTest</td>
+<td></td>
+<td>3</td>
+<td>com.uiFramework.Genesis.regression.web.InboundTruckTest@6ebf0f36</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundPalletTest.shouldApplyColumnFiltersOnCreateInboundPallet()'><b>shouldApplyColumnFiltersOnCreateInboundPallet</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundPalletTest</td>
+<td></td>
+<td>48</td>
+<td>com.uiFramework.Genesis.regression.web.InboundPalletTest@6b3e12b5</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundPalletTest.shouldCreateSinglePalletOnMergeClick()'><b>shouldCreateSinglePalletOnMergeClick</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundPalletTest</td>
+<td></td>
+<td>1</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundPalletTest@2807bdeb</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.DocQueueTest.shouldCheckColumnFilterOnSplitPOD()'><b>shouldCheckColumnFilterOnSplitPOD</b><br>Test class: com.uiFramework.Genesis.regression.web.DocQueueTest</td>
+<td></td>
+<td>24</td>
+<td>com.uiFramework.Genesis.regression.web.DocQueueTest@2c5529ab</td></tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.InboundQATest.shouldCheckColumnFilterOnInboundQA()'><b>shouldCheckColumnFilterOnInboundQA</b><br>Test class: com.uiFramework.Genesis.regression.web.InboundQATest</td>
+<td></td>
+<td>25</td>
+<td>com.uiFramework.Genesis.regression.web.InboundQATest@18920cc</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldUpdateTruckStatusAfterTruckCreation()'><b>shouldUpdateTruckStatusAfterTruckCreation</b><br>Test class: com.uiFramework.Genesis.regression.web.OutboundTruckTest</td>
+<td><div><pre>java.lang.Throwable: Method com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldUpdateTruckStatusAfterTruckCreation() on instance com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64 depends on not successfully finished methods 
+[com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldCreateSuccessfullyAndIncreseCountByOne() on instance com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+... Removed 18 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1740268424", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1740268424'><pre>java.lang.Throwable: Method com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldUpdateTruckStatusAfterTruckCreation() on instance com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64 depends on not successfully finished methods 
+[com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldCreateSuccessfullyAndIncreseCountByOne() on instance com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+</pre></div></td>
+<td>0</td>
+<td>com.uiFramework.Genesis.regression.web.OutboundTruckTest@72c28d64</td></tr>
+</table><p>
+</body>
+</html>

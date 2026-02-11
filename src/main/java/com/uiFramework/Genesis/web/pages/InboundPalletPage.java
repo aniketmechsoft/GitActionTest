@@ -204,6 +204,7 @@ public class InboundPalletPage extends OrderPage {
 
     public int getTotalEntriesCount(WebDriver driver) {
         cp.waitForLoaderToDisappear();
+        cp.waitForPopupToDisappear();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -813,8 +814,7 @@ public class InboundPalletPage extends OrderPage {
             safeClick(addPallet);
             cp.captureToastMessage();
           sAssert.assertEquals("Please enter pallet quantity first." , "Please enter pallet quantity first." ,"Not Match!");
-            addPalletQty(qty);
-            
+            addPalletQty(qty);    
 
         } else {
             throw new SkipException("Skipped because no GL- orders available.");
@@ -826,6 +826,7 @@ public class InboundPalletPage extends OrderPage {
         cp.waitForLoaderToDisappear();
         clearAndType(rpalletqty, qty);
         safeClick(addPallet);
+        cp.waitForLoaderToDisappear();
         cp.waitForPopupToDisappear();
         sAssert.assertEquals(getPalletQtyAdd(), getPalletQtyRemove(), "Pallet quantity not same on Edit Inbound pallet");
         sAssert.assertAll();
@@ -842,6 +843,7 @@ public class InboundPalletPage extends OrderPage {
     }
 
     public String getPalletQty() {
+    	cp.waitForLoaderToDisappear();
         return cp.getMandatoryText(palletQty);
     }
 

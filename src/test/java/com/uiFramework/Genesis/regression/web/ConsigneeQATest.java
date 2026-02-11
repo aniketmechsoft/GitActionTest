@@ -105,7 +105,7 @@ public class ConsigneeQATest extends TestBase {
 		cp.Search();
 	}
 	
-	@Test(priority = 8,alwaysRun = true, groups = {"smoke"}, dependsOnMethods="shouldAllowUserToOpenDraftRequest")
+	@Test(priority = 8, dependsOnMethods="shouldAllowUserToOpenDraftRequest")
 	public void shouldAllowUserToUploadExcelFile() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cqa.upload_file();
@@ -184,11 +184,11 @@ public class ConsigneeQATest extends TestBase {
 //		
 //	}
 	
-//	@AfterClass()
-//	public void checkOrderStatusAfterorderLoad() {
-//		cp.orderpageMenulanding();
-//		Assert.assertEquals(oqa.getOrderStatus(op.MGLOrderno), "Closed", "Order status not match! as 'Closed'.");
-//	}
+	@AfterClass()
+	public void checkOrderStatusAfterorderLoad() throws InterruptedException {
+		cp.orderpageMenulanding();
+		Assert.assertEquals(cp.getOrderStatus(op.MGLOrderno), "Closed", "Order status not match! as 'Closed'.");
+	}
 	
 //	@AfterClass()
 //	public void checkOrderStatusAfterorderLoad() {

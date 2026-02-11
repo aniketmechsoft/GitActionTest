@@ -2,51 +2,51 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-01-28T18:23:29 IST" name="Suite" finished-at="2026-01-28T18:23:52 IST" duration-ms="22498">
+  <suite started-at="2026-02-11T16:34:22 IST" name="Default suite" finished-at="2026-02-11T16:35:22 IST" duration-ms="59417">
     <groups>
-      <group name="regression1">
-        <method signature="PRTest.shouldNotDisplayedToastOnInboundPalletPage()[pri:16, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" name="shouldNotDisplayedToastOnInboundPalletPage" class="com.uiFramework.Genesis.regression.web.PRTest"/>
-        <method signature="PRTest.shouldNotDisplayedToastOnInboundPalletCreatePage()[pri:17, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" name="shouldNotDisplayedToastOnInboundPalletCreatePage" class="com.uiFramework.Genesis.regression.web.PRTest"/>
-      </group> <!-- regression1 -->
+      <group name="smoke">
+        <method signature="OutboundTruckTest.shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck()[pri:7, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" name="shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck" class="com.uiFramework.Genesis.regression.web.OutboundTruckTest"/>
+        <method signature="OutboundTruckTest.shouldRouteOrderEditable()[pri:8, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" name="shouldRouteOrderEditable" class="com.uiFramework.Genesis.regression.web.OutboundTruckTest"/>
+      </group> <!-- smoke -->
     </groups>
-    <test started-at="2026-01-28T18:23:29 IST" name="regression1" finished-at="2026-01-28T18:23:52 IST" duration-ms="22498">
-      <class name="com.uiFramework.Genesis.regression.web.PRTest">
-        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:18 IST" name="beforeSuite" finished-at="2026-01-28T18:23:29 IST" duration-ms="11462" status="PASS">
+    <test started-at="2026-02-11T16:34:22 IST" name="Default test" finished-at="2026-02-11T16:35:22 IST" duration-ms="59417">
+      <class name="com.uiFramework.Genesis.regression.web.OutboundTruckTest">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:34:13 IST" name="beforeSuite" finished-at="2026-02-11T16:34:22 IST" duration-ms="9696" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method is-config="true" signature="setupSuite(org.testng.ITestContext)[pri:0, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:30 IST" name="setupSuite" finished-at="2026-01-28T18:23:30 IST" duration-ms="9" status="PASS">
+        <test-method is-config="true" signature="setupSuite(org.testng.ITestContext)[pri:0, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:34:22 IST" name="setupSuite" finished-at="2026-02-11T16:34:23 IST" duration-ms="10" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1c7cd434]]>
+                <![CDATA[org.testng.TestRunner@6cc8c13c]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupSuite -->
-        <test-method is-config="true" signature="beforeclass()[pri:0, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:30 IST" name="beforeclass" finished-at="2026-01-28T18:23:30 IST" duration-ms="241" status="PASS">
+        <test-method is-config="true" signature="befreclass()[pri:0, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:34:23 IST" name="befreclass" finished-at="2026-02-11T16:34:23 IST" duration-ms="36" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeclass -->
-        <test-method signature="shouldNotDisplayedToastOnInboundPalletPage()[pri:16, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:30 IST" name="shouldNotDisplayedToastOnInboundPalletPage" finished-at="2026-01-28T18:23:41 IST" duration-ms="11515" status="PASS">
+        </test-method> <!-- befreclass -->
+        <test-method signature="shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck()[pri:7, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:34:23 IST" name="shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck" finished-at="2026-02-11T16:35:05 IST" duration-ms="42358" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- shouldNotDisplayedToastOnInboundPalletPage -->
-        <test-method signature="shouldNotDisplayedToastOnInboundPalletCreatePage()[pri:17, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:41 IST" name="shouldNotDisplayedToastOnInboundPalletCreatePage" finished-at="2026-01-28T18:23:52 IST" duration-ms="10519" status="PASS">
+        </test-method> <!-- shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck -->
+        <test-method signature="shouldRouteOrderEditable()[pri:8, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:35:05 IST" name="shouldRouteOrderEditable" finished-at="2026-02-11T16:35:22 IST" depends-on-methods="com.uiFramework.Genesis.regression.web.OutboundTruckTest.shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck" duration-ms="16804" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- shouldNotDisplayedToastOnInboundPalletCreatePage -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:52 IST" name="tearDown" finished-at="2026-01-28T18:23:53 IST" duration-ms="17" status="PASS">
+        </test-method> <!-- shouldRouteOrderEditable -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:35:22 IST" name="tearDown" finished-at="2026-02-11T16:35:23 IST" duration-ms="564" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="flushReport()[pri:0, instance:com.uiFramework.Genesis.regression.web.PRTest@77825085]" started-at="2026-01-28T18:23:53 IST" name="flushReport" finished-at="2026-01-28T18:23:53 IST" depends-on-methods="com.uiFramework.Genesis.base.TestBase.tearDown" duration-ms="15" status="PASS">
+        <test-method is-config="true" signature="flushReport()[pri:0, instance:com.uiFramework.Genesis.regression.web.OutboundTruckTest@5f0e9815]" started-at="2026-02-11T16:35:23 IST" name="flushReport" finished-at="2026-02-11T16:35:23 IST" depends-on-methods="com.uiFramework.Genesis.base.TestBase.tearDown" duration-ms="25" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReport -->
-      </class> <!-- com.uiFramework.Genesis.regression.web.PRTest -->
-    </test> <!-- regression1 -->
-  </suite> <!-- Suite -->
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundTruckTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

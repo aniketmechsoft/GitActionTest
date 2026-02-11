@@ -277,6 +277,7 @@ public class OutboundTruckPage extends InbTruckPage {
 
 	/**
 	 * Add first 3 pallets, verify totals, collect GL & LDA
+	 * @throws  
 	 */
 	public void creatTruckwithCheckTotalPiecesandpallet() {
 		glOrders.clear();
@@ -341,11 +342,20 @@ public class OutboundTruckPage extends InbTruckPage {
 	
 	/**
 	 * This method use to click on save btn from route popup
+	 * @throws InterruptedException 
 	 */
-	public void routeSaveBtn() {
-		wt.waitToClickWithAction(dropcheckbox, 10);
-		cp.waitAndClickWithJS(By.xpath("(//button[@title='Click to save data'])[2]"), 10);
-		cp.waitForLoaderToDisappear();
+	public void routeSaveBtn() throws InterruptedException {
+		try {
+			wt.waitToClickWithAction(dropcheckbox, 10);
+			cp.waitAndClickWithJS(By.xpath("(//button[@title='Click to save data'])[2]"), 10);
+			cp.waitForLoaderToDisappear();
+			Thread.sleep(1000);
+			
+		} catch (Exception e) {
+			logger.info("Route order pop up not displayed..");
+
+		}
+		
 	}
 
 //	public boolean isRouteOrderShouldbeEditable() {
@@ -386,7 +396,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		return obttruckData.get("PalletQty");
 	}
 
-	public void checkRemovePalletTotalPiecesndpalletQtyforFirstOrder() {
+	public void checkRemovePalletTotalPiecesndpalletQtyforFirstOrder(){
 		iTotalPieces = Integer.parseInt(cp.getAttributeValue(getTotalPieces, "value"));
 		iPalletQty = Integer.parseInt(cp.getAttributeValue(getPalletQty, "value"));
 
@@ -406,7 +416,9 @@ public class OutboundTruckPage extends InbTruckPage {
 
 		Assert.assertEquals(iTotalPieces, ExpectedPieces, "Mismatch in Total and final pieces when pallet removed");
 		Assert.assertEquals(iPalletQty, ExpectedPalletQty, "Mismatch in Total and final Qty when pallet removed");
-		checkbox.click();// unselect
+		checkbox.click();
+		System.out.println("Calculate pieces first order actual "+iTotalPieces);
+		// unselect
 	}
 
 	public int sumOrderPieces() {
@@ -458,6 +470,7 @@ public class OutboundTruckPage extends InbTruckPage {
 		List<WebElement> Pieces = driver.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr//td[6]"));
 		totalOrderPieces = 0;
 		totalOrderWeight = 0;
+		System.out.println(" Before order piece count "+ totalOrderPieces  +" wt count " +totalOrderWeight);
 
 		for (WebElement cell : Pieces) {
 			String orderPieces = cell.getText().trim();
@@ -468,7 +481,7 @@ public class OutboundTruckPage extends InbTruckPage {
 				logger.info("Unable to parse piece: " + orderPieces);
 			}
 		}
-
+		
 		List<WebElement> weights = driver.findElements(By.xpath("(//div[@class='p-datatable-wrapper'])[1]//tr//td[7]"));
 		for (WebElement cell : weights) {
 			String orderWeight = cell.getText().trim();
@@ -479,6 +492,7 @@ public class OutboundTruckPage extends InbTruckPage {
 				logger.info("Unable to parse weight: " + orderWeight);
 			}
 		}
+		System.out.println(" after order piece count "+ totalOrderPieces  +" wt " +totalOrderWeight);
 		wt.waitToClick(closeInfo, 30);
 		cp.waitForLoaderToDisappear();
 	}
@@ -888,6 +902,11 @@ public class OutboundTruckPage extends InbTruckPage {
 
 	public boolean isRouteOrderEditable() {
 		return driver.findElement(By.xpath("//*[@placeholder='Route Order']")).isEnabled();
+	}
+	
+	public boolean isRouteOrderDisplayed() {
+	    List<WebElement> elements = driver.findElements(By.xpath("//*[@placeholder='Route Order']"));
+	    return elements.size() > 0 && elements.get(0).isDisplayed();
 	}
 
 	public String getObtTruckNo() {

@@ -3,17 +3,25 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.uiFramework.Genesis.regression.web.InboundPalletTest">
+      <class name="com.uiFramework.Genesis.regression.web.OutboundTruckTest">
         <methods>
-          <include name="befreclass"/>
+          <include name="shouldCreateSuccessfullyAndIncreseCountByOne"/>
+          <include name="shouldNotAllowAddedPalletToCreateOutboundTruck"/>
           <include name="flushReport"/>
-          <include name="tearDown"/>
+          <include name="shouldNotAllowMultiDropLocationForNonUPS"/>
+          <include name="shouldAllowEditingLTL3rdPartyAndCostEstimate"/>
           <include name="setupSuite"/>
           <include name="beforeSuite"/>
-          <include name="shouldCheckOrderStatusAfterInoundPalletCreate"/>
-          <include name="shouldVerifyPalletQuantityAndStatusForInboundPallet"/>
+          <include name="shouldPalletAvailableToCreateOutboundTruck"/>
+          <include name="shouldVerifyCreatedTruckDetailsAndPalletQtyMatch"/>
+          <include name="shouldDisplayLDACodesCorrectlyOnListing"/>
+          <include name="tearDown"/>
+          <include name="shouldAddPalletInEditModeWithCalculationsAndShouldUpdateStatus"/>
+          <include name="shouldDisplayTruckDetailsInEditOutboundTruckMode"/>
+          <include name="shouldVerifyAddedPalletWTandPiecesLoadedIntoTruck"/>
+          <include name="befreclass"/>
         </methods>
-      </class> <!-- com.uiFramework.Genesis.regression.web.InboundPalletTest -->
+      </class> <!-- com.uiFramework.Genesis.regression.web.OutboundTruckTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

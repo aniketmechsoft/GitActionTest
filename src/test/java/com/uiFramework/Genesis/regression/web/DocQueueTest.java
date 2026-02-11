@@ -33,7 +33,7 @@ public class DocQueueTest extends TestBase {
 
 	}
 
-	@Test(priority = 3,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 3,alwaysRun = true, groups = {"smoke"})
 	public void shouldShowErrorMessageIfRequiredFieldNotSelected() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.docQueueMenu();
@@ -152,7 +152,7 @@ public class DocQueueTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 15, alwaysRun = true)
+	@Test(priority = 15, alwaysRun = true,groups = {"smoke"})
 	public void shouldCreateDocumentsForMainOrder() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		dc.ClickDocGen();
@@ -164,7 +164,7 @@ public class DocQueueTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 16,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 16,alwaysRun = true, groups = {"smoke"})
 	public void shouldRetrieveDocumentsForMainOrder() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert1 = new SoftAssert();
 		dc.clickGeneratedDoc();
@@ -174,7 +174,7 @@ public class DocQueueTest extends TestBase {
 	}
 	
 	//Split POD
-	@Test(priority = 17, alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 17, alwaysRun = true, groups = {"smoke"})
 	public void shouldCheckColumnFilterOnSplitPOD() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		//dc.docQueueMenu();

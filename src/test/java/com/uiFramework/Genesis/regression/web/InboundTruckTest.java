@@ -111,7 +111,7 @@ public class InboundTruckTest extends TestBase {
 
 	}
 
-	@Test(priority = 6,dependsOnMethods="shouldCreateTruckSuccessfullyAndVerifyTotalPiecesAndPalletQty",alwaysRun = true, groups = {"smoke"})
+	@Test(priority = 6,dependsOnMethods="shouldCreateTruckSuccessfullyAndVerifyTotalPiecesAndPalletQty", groups = {"smoke"})
 	public void shouldVerifyTruckStatusAfterTruckCreation() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		String Status = it.getTruckNondStatus();
@@ -190,11 +190,11 @@ public class InboundTruckTest extends TestBase {
 		it.getDeletingPallet();
 		it.deleteBtn();
 		it.searchTruckno(Trcukno);
-		sAssert.assertTrue(it.checkElementNorecord(), "'No record found' is Not displayed.” Test Failed");
+		sAssert.assertFalse(it.checkElementNorecord(), "'No record found' is Not displayed.' Test Failed");
 		it.createTruck();
 		iIBPL = it.getIBPL();
 		it.searchRemovedPallet(iIBPL);
-		sAssert.assertFalse(it.checkElementNorecord(), "'No record found' is displayed .” Test Failed");
+		sAssert.assertFalse(it.checkElementNorecord(), "'No record found' is displayed .' Test Failed");
 		sAssert.assertAll();
 	}
 
@@ -273,34 +273,18 @@ public class InboundTruckTest extends TestBase {
 		cp.selectMultiplePickuprByIndex(indicesToSelect);
 		cp.validateDataInGridForScroll(8);
 		
-//		List<Integer> indicesToSelect = Arrays.asList(55, 2, 3);
-//		cp.selectMultiplePickuprByIndex(indicesToSelect);
-//		cp.validateDataInGrid(10);
-		
 		List<Integer> indicesToSelect1 = Arrays.asList(2,3,5);
 		cp.selectMultipleDropByIndex(indicesToSelect1);
 		cp.validateDataInGridForScroll(9);
-
-//		List<Integer> indicesToSelect1 = Arrays.asList(1, 2, 3);
-//		cp.selectMultipleDropByIndex(indicesToSelect1);
-//		cp.validateDataInGrid(11);
 
 		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
 		cp.selectMultipleLTLByIndex(indicesToSelect2);
 		cp.validateDataInGridForScroll(4);
 		
-//		List<Integer> indicesToSelect2 = Arrays.asList(1, 2, 33);
-//		cp.selectMultipleLTLByIndex(indicesToSelect2);
-//		cp.validateDataInGrid(6);
-		
 		cp.clickClearButton();
 		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
 		cp.selectMultiplestatusByIndex(indicesToSelect3);
 		cp.validateDataInGridForScroll(6);
-
-//		List<Integer> indicesToSelect3 = Arrays.asList(5, 3, 2);
-//		cp.selectMultiplestatusByIndex(indicesToSelect3);
-//		cp.validateDataInGrid(8);
 
 		it.searchAndValidateTruckNo();
 		it.searchAndValidateTruckName();

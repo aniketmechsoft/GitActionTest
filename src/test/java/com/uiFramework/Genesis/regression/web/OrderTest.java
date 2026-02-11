@@ -168,7 +168,6 @@ public class OrderTest extends TestBase {
 		sAssert.assertEquals(op.addCarrAccessorial(), "Carrier Accessorial is required. | Price is required.",
 				"Not matched.");
 		sAssert.assertAll();
-
 	}
 
 	@Test(priority = 14,alwaysRun = true, groups = {"smoke"})
@@ -207,8 +206,7 @@ public class OrderTest extends TestBase {
 	}
 
 	@Test(priority = 18,alwaysRun = true, groups = {"smoke"})
-	public void shouldSaveCommentAfterDelete()
-			throws Throwable {
+	public void shouldSaveCommentAfterDelete()throws Throwable {
 		SoftAssert sAssert = new SoftAssert();
 		op.saveCommentAfterDelete("Contact", DataRepo.SUBJECT, DataRepo.COMMENT);
 		sAssert.assertEquals(cp.getToastMessage(), "Comment save successfully", "Not match!");
@@ -404,7 +402,7 @@ public class OrderTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 35, enabled = true)
+	@Test(priority = 35, enabled = true, groups = {"smoke"})
 	public void shouldFilterOrdersByVariousFieldsSuccessfully() throws InterruptedException {
 		op.landingOrderListing();
 		cp.searchClick();
@@ -414,21 +412,27 @@ public class OrderTest extends TestBase {
 		List<Integer> indicesToSelect = Arrays.asList(13, 2, 8);
 		cp.selectMultipleConsigneesByIndex(indicesToSelect);
 		cp.validateDataInGridForScrollForConsignee(5);
+		
 		List<Integer> indicesToSelect2 = Arrays.asList(6, 9, 8);
 		cp.selectMultipleDistributorByIndex(indicesToSelect2);
 		cp.validateDataInGridForScroll(2);
+		
 		List<Integer> indicesToSelect3 = Arrays.asList(86, 4, 3);
 		cp.selectMultipleLDAByIndex(indicesToSelect3);
 		cp.validateDataInGridForScroll(8);
+		
 		List<Integer> indicesToSelect4 = Arrays.asList(1, 2, 11);
 		cp.selectMultipleLTLByIndex(indicesToSelect4);
 		cp.validateDataInGridForScroll(9);
+		
 		List<Integer> indicesToSelect5 = Arrays.asList(6, 19, 14);
 		cp.selectMultipleUsersByIndex(indicesToSelect5);
 		cp.validateDataInGridForScroll(16);
+		
 		List<Integer> indicesToSelect6 = Arrays.asList(1, 2, 4);
 		cp.selectMultipleWarehouseByIndex(indicesToSelect6);
 		cp.validateDataInGridForScroll(1);
+		
 		List<Integer> indicesToSelect7 = Arrays.asList(1, 2, 3);
 		cp.selectMultipleCreationModeByIndex(indicesToSelect7);
 		cp.validateDataInGridForScroll(13);
@@ -447,6 +451,7 @@ public class OrderTest extends TestBase {
 	public void shouldCheckColumnFilter() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		op.landingOrderListing();
+		cp.clickClearButton();
 		cp.verifyColumnFilter("frozen-pane");
 		cp.verifyColumnFilter("scrollable-pane");
 		sAssert.assertAll();
@@ -467,7 +472,7 @@ public class OrderTest extends TestBase {
 //		op.paginationTest();
 //	}
 	
-	@Test(priority = 37, alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 37, alwaysRun = true, groups = {"smoke"})
 	public void shouldCheckPDFDownloadedOnOrderPage() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.deleteExistingFiles();
@@ -476,7 +481,7 @@ public class OrderTest extends TestBase {
 		sAssert.assertAll();
 	}
 	
-	@Test(priority = 38, alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 38, alwaysRun = true, groups = {"smoke"})
 	public void shouldCheckExcelDownloadedOnOrderPage() throws InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		cp.deleteExistingFiles();

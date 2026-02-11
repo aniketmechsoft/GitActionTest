@@ -499,11 +499,12 @@ public class OrderPage {
 		cp.waitForPopupToDisappear();
 	}
 
-	public void deleteCustAccess() {
+	public void deleteCustAccess() throws InterruptedException {
 		cp.waitForLoaderToDisappear();
 		cp.waitForPopupToDisappear();
 		cp.waitForLoaderToDisappear();
 		safeClick(delete);
+		Thread.sleep(500);
 		safeClick(yesbutton);
 	}
 
@@ -954,7 +955,8 @@ public class OrderPage {
 	}
 
 	By barcode=By.xpath("(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[1]");
-	public void untickBarcodeGenertion() {
+	public void untickBarcodeGenertion() throws InterruptedException {
+		Thread.sleep(400);
 		safeClick(barcode);
 		//driver.findElement(By.xpath("(//input[@class='PrivateSwitchBase-input css-1m9pwf3'])[1]")).click();
 		logger.info("barcode untick for order no." + cp.getMandatoryText(By.xpath("//table/tbody/tr/td[4]")));

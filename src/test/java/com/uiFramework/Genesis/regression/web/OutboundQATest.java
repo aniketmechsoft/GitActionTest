@@ -48,6 +48,7 @@ public class OutboundQATest extends TestBase {
 		SoftAssert sAssert = new SoftAssert();
 		oqa.outboundQAMenu();
 		System.out.println("lda is"+ op.MLDA);
+		System.out.println("Manifest no is"+ dq.ManifestNo);
         oqa.selectLDA(op.MLDA);
         oqa.selectLBOL(dq.ManifestNo);
 		cp.Search();

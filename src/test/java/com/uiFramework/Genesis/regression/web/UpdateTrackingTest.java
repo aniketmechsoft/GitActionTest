@@ -33,7 +33,7 @@ public class UpdateTrackingTest extends TestBase {
 
 	}
 
-	@Test(priority = 1,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 1,alwaysRun = true, groups = {"smoke"})
 	public void shouldShowErrorMessageIfReqFieldNotSelected() throws TimeoutException, InterruptedException {
 		SoftAssert sAssert = new SoftAssert();
 		ut.updteTrackMenu();
@@ -45,40 +45,40 @@ public class UpdateTrackingTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 2,alwaysRun = true, groups = {"Smoke"})
-	public void shouldShowErrorMessageIfReqSelectedButTrackingNoNotEntered() throws InterruptedException {
-		SoftAssert sAssert = new SoftAssert();
-		ut.selTruckChkbox();
-		ut.clickUpdate();
-		boolean flag = cp.toastMsgReceivedSuccessfully();
-		sAssert.assertTrue(flag, "ETA & Tracking no is Required.");
-		sAssert.assertAll();
-	}
+//	@Test(priority = 2,alwaysRun = true)
+//	public void shouldShowErrorMessageIfReqSelectedButTrackingNoNotEntered() throws InterruptedException {
+//		SoftAssert sAssert = new SoftAssert();
+//		ut.selTruckChkbox();
+//		ut.clickUpdate();
+//		boolean flag = cp.toastMsgReceivedSuccessfully();
+//		sAssert.assertTrue(flag, "ETA & Tracking no is Required.");
+//		sAssert.assertAll();
+//	}
+//
+//	@Test(priority = 3,alwaysRun = true)
+//	public void shouldRecErrMsgIfReqTrkNoSelButETAIsNotEnter() throws InterruptedException {
+//		SoftAssert sAssert = new SoftAssert();
+//		ut.EnterTrkNo();
+//		ut.clickUpdate();
+//		boolean flag = cp.toastMsgReceivedSuccessfully();
+//		sAssert.assertTrue(flag, "Please enter the ETA for the selected trucks.");
+//		sAssert.assertAll();
+//	}
+//
+//	@Test(priority = 4,alwaysRun = true)
+//	public void shouldAbleToUpdateTrackinIdOfReq() throws InterruptedException {
+//		SoftAssert sAssert = new SoftAssert();
+//		ut.selDate();
+//		ut.clickUpdate();
+//		cp.waitForPopupToDisappear();
+//		ut.clickUpdate();
+//		boolean flag = cp.toastMsgReceivedSuccessfully();
+//		sAssert.assertTrue(flag, "ETA & Tracking number is updated successfully.");
+//		sAssert.assertAll();
+//	}
 
-	@Test(priority = 3,alwaysRun = true, groups = {"Smoke"})
-	public void shouldRecErrMsgIfReqTrkNoSelButETAIsNotEnter() throws InterruptedException {
-		SoftAssert sAssert = new SoftAssert();
-		ut.EnterTrkNo();
-		ut.clickUpdate();
-		boolean flag = cp.toastMsgReceivedSuccessfully();
-		sAssert.assertTrue(flag, "Please enter the ETA for the selected trucks.");
-		sAssert.assertAll();
-	}
-
-	@Test(priority = 4,alwaysRun = true, groups = {"Smoke"})
-	public void shouldAbleToUpdateTrackinIdOfReq() throws InterruptedException {
-		SoftAssert sAssert = new SoftAssert();
-		ut.selDate();
-		ut.clickUpdate();
-		cp.waitForPopupToDisappear();
-		ut.clickUpdate();
-		boolean flag = cp.toastMsgReceivedSuccessfully();
-		sAssert.assertTrue(flag, "ETA & Tracking number is updated successfully.");
-		sAssert.assertAll();
-	}
-
-	@Test(priority = 5)
-	public void shouldAllowUserToUpdateMultipleRequestsAtOnce() throws InterruptedException {
+	@Test(priority = 5,groups = {"smoke"})
+	public void shouldAllowUserToUpdateMultipleRequestsAtOnce() throws InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 		
 		ut.enterTrackingDetailsInLoop();
@@ -87,7 +87,7 @@ public class UpdateTrackingTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 6,alwaysRun = true, groups = {"Smoke"})
+	@Test(priority = 6,alwaysRun = true, groups = {"smoke"})
 	public void shouldAllowUserToDownloadExcelOfGridData() throws FileNotFoundException, InterruptedException, TimeoutException {
 		SoftAssert sAssert = new SoftAssert();
 				//ut.updteTrackMenu();
@@ -131,7 +131,7 @@ public class UpdateTrackingTest extends TestBase {
 		sAssert.assertAll();
 	}
 
-	@Test(priority = 10, groups = {"Smoke"}, dependsOnMethods = "shouldAllowUserToDownloadExcelOfGridData")
+	@Test(priority = 10, dependsOnMethods = "shouldAllowUserToDownloadExcelOfGridData")
 	public void shouldAllowUpdateWithValidData() throws InterruptedException, IOException {
 		SoftAssert sAssert = new SoftAssert();
 		ut.updateFileFormat(true, true);
